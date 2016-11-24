@@ -3,9 +3,9 @@ var bodyParser = require('body-parser');
 var pg = require('pg');
 
 var app = express();
-var restful = require('node-restful');
+//var restful = require('node-restful');
 
-//app.use(express.static('public'));
+app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
