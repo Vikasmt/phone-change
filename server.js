@@ -78,9 +78,8 @@ router.get('/ValidateAdmin', function(req, res) {
 router.post('/CreateUser', function(req, res) {
     pg.connect(connectionstring, function (err, conn, done) {
          if (err) console.log(err);
-         conn.query('INSERT INTO UserManagement (firstname, lastname, username, email, phone, password) VALUES ($1, $2, $3, $4, $5, ,$6)',
+         conn.query('INSERT INTO UserManagement (firstname, lastname, username, email, phone, password) VALUES (fname, lname, test, test@test.com, 1234567899, 123456)',
                   //[req.body.firstname.trim(), req.body.lastname.trim(), req.body.username.trim(), req.body.email.trim(), req.body.phone.trim(), req.body.password.trim()]
-                  ['fname', 'lname', 'test', 'test@test.com', 1234567899, '123456'],
              function(err, result) {
                 done(); 
              if(err){
