@@ -41,10 +41,7 @@ router.get('/getContacts', function(req, res) {
 
 router.get('/getContact', function(req, res) {
     var contact_id = req.param('id');
-    res.json({ message: contact_id,
-             query:'SELECT id, email, phone, firstname, lastname, mobilephone from salesforce.Contact where id='+contact_id+''});
-    
-     /*pg.connect(process.env.DATABASE_URL, function (err, conn, done){
+     pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
              'SELECT id, email, phone, firstname, lastname, mobilephone from salesforce.Contact where id='+contact_id+'',
@@ -57,7 +54,7 @@ router.get('/getContact', function(req, res) {
                     res.json(result);
                 }
             });
-     });*/
+     });
 });
 
 app.use('/api', router);
