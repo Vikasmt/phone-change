@@ -5,20 +5,15 @@ var pg = require('pg');
 var app = express();
 var restful = require('node-restful');
 
-app.set('port', process.env.PORT || 5000);
+//app.use(express.static('public'));
 
-app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+app.set('port', process.env.PORT || 5000);
 
 var router = express.Router();  
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-
-// ===============
-// REST API LOGIC
-// ===============
 router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
