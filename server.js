@@ -78,8 +78,7 @@ router.get('/ValidateAdmin', function(req, res) {
 router.post('/CreateUser', function(req, res) {
     
     var jsontext= JSON.stringify(req.body.trim());
-     res.json({body: jsontext,
-                name: jsontext.firstname});
+     res.json(jsontext);
     
     /*pg.connect(connectionstring, function (err, conn, done) {
          if (err) console.log(err);
