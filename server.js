@@ -68,7 +68,7 @@ router.get('/getUsers', function(req, res) {
                     res.status(400).json({error: err.message});
                 }
                 else{
-                    res.json(result);
+                    res.json(result.rows);
                 }
             });
  });
