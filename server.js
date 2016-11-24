@@ -30,17 +30,22 @@ app.post('/update', function(req, res) {
                     else {
                         // this will still cause jquery to display 'Record updated!'
                         // eventhough it was inserted
-                        var testResult=JSON.stringify{
+                        /*var testResult=JSON.stringify{
                             port: portnbr,
                             result: result
-                        })
-                        res.json(testResult);
+                        })*/
+                        res.json({port:
+                                app.get('port'),
+                                result: result});
                     }
                   });
                 }
                 else {
                     done();
-                    res.json(result);
+                    //res.json(result);
+                    res.json({port:
+                                app.get('port'),
+                                result: result});
                 }
             }
         );
