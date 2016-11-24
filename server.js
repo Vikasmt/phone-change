@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var pg = require('pg');
 
 var app = express();
-//var restful = require('node-restful');
+var connectionstring = 'postgres://dooztnflwrrsyr:2o30X5UiuDUNnxLdLqoAxJlBh7@ec2-107-22-251-225.compute-1.amazonaws.com:5432/db5punfeclfvgo';
 
 app.use(express.static('public'));
 
@@ -55,6 +55,23 @@ router.get('/getContact', function(req, res) {
                 }
             });
      });
+});
+
+router.get('/getUsers', function(req, res) {
+ pg.connect(connectionstring, function (err, conn, done) {
+     if (err) console.log(err);
+        conn.query(
+            'SELECT *from UserManagement',
+            function(err,result){
+                done();
+                if(err){
+                    res.status(400).json({error: err.message});
+                }
+                else{
+                    res.json(result);
+                }
+            });
+ });
 });
 
 app.use('/api', router);
