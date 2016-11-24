@@ -58,7 +58,8 @@ router.get('/getContact', function(req, res) {
 });
 
 router.get('/ValidateAdmin', function(req, res) {
-    res.json(req.headers);
+    res.json({ username: req.headers.username,
+             password: req.headers.password});
 });
 
 router.get('/getUsers', function(req, res) {
