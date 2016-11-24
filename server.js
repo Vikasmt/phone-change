@@ -63,7 +63,7 @@ router.get('/ValidateAdmin', function(req, res) {
      pg.connect(connectionstring, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
-             'SELECT firstname, lastname, username,email, phone from UserManagement where trim(username)='+username+' and trim(password)='+password+'',
+             'SELECT firstname, lastname, username,email, phone from UserManagement where trim(username)='''+username+''' and trim(password)='''+password+'''',
              function(err,result){
                 if (err != null || result.rowCount == 0) {
                     res.status(401).json({error: 'Invalid credentials.'});
