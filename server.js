@@ -22,6 +22,23 @@ router.get('/message', function(req, res) {
     res.json({ message: 'hooray! welcome to our message api!' });   
 });
 
+router.get('/getContacts', function(req, res) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        conn.query(
+            'SELECT id, email, phone, firstname, lastname, mobilephone from salesforce.Contact',
+            function(err,result){
+                done();
+                if(err){
+                    res.status(400).json({error: err.message});
+                }
+                else{
+                    res.json(result);
+                }
+        );
+    });
+});
+
 app.use('/api', router);
 
 app.post('/update', function(req, res) {
