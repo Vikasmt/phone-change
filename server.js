@@ -66,18 +66,18 @@ router.get('/ValidateAdmin', function(req, res) {
              'SELECT firstname, lastname, username,email, phone from UserManagement where username='+username+' and password='+password+'',
              function(err,result){
                  done();
-                 res.json(result.rows);
-                if (err != null || result.rowCount == 0) {
+                 res.json(result);
+                /*if (err != null || result.rowCount == 0) {
                     res.status(401).json({error: 'Invalid credentials.'});
                 }
                  else {
                     res.json(result.rows);
-                }
+                }*/
             });
      });
 });
 
-router.post('/CreateUser', function(req, res) {
+/*router.post('/CreateUser', function(req, res) {
     pg.connect(connectionstring, function (err, conn, done) {
          if (err) console.log(err);
          conn.query('INSERT INTO UserManagement (firstname, lastname, username, email, phone, password) VALUES (fname, lname, test, test@test.com, 1234567899, 123456)',
@@ -92,7 +92,7 @@ router.post('/CreateUser', function(req, res) {
                 }
          });
      });
-});
+});*/
 
 router.get('/getUsers', function(req, res) {
  pg.connect(connectionstring, function (err, conn, done) {
