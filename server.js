@@ -60,6 +60,22 @@ router.get('/getContact', function(req, res) {
 router.get('/ValidateAdmin', function(req, res) {
     res.json({ username: req.headers.username,
              password: req.headers.password});
+    
+    var username = req.headers.username;
+    var password = req.headers.password;
+     pg.connect(connectionstring, function (err, conn, done){
+          if (err) console.log(err);
+         conn.query(
+             'SELECT firstname, lastname, username,email, phone from UserManagement where username='+username+' and password='+password+'',
+             function(err,result){
+                if (err != null || result.rowCount == 0) {
+                    res.status(401).json({error: 'Invalid credentials.'});
+                }
+                 else {
+                    res.json(result.rows);
+                }
+            });
+     });
 });
 
 router.get('/getUsers', function(req, res) {
