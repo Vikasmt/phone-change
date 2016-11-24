@@ -51,6 +51,7 @@
                             $("#phone").val("");
                             $("#messageMessage").text("Record updated!");
                             $("#message").show();
+                            alert(data);
                         },
                         error: function(err) {
                             errorMessage.text(err.responseJSON.error);
