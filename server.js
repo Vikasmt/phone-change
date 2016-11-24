@@ -66,13 +66,12 @@ router.get('/ValidateAdmin', function(req, res) {
              'SELECT firstname, lastname, username,email, phone from UserManagement where username=\''+username+'\' and password='+password+'',
              function(err,result){
                  done();
-                 res.json(result);
-                /*if (err != null || result.rowCount == 0) {
+                if (err != null || result.rowCount == 0) {
                     res.status(401).json({error: 'Invalid credentials.'});
                 }
                  else {
                     res.json(result.rows);
-                }*/
+                }
             });
      });
 });
