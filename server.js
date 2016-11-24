@@ -76,14 +76,11 @@ router.get('/ValidateAdmin', function(req, res) {
 });
 
 router.post('/CreateUser', function(req, res) {
-    
-    var jsontext= JSON.stringify(req.body.trim());
-     res.json(jsontext);
-    
-    /*pg.connect(connectionstring, function (err, conn, done) {
+    pg.connect(connectionstring, function (err, conn, done) {
          if (err) console.log(err);
          conn.query('INSERT INTO UserManagement (firstname, lastname, username, email, phone, password) VALUES ($1, $2, $3, $4, $5, ,$6)',
-                  [req.body.firstname.trim(), req.body.lastname.trim(), req.body.username.trim(), req.body.email.trim(), req.body.phone.trim(), req.body.password.trim()],
+                  //[req.body.firstname.trim(), req.body.lastname.trim(), req.body.username.trim(), req.body.email.trim(), req.body.phone.trim(), req.body.password.trim()]
+                  ['fname', 'lname', 'test', 'test@test.com', '1234567899', '123456'],
              function(err, result) {
                 done(); 
              if(err){
@@ -93,7 +90,7 @@ router.post('/CreateUser', function(req, res) {
                     res.json(result);
                 }
          });
-     });*/
+     });
 });
 
 router.get('/getUsers', function(req, res) {
