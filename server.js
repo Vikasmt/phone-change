@@ -35,7 +35,7 @@ router.get('/getContacts', function(req, res) {
                 else{
                     res.json(result);
                 }
-        );
+            });
     });
 });
 
