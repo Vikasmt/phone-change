@@ -39,6 +39,27 @@ router.get('/getContacts', function(req, res) {
     });
 });
 
+router.get('/getContacts', function(req, res) {
+    var contact_id = req.param('id');
+    res.json({ message: contact_id,
+             query:'SELECT id, email, phone, firstname, lastname, mobilephone from salesforce.Contact where id='+contact_id+''});
+    
+     /*pg.connect(process.env.DATABASE_URL, function (err, conn, done){
+          if (err) console.log(err);
+         conn.query(
+             'SELECT id, email, phone, firstname, lastname, mobilephone from salesforce.Contact where id='+contact_id+'',
+             function(err,result){
+                done();
+                if(err){
+                    res.status(400).json({error: err.message});
+                }
+                else{
+                    res.json(result);
+                }
+            });
+     });*/
+});
+
 app.use('/api', router);
 
 app.post('/update', function(req, res) {
