@@ -33,7 +33,7 @@ router.get('/getContacts', function(req, res) {
                     res.status(400).json({error: err.message});
                 }
                 else{
-                    res.json(process.env.DATABASE_URL);
+                    res.json(result.rows);
                 }
             });
     });
