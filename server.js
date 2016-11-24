@@ -3,13 +3,27 @@ var bodyParser = require('body-parser');
 var pg = require('pg');
 
 var app = express();
+var restful = require('node-restful');
 
 app.set('port', process.env.PORT || 5000);
 
 app.use(express.static('public'));
-app.use(bodyParser.json());
 
-var portnbr = app.get('port');
+var router = express.Router();  
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+// ===============
+// REST API LOGIC
+// ===============
+router.get('/', function(req, res) {
+    res.json({ message: 'hooray! welcome to our api!' });   
+});
+
+app.use('/api', router);
 
 app.post('/update', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
