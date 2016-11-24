@@ -75,7 +75,7 @@ router.get('/ValidateAdmin', function(req, res) {
      });
 });
 
-router.get('/CreateUser', function(req, res) {
+router.post('/CreateUser', function(req, res) {
      pg.connect(connectionstring, function (err, conn, done) {
          if (err) console.log(err);
          conn.query('INSERT INTO UserManagement (firstname, lastname, username, email, phone, password) VALUES ($1, $2, $3, $4, $5, ,$6)',
