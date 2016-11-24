@@ -18,6 +18,10 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+router.get('/message', function(req, res) {
+    res.json({ message: 'hooray! welcome to our message api!' });   
+});
+
 app.use('/api', router);
 
 app.post('/update', function(req, res) {
