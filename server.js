@@ -57,6 +57,10 @@ router.get('/getContact', function(req, res) {
      });
 });
 
+router.get('/ValidateAdmin', function(req, res) {
+    res.json(req.headers);
+});
+
 router.get('/getUsers', function(req, res) {
  pg.connect(connectionstring, function (err, conn, done) {
      if (err) console.log(err);
