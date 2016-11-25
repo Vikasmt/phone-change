@@ -98,8 +98,7 @@ router.get('/ValidateAdmin', function(req, res) {
 });
 
 router.post('/CreateUser', function(req, res) {
-    res.json(req.body.data);
-    //res.json(JSON.parse(req.body));
+    res.json(JSON.parse(req.body.data));
     
     /*pg.connect(connectionstring, function (err, conn, done) {
          if (err) console.log(err);
