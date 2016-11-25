@@ -63,6 +63,27 @@ router.get('/ValidateAdmin', function(req, res) {
      pg.connect(connectionstring, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
+             'SELECT firstname, lastname, username,email, phone from UserManagement where username=\''+username+'\'',
+             function(err,result){
+              if (err != null || result.rowCount == 0) {
+                    res.status(401).json({error: 'Invalid username.'});
+                }
+                 else{
+                       conn.query(
+                            'SELECT firstname, lastname, username,email, phone from UserManagement where username=\''+username+'\' and password='+password+'',
+                           function(err,result){
+                               done();
+                               if(err != null || result.rows.count == 0){
+                                   res.status(401).json({error: 'Invalid password.'});
+                               }
+                               else{
+                                   res.json(result.rows);
+                               }
+                            });
+                 }
+             });
+         
+         /*conn.query(
              'SELECT firstname, lastname, username,email, phone from UserManagement where username=\''+username+'\' and password='+password+'',
              function(err,result){
                  done();
@@ -72,7 +93,7 @@ router.get('/ValidateAdmin', function(req, res) {
                  else {
                     res.json(result.rows);
                 }
-            });
+            });*/
      });
 });
 
