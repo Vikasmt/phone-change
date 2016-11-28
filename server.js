@@ -85,6 +85,12 @@ router.get('/ValidateAdmin', function(req, res) {
      });
 });
 
+router.post('/insertCase', function(req, res) {
+    var requestedData = req.body;
+    console.log(requestedData);
+    res.json({message: 'Success'});
+});
+
 router.get('/getProducts', function(req, res) {
     var productType = req.param('producttype');
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
