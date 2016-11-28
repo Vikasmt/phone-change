@@ -92,17 +92,19 @@ router.post('/insertCase', function(req, res) {
         console.log(req.body);
         var jsonData = req.body;
 
-        var formattedData='INSERT INTO salesforce.Case (Status, Contact, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Contact+'\', \''+jsonData.Subject+'\', \''+jsonData.Category__c+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.MIL_Division__c+'\', \''+jsonData.Type+'\')';
+        var formattedData='INSERT INTO salesforce.Case (Status, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Subject+'\', \''+jsonData.Category__c+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.MIL_Division__c+'\', \''+jsonData.Type+'\')';
 
          console.log(formattedData);
         
-        conn.query('INSERT INTO salesforce.Case (Status, Contact, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Contact+'\', \''+jsonData.Subject+'\', \''+jsonData.Category__c+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.MIL_Division__c+'\', \''+jsonData.Type+'\')',
+        conn.query('INSERT INTO salesforce.Case (Status, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Subject+'\', \''+jsonData.Category__c+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.MIL_Division__c+'\', \''+jsonData.Type+'\')',
                 function(err, result) {
                     done();
                         if (err) {
+                            console.log(err.message);
                             res.status(400).json({error: err.message});
                         }
                         else {
+                            console.log(result);
                             res.json(result);
                         }
             });  
@@ -128,24 +130,27 @@ router.get('/getProducts', function(req, res) {
 });
 
 router.post('/CreateUser', function(req, res) {
-    var requestedData = req.body.data.trim();
-    //var jsonData = JSON.parse(requestedData);
-    res.json(requestedData);
+    console.log(req.body);
+    var jsonData = req.body;
     
-    /*pg.connect(connectionstring, function (err, conn, done) {
+    var formattedData='INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.name+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')';
+    console.log('formattedQuery:'+formattedData);
+    
+    pg.connect(connectionstring, function (err, conn, done) {
          if (err) console.log(err);
-         conn.query('INSERT INTO UserManagement (firstname, lastname, username, email, phone, password) VALUES (fname, lname, test, test@test.com, 1234567899, 123456)',
-                  //[req.body.firstname.trim(), req.body.lastname.trim(), req.body.username.trim(), req.body.email.trim(), req.body.phone.trim(), req.body.password.trim()]
+         conn.query('INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.name+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')',
              function(err, result) {
                 done(); 
              if(err){
+                 console.log(err.message);
                     res.status(400).json({error: err.message});
                 }
              else{
+                 console.log(result);
                     res.json(result);
                 }
          });
-     });*/
+     });
 });
 
 router.get('/getUsers', function(req, res) {
