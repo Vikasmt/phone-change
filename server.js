@@ -60,8 +60,6 @@ router.get('/getContact', function(req, res) {
 router.get('/ValidateAdmin', function(req, res) {
     var emailaddress = req.headers.email;
     var password = req.headers.password;
-    console.log('Email: '+emailaddress);
-    console.log('Password: '+password);
      pg.connect(connectionstring, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
