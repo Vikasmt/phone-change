@@ -152,12 +152,14 @@ router.post('/CreateUser', function(req, res) {
              function(err, result) {
                 done(); 
              if(err){
-                 console.log(err.message);
-                    res.status(400).json({error: err.message});
+                    res.json({
+                            msgid: 2,
+                            message: err.message});
                 }
-             else{
-                 console.log(result);
-                    res.json(result);
+                else{
+                    res.json({
+                            msgid: 1,
+                            message: 'Success.'});
                 }
          });
      });
