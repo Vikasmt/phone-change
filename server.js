@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 var pg = require('pg');
 
 var app = express();
-var connectionstring = 'postgres://dooztnflwrrsyr:2o30X5UiuDUNnxLdLqoAxJlBh7@ec2-107-22-251-225.compute-1.amazonaws.com:5432/db5punfeclfvgo';
 
 app.use(express.static('public'));
 
@@ -60,7 +59,7 @@ router.get('/getContact', function(req, res) {
 router.get('/ValidateAdmin', function(req, res) {
     var emailaddress = req.headers.email;
     var password = req.headers.password;
-     pg.connect(connectionstring, function (err, conn, done){
+     pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
              'SELECT firstname, lastname, username,email, phone from UserManagement where email=\''+emailaddress+'\'',
@@ -102,12 +101,12 @@ router.post('/insertCase', function(req, res) {
         
         console.log(req.body);
         var jsonData = req.body;
-
-        var formattedData='INSERT INTO salesforce.Case (Status, Subject, Priority, Reason, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Subject+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.Type+'\')';
+        
+        var formattedData='INSERT INTO salesforce.Case (FMA_DeviceName__c, FMA_Dosage__c, FMA_DosageForm__c, FMA_BatchSerialnumber__c, Description, FMA_Dateoffirstuse__c, FMA_Expirydate__c, FMA_Initialpatientname__c, FMA_Initialpatientsurname__c, FMA_Age__c, FMA_Gender__c, FMA_Quantityofproductsconcerned__c, FMA_NameofComplainant__c, FMA_Defectdescription__c, FMA_Isthecomplaintsampleavailable__c, FMA_Expecteddateofsamplereceived__c, FMA_Hasresponsebeenrequested__c, FMA_Ispatientfamiliarwithdeviceusage__c, FMA_Sincewhendoespatientusethiskind__c, FMA_Isthedevicephysicallydamaged__c, FMA_where__c, FMA_Thedamageisduetoanaccidentalfall__c, FMA_Fromwhichheightisoccurredhefall__c, FMA_Isthedefectduetoamisusebypatient__c, FMA_whichkindofmisuse__c, FMA_Issomethingstuckinsidethedevice__c, FMA_whatstuckinside__c, FMA_Adverseeventassociatedtodefect__c, FMA_Adverseeventassociatedwithdefect__c, FMA_OtherInformation__c, FMA_Isproductcartridgestuckedindevice__c, FMA_Isreplacementofproductrequested__c, Subject, Priority, Status) VALUES (\''+jsonData.DeviceName+'\', \''+jsonData.Dosage+'\', \''+jsonData.DosageForm+'\', \''+jsonData.BatchSerialNbr+'\', \''+jsonData.Description+'\', \''+jsonData.DateOfFirstUse+'\', \''+jsonData.ExpiryDate+'\', \''+jsonData.InitialPatientName+'\', \''+jsonData.InitialPatientSurName+'\', '+jsonData.Age+', \''+jsonData.Gender+'\', '+jsonData.QtyOfProductsConcerned+', \''+jsonData.NameOfCompliant+'\', \''+jsonData.DefectDescription+'\', '+jsonData.IsComplaintSampleAvailable+', \''+jsonData.ExpectedDateOfSampleReceived+'\', '+jsonData.HasResponseBeenRequested+', '+jsonData.IsPatientFamiliarWithDeviceUsage+', \''+jsonData.SinceWhenPatientUseThisDevice+'\', '+jsonData.IsDevicePhysicallyDamaged+', \''+jsonData.Where+'\', '+jsonData.DamageDuetoAccidentalFall+', \''+jsonData.FromWhichHeightOccuredtheFall+'\', '+jsonData.IsDefectedDuetomisusebypatient+', \''+jsonData.Whichkindofmisuse+'\', '+jsonData.IsSomethingstuckinsidedevice+', \''+jsonData.WhatStuckinside+'\', '+jsonData.Adverseeventassociatedtodefect+', \''+jsonData.Adverseeventassociatedwithdefect+'\', \''+jsonData.OtherInformation+'\', '+jsonData.Isproductcartridgestuckedindevice+', '+jsonData.Isreplacementofproductrequested+', \''+jsonData.Subject+'\',\''+jsonData.Priority+'\',\''+jsonData.Status+'\')';
 
          console.log(formattedData);
         
-        conn.query('INSERT INTO salesforce.Case (Status, Subject, Priority, Reason, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Subject+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.Type+'\')',
+        conn.query('INSERT INTO salesforce.Case (FMA_DeviceName__c, FMA_Dosage__c, FMA_DosageForm__c, FMA_BatchSerialnumber__c, Description,    FMA_Dateoffirstuse__c, FMA_Expirydate__c, FMA_Initialpatientname__c, FMA_Initialpatientsurname__c, FMA_Age__c, FMA_Gender__c, FMA_Quantityofproductsconcerned__c, FMA_NameofComplainant__c, FMA_Defectdescription__c, FMA_Isthecomplaintsampleavailable__c, FMA_Expecteddateofsamplereceived__c, FMA_Hasresponsebeenrequested__c, FMA_Ispatientfamiliarwithdeviceusage__c, FMA_Sincewhendoespatientusethiskind__c, FMA_Isthedevicephysicallydamaged__c, FMA_where__c, FMA_Thedamageisduetoanaccidentalfall__c, FMA_Fromwhichheightisoccurredhefall__c, FMA_Isthedefectduetoamisusebypatient__c, FMA_whichkindofmisuse__c, FMA_Issomethingstuckinsidethedevice__c, FMA_whatstuckinside__c, FMA_Adverseeventassociatedtodefect__c, FMA_Adverseeventassociatedwithdefect__c, FMA_OtherInformation__c, FMA_Isproductcartridgestuckedindevice__c, FMA_Isreplacementofproductrequested__c, Subject, Priority, Status) VALUES (\''+jsonData.DeviceName+'\', \''+jsonData.Dosage+'\', \''+jsonData.DosageForm+'\', \''+jsonData.BatchSerialNbr+'\', \''+jsonData.Description+'\', \''+jsonData.DateOfFirstUse+'\', \''+jsonData.ExpiryDate+'\', \''+jsonData.InitialPatientName+'\', \''+jsonData.InitialPatientSurName+'\', '+jsonData.Age+', \''+jsonData.Gender+'\', '+jsonData.QtyOfProductsConcerned+', \''+jsonData.NameOfCompliant+'\', \''+jsonData.DefectDescription+'\', '+jsonData.IsComplaintSampleAvailable+', \''+jsonData.ExpectedDateOfSampleReceived+'\', '+jsonData.HasResponseBeenRequested+', '+jsonData.IsPatientFamiliarWithDeviceUsage+', \''+jsonData.SinceWhenPatientUseThisDevice+'\', '+jsonData.IsDevicePhysicallyDamaged+', \''+jsonData.Where+'\', '+jsonData.DamageDuetoAccidentalFall+', \''+jsonData.FromWhichHeightOccuredtheFall+'\', '+jsonData.IsDefectedDuetomisusebypatient+', \''+jsonData.Whichkindofmisuse+'\', '+jsonData.IsSomethingstuckinsidedevice+', \''+jsonData.WhatStuckinside+'\', '+jsonData.Adverseeventassociatedtodefect+', \''+jsonData.Adverseeventassociatedwithdefect+'\', \''+jsonData.OtherInformation+'\', '+jsonData.Isproductcartridgestuckedindevice+', '+jsonData.Isreplacementofproductrequested+', \''+jsonData.Subject+'\',\''+jsonData.Priority+'\',\''+jsonData.Status+'\')',
                 function(err, result) {
                     done();
                         if (err) {
@@ -147,7 +146,7 @@ router.post('/CreateUser', function(req, res) {
     var formattedData='INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.name+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')';
     console.log('formattedQuery:'+formattedData);
     
-    pg.connect(connectionstring, function (err, conn, done) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
          if (err) console.log(err);
          conn.query('INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.name+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')',
              function(err, result) {
@@ -165,7 +164,7 @@ router.post('/CreateUser', function(req, res) {
 });
 
 router.get('/getUsers', function(req, res) {
- pg.connect(connectionstring, function (err, conn, done) {
+ pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
      if (err) console.log(err);
         conn.query(
             'SELECT *from UserManagement',
