@@ -73,8 +73,7 @@ router.get('/ValidateAdmin', function(req, res) {
                             'SELECT firstname, lastname, username,email, phone from UserManagement where email=\''+emailaddress+'\' and password='+password+'',
                            function(err,result){
                                done();
-                               res.json(result);
-                               if(result.count == 0){
+                               if(err != null || result.rowCount == 0){
                                    res.status(401).json({error: 'Invalid password.'});
                                }
                                else{
