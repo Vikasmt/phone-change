@@ -70,7 +70,7 @@ router.get('/ValidateAdmin', function(req, res) {
                 }
                  else{
                        conn.query(
-                            'SELECT firstname, lastname, username,email, phone from UserManagement where email=\''+emailaddress+'\' and password='+password+'',
+                            'SELECT id, firstname, lastname, username,email, phone from UserManagement where email=\''+emailaddress+'\' and password='+password+'',
                            function(err,result){
                                done();
                                if(err != null || result.rowCount == 0){
