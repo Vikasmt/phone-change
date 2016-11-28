@@ -86,7 +86,9 @@ router.get('/ValidateAdmin', function(req, res) {
 });
 
 router.post('/insertCase', function(req, res) {
-    console.log(req.body);
+    var jsonData = JSON.parse(req.body);
+    console.log(jsonData);
+    console.log(jsonData.UserName);
     res.json({message: 'Success'});
 });
 
