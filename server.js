@@ -67,7 +67,7 @@ router.get('/ValidateAdmin', function(req, res) {
              function(err,result){
               if (err != null || result.rowCount == 0) {
                    res.status(401).json({
-                                       id: -1,
+                                       userid: -1,
                                        msgid: 2,
                                        message: 'Invalid email.'});
                     //res.status(401).json({error: 'Invalid email.'});
@@ -79,16 +79,15 @@ router.get('/ValidateAdmin', function(req, res) {
                                done();
                                if(err != null || result.rowCount == 0){
                                    res.status(401).json({
-                                       id: -1,
+                                       userid: -1,
                                        msgid: 3,
                                        message: 'Invalid password.'});
                                }
                                else{
-                                   result.jsonp({
+                                   result.json({
                                        userid:result.rows[0].id,
                                        msgid: 1,
-                                       message: 'Success.'
-                                   })
+                                       message: 'Success.'});
                                    //res.json(result.rows);
                                }
                             });
