@@ -89,6 +89,10 @@ router.post('/insertCase', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
     console.log(req.body.UserName);
+    
+    var data= "{ Status: 'New', Contact: '003e000000dUY0B', Subject: 'Test', Category__c: 'Customer Service', Priority: 'Medium', Reason: 'Damages', MIL_Division__c: 'AA', Type: 'Other' }";
+    console.log(data.Status);
+    
     res.json({message: 'Success'});
 });
 
