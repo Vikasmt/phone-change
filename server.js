@@ -103,7 +103,7 @@ router.post('/insertCase', function(req, res) {
                             res.status(400).json({error: err.message});
                         }
                         else {
-                            res.json(result: result);
+                            res.json(result);
                         }
             });  
     });
