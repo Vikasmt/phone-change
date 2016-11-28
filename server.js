@@ -84,7 +84,7 @@ router.get('/ValidateAdmin', function(req, res) {
                                        message: 'Invalid password.'});
                                }
                                else{
-                                   result.json({
+                                   res.json({
                                        userid:result.rows[0].id,
                                        msgid: 1,
                                        message: 'Success.'});
