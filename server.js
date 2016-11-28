@@ -93,10 +93,9 @@ router.post('/insertCase', function(req, res) {
     
      console.log(formattedData);
     
-    /*pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
        if (err) console.log(err);
-      conn.query('INSERT INTO salesforce.Case (Status, Contact, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
-                  [data.Status.trim(), data.Contact.trim(), data.Subject.trim(), data.Category__c.trim(), data.Priority.trim(), data.Reason.trim(), data.MIL_Division__c.trim(), data.Type.trim()],
+      conn.query('INSERT INTO salesforce.Case (Status, Contact, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Contact+'\', \''+jsonData.Subject+'\', \''+jsonData.Category__c+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.MIL_Division__c+'\', \''+jsonData.Type+'\')',
             function(err, result) {
                 done();
                     if (err) {
@@ -106,8 +105,7 @@ router.post('/insertCase', function(req, res) {
                         res.json(result: result);
                     }
         });  
-    });*/
-    res.json({message: 'Success'});
+    });
 });
 
 router.get('/getProducts', function(req, res) {
