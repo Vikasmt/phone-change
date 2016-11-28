@@ -88,11 +88,25 @@ router.get('/ValidateAdmin', function(req, res) {
 router.post('/insertCase', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
-    console.log(req.body.UserName);
     
-    var data= "{ Status: 'New', Contact: '003e000000dUY0B', Subject: 'Test', Category__c: 'Customer Service', Priority: 'Medium', Reason: 'Damages', MIL_Division__c: 'AA', Type: 'Other' }";
-    console.log(data.Status);
+    var formattedData='INSERT INTO salesforce.Case (Status, Contact, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Contact+'\', \''+jsonData.Subject+'\', \''+jsonData.Category__c+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.MIL_Division__c+'\', \''+jsonData.Type+'\')';
     
+     console.log(formattedData);
+    
+    /*pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+       if (err) console.log(err);
+      conn.query('INSERT INTO salesforce.Case (Status, Contact, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+                  [data.Status.trim(), data.Contact.trim(), data.Subject.trim(), data.Category__c.trim(), data.Priority.trim(), data.Reason.trim(), data.MIL_Division__c.trim(), data.Type.trim()],
+            function(err, result) {
+                done();
+                    if (err) {
+                        res.status(400).json({error: err.message});
+                    }
+                    else {
+                        res.json(result: result);
+                    }
+        });  
+    });*/
     res.json({message: 'Success'});
 });
 
