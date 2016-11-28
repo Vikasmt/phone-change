@@ -58,19 +58,19 @@ router.get('/getContact', function(req, res) {
 });
 
 router.get('/ValidateAdmin', function(req, res) {
-    var username = req.headers.username;
+    var emailaddress = req.headers.email;
     var password = req.headers.password;
      pg.connect(connectionstring, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
-             'SELECT firstname, lastname, username,email, phone from UserManagement where username=\''+username+'\'',
+             'SELECT firstname, lastname, username,email, phone from UserManagement where email=\''+emailaddress+'\'',
              function(err,result){
               if (err != null || result.rowCount == 0) {
-                    res.status(401).json({error: 'Invalid username.'});
+                    res.status(401).json({error: 'Invalid email.'});
                 }
                  else{
                        conn.query(
-                            'SELECT firstname, lastname, username,email, phone from UserManagement where username=\''+username+'\' and password='+password+'',
+                            'SELECT firstname, lastname, username,email, phone from UserManagement where email=\''+emailaddress+'\' and password='+password+'',
                            function(err,result){
                                done();
                                if(err != null || result.rows.count == 0){
