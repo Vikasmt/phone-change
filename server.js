@@ -86,25 +86,26 @@ router.get('/ValidateAdmin', function(req, res) {
 });
 
 router.post('/insertCase', function(req, res) {
-    console.log(req.body);
-    var jsonData = req.body;
-    
-    var formattedData='INSERT INTO salesforce.Case (Status, Contact, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Contact+'\', \''+jsonData.Subject+'\', \''+jsonData.Category__c+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.MIL_Division__c+'\', \''+jsonData.Type+'\')';
-    
-     console.log(formattedData);
-    
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-       if (err) console.log(err);
-      conn.query('INSERT INTO salesforce.Case (Status, Contact, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Contact+'\', \''+jsonData.Subject+'\', \''+jsonData.Category__c+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.MIL_Division__c+'\', \''+jsonData.Type+'\')',
-            function(err, result) {
-                done();
-                    if (err) {
-                        res.status(400).json({error: err.message});
-                    }
-                    else {
-                        res.json(result: result);
-                    }
-        });  
+        if (err) console.log(err);
+        
+        console.log(req.body);
+        var jsonData = req.body;
+
+        var formattedData='INSERT INTO salesforce.Case (Status, Contact, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Contact+'\', \''+jsonData.Subject+'\', \''+jsonData.Category__c+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.MIL_Division__c+'\', \''+jsonData.Type+'\')';
+
+         console.log(formattedData);
+        
+        conn.query('INSERT INTO salesforce.Case (Status, Contact, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Contact+'\', \''+jsonData.Subject+'\', \''+jsonData.Category__c+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.MIL_Division__c+'\', \''+jsonData.Type+'\')',
+                function(err, result) {
+                    done();
+                        if (err) {
+                            res.status(400).json({error: err.message});
+                        }
+                        else {
+                            res.json(result: result);
+                        }
+            });  
     });
 });
 
