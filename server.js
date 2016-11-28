@@ -65,7 +65,7 @@ router.get('/ValidateAdmin', function(req, res) {
              'SELECT firstname, lastname, username,email, phone from UserManagement where email=\''+emailaddress+'\'',
              function(err,result){
               if (err != null || result.rowCount == 0) {
-                   res.status(401).json({
+                   res.json({
                                        userid: -1,
                                        msgid: 2,
                                        message: 'Invalid email.'});
@@ -77,7 +77,7 @@ router.get('/ValidateAdmin', function(req, res) {
                            function(err,result){
                                done();
                                if(err != null || result.rowCount == 0){
-                                   res.status(401).json({
+                                   res.json({
                                        userid: -1,
                                        msgid: 3,
                                        message: 'Invalid password.'});
