@@ -66,7 +66,11 @@ router.get('/ValidateAdmin', function(req, res) {
              'SELECT firstname, lastname, username,email, phone from UserManagement where email=\''+emailaddress+'\'',
              function(err,result){
               if (err != null || result.rowCount == 0) {
-                    res.status(401).json({error: 'Invalid email.'});
+                   res.status(401).json({
+                                       id: -1,
+                                       msgid: 2,
+                                       message: 'Invalid email.'});
+                    //res.status(401).json({error: 'Invalid email.'});
                 }
                  else{
                        conn.query(
@@ -74,10 +78,18 @@ router.get('/ValidateAdmin', function(req, res) {
                            function(err,result){
                                done();
                                if(err != null || result.rowCount == 0){
-                                   res.status(401).json({error: 'Invalid password.'});
+                                   res.status(401).json({
+                                       id: -1,
+                                       msgid: 3,
+                                       message: 'Invalid password.'});
                                }
                                else{
-                                   res.json(result.rows);
+                                   result.jsonp({
+                                       userid:result.rows[0].id,
+                                       msgid: 1,
+                                       message: 'Success.'
+                                   })
+                                   //res.json(result.rows);
                                }
                             });
                  }
@@ -92,11 +104,11 @@ router.post('/insertCase', function(req, res) {
         console.log(req.body);
         var jsonData = req.body;
 
-        var formattedData='INSERT INTO salesforce.Case (Status, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Subject+'\', \''+jsonData.Category__c+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.MIL_Division__c+'\', \''+jsonData.Type+'\')';
+        var formattedData='INSERT INTO salesforce.Case (Status, Subject, Priority, Reason, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Subject+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.Type+'\')';
 
          console.log(formattedData);
         
-        conn.query('INSERT INTO salesforce.Case (Status, Subject, Category__c, Priority, Reason, MIL_Division__c, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Subject+'\', \''+jsonData.Category__c+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.MIL_Division__c+'\', \''+jsonData.Type+'\')',
+        conn.query('INSERT INTO salesforce.Case (Status, Subject, Priority, Reason, Type) VALUES (\''+jsonData.Status+'\', \''+jsonData.Subject+'\', \''+jsonData.Priority+'\', \''+jsonData.Reason+'\', \''+jsonData.Type+'\')',
                 function(err, result) {
                     done();
                         if (err) {
