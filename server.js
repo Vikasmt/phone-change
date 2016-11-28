@@ -73,7 +73,7 @@ router.get('/ValidateAdmin', function(req, res) {
                             'SELECT firstname, lastname, username,email, phone from UserManagement where email=\''+emailaddress+'\' and password='+password+'',
                            function(err,result){
                                done();
-                               res.json(result.count);
+                               res.json(result);
                                if(result.count == 0){
                                    res.status(401).json({error: 'Invalid password.'});
                                }
@@ -83,18 +83,6 @@ router.get('/ValidateAdmin', function(req, res) {
                             });
                  }
              });
-         
-         /*conn.query(
-             'SELECT firstname, lastname, username,email, phone from UserManagement where username=\''+username+'\' and password='+password+'',
-             function(err,result){
-                 done();
-                if (err != null || result.rowCount == 0) {
-                    res.status(401).json({error: 'Invalid credentials.'});
-                }
-                 else {
-                    res.json(result.rows);
-                }
-            });*/
      });
 });
 
