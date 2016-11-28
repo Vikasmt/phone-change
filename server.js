@@ -71,13 +71,13 @@ router.get('/ValidateAdmin', function(req, res) {
                  else{
                        conn.query(
                             'SELECT firstname, lastname, username,email, phone from UserManagement where email=\''+emailaddress+'\' and password='+password+'',
-                           function(err,result){
-                               //done();
-                               if(err != null || result.rows.count == 0){
+                           function(err1,result1){
+                               done();
+                               if(err1 != null || result1.rows.count == 0){
                                    res.status(401).json({error: 'Invalid password.'});
                                }
                                else{
-                                   res.json(result.rows);
+                                   res.json(result1.rows);
                                }
                             });
                  }
