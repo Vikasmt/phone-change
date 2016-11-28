@@ -109,15 +109,19 @@ router.post('/insertCase', function(req, res) {
         conn.query('INSERT INTO salesforce.Case (FMA_DeviceName__c, FMA_Dosage__c, FMA_DosageForm__c, FMA_BatchSerialnumber__c, Description,    FMA_Dateoffirstuse__c, FMA_Expirydate__c, FMA_Initialpatientname__c, FMA_Initialpatientsurname__c, FMA_Age__c, FMA_Gender__c, FMA_Quantityofproductsconcerned__c, FMA_NameofComplainant__c, FMA_Defectdescription__c, FMA_Isthecomplaintsampleavailable__c, FMA_Expecteddateofsamplereceived__c, FMA_Hasresponsebeenrequested__c, FMA_Ispatientfamiliarwithdeviceusage__c, FMA_Sincewhendoespatientusethiskind__c, FMA_Isthedevicephysicallydamaged__c, FMA_where__c, FMA_Thedamageisduetoanaccidentalfall__c, FMA_Fromwhichheightisoccurredhefall__c, FMA_Isthedefectduetoamisusebypatient__c, FMA_whichkindofmisuse__c, FMA_Issomethingstuckinsidethedevice__c, FMA_whatstuckinside__c, FMA_Adverseeventassociatedtodefect__c, FMA_Adverseeventassociatedwithdefect__c, FMA_OtherInformation__c, FMA_Isproductcartridgestuckedindevice__c, FMA_Isreplacementofproductrequested__c, Subject, Priority, Status) VALUES (\''+jsonData.DeviceName+'\', \''+jsonData.Dosage+'\', \''+jsonData.DosageForm+'\', \''+jsonData.BatchSerialNbr+'\', \''+jsonData.Description+'\', \''+jsonData.DateOfFirstUse+'\', \''+jsonData.ExpiryDate+'\', \''+jsonData.InitialPatientName+'\', \''+jsonData.InitialPatientSurName+'\', '+jsonData.Age+', \''+jsonData.Gender+'\', '+jsonData.QtyOfProductsConcerned+', \''+jsonData.NameOfCompliant+'\', \''+jsonData.DefectDescription+'\', '+jsonData.IsComplaintSampleAvailable+', \''+jsonData.ExpectedDateOfSampleReceived+'\', '+jsonData.HasResponseBeenRequested+', '+jsonData.IsPatientFamiliarWithDeviceUsage+', \''+jsonData.SinceWhenPatientUseThisDevice+'\', '+jsonData.IsDevicePhysicallyDamaged+', \''+jsonData.Where+'\', '+jsonData.DamageDuetoAccidentalFall+', \''+jsonData.FromWhichHeightOccuredtheFall+'\', '+jsonData.IsDefectedDuetomisusebypatient+', \''+jsonData.Whichkindofmisuse+'\', '+jsonData.IsSomethingstuckinsidedevice+', \''+jsonData.WhatStuckinside+'\', '+jsonData.Adverseeventassociatedtodefect+', \''+jsonData.Adverseeventassociatedwithdefect+'\', \''+jsonData.OtherInformation+'\', '+jsonData.Isproductcartridgestuckedindevice+', '+jsonData.Isreplacementofproductrequested+', \''+jsonData.Subject+'\',\''+jsonData.Priority+'\',\''+jsonData.Status+'\')',
                 function(err, result) {
                     done();
-                        if (err) {
-                            console.log(err.message);
-                            res.status(400).json({error: err.message});
+                    if(err){
+                        console.log(err.message);
+                            res.json({
+                                    msgid: 2,
+                                    message: err.message});
                         }
-                        else {
+                        else{
                             console.log(result);
-                            res.json(result);
+                            res.json({
+                                    msgid: 1,
+                                    message: 'Success.'});
                         }
-            });  
+            });
     });
 });
 
