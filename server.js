@@ -97,6 +97,24 @@ router.get('/ValidateAdmin', function(req, res) {
      });
 });
 
+router.get('/getProducts', function(req, res) {
+    var productType = req.param('producttype');
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        conn.query(
+            'SELECT Administration__c,Data_Transfer__c,Dosage_Form__c,Drug_Substance__c,E_Device_used_with__c,Product_Description__c,Product_Type__c,Quality_Contact_Notified__c,Serial_Batch_code__c,Software_Version__c,Sub_Category__c FROM salesforce.FMA_Product__c WHERE Product_Type__c = '+productType+'',
+            function(err,result){
+                done();
+                if(err){
+                    res.status(400).json({error: err.message});
+                }
+                else{
+                    res.json(result.rows);
+                }
+            });
+    });
+});
+
 router.post('/CreateUser', function(req, res) {
     var requestedData = req.body.data.trim();
     //var jsonData = JSON.parse(requestedData);
