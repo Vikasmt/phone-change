@@ -40,12 +40,12 @@ router.post('/uploadfile', function(req, res, next) {
     console.log('Body:'+req.body);
     console.log('RawBody:'+req.rawBody);
     
-         var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (test, \''+req.body+'\', \''+req.body.caseid+'\')';
-         console.log('formattedQuery:'+formattedData);
+         //var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (test, \''+req.body+'\', \''+req.body.caseid+'\')';
+         //console.log('formattedQuery:'+formattedData);
          
          pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
              if (err) console.log(err);
-             conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES (''test'', \''+req.body+'\', \''+req.body.caseid+'\')',
+             conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+req.body.name +'\', \''+req.body.image+'\', \''+req.body.caseid+'\')',
                  function(err, result) {
                     done(); 
                  if(err){
