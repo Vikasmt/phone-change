@@ -38,6 +38,15 @@ router.get('/getContacts', function(req, res) {
     });
 });
 
+router.post('/uploadfile', function(req, res, next) {
+    console.log('Body:'+req.body);
+    console.log('RawBody:'+req.rawBody);
+    
+     res.json({
+                msgid: 1,
+                message: 'Success.'});
+});
+
 router.get('/getContact', function(req, res) {
     var contact_id = req.param('id');
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
