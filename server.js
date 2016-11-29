@@ -191,7 +191,7 @@ router.post('/CreateUser', function(req, res) {
      });
 });
 
-router.get('/getImage', function(req, res) {
+router.get('/showImage', function(req, res) {
     var imageid = req.param('imageid');
     console.log('ImageId:'+imageid);
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
