@@ -5,7 +5,8 @@ var pg = require('pg');
 var app = express();
 
 app.use(express.static('public'));
-app.use(express.limit(100000000));
+
+app.use(express.bodyParser({limit: '50mb'}));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
