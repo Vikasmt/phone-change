@@ -39,19 +39,16 @@ router.post('/uploadfile', function(req, res, buf, encoding, next) {
     var contentType = req.headers['content-type'];
     var mime = contentType.split(';')[0];
     
-    if (buf && buf.length) {
-        req.rawBody = buf.toString(encoding || 'utf8');
-    }
-    
-    /*console.log('contenttype:'+mime);
+    console.log('contenttype:'+mime);
     var data = '';
       req.setEncoding('utf8');
       req.on('data', function(chunk) {
+        console.log('Chunk:'+chunk);
         data += chunk;
       });
       req.on('end', function() {
         req.rawBody = data;
-      });*/
+      });
     
     console.log('Body:'+req.body);
     console.log('RawBody:'+req.rawBody);
