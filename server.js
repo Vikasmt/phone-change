@@ -223,10 +223,8 @@ router.get('/showImage', function(req, res) {
                 }
                 else{
                     
-                      res.writeHead(200, {'Content-Type': 'text/html'});
-                      res.write('<html><body><img src="data:image/jpeg;base64,')
-                      res.write(new Buffer(result.rows[0].body).toString('base64'));
-                      res.end('"/></body></html>');
+                      res.writeHead(200, {'Content-Type': 'image/png'});
+                      res.end(new Buffer(result.rows[0].body).toString('base64'));
                      //res.writeHead(200, {'Content-Type': 'image/png'});
                      //res.end(result.rows[0].body);
                      //res.json(result.rows[0].body);
