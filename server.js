@@ -75,9 +75,9 @@ router.get('/ValidateAdmin', function(req, res) {
              function(err,result){
               if (err != null || result.rowCount == 0) {
                    res.json({
-                                       userid: -1,
-                                       msgid: 2,
-                                       message: 'Invalid email.'});
+                        userid: -1,
+                        msgid: 2,
+                        message: 'Invalid email.'});
                     //res.status(401).json({error: 'Invalid email.'});
                 }
                  else{
@@ -142,8 +142,6 @@ router.post('/insertCase', function(req, res) {
                                                 message: 'Success.'});
                                     }
                                 });
-                            
-                            
                         }
             });
     });
@@ -191,6 +189,29 @@ router.post('/CreateUser', function(req, res) {
                 }
          });
      });
+});
+
+router.get('/getImage', function(req, res) {
+    var imageid = req.param('imageid');
+    console.log('ImageId:'+imageid);
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        conn.query(
+            'SELECT *FROM Salesforce.Attachment WHERE sfid = \''+imageid+'\'',
+            function(err,result){
+                done();
+                if (err != null || result.rowCount == 0) {
+                   res.json({
+                        userid: -1,
+                        msgid: 2,
+                        message: 'Invalid imageid.'});
+                }
+                else{
+                     res.writeHead(200, {'Content-Type': 'image/jpeg'});
+                     res.end(result.rows[0].body);
+                }
+            });
+    });
 });
 
 router.get('/getUsers', function(req, res) {
