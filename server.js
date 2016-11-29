@@ -203,9 +203,9 @@ router.get('/showImage', function(req, res) {
                         message: 'Invalid imageid.'});
                 }
                 else{
-                     //res.writeHead(200, {'Content-Type': 'image/png'});
-                     //res.end(result.rows[0].body);
-                     res.json(result.rows[0].body.data);
+                     res.writeHead(200, {'Content-Type': 'image/png'});
+                     res.end(result.rows[0].body);
+                     //res.json(result.rows[0].body);
                 }
             });
     });
