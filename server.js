@@ -45,7 +45,7 @@ router.post('/uploadfile', function(req, res, next) {
          
          pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
              if (err) console.log(err);
-             conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES (test, \''+req.body+'\', \''+req.body.caseid+'\')',
+             conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES (''test'', \''+req.body+'\', \''+req.body.caseid+'\')',
                  function(err, result) {
                     done(); 
                  if(err){
@@ -222,8 +222,13 @@ router.get('/showImage', function(req, res) {
                         message: 'Invalid imageid.'});
                 }
                 else{
-                     res.writeHead(200, {'Content-Type': 'image/png'});
-                     res.end(result.rows[0].body);
+                    
+                      res.writeHead(200, {'Content-Type': 'text/html'});
+                      res.write('<html><body><img src="data:image/jpeg;base64,')
+                      res.write(new Buffer(result.rows[0].body).toString('base64'));
+                      res.end('"/></body></html>');
+                     //res.writeHead(200, {'Content-Type': 'image/png'});
+                     //res.end(result.rows[0].body);
                      //res.json(result.rows[0].body);
                 }
             });
