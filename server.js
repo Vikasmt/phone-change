@@ -17,10 +17,6 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
-router.get('/message', function(req, res) {
-    res.json({ message: 'hooray! welcome to our message api!' });   
-});
-
 router.get('/getContacts', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
@@ -194,8 +190,7 @@ router.post('/CreateUser', function(req, res) {
 router.get('/showImage', function(req, res) {
     var imageid = req.param('imageid');
     console.log('ImageId:'+imageid);
-     res.json(imageid);
-    /*pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
             'SELECT *FROM Salesforce.Attachment WHERE sfid = \''+imageid+'\'',
@@ -212,7 +207,7 @@ router.get('/showImage', function(req, res) {
                      res.end(result.rows[0].body);
                 }
             });
-    });*/
+    });
 });
 
 router.get('/getUsers', function(req, res) {
