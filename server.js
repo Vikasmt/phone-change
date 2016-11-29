@@ -6,9 +6,9 @@ var app = express();
 
 app.use(express.static('public'));
 
-app.use(bodyParser.json({verify: rawBodySaver, limit: "50mb"}));
-app.use(bodyParser.urlencoded({verify: rawBodySaver, limit: "50mb", extended: true, parameterLimit:50000}));
-app.use(bodyParser.raw({ verify: rawBodySaver, type: '*/*' }));
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(bodyParser.raw({limit: "50mb", type: '*/*' }));
 
 app.set('port', process.env.PORT || 5000);
 
