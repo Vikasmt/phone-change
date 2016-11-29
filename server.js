@@ -6,10 +6,9 @@ var app = express();
 
 app.use(express.static('public'));
 
-app.use(bodyParser.json({limit: "50mb"}));
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
-//app.use(bodyParser.urlencoded({extended: true}));
-//app.use(bodyParser.json());
+app.use(bodyParser.json({verify: rawBodySaver, limit: "50mb"}));
+app.use(bodyParser.urlencoded({verify: rawBodySaver, limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(bodyParser.raw({ verify: rawBodySaver, type: '*/*' }));
 
 app.set('port', process.env.PORT || 5000);
 
@@ -36,12 +35,15 @@ router.get('/getContacts', function(req, res) {
     });
 });
 
-router.post('/uploadfile', function(req, res, next) {
+router.post('/uploadfile', function(req, res, buf, encoding, next) {
     var contentType = req.headers['content-type'];
     var mime = contentType.split(';')[0];
     
+    if (buf && buf.length) {
+        req.rawBody = buf.toString(encoding || 'utf8');
+    }
     
-    console.log('contenttype:'+mime);
+    /*console.log('contenttype:'+mime);
     var data = '';
       req.setEncoding('utf8');
       req.on('data', function(chunk) {
@@ -49,10 +51,8 @@ router.post('/uploadfile', function(req, res, next) {
       });
       req.on('end', function() {
         req.rawBody = data;
-        next();
-      });
+      });*/
     
-    console.log('data:'+data);
     console.log('Body:'+req.body);
     console.log('RawBody:'+req.rawBody);
     
