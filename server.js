@@ -37,9 +37,7 @@ router.get('/getContacts', function(req, res) {
 });
 
 router.post('/uploadfile', function(req, res, next) {
-    var reqBody = res.request;
-    console.log('Body Enhanced:'+reqBody);
-    console.log('Body:'+req.body);
+    console.log('Body:'+JSON.stringify(req.body));
     console.log('RawBody:'+req.rawBody);
     
          //var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (test, \''+req.body+'\', \''+req.body.caseid+'\')';
