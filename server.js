@@ -35,7 +35,7 @@ router.get('/getContacts', function(req, res) {
     });
 });
 
-router.post('/uploadfile', function(req, res, buf, encoding, next) {
+router.post('/uploadfile', function(req, res) {
     var contentType = req.headers['content-type'];
     var mime = contentType.split(';')[0];
     
