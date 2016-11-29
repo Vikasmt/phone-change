@@ -38,16 +38,28 @@ router.get('/getContacts', function(req, res) {
 
 router.post('/uploadfile', function(req, res, next) {
     var contentType = req.headers['content-type'];
+    var mime = contentType.split(';')[0];
     
     
-    console.log('contenttype:'+contentType);
+    console.log('contenttype:'+mime);
+    var data = '';
+      req.setEncoding('utf8');
+      req.on('data', function(chunk) {
+        data += chunk;
+      });
+      req.on('end', function() {
+        req.rawBody = data;
+        next();
+      });
+    
+    console.log('data:'+data);
     console.log('Body:'+req.body);
     console.log('RawBody:'+req.rawBody);
     
-         //var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (test, \''+req.body+'\', \''+req.body.caseid+'\')';
+         //var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+req.body.name +'\', \''+req.body.image+'\', '+req.body.caseid+')';
          //console.log('formattedQuery:'+formattedData);
          
-         pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+         /*pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
              if (err) console.log(err);
              conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+req.body.name +'\', \''+req.body.image+'\', '+req.body.caseid+')',
                  function(err, result) {
@@ -63,7 +75,7 @@ router.post('/uploadfile', function(req, res, next) {
                                 message: 'Success.'});
                     }
              });
-     });
+     });*/
 });
 
 router.get('/getContact', function(req, res) {
