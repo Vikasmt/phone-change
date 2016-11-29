@@ -40,9 +40,26 @@ router.post('/uploadfile', function(req, res, next) {
     console.log('Body:'+req.body);
     console.log('RawBody:'+req.rawBody);
     
-     res.json({
-                msgid: 1,
-                message: 'Success.'});
+         var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (test, \''+req.body+'\', \''+req.body.caseid+'\')';
+         console.log('formattedQuery:'+formattedData);
+         
+         pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+             if (err) console.log(err);
+             conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES (test, \''+req.body+'\', \''+req.body.caseid+'\')',
+                 function(err, result) {
+                    done(); 
+                 if(err){
+                        res.json({
+                                msgid: 2,
+                                message: err.message});
+                    }
+                    else{
+                        res.json({
+                                msgid: 1,
+                                message: 'Success.'});
+                    }
+             });
+     });
 });
 
 router.get('/getContact', function(req, res) {
