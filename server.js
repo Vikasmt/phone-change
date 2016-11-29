@@ -121,14 +121,29 @@ router.post('/insertCase', function(req, res) {
                     if(err){
                         console.log(err.message);
                             res.json({
+                                    caseid: -1,
                                     msgid: 2,
                                     message: err.message});
                         }
                         else{
                             console.log(result);
-                            res.json({
-                                    msgid: 1,
-                                    message: 'Success.'});
+                            conn.query('SELECT Max(Id) as maxid from salesforce.Case',
+                               function(err,result){
+                                    done();
+                                    if(result.rowCount > 0){
+                                        res.json({
+                                           caseid:result.rows[0].maxid,
+                                           msgid: 1,
+                                           message: 'Success.'});
+                                    }else{
+                                        res.json({
+                                                caseid: -1,
+                                                msgid: 1,
+                                                message: 'Success.'});
+                                    }
+                                });
+                            
+                            
                         }
             });
     });
