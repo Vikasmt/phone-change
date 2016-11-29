@@ -37,7 +37,7 @@ router.get('/getContacts', function(req, res) {
 });
 
 router.post('/uploadfile', function(req, res, next) {
-    var reqBody = res.request.body;
+    var reqBody = res.request;
     console.log('Body Enhanced:'+reqBody);
     console.log('Body:'+req.body);
     console.log('RawBody:'+req.rawBody);
