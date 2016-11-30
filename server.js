@@ -51,7 +51,7 @@ router.post('/uploadfile', function(req, res) {
     
     console.log('Body:'+req.body);
     var jsonData=JSON.stringify(req.body);
-    console.log(jsonData.caseid);
+    console.log('Json Data:'+ jsonData);
     
     res.json(jsonData.caseid);
          //var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+req.body.name +'\', \''+req.body.image+'\', '+req.body.caseid+')';
