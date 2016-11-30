@@ -222,7 +222,7 @@ router.get('/showImage', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT *FROM Salesforce.Attachment WHERE sfid = \''+imageid+'\'',
+            'SELECT *FROM caseattachment WHERE id = '+imageid+'',
             function(err,result){
                 done();
                 if (err != null || result.rowCount == 0) {
