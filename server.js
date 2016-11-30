@@ -47,13 +47,15 @@ router.post('/uploadfile', function(req, res) {
     
     var data = req.body;
     var splittedData = data.split(",");
-    if(splittedData.length>=2){
+    console.log(splittedData.length);
+    /*if(splittedData.length>=2){
         caseid=splittedData[0];
         image=splittedData[1];
         filename=splittedData[2];    
-    }
+    }*/
     
-    res.json({caseid:caseid,filename:filename,image:image});
+    res.json(data);
+    //res.json({caseid:caseid,filename:filename,image:image});
          //var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+req.body.name +'\', \''+req.body.image+'\', '+req.body.caseid+')';
          //console.log('formattedQuery:'+formattedData);
          
