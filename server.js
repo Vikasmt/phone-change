@@ -50,7 +50,7 @@ router.post('/uploadfile', function(req, res) {
       });*/
     
     console.log('Body:'+req.body);
-    var jsonData=JSON.stringify(req.body);
+    var jsonData=JSON.parse(req.body);
     console.log('Json Data:'+ jsonData);
     
     res.json(jsonData.caseid);
