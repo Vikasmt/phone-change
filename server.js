@@ -242,7 +242,7 @@ router.get('/showImage', function(req, res) {
                      //res.json(result.rows[0].body);
                     
                     res.writeHead(200, {'Content-Type': 'image/png'});
-                    res.end(new Buffer(result.rows[0].body));
+                    res.end(result.rows[0].body);
                 }
             });
     });
