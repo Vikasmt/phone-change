@@ -60,12 +60,13 @@ router.post('/uploadfile', function(req, res) {
     
     console.log('Case ID:'+caseid);
     console.log('filename:'+filename);
-    console.log('imagedata:'+imagedata);
+    //console.log('imagedata:'+imagedata);
     
-    res.json('data');
-         //var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+req.body.name +'\', \''+req.body.image+'\', '+req.body.caseid+')';
-         //console.log('formattedQuery:'+formattedData);
+   
+    var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+filename +'\', '+imagedata+', '+caseid+')';
+    console.log('formattedQuery:'+formattedData);
          
+     res.json('data');
          /*pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
              if (err) console.log(err);
              conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+req.body.name +'\', \''+req.body.image+'\', '+req.body.caseid+')',
