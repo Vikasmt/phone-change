@@ -40,24 +40,19 @@ router.post('/uploadfile', function(req, res) {
     var mime = contentType.split(';')[0];
     
     console.log('contenttype:'+mime);
+    /*var data = '';
+      req.setEncoding('utf8');
+      req.on('data', function(chunk) {
+        data += chunk;
+      });
+      req.on('end', function() {
+        req.rawBody = data;
+      });*/
     
-    var caseid='';
-    var image='';
-    var filename='';
+    var data=req.body;
+    console.log('Body:'+req.body);
     
-    var data = req.body;
-    
-    console.log(data);
-    //var splittedData = data.split(',');
-    //console.log(splittedData.length);
-    /*if(splittedData.length>=2){
-        caseid=splittedData[0];
-        image=splittedData[1];
-        filename=splittedData[2];    
-    }*/
-    
-    res.json('data');
-    //res.json({caseid:caseid,filename:filename,image:image});
+    res.json(jsonData.caseid);
          //var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+req.body.name +'\', \''+req.body.image+'\', '+req.body.caseid+')';
          //console.log('formattedQuery:'+formattedData);
          
