@@ -58,8 +58,11 @@ router.post('/uploadfile', function(req, res) {
     var filename = splitteddata[1];
     var imagedata = splitteddata[2];
     
+    console.log(caseid);
+    console.log(filename);
+    
    
-    var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+filename +'\', '+imagedata+', '+caseid+')';
+    var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+filename +', '+imagedata+', '+caseid+')';
     console.log('formattedQuery:'+formattedData);
          
          pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
