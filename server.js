@@ -54,6 +54,8 @@ router.post('/uploadfile', function(req, res) {
     console.log('Body:'+req.body);
     console.log('RawBody:'+req.rawBody);
     
+    res.json(data);
+    
          //var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+req.body.name +'\', \''+req.body.image+'\', '+req.body.caseid+')';
          //console.log('formattedQuery:'+formattedData);
          
