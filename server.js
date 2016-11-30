@@ -52,7 +52,7 @@ router.post('/uploadfile', function(req, res) {
     var data=req.body.toString();
     console.log('Body:'+data);
     
-    var splitteddata=data.split(',');
+    var splitteddata=data.replace("{","").replace("}","").split(',');
     
     var caseid = splitteddata[0];
     var filename = splitteddata[1];
