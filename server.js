@@ -40,14 +40,6 @@ router.post('/uploadfile', function(req, res) {
     var mime = contentType.split(';')[0];
     
     console.log('contenttype:'+mime);
-    /*var data = '';
-      req.setEncoding('utf8');
-      req.on('data', function(chunk) {
-        data += chunk;
-      });
-      req.on('end', function() {
-        req.rawBody = data;
-      });*/
     
     var data=req.body.toString();
     console.log('Body:'+data);
@@ -58,10 +50,6 @@ router.post('/uploadfile', function(req, res) {
     var filename = splitteddata[1];
     var imagedata = splitteddata[2];
     
-    console.log(caseid);
-    console.log(filename);
-    
-   
     var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+filename +', '+imagedata+', '+caseid+')';
     console.log('formattedQuery:'+formattedData);
          
