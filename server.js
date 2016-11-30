@@ -54,7 +54,7 @@ router.post('/uploadfile', function(req, res) {
     
     var splitteddata=data.split(',');
     
-    var caseid = splitteddata[0].replace("{\"caseid\":'");
+    var caseid = splitteddata[0].replace(\'{"caseid":');
     var filename = splitteddata[1];
     var imagedata = splitteddata[2];
     
@@ -64,7 +64,7 @@ router.post('/uploadfile', function(req, res) {
     
    
     var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+filename +'\', '+imagedata+', '+caseid+')';
-    console.log('formattedQuery:'+formattedData);
+    //console.log('formattedQuery:'+formattedData);
          
      res.json('data');
          /*pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
