@@ -40,20 +40,20 @@ router.post('/uploadfile', function(req, res) {
     var mime = contentType.split(';')[0];
     
     console.log('contenttype:'+mime);
-    /*var data = '';
-      req.setEncoding('utf8');
-      req.on('data', function(chunk) {
-        data += chunk;
-      });
-      req.on('end', function() {
-        req.rawBody = data;
-      });*/
     
-    console.log('Body:'+req.body);
-    var jsonData=JSON.parse(req.body);
-    console.log('Json Data:'+ jsonData);
+    var caseid='';
+    var image='';
+    var filename='';
     
-    res.json(jsonData.caseid);
+    var data = req.body;
+    var splittedData = data.split(",");
+    if(splittedData.length>=2){
+        caseid=splittedData[0];
+        image=splittedData[1];
+        filename=splittedData[2];    
+    }
+    
+    res.json({caseid:caseid,filename:filename,image:image});
          //var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+req.body.name +'\', \''+req.body.image+'\', '+req.body.caseid+')';
          //console.log('formattedQuery:'+formattedData);
          
