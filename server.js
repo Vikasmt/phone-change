@@ -222,7 +222,7 @@ router.get('/showImage', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT *FROM caseattachment WHERE id = '+imageid+'',
+            'SELECT *FROM Salesforce.Attachment WHERE sfid = \''+imageid+'\'',
             function(err,result){
                 done();
                 if (err != null || result.rowCount == 0) {
@@ -232,8 +232,13 @@ router.get('/showImage', function(req, res) {
                         message: 'Invalid imageid.'});
                 }
                 else{
-                     res.writeHead(200, {'Content-Type': 'image/png'});
-                     res.end(result.rows[0].body);
+                    
+                      res.writeHead(200, {'Content-Type': 'image/text'});
+                      res.write('<html><body><img src="data:image/png;base64,')
+                      res.write(new Buffer(result.rows[0].body).toString('base64'));
+                      res.end('"/></body></html>');
+                     //res.writeHead(200, {'Content-Type': 'image/png'});
+                     //res.end(result.rows[0].body);
                      //res.json(result.rows[0].body);
                 }
             });
