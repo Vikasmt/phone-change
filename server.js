@@ -58,18 +58,13 @@ router.post('/uploadfile', function(req, res) {
     var filename = splitteddata[1];
     var imagedata = splitteddata[2];
     
-    console.log('Case ID:'+caseid);
-    console.log('filename:'+filename);
-    console.log('imagedata:'+imagedata);
-    
    
     var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+filename +'\', '+imagedata+', '+caseid+')';
-    //console.log('formattedQuery:'+formattedData);
+    console.log('formattedQuery:'+formattedData);
          
-     res.json('data');
-         /*pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+         pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
              if (err) console.log(err);
-             conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+req.body.name +'\', \''+req.body.image+'\', '+req.body.caseid+')',
+             conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+ filename +', '+imagedata+', '+caseid+')',
                  function(err, result) {
                     done(); 
                  if(err){
@@ -83,7 +78,7 @@ router.post('/uploadfile', function(req, res) {
                                 message: 'Success.'});
                     }
              });
-     });*/
+     });
 });
 
 router.get('/getContact', function(req, res) {
