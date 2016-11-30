@@ -52,7 +52,10 @@ router.post('/uploadfile', function(req, res) {
     var data=req.body.toString();
     console.log('Body:'+data);
     
-    console.log('Case ID:'+data.split(',')[0]);
+    var splitteddata=data.split(',');
+    
+    console.log('Case ID:'+splitteddata[0]);
+    console.log('Image:'+splitteddata[1]);
     
     res.json('data');
          //var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+req.body.name +'\', \''+req.body.image+'\', '+req.body.caseid+')';
