@@ -241,7 +241,8 @@ router.get('/showImage', function(req, res) {
                      //res.end(result.rows[0].body);
                      //res.json(result.rows[0].body);
                     
-                    res.writeHead(200, {'Content-Type': 'image/png'});
+                    res.contentType('image/png');
+                    console.log(JSON.stringify(result.rows[0].body));
                     res.end(result.rows[0].body);
                 }
             });
