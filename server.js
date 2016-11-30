@@ -47,6 +47,7 @@ router.post('/uploadfile', function(req, res) {
         data += chunk;
       });
       req.on('end', function() {
+        console.log('Ended');
         req.rawBody = data;
       });
     
