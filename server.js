@@ -54,13 +54,13 @@ router.post('/uploadfile', function(req, res) {
     
     var splitteddata=data.split(',');
     
-    var caseid = splitteddata[0].replace("'{"'caseid'":'",'');
+    var caseid = splitteddata[0];
     var filename = splitteddata[1];
     var imagedata = splitteddata[2];
     
     console.log('Case ID:'+caseid);
     console.log('filename:'+filename);
-    //console.log('imagedata:'+imagedata);
+    console.log('imagedata:'+imagedata);
     
    
     var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES (\''+filename +'\', '+imagedata+', '+caseid+')';
