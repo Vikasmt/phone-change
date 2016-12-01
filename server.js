@@ -304,7 +304,7 @@ router.post('/insertCase', function(req, res) {
                                 caseid:result.rows[0].id,
                                 msgid: 1,
                                 message: 'Success.'});
-                        }
+                        } 
             });
     });
 });
