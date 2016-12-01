@@ -49,8 +49,9 @@ router.post('/uploadfile', function(req, res) {
     var caseid = splitteddata[0];
     var filename = splitteddata[1];
     var imagedata = splitteddata[2];
+    var last_id = -1;
     
-    var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+filename +', '+imagedata+', '+caseid+')';
+    var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+filename +', '+imagedata+', '+caseid+') RETURNING id INTO last_id';
     console.log('formattedQuery:'+formattedData);
     
          pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
@@ -62,16 +63,18 @@ router.post('/uploadfile', function(req, res) {
                             msgid: 2,
                             message: 'case id not found.'});
                  }else{
-                      conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+ filename +', '+imagedata+', '+caseid+')',
+                      conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+ filename +', '+imagedata+', '+caseid+') RETURNING id INTO last_id',
                          function(err, result) {
                             done(); 
                          if(err){
                                 res.json({
+                                        attachementid: last_id,
                                         msgid: 2,
                                         message: err.message});
                             }
                             else{
                                 res.json({
+                                        attachementid: last_id,
                                         msgid: 1,
                                         message: 'Success.'});
                             }
@@ -241,21 +244,11 @@ router.get('/showImage', function(req, res) {
                         message: 'Invalid imageid.'});
                 }
                 else{
-                    
-                      //res.writeHead(200, {'Content-Type': 'image/text'});
-                      //res.write('<html><body><img src="data:image/png;base64,')
-                      //res.write(new Buffer(result.rows[0].body).toString('base64'));
-                      //res.end('"/></body></html>');
-                     //res.writeHead(200, {'Content-Type': 'image/png'});
-                     //res.end(result.rows[0].body);
-                     //res.json(result.rows[0].body);
-                    
                     var img = new Buffer(result.rows[0].body, 'base64');
                     res.writeHead(200, {
                      'Content-Type': 'image/png',
                      'Content-Length': img.length
                    });
-                    console.log('length:'+img.length);
                     res.end(img);
                 }
             });
