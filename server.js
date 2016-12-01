@@ -168,94 +168,128 @@ router.post('/insertCase', function(req, res) {
         
         console.log(req.body);
         var jsonData = req.body;
+        var insertQueryData = 'INSERT INTO salesforce.Case (';
+        var valuesData=' VALUES (';
         
-        //---------------Format Data---------------
-        
-        if(jsonData.DeviceName === null || jsonData.DeviceName === "null" || jsonData.DeviceName.length < 1) { jsonData.DeviceName = 'NULL' } else { jsonData.DeviceName = ''+jsonData.DeviceName+'' };
-        
-        if(jsonData.Dosage === null || jsonData.Dosage === "null" || jsonData.Dosage.length < 1) { jsonData.Dosage = 'NULL' } else { jsonData.Dosage = ''+jsonData.Dosage+'' };
-        
-        if(jsonData.DosageForm === null || jsonData.DosageForm === "null" || jsonData.DosageForm.length < 1) { jsonData.DosageForm = 'NULL' } else { jsonData.DosageForm = ''+jsonData.DosageForm+'' };
-        
-        if(jsonData.BatchSerialNbr === null || jsonData.BatchSerialNbr === "null" || jsonData.BatchSerialNbr.length < 1) { jsonData.BatchSerialNbr = 'NULL' } else { jsonData.BatchSerialNbr = ''+jsonData.BatchSerialNbr+'' };
-        
-        if(jsonData.Description === null || jsonData.Description === "null" || jsonData.Description.length < 1) { jsonData.Description = 'NULL' } else { jsonData.Description = ''+jsonData.Description+'' };
-        
-        if(jsonData.DateOfFirstUse === null || jsonData.DateOfFirstUse === "null" || jsonData.DateOfFirstUse.length < 1) { jsonData.DateOfFirstUse =  "NULL" } else { jsonData.DateOfFirstUse = '\''+jsonData.DateOfFirstUse+'\'' };
-        
-        if(jsonData.ExpiryDate === null || jsonData.ExpiryDate === "null" || jsonData.ExpiryDate.length < 1) { jsonData.ExpiryDate = 'NULL' } else { jsonData.ExpiryDate = ''+jsonData.ExpiryDate+'' };
-        
-        if(jsonData.InitialPatientName === null || jsonData.InitialPatientName === "null" || jsonData.InitialPatientName.length < 1) { jsonData.InitialPatientName = 'NULL' } else { jsonData.InitialPatientName = ''+jsonData.InitialPatientName+'' };
-        
-        if(jsonData.InitialPatientSurName === null || jsonData.InitialPatientSurName === "null" || jsonData.InitialPatientSurName.length < 1) { jsonData.InitialPatientSurName = 'NULL' } else { jsonData.InitialPatientSurName = ''+jsonData.InitialPatientSurName+'' };
-        
-        if(jsonData.Age === null || jsonData.Age === "null" || jsonData.Age.length < 1) { jsonData.Age = 'NULL' } else { jsonData.Age = jsonData.Age };
-        if(jsonData.Gender === null || jsonData.Gender === "null" || jsonData.Gender.length < 1) { jsonData.Gender = 'NULL' } else { jsonData.Gender = ''+jsonData.Gender+'' };
-        
-        if(jsonData.QtyOfProductsConcerned === null || jsonData.QtyOfProductsConcerned === "null" || jsonData.QtyOfProductsConcerned.length < 1) { jsonData.QtyOfProductsConcerned = 'NULL' } else { jsonData.QtyOfProductsConcerned = jsonData.QtyOfProductsConcerned };
-        
-        if(jsonData.NameOfCompliant === null || jsonData.NameOfCompliant === "null" || jsonData.NameOfCompliant.length < 1) { jsonData.NameOfCompliant = 'NULL' } else { jsonData.NameOfCompliant = ''+jsonData.NameOfCompliant+'' };
-        
-        if(jsonData.DefectDescription === null || jsonData.DefectDescription === "null" || jsonData.DefectDescription.length < 1) { jsonData.DefectDescription = 'NULL' } else { jsonData.DefectDescription = ''+jsonData.DefectDescription+'' };
-        
-        if(jsonData.IsComplaintSampleAvailable === null || jsonData.IsComplaintSampleAvailable === "null" || jsonData.IsComplaintSampleAvailable.length < 1) { jsonData.IsComplaintSampleAvailable = 'NULL' } else { jsonData.IsComplaintSampleAvailable = jsonData.IsComplaintSampleAvailable };
-        
-        if(jsonData.ExpectedDateOfSampleReceived === null || jsonData.ExpectedDateOfSampleReceived === "null" || jsonData.ExpectedDateOfSampleReceived.length < 1) { jsonData.ExpectedDateOfSampleReceived = 'NULL' } else { jsonData.ExpectedDateOfSampleReceived = ''+jsonData.ExpectedDateOfSampleReceived+'' };
-        
-        if(jsonData.HasResponseBeenRequested === null || jsonData.HasResponseBeenRequested === "null" || jsonData.HasResponseBeenRequested.length < 1) { jsonData.HasResponseBeenRequested = 'NULL' } else { jsonData.HasResponseBeenRequested = jsonData.HasResponseBeenRequested };
-        
-        if(jsonData.IsPatientFamiliarWithDeviceUsage === null || jsonData.IsPatientFamiliarWithDeviceUsage === "null" || jsonData.IsPatientFamiliarWithDeviceUsage.length < 1) { jsonData.IsPatientFamiliarWithDeviceUsage = 'NULL' } else { jsonData.IsPatientFamiliarWithDeviceUsage = jsonData.IsPatientFamiliarWithDeviceUsage };
-        
-        if(jsonData.SinceWhenPatientUseThisDevice === null || jsonData.SinceWhenPatientUseThisDevice === "null" || jsonData.SinceWhenPatientUseThisDevice.length < 1) { jsonData.SinceWhenPatientUseThisDevice = 'NULL' } else { jsonData.SinceWhenPatientUseThisDevice = ''+jsonData.SinceWhenPatientUseThisDevice+'' };
-        
-        if(jsonData.IsDevicePhysicallyDamaged === null || jsonData.IsDevicePhysicallyDamaged === "null" || jsonData.IsDevicePhysicallyDamaged.length < 1) { jsonData.IsDevicePhysicallyDamaged = 'NULL' } else { jsonData.IsDevicePhysicallyDamaged = jsonData.IsDevicePhysicallyDamaged };
-        
-        if(jsonData.Where === null || jsonData.Where === "null" || jsonData.Where.length < 1) { jsonData.Where = 'NULL' } else { jsonData.Where = ''+jsonData.Where+'' };
-        
-        if(jsonData.DamageDuetoAccidentalFall === null || jsonData.DamageDuetoAccidentalFall === "null" || jsonData.DamageDuetoAccidentalFall.length < 1) { jsonData.DamageDuetoAccidentalFall = 'NULL' } else { jsonData.DamageDuetoAccidentalFall = jsonData.DamageDuetoAccidentalFall };
-        
-        if(jsonData.FromWhichHeightOccuredtheFall === null || jsonData.FromWhichHeightOccuredtheFall === "null" || jsonData.FromWhichHeightOccuredtheFall.length < 1) { jsonData.FromWhichHeightOccuredtheFall = 'NULL' } else { jsonData.FromWhichHeightOccuredtheFall = ''+jsonData.FromWhichHeightOccuredtheFall+'' };
-        
-        if(jsonData.IsDefectedDuetomisusebypatient === null || jsonData.IsDefectedDuetomisusebypatient === "null" || jsonData.IsDefectedDuetomisusebypatient.length < 1) { jsonData.IsDefectedDuetomisusebypatient = 'NULL' } else { jsonData.IsDefectedDuetomisusebypatient = jsonData.IsDefectedDuetomisusebypatient };
-        
-        if(jsonData.Whichkindofmisuse === null || jsonData.Whichkindofmisuse === "null" || jsonData.Whichkindofmisuse.length < 1) { jsonData.Whichkindofmisuse = 'NULL' } else { jsonData.Whichkindofmisuse = ''+jsonData.Whichkindofmisuse+'' };
-        
-        if(jsonData.IsSomethingstuckinsidedevice === null || jsonData.IsSomethingstuckinsidedevice === "null" || jsonData.IsSomethingstuckinsidedevice.length < 1) { jsonData.IsSomethingstuckinsidedevice = 'NULL' } else { jsonData.IsSomethingstuckinsidedevice = jsonData.IsSomethingstuckinsidedevice };
-        
-        if(jsonData.WhatStuckinside === null || jsonData.WhatStuckinside === "null" || jsonData.WhatStuckinside.length < 1) { jsonData.WhatStuckinside = 'NULL' } else { jsonData.WhatStuckinside = ''+jsonData.WhatStuckinside+'' };
-        
-        if(jsonData.Adverseeventassociatedtodefect === null || jsonData.Adverseeventassociatedtodefect === "null" || jsonData.Adverseeventassociatedtodefect.length < 1) { jsonData.Adverseeventassociatedtodefect = 'NULL' } else { jsonData.Adverseeventassociatedtodefect = jsonData.Adverseeventassociatedtodefect };
-        
-        if(jsonData.Adverseeventassociatedwithdefect === null || jsonData.Adverseeventassociatedwithdefect === "null" || jsonData.Adverseeventassociatedwithdefect.length < 1) { jsonData.Adverseeventassociatedwithdefect = 'NULL' } else { jsonData.Adverseeventassociatedwithdefect = ''+jsonData.Adverseeventassociatedwithdefect+'' };
-        
-        if(jsonData.OtherInformation === null || jsonData.OtherInformation === "null" || jsonData.OtherInformation.length < 1) { jsonData.OtherInformation = 'NULL' } else { jsonData.OtherInformation = ''+jsonData.OtherInformation+'' };
-        
-        if(jsonData.Isproductcartridgestuckedindevice === null || jsonData.Isproductcartridgestuckedindevice === "null" || jsonData.Isproductcartridgestuckedindevice.length < 1) { jsonData.Isproductcartridgestuckedindevice = 'NULL' } else { jsonData.Isproductcartridgestuckedindevice = jsonData.Isproductcartridgestuckedindevice };
-        
-        if(jsonData.Isreplacementofproductrequested === null || jsonData.Isreplacementofproductrequested === "null" || jsonData.Isreplacementofproductrequested.length < 1) { jsonData.Isreplacementofproductrequested = 'NULL' } else { jsonData.Isreplacementofproductrequested = jsonData.Isreplacementofproductrequested };
-        
-        if(jsonData.Subject === null || jsonData.Subject === "null" || jsonData.Subject.length < 1) { jsonData.Subject = 'NULL' } else { jsonData.Subject = ''+jsonData.Subject+'' };
-        if(jsonData.Priority === null || jsonData.Priority === "null" || jsonData.Priority.length < 1) { jsonData.Priority = 'NULL' } else { jsonData.Priority = ''+jsonData.Priority+'' };
-        if(jsonData.Status === null || jsonData.Status === "null" || jsonData.Status.length < 1) { jsonData.Status = 'NULL' } else { jsonData.Status = ''+jsonData.Status+'' };
-        if(jsonData.userid === null || jsonData.userid === "null" || jsonData.userid.length < 1) { jsonData.userid = 'NULL' } else { jsonData.userid = ''+jsonData.userid+'' };
-        if(jsonData.username === null || jsonData.username === "null" || jsonData.username.length < 1) { jsonData.username = 'NULL' } else { jsonData.username = ''+jsonData.username+'' };
-        
-        console.log(jsonData);
-        
-        //---------------End Format Data---------------
-        
-        /*var formattedData='INSERT INTO salesforce.Case (FMA_DeviceName__c, FMA_Dosage__c, FMA_DosageForm__c, FMA_BatchSerialnumber__c, Description, FMA_Dateoffirstuse__c, FMA_Expirydate__c, FMA_Initialpatientname__c, FMA_Initialpatientsurname__c, FMA_Age__c, FMA_Gender__c, FMA_Quantityofproductsconcerned__c, FMA_NameofComplainant__c, FMA_Defectdescription__c, FMA_Isthecomplaintsampleavailable__c, FMA_Expecteddateofsamplereceived__c, FMA_Hasresponsebeenrequested__c, FMA_Ispatientfamiliarwithdeviceusage__c, FMA_Sincewhendoespatientusethiskind__c, FMA_Isthedevicephysicallydamaged__c, FMA_where__c, FMA_Thedamageisduetoanaccidentalfall__c, FMA_Fromwhichheightisoccurredhefall__c, FMA_Isthedefectduetoamisusebypatient__c, FMA_whichkindofmisuse__c, FMA_Issomethingstuckinsidethedevice__c, FMA_whatstuckinside__c, FMA_Adverseeventassociatedtodefect__c, FMA_Adverseeventassociatedwithdefect__c, FMA_OtherInformation__c, FMA_Isproductcartridgestuckedindevice__c, FMA_Isreplacementofproductrequested__c, Subject, Priority, Status,fma_loginuserid__c,fma_feedbackcreator__c) VALUES (\''+jsonData.DeviceName+'\', \''+jsonData.Dosage+'\', \''+jsonData.DosageForm+'\', \''+jsonData.BatchSerialNbr+'\', \''+jsonData.Description+'\', \''+jsonData.DateOfFirstUse+'\', \''+jsonData.ExpiryDate+'\', \''+jsonData.InitialPatientName+'\', \''+jsonData.InitialPatientSurName+'\', '+jsonData.Age+', \''+jsonData.Gender+'\', '+jsonData.QtyOfProductsConcerned+', \''+jsonData.NameOfCompliant+'\', \''+jsonData.DefectDescription+'\', '+jsonData.IsComplaintSampleAvailable+', \''+jsonData.ExpectedDateOfSampleReceived+'\', '+jsonData.HasResponseBeenRequested+', '+jsonData.IsPatientFamiliarWithDeviceUsage+', \''+jsonData.SinceWhenPatientUseThisDevice+'\', '+jsonData.IsDevicePhysicallyDamaged+', \''+jsonData.Where+'\', '+jsonData.DamageDuetoAccidentalFall+', \''+jsonData.FromWhichHeightOccuredtheFall+'\', '+jsonData.IsDefectedDuetomisusebypatient+', \''+jsonData.Whichkindofmisuse+'\', '+jsonData.IsSomethingstuckinsidedevice+', \''+jsonData.WhatStuckinside+'\', '+jsonData.Adverseeventassociatedtodefect+', \''+jsonData.Adverseeventassociatedwithdefect+'\', \''+jsonData.OtherInformation+'\', '+jsonData.Isproductcartridgestuckedindevice+', '+jsonData.Isreplacementofproductrequested+', \''+jsonData.Subject+'\',\''+jsonData.Priority+'\',\''+jsonData.Status+'\','+jsonData.userid+',\''+jsonData.username+'\') RETURNING id';
-        
-        
-        'INSERT INTO salesforce.Case (FMA_DeviceName__c, FMA_Dosage__c, FMA_DosageForm__c, FMA_BatchSerialnumber__c, Description,    FMA_Dateoffirstuse__c, FMA_Expirydate__c, FMA_Initialpatientname__c, FMA_Initialpatientsurname__c, FMA_Age__c, FMA_Gender__c, FMA_Quantityofproductsconcerned__c, FMA_NameofComplainant__c, FMA_Defectdescription__c, FMA_Isthecomplaintsampleavailable__c, FMA_Expecteddateofsamplereceived__c, FMA_Hasresponsebeenrequested__c, FMA_Ispatientfamiliarwithdeviceusage__c, FMA_Sincewhendoespatientusethiskind__c, FMA_Isthedevicephysicallydamaged__c, FMA_where__c, FMA_Thedamageisduetoanaccidentalfall__c, FMA_Fromwhichheightisoccurredhefall__c, FMA_Isthedefectduetoamisusebypatient__c, FMA_whichkindofmisuse__c, FMA_Issomethingstuckinsidethedevice__c, FMA_whatstuckinside__c, FMA_Adverseeventassociatedtodefect__c, FMA_Adverseeventassociatedwithdefect__c, FMA_OtherInformation__c, FMA_Isproductcartridgestuckedindevice__c, FMA_Isreplacementofproductrequested__c, Subject, Priority, Status,fma_loginuserid__c,fma_feedbackcreator__c) VALUES (\''+jsonData.DeviceName+'\', \''+jsonData.Dosage+'\', \''+jsonData.DosageForm+'\', \''+jsonData.BatchSerialNbr+'\', \''+jsonData.Description+'\', \''+jsonData.DateOfFirstUse+'\', \''+jsonData.ExpiryDate+'\', \''+jsonData.InitialPatientName+'\', \''+jsonData.InitialPatientSurName+'\', '+jsonData.Age+', \''+jsonData.Gender+'\', '+jsonData.QtyOfProductsConcerned+', \''+jsonData.NameOfCompliant+'\', \''+jsonData.DefectDescription+'\', '+jsonData.IsComplaintSampleAvailable+', \''+jsonData.ExpectedDateOfSampleReceived+'\', '+jsonData.HasResponseBeenRequested+', '+jsonData.IsPatientFamiliarWithDeviceUsage+', \''+jsonData.SinceWhenPatientUseThisDevice+'\', '+jsonData.IsDevicePhysicallyDamaged+', \''+jsonData.Where+'\', '+jsonData.DamageDuetoAccidentalFall+', \''+jsonData.FromWhichHeightOccuredtheFall+'\', '+jsonData.IsDefectedDuetomisusebypatient+', \''+jsonData.Whichkindofmisuse+'\', '+jsonData.IsSomethingstuckinsidedevice+', \''+jsonData.WhatStuckinside+'\', '+jsonData.Adverseeventassociatedtodefect+', \''+jsonData.Adverseeventassociatedwithdefect+'\', \''+jsonData.OtherInformation+'\', '+jsonData.Isproductcartridgestuckedindevice+', '+jsonData.Isreplacementofproductrequested+', \''+jsonData.Subject+'\',\''+jsonData.Priority+'\',\''+jsonData.Status+'\','+jsonData.userid+',\''+jsonData.username+'\') RETURNING id'
-        */
-        
-        var formattedData='INSERT INTO salesforce.Case (FMA_DeviceName__c, FMA_Dosage__c, FMA_DosageForm__c, FMA_BatchSerialnumber__c, Description,    FMA_Dateoffirstuse__c, FMA_Expirydate__c, FMA_Initialpatientname__c, FMA_Initialpatientsurname__c, FMA_Age__c, FMA_Gender__c, FMA_Quantityofproductsconcerned__c, FMA_NameofComplainant__c, FMA_Defectdescription__c, FMA_Isthecomplaintsampleavailable__c, FMA_Expecteddateofsamplereceived__c, FMA_Hasresponsebeenrequested__c, FMA_Ispatientfamiliarwithdeviceusage__c, FMA_Sincewhendoespatientusethiskind__c, FMA_Isthedevicephysicallydamaged__c, FMA_where__c, FMA_Thedamageisduetoanaccidentalfall__c, FMA_Fromwhichheightisoccurredhefall__c, FMA_Isthedefectduetoamisusebypatient__c, FMA_whichkindofmisuse__c, FMA_Issomethingstuckinsidethedevice__c, FMA_whatstuckinside__c, FMA_Adverseeventassociatedtodefect__c, FMA_Adverseeventassociatedwithdefect__c, FMA_OtherInformation__c, FMA_Isproductcartridgestuckedindevice__c, FMA_Isreplacementofproductrequested__c, Subject, Priority, Status,fma_loginuserid__c,fma_feedbackcreator__c) VALUES (\''+jsonData.DeviceName+'\', \''+jsonData.Dosage+'\', \''+jsonData.DosageForm+'\', \''+jsonData.BatchSerialNbr+'\', \''+jsonData.Description+'\', '+jsonData.DateOfFirstUse+', \''+jsonData.ExpiryDate+'\', \''+jsonData.InitialPatientName+'\', \''+jsonData.InitialPatientSurName+'\', '+jsonData.Age+', \''+jsonData.Gender+'\', '+jsonData.QtyOfProductsConcerned+', \''+jsonData.NameOfCompliant+'\', \''+jsonData.DefectDescription+'\', '+jsonData.IsComplaintSampleAvailable+', \''+jsonData.ExpectedDateOfSampleReceived+'\', '+jsonData.HasResponseBeenRequested+', '+jsonData.IsPatientFamiliarWithDeviceUsage+', \''+jsonData.SinceWhenPatientUseThisDevice+'\', '+jsonData.IsDevicePhysicallyDamaged+', \''+jsonData.Where+'\', '+jsonData.DamageDuetoAccidentalFall+', \''+jsonData.FromWhichHeightOccuredtheFall+'\', '+jsonData.IsDefectedDuetomisusebypatient+', \''+jsonData.Whichkindofmisuse+'\', '+jsonData.IsSomethingstuckinsidedevice+', \''+jsonData.WhatStuckinside+'\', '+jsonData.Adverseeventassociatedtodefect+', \''+jsonData.Adverseeventassociatedwithdefect+'\', \''+jsonData.OtherInformation+'\', '+jsonData.Isproductcartridgestuckedindevice+', '+jsonData.Isreplacementofproductrequested+', \''+jsonData.Subject+'\',\''+jsonData.Priority+'\',\''+jsonData.Status+'\','+jsonData.userid+',\''+jsonData.username+'\') RETURNING id';
+        //-------------------------------------------Framing Query-------------------------------------------
+        if (jsonData.DeviceName !== null && jsonData.DeviceName !== "null" && jsonData.DeviceName.length > 0)
+        { insertQueryData += 'FMA_DeviceName__c,'; valuesData += '' + jsonData.DeviceName + '' + ','; }
 
+        if (jsonData.Dosage !== null || jsonData.Dosage !== "null" || jsonData.Dosage.length > 1)
+        { insertQueryData += 'FMA_Dosage__c,'; valuesData += '' + jsonData.Dosage + '' + ','; }
 
-         console.log(formattedData);
+        if (jsonData.DosageForm !== null || jsonData.DosageForm !== "null" || jsonData.DosageForm.length > 1)
+        { insertQueryData += 'FMA_DosageForm__c,'; valuesData += '' + jsonData.DosageForm + '' + ','; }
+
+        if (jsonData.BatchSerialNbr !== null || jsonData.BatchSerialNbr !== "null" || jsonData.BatchSerialNbr.length > 1)
+        { insertQueryData += 'FMA_BatchSerialnumber__c,'; valuesData += '' + jsonData.BatchSerialNbr + '' + ','; }
+
+        if (jsonData.Description !== null || jsonData.Description !== "null" || jsonData.Description.length > 1)
+        { insertQueryData += 'Description,'; valuesData += '' + jsonData.Description + '' + ','; }
+
+        if (jsonData.DateOfFirstUse !== null || jsonData.DateOfFirstUse !== "null" || jsonData.DateOfFirstUse.length > 7)
+        { insertQueryData += 'FMA_Dateoffirstuse__c,'; valuesData += '' + jsonData.DateOfFirstUse + '' + ','; }
+
+        if (jsonData.ExpiryDate !== null || jsonData.ExpiryDate !== "null" || jsonData.ExpiryDate.length > 7)
+        { insertQueryData += 'FMA_Expirydate__c,'; valuesData += '' + jsonData.ExpiryDate + '' + ','; }
+
+        if (jsonData.InitialPatientName !== null || jsonData.InitialPatientName !== "null" || jsonData.InitialPatientName.length > 1)
+        { insertQueryData += 'FMA_Initialpatientname__c,'; valuesData += '' + jsonData.InitialPatientName + '' + ','; }
+
+        if (jsonData.InitialPatientSurName !== null || jsonData.InitialPatientSurName !== "null" || jsonData.InitialPatientSurName.length > 0)
+        { insertQueryData += 'FMA_Initialpatientsurname__c,'; valuesData += '' + jsonData.InitialPatientSurName + '' + ','; }
+
+        if (jsonData.Age !== null || jsonData.Age !== "null" || jsonData.Age.length > 0)
+        { insertQueryData += 'FMA_Age__c,'; valuesData += jsonData.Age + ','; }
+
+        if (jsonData.Gender !== null || jsonData.Gender !== "null" || jsonData.Gender.length > 0)
+        { insertQueryData += 'FMA_Gender__c,'; valuesData += '' + jsonData.Gender + '' + ','; }
+
+        if (jsonData.QtyOfProductsConcerned !== null || jsonData.QtyOfProductsConcerned !== "null" || jsonData.QtyOfProductsConcerned.length > 0)
+        { insertQueryData += 'FMA_Quantityofproductsconcerned__c,'; valuesData += jsonData.QtyOfProductsConcerned + ','; }
+
+        if (jsonData.NameOfCompliant !== null || jsonData.NameOfCompliant !== "null" || jsonData.NameOfCompliant.length > 1)
+        { insertQueryData += 'FMA_NameofComplainant__c,'; valuesData += '' + jsonData.NameOfCompliant + '' + ','; }
+
+        if (jsonData.DefectDescription !== null || jsonData.DefectDescription !== "null" || jsonData.DefectDescription.length > 1)
+        { insertQueryData += 'FMA_Defectdescription__c,'; valuesData += '' + jsonData.DefectDescription + '' + ','; }
+
+        if (jsonData.IsComplaintSampleAvailable !== null || jsonData.IsComplaintSampleAvailable !== "null" || jsonData.IsComplaintSampleAvailable.length > 0)
+        { insertQueryData += 'FMA_Isthecomplaintsampleavailable__c,'; valuesData += jsonData.IsComplaintSampleAvailable + ','; }
+
+        if (jsonData.ExpectedDateOfSampleReceived !== null || jsonData.ExpectedDateOfSampleReceived !== "null" || jsonData.ExpectedDateOfSampleReceived.length > 7)
+        { insertQueryData += 'FMA_Expecteddateofsamplereceived__c,'; valuesData += '' + jsonData.ExpectedDateOfSampleReceived + '' + ','; }
+
+        if (jsonData.HasResponseBeenRequested !== null || jsonData.HasResponseBeenRequested !== "null" || jsonData.HasResponseBeenRequested.length > 0)
+        { insertQueryData += 'FMA_Hasresponsebeenrequested__c,'; valuesData += jsonData.HasResponseBeenRequested + ','; }
+
+        if (jsonData.IsPatientFamiliarWithDeviceUsage !== null || jsonData.IsPatientFamiliarWithDeviceUsage !== "null" || jsonData.IsPatientFamiliarWithDeviceUsage.length > 0)
+        { insertQueryData += 'FMA_Ispatientfamiliarwithdeviceusage__c,'; valuesData += jsonData.IsPatientFamiliarWithDeviceUsage + ','; }
+
+        if (jsonData.SinceWhenPatientUseThisDevice !== null || jsonData.SinceWhenPatientUseThisDevice !== "null" || jsonData.SinceWhenPatientUseThisDevice.length > 1)
+        { insertQueryData += 'FMA_Sincewhendoespatientusethiskind__c,'; valuesData += '' + jsonData.SinceWhenPatientUseThisDevice + '' + ','; }
+
+        if (jsonData.IsDevicePhysicallyDamaged !== null || jsonData.IsDevicePhysicallyDamaged !== "null" || jsonData.IsDevicePhysicallyDamaged.length > 0)
+        { insertQueryData += 'FMA_Isthedevicephysicallydamaged__c,'; valuesData += jsonData.IsDevicePhysicallyDamaged + ','; }
+
+        if (jsonData.Where !== null || jsonData.Where !== "null" || jsonData.Where.length > 0)
+        { insertQueryData += 'FMA_where__c,'; valuesData += '' + jsonData.Where + '' + ','; }
+
+        if (jsonData.DamageDuetoAccidentalFall !== null || jsonData.DamageDuetoAccidentalFall !== "null" || jsonData.DamageDuetoAccidentalFall.length > 0)
+        { insertQueryData += 'FMA_Thedamageisduetoanaccidentalfall__c,'; valuesData += jsonData.DamageDuetoAccidentalFall + ','; }
+
+        if (jsonData.FromWhichHeightOccuredtheFall !== null || jsonData.FromWhichHeightOccuredtheFall !== "null" || jsonData.FromWhichHeightOccuredtheFall.length > 0)
+        { insertQueryData += 'FMA_Fromwhichheightisoccurredhefall__c,'; valuesData += '' + jsonData.FromWhichHeightOccuredtheFall + '' + ','; }
+
+        if (jsonData.IsDefectedDuetomisusebypatient !== null || jsonData.IsDefectedDuetomisusebypatient !== "null" || jsonData.IsDefectedDuetomisusebypatient.length > 0)
+        { insertQueryData += 'FMA_Isthedefectduetoamisusebypatient__c,'; valuesData += jsonData.IsDefectedDuetomisusebypatient + ','; }
+
+        if (jsonData.Whichkindofmisuse !== null || jsonData.Whichkindofmisuse !== "null" || jsonData.Whichkindofmisuse.length > 0)
+        { insertQueryData += 'FMA_whichkindofmisuse__c,'; valuesData += '' + jsonData.Whichkindofmisuse + '' + ','; }
+
+        if (jsonData.IsSomethingstuckinsidedevice !== null || jsonData.IsSomethingstuckinsidedevice !== "null" || jsonData.IsSomethingstuckinsidedevice.length > 0)
+        { insertQueryData += 'FMA_Issomethingstuckinsidethedevice__c,'; valuesData += jsonData.IsSomethingstuckinsidedevice + ','; }
+
+        if (jsonData.WhatStuckinside !== null || jsonData.WhatStuckinside !== "null" || jsonData.WhatStuckinside.length > 0)
+        { insertQueryData += 'FMA_whatstuckinside__c,'; valuesData += '' + jsonData.WhatStuckinside + '' + ','; }
+
+        if (jsonData.Adverseeventassociatedtodefect !== null || jsonData.Adverseeventassociatedtodefect !== "null" || jsonData.Adverseeventassociatedtodefect.length > 0)
+        { insertQueryData += 'FMA_Adverseeventassociatedtodefect__c,'; valuesData += jsonData.Adverseeventassociatedtodefect + ','; }
+
+        if (jsonData.Adverseeventassociatedwithdefect !== null || jsonData.Adverseeventassociatedwithdefect !== "null" || jsonData.Adverseeventassociatedwithdefect.length > 0)
+        { insertQueryData += 'FMA_Adverseeventassociatedwithdefect__c,'; valuesData += '' + jsonData.Adverseeventassociatedwithdefect + '' + ','; }
+
+        if (jsonData.OtherInformation !== null || jsonData.OtherInformation !== "null" || jsonData.OtherInformation.length > 0)
+        { insertQueryData += 'FMA_OtherInformation__c,'; valuesData += '' + jsonData.OtherInformation + '' + ','; }
+
+        if (jsonData.Isproductcartridgestuckedindevice !== null || jsonData.Isproductcartridgestuckedindevice !== "null" || jsonData.Isproductcartridgestuckedindevice.length > 0)
+        { insertQueryData += 'FMA_Isproductcartridgestuckedindevice__c,'; valuesData += jsonData.Isproductcartridgestuckedindevice + ','; }
+
+        if (jsonData.Isreplacementofproductrequested !== null || jsonData.Isreplacementofproductrequested !== "null" || jsonData.Isreplacementofproductrequested.length > 0)
+        { insertQueryData += 'FMA_Isreplacementofproductrequested__c,'; valuesData += jsonData.Isreplacementofproductrequested + ','; }
+
+        if (jsonData.Subject !== null || jsonData.Subject !== "null" || jsonData.Subject.length > 0)
+        { insertQueryData += 'Subject,'; valuesData += '' + jsonData.Subject + '' + ','; }
+
+        if (jsonData.Priority !== null || jsonData.Priority !== "null" || jsonData.Priority.length > 0)
+        { insertQueryData += 'Priority,'; valuesData += '' + jsonData.Priority + '' + ','; }
+
+        if (jsonData.Status !== null || jsonData.Status !== "null" || jsonData.Status.length > 0)
+        { insertQueryData += 'Status,'; valuesData += '' + jsonData.Status + '' + ','; }
+
+        if (jsonData.userid !== null || jsonData.userid !== "null" || jsonData.userid.length > 0)
+        { insertQueryData += 'fma_loginuserid__c,'; valuesData += '' + jsonData.userid + '' + ','; }
+
+        if (jsonData.username !== null || jsonData.username !== "null" || jsonData.username.length > 0)
+        { insertQueryData += 'fma_feedbackcreator__c'; valuesData += '' + jsonData.username + ''; }
         
-        conn.query('INSERT INTO salesforce.Case (FMA_DeviceName__c, FMA_Dosage__c, FMA_DosageForm__c, FMA_BatchSerialnumber__c, Description,    FMA_Dateoffirstuse__c, FMA_Expirydate__c, FMA_Initialpatientname__c, FMA_Initialpatientsurname__c, FMA_Age__c, FMA_Gender__c, FMA_Quantityofproductsconcerned__c, FMA_NameofComplainant__c, FMA_Defectdescription__c, FMA_Isthecomplaintsampleavailable__c, FMA_Expecteddateofsamplereceived__c, FMA_Hasresponsebeenrequested__c, FMA_Ispatientfamiliarwithdeviceusage__c, FMA_Sincewhendoespatientusethiskind__c, FMA_Isthedevicephysicallydamaged__c, FMA_where__c, FMA_Thedamageisduetoanaccidentalfall__c, FMA_Fromwhichheightisoccurredhefall__c, FMA_Isthedefectduetoamisusebypatient__c, FMA_whichkindofmisuse__c, FMA_Issomethingstuckinsidethedevice__c, FMA_whatstuckinside__c, FMA_Adverseeventassociatedtodefect__c, FMA_Adverseeventassociatedwithdefect__c, FMA_OtherInformation__c, FMA_Isproductcartridgestuckedindevice__c, FMA_Isreplacementofproductrequested__c, Subject, Priority, Status,fma_loginuserid__c,fma_feedbackcreator__c) VALUES (\''+jsonData.DeviceName+'\', \''+jsonData.Dosage+'\', \''+jsonData.DosageForm+'\', \''+jsonData.BatchSerialNbr+'\', \''+jsonData.Description+'\', '+jsonData.DateOfFirstUse+', \''+jsonData.ExpiryDate+'\', \''+jsonData.InitialPatientName+'\', \''+jsonData.InitialPatientSurName+'\', '+jsonData.Age+', \''+jsonData.Gender+'\', '+jsonData.QtyOfProductsConcerned+', \''+jsonData.NameOfCompliant+'\', \''+jsonData.DefectDescription+'\', '+jsonData.IsComplaintSampleAvailable+', \''+jsonData.ExpectedDateOfSampleReceived+'\', '+jsonData.HasResponseBeenRequested+', '+jsonData.IsPatientFamiliarWithDeviceUsage+', \''+jsonData.SinceWhenPatientUseThisDevice+'\', '+jsonData.IsDevicePhysicallyDamaged+', \''+jsonData.Where+'\', '+jsonData.DamageDuetoAccidentalFall+', \''+jsonData.FromWhichHeightOccuredtheFall+'\', '+jsonData.IsDefectedDuetomisusebypatient+', \''+jsonData.Whichkindofmisuse+'\', '+jsonData.IsSomethingstuckinsidedevice+', \''+jsonData.WhatStuckinside+'\', '+jsonData.Adverseeventassociatedtodefect+', \''+jsonData.Adverseeventassociatedwithdefect+'\', \''+jsonData.OtherInformation+'\', '+jsonData.Isproductcartridgestuckedindevice+', '+jsonData.Isreplacementofproductrequested+', \''+jsonData.Subject+'\',\''+jsonData.Priority+'\',\''+jsonData.Status+'\','+jsonData.userid+',\''+jsonData.username+'\') RETURNING id',
+        //-------------------------------------------End Framing Query-------------------------------------------
+        
+        var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
+        console.log(combinedQuery);
+        res.json(combinedQuery);
+        
+        /*conn.query(combinedQuery,
                 function(err, result) {
                     done();
                     if(err){
@@ -272,7 +306,7 @@ router.post('/insertCase', function(req, res) {
                                 msgid: 1,
                                 message: 'Success.'});
                         }
-            });
+            });*/
     });
 });
 
