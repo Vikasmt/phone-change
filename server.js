@@ -98,7 +98,6 @@ router.post('/uploadfile', function(req, res) {
                                 }
                             });
                      }
-                 }
              });
      });
 });
