@@ -287,9 +287,8 @@ router.post('/insertCase', function(req, res) {
         
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
         console.log(combinedQuery);
-        res.json(combinedQuery);
         
-        /*conn.query(combinedQuery,
+        conn.query(combinedQuery,
                 function(err, result) {
                     done();
                     if(err){
@@ -306,7 +305,7 @@ router.post('/insertCase', function(req, res) {
                                 msgid: 1,
                                 message: 'Success.'});
                         }
-            });*/
+            });
     });
 });
 
