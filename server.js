@@ -176,49 +176,49 @@ router.post('/insertCase', function(req, res) {
         { insertQueryData += 'FMA_DeviceName__c,'; valuesData += '\'' + jsonData.DeviceName + '\'' + ','; }
 
         if (jsonData.Dosage !== null || jsonData.Dosage !== "null" || jsonData.Dosage.length > 1)
-        { insertQueryData += 'FMA_Dosage__c,'; valuesData += '' + jsonData.Dosage + '' + ','; }
+        { insertQueryData += 'FMA_Dosage__c,'; valuesData += '\'' + jsonData.Dosage + '\'' + ','; }
 
         if (jsonData.DosageForm !== null || jsonData.DosageForm !== "null" || jsonData.DosageForm.length > 1)
-        { insertQueryData += 'FMA_DosageForm__c,'; valuesData += '' + jsonData.DosageForm + '' + ','; }
+        { insertQueryData += 'FMA_DosageForm__c,'; valuesData += '\'' + jsonData.DosageForm + '\'' + ','; }
 
         if (jsonData.BatchSerialNbr !== null || jsonData.BatchSerialNbr !== "null" || jsonData.BatchSerialNbr.length > 1)
-        { insertQueryData += 'FMA_BatchSerialnumber__c,'; valuesData += '' + jsonData.BatchSerialNbr + '' + ','; }
+        { insertQueryData += 'FMA_BatchSerialnumber__c,'; valuesData += '\'' + jsonData.BatchSerialNbr + '\'' + ','; }
 
         if (jsonData.Description !== null || jsonData.Description !== "null" || jsonData.Description.length > 1)
-        { insertQueryData += 'Description,'; valuesData += '' + jsonData.Description + '' + ','; }
+        { insertQueryData += 'Description,'; valuesData += '\'' + jsonData.Description + '\'' + ','; }
 
         if (jsonData.DateOfFirstUse !== null || jsonData.DateOfFirstUse !== "null" || jsonData.DateOfFirstUse.length > 7)
-        { insertQueryData += 'FMA_Dateoffirstuse__c,'; valuesData += '' + jsonData.DateOfFirstUse + '' + ','; }
+        { insertQueryData += 'FMA_Dateoffirstuse__c,'; valuesData += '\'' + jsonData.DateOfFirstUse + '\'' + ','; }
 
         if (jsonData.ExpiryDate !== null || jsonData.ExpiryDate !== "null" || jsonData.ExpiryDate.length > 7)
-        { insertQueryData += 'FMA_Expirydate__c,'; valuesData += '' + jsonData.ExpiryDate + '' + ','; }
+        { insertQueryData += 'FMA_Expirydate__c,'; valuesData += '\'' + jsonData.ExpiryDate + '\'' + ','; }
 
         if (jsonData.InitialPatientName !== null || jsonData.InitialPatientName !== "null" || jsonData.InitialPatientName.length > 1)
-        { insertQueryData += 'FMA_Initialpatientname__c,'; valuesData += '' + jsonData.InitialPatientName + '' + ','; }
+        { insertQueryData += 'FMA_Initialpatientname__c,'; valuesData += '\'' + jsonData.InitialPatientName + '\'' + ','; }
 
         if (jsonData.InitialPatientSurName !== null || jsonData.InitialPatientSurName !== "null" || jsonData.InitialPatientSurName.length > 0)
-        { insertQueryData += 'FMA_Initialpatientsurname__c,'; valuesData += '' + jsonData.InitialPatientSurName + '' + ','; }
+        { insertQueryData += 'FMA_Initialpatientsurname__c,'; valuesData += '\'' + jsonData.InitialPatientSurName + '\'' + ','; }
 
         if (jsonData.Age !== null || jsonData.Age !== "null" || jsonData.Age.length > 0)
         { insertQueryData += 'FMA_Age__c,'; valuesData += jsonData.Age + ','; }
 
         if (jsonData.Gender !== null || jsonData.Gender !== "null" || jsonData.Gender.length > 0)
-        { insertQueryData += 'FMA_Gender__c,'; valuesData += '' + jsonData.Gender + '' + ','; }
+        { insertQueryData += 'FMA_Gender__c,'; valuesData += '\'' + jsonData.Gender + '\'' + ','; }
 
         if (jsonData.QtyOfProductsConcerned !== null || jsonData.QtyOfProductsConcerned !== "null" || jsonData.QtyOfProductsConcerned.length > 0)
         { insertQueryData += 'FMA_Quantityofproductsconcerned__c,'; valuesData += jsonData.QtyOfProductsConcerned + ','; }
 
         if (jsonData.NameOfCompliant !== null || jsonData.NameOfCompliant !== "null" || jsonData.NameOfCompliant.length > 1)
-        { insertQueryData += 'FMA_NameofComplainant__c,'; valuesData += '' + jsonData.NameOfCompliant + '' + ','; }
+        { insertQueryData += 'FMA_NameofComplainant__c,'; valuesData += '\'' + jsonData.NameOfCompliant + '\'' + ','; }
 
         if (jsonData.DefectDescription !== null || jsonData.DefectDescription !== "null" || jsonData.DefectDescription.length > 1)
-        { insertQueryData += 'FMA_Defectdescription__c,'; valuesData += '' + jsonData.DefectDescription + '' + ','; }
+        { insertQueryData += 'FMA_Defectdescription__c,'; valuesData += '\'' + jsonData.DefectDescription + '\'' + ','; }
 
         if (jsonData.IsComplaintSampleAvailable !== null || jsonData.IsComplaintSampleAvailable !== "null" || jsonData.IsComplaintSampleAvailable.length > 0)
         { insertQueryData += 'FMA_Isthecomplaintsampleavailable__c,'; valuesData += jsonData.IsComplaintSampleAvailable + ','; }
 
         if (jsonData.ExpectedDateOfSampleReceived !== null || jsonData.ExpectedDateOfSampleReceived !== "null" || jsonData.ExpectedDateOfSampleReceived.length > 7)
-        { insertQueryData += 'FMA_Expecteddateofsamplereceived__c,'; valuesData += '' + jsonData.ExpectedDateOfSampleReceived + '' + ','; }
+        { insertQueryData += 'FMA_Expecteddateofsamplereceived__c,'; valuesData += '\'' + jsonData.ExpectedDateOfSampleReceived + '\'' + ','; }
 
         if (jsonData.HasResponseBeenRequested !== null || jsonData.HasResponseBeenRequested !== "null" || jsonData.HasResponseBeenRequested.length > 0)
         { insertQueryData += 'FMA_Hasresponsebeenrequested__c,'; valuesData += jsonData.HasResponseBeenRequested + ','; }
@@ -227,40 +227,40 @@ router.post('/insertCase', function(req, res) {
         { insertQueryData += 'FMA_Ispatientfamiliarwithdeviceusage__c,'; valuesData += jsonData.IsPatientFamiliarWithDeviceUsage + ','; }
 
         if (jsonData.SinceWhenPatientUseThisDevice !== null || jsonData.SinceWhenPatientUseThisDevice !== "null" || jsonData.SinceWhenPatientUseThisDevice.length > 1)
-        { insertQueryData += 'FMA_Sincewhendoespatientusethiskind__c,'; valuesData += '' + jsonData.SinceWhenPatientUseThisDevice + '' + ','; }
+        { insertQueryData += 'FMA_Sincewhendoespatientusethiskind__c,'; valuesData += '\'' + jsonData.SinceWhenPatientUseThisDevice + '\'' + ','; }
 
         if (jsonData.IsDevicePhysicallyDamaged !== null || jsonData.IsDevicePhysicallyDamaged !== "null" || jsonData.IsDevicePhysicallyDamaged.length > 0)
         { insertQueryData += 'FMA_Isthedevicephysicallydamaged__c,'; valuesData += jsonData.IsDevicePhysicallyDamaged + ','; }
 
         if (jsonData.Where !== null || jsonData.Where !== "null" || jsonData.Where.length > 0)
-        { insertQueryData += 'FMA_where__c,'; valuesData += '' + jsonData.Where + '' + ','; }
+        { insertQueryData += 'FMA_where__c,'; valuesData += '\'' + jsonData.Where + '\'' + ','; }
 
         if (jsonData.DamageDuetoAccidentalFall !== null || jsonData.DamageDuetoAccidentalFall !== "null" || jsonData.DamageDuetoAccidentalFall.length > 0)
         { insertQueryData += 'FMA_Thedamageisduetoanaccidentalfall__c,'; valuesData += jsonData.DamageDuetoAccidentalFall + ','; }
 
         if (jsonData.FromWhichHeightOccuredtheFall !== null || jsonData.FromWhichHeightOccuredtheFall !== "null" || jsonData.FromWhichHeightOccuredtheFall.length > 0)
-        { insertQueryData += 'FMA_Fromwhichheightisoccurredhefall__c,'; valuesData += '' + jsonData.FromWhichHeightOccuredtheFall + '' + ','; }
+        { insertQueryData += 'FMA_Fromwhichheightisoccurredhefall__c,'; valuesData += '\'' + jsonData.FromWhichHeightOccuredtheFall + '\'' + ','; }
 
         if (jsonData.IsDefectedDuetomisusebypatient !== null || jsonData.IsDefectedDuetomisusebypatient !== "null" || jsonData.IsDefectedDuetomisusebypatient.length > 0)
         { insertQueryData += 'FMA_Isthedefectduetoamisusebypatient__c,'; valuesData += jsonData.IsDefectedDuetomisusebypatient + ','; }
 
         if (jsonData.Whichkindofmisuse !== null || jsonData.Whichkindofmisuse !== "null" || jsonData.Whichkindofmisuse.length > 0)
-        { insertQueryData += 'FMA_whichkindofmisuse__c,'; valuesData += '' + jsonData.Whichkindofmisuse + '' + ','; }
+        { insertQueryData += 'FMA_whichkindofmisuse__c,'; valuesData += '\'' + jsonData.Whichkindofmisuse + '\'' + ','; }
 
         if (jsonData.IsSomethingstuckinsidedevice !== null || jsonData.IsSomethingstuckinsidedevice !== "null" || jsonData.IsSomethingstuckinsidedevice.length > 0)
         { insertQueryData += 'FMA_Issomethingstuckinsidethedevice__c,'; valuesData += jsonData.IsSomethingstuckinsidedevice + ','; }
 
         if (jsonData.WhatStuckinside !== null || jsonData.WhatStuckinside !== "null" || jsonData.WhatStuckinside.length > 0)
-        { insertQueryData += 'FMA_whatstuckinside__c,'; valuesData += '' + jsonData.WhatStuckinside + '' + ','; }
+        { insertQueryData += 'FMA_whatstuckinside__c,'; valuesData += '\'' + jsonData.WhatStuckinside + '\'' + ','; }
 
         if (jsonData.Adverseeventassociatedtodefect !== null || jsonData.Adverseeventassociatedtodefect !== "null" || jsonData.Adverseeventassociatedtodefect.length > 0)
         { insertQueryData += 'FMA_Adverseeventassociatedtodefect__c,'; valuesData += jsonData.Adverseeventassociatedtodefect + ','; }
 
         if (jsonData.Adverseeventassociatedwithdefect !== null || jsonData.Adverseeventassociatedwithdefect !== "null" || jsonData.Adverseeventassociatedwithdefect.length > 0)
-        { insertQueryData += 'FMA_Adverseeventassociatedwithdefect__c,'; valuesData += '' + jsonData.Adverseeventassociatedwithdefect + '' + ','; }
+        { insertQueryData += 'FMA_Adverseeventassociatedwithdefect__c,'; valuesData += '\'' + jsonData.Adverseeventassociatedwithdefect + '\'' + ','; }
 
         if (jsonData.OtherInformation !== null || jsonData.OtherInformation !== "null" || jsonData.OtherInformation.length > 0)
-        { insertQueryData += 'FMA_OtherInformation__c,'; valuesData += '' + jsonData.OtherInformation + '' + ','; }
+        { insertQueryData += 'FMA_OtherInformation__c,'; valuesData += '\'' + jsonData.OtherInformation + '\'' + ','; }
 
         if (jsonData.Isproductcartridgestuckedindevice !== null || jsonData.Isproductcartridgestuckedindevice !== "null" || jsonData.Isproductcartridgestuckedindevice.length > 0)
         { insertQueryData += 'FMA_Isproductcartridgestuckedindevice__c,'; valuesData += jsonData.Isproductcartridgestuckedindevice + ','; }
@@ -269,19 +269,19 @@ router.post('/insertCase', function(req, res) {
         { insertQueryData += 'FMA_Isreplacementofproductrequested__c,'; valuesData += jsonData.Isreplacementofproductrequested + ','; }
 
         if (jsonData.Subject !== null || jsonData.Subject !== "null" || jsonData.Subject.length > 0)
-        { insertQueryData += 'Subject,'; valuesData += '' + jsonData.Subject + '' + ','; }
+        { insertQueryData += 'Subject,'; valuesData += '\'' + jsonData.Subject + '\'' + ','; }
 
         if (jsonData.Priority !== null || jsonData.Priority !== "null" || jsonData.Priority.length > 0)
-        { insertQueryData += 'Priority,'; valuesData += '' + jsonData.Priority + '' + ','; }
+        { insertQueryData += 'Priority,'; valuesData += '\'' + jsonData.Priority + '\'' + ','; }
 
         if (jsonData.Status !== null || jsonData.Status !== "null" || jsonData.Status.length > 0)
-        { insertQueryData += 'Status,'; valuesData += '' + jsonData.Status + '' + ','; }
+        { insertQueryData += 'Status,'; valuesData += '\'' + jsonData.Status + '\'' + ','; }
 
         if (jsonData.userid !== null || jsonData.userid !== "null" || jsonData.userid.length > 0)
-        { insertQueryData += 'fma_loginuserid__c,'; valuesData += '' + jsonData.userid + '' + ','; }
+        { insertQueryData += 'fma_loginuserid__c,'; valuesData += '\'' + jsonData.userid + '\'' + ','; }
 
         if (jsonData.username !== null || jsonData.username !== "null" || jsonData.username.length > 0)
-        { insertQueryData += 'fma_feedbackcreator__c'; valuesData += '' + jsonData.username + ''; }
+        { insertQueryData += 'fma_feedbackcreator__c'; valuesData += '\'' + jsonData.username + '\''; }
         
         //-------------------------------------------End Framing Query-------------------------------------------
         
