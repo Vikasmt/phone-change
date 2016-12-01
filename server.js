@@ -63,14 +63,11 @@ router.post('/uploadfile', function(req, res) {
                             msgid: 2,
                             message: 'case id not found.'});
                  }else{
-                      conn.query('with rows as (INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+ filename +', '+imagedata+', '+caseid+') RETURNING id)',
+                      conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+ filename +', '+imagedata+', '+caseid+') RETURNING id',
                          function(err, result) {
                             done(); 
-                          conn.query('SELECT rows.id from rows',
-                            function(err,result){
-                              res.json(result);
-                          });
                           
+                          res.json(result);
                           
                          /*if(err){
                                 res.json({
