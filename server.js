@@ -132,27 +132,29 @@ router.get('/ValidateAdmin', function(req, res) {
               if (err != null || result.rowCount == 0) {
                    res.json({
                         userid: -1,
+                        username:'',
                         msgid: 2,
                         message: 'Invalid email.'});
                     //res.status(401).json({error: 'Invalid email.'});
                 }
                  else{
                        conn.query(
-                            'SELECT id, firstname, lastname, username,email, phone from UserManagement where email=\''+emailaddress+'\' and password='+password+'',
+                            'SELECT id, firstname, lastname, username, email, phone from UserManagement where email=\''+emailaddress+'\' and password='+password+'',
                            function(err,result){
                                done();
                                if(err != null || result.rowCount == 0){
                                    res.json({
                                        userid: -1,
+                                       username:'',
                                        msgid: 3,
                                        message: 'Invalid password.'});
                                }
                                else{
                                    res.json({
                                        userid:result.rows[0].id,
+                                       username:result.rows[0].username,
                                        msgid: 1,
                                        message: 'Success.'});
-                                   //res.json(result.rows);
                                }
                             });
                  }
