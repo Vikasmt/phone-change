@@ -181,9 +181,9 @@ router.post('/insertCase', function(req, res) {
         
         if(jsonData.Description === null || jsonData.Description === "null" || jsonData.Description.length < 1) { jsonData.Description = 'NULL' } else { jsonData.Description = ''+jsonData.Description+'' };
         
-        if(jsonData.DateOfFirstUse === null || jsonData.DateOfFirstUse === "null" || jsonData.DateOfFirstUse.length < 1) { jsonData.DateOfFirstUse = 'NULL' } else { jsonData.DateOfFirstUse = ''+jsonData.DateOfFirstUse+'' };
+        if(jsonData.DateOfFirstUse === null || jsonData.DateOfFirstUse === "null" || jsonData.DateOfFirstUse.length < 1) { jsonData.DateOfFirstUse = 'NULL' } else { jsonData.DateOfFirstUse = '\''+jsonData.DateOfFirstUse+'\'' };
         
-        if(jsonData.ExpiryDate === null || jsonData.ExpiryDate === "null" || jsonData.ExpiryDate.length < 1) { jsonData.ExpiryDate = 'NULL' } else { jsonData.ExpiryDate = jsonData.ExpiryDate };
+        if(jsonData.ExpiryDate === null || jsonData.ExpiryDate === "null" || jsonData.ExpiryDate.length < 1) { jsonData.ExpiryDate = 'NULL' } else { jsonData.ExpiryDate = ''+jsonData.ExpiryDate+'' };
         
         if(jsonData.InitialPatientName === null || jsonData.InitialPatientName === "null" || jsonData.InitialPatientName.length < 1) { jsonData.InitialPatientName = 'NULL' } else { jsonData.InitialPatientName = ''+jsonData.InitialPatientName+'' };
         
