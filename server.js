@@ -49,9 +49,8 @@ router.post('/uploadfile', function(req, res) {
     var caseid = splitteddata[0];
     var filename = splitteddata[1];
     var imagedata = splitteddata[2];
-    var last_id = -1;
     
-    var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+filename +', '+imagedata+', '+caseid+') RETURNING id INTO last_id';
+    var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+filename +', '+imagedata+', '+caseid+') RETURNING id';
     console.log('formattedQuery:'+formattedData);
     
          pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
@@ -65,22 +64,19 @@ router.post('/uploadfile', function(req, res) {
                  }else{
                       conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+ filename +', '+imagedata+', '+caseid+') RETURNING id',
                          function(err, result) {
-                            done(); 
-                          
-                          res.json(result);
-                          
-                         /*if(err){
+                            done();
+                         if(err){
                                 res.json({
-                                        attachementid: rows,
+                                        attachementid: -1,
                                         msgid: 2,
                                         message: err.message});
                             }
                             else{
                                 res.json({
-                                        attachementid: rows,
+                                        attachementid: result.rows[0].id,
                                         msgid: 1,
                                         message: 'Success.'});
-                            }*/
+                            }
                      });
                  }
              });
@@ -151,11 +147,11 @@ router.post('/insertCase', function(req, res) {
         console.log(req.body);
         var jsonData = req.body;
         
-        var formattedData='INSERT INTO salesforce.Case (FMA_DeviceName__c, FMA_Dosage__c, FMA_DosageForm__c, FMA_BatchSerialnumber__c, Description, FMA_Dateoffirstuse__c, FMA_Expirydate__c, FMA_Initialpatientname__c, FMA_Initialpatientsurname__c, FMA_Age__c, FMA_Gender__c, FMA_Quantityofproductsconcerned__c, FMA_NameofComplainant__c, FMA_Defectdescription__c, FMA_Isthecomplaintsampleavailable__c, FMA_Expecteddateofsamplereceived__c, FMA_Hasresponsebeenrequested__c, FMA_Ispatientfamiliarwithdeviceusage__c, FMA_Sincewhendoespatientusethiskind__c, FMA_Isthedevicephysicallydamaged__c, FMA_where__c, FMA_Thedamageisduetoanaccidentalfall__c, FMA_Fromwhichheightisoccurredhefall__c, FMA_Isthedefectduetoamisusebypatient__c, FMA_whichkindofmisuse__c, FMA_Issomethingstuckinsidethedevice__c, FMA_whatstuckinside__c, FMA_Adverseeventassociatedtodefect__c, FMA_Adverseeventassociatedwithdefect__c, FMA_OtherInformation__c, FMA_Isproductcartridgestuckedindevice__c, FMA_Isreplacementofproductrequested__c, Subject, Priority, Status,fma_loginuserid__c,fma_feedbackcreator__c) VALUES (\''+jsonData.DeviceName+'\', \''+jsonData.Dosage+'\', \''+jsonData.DosageForm+'\', \''+jsonData.BatchSerialNbr+'\', \''+jsonData.Description+'\', \''+jsonData.DateOfFirstUse+'\', \''+jsonData.ExpiryDate+'\', \''+jsonData.InitialPatientName+'\', \''+jsonData.InitialPatientSurName+'\', '+jsonData.Age+', \''+jsonData.Gender+'\', '+jsonData.QtyOfProductsConcerned+', \''+jsonData.NameOfCompliant+'\', \''+jsonData.DefectDescription+'\', '+jsonData.IsComplaintSampleAvailable+', \''+jsonData.ExpectedDateOfSampleReceived+'\', '+jsonData.HasResponseBeenRequested+', '+jsonData.IsPatientFamiliarWithDeviceUsage+', \''+jsonData.SinceWhenPatientUseThisDevice+'\', '+jsonData.IsDevicePhysicallyDamaged+', \''+jsonData.Where+'\', '+jsonData.DamageDuetoAccidentalFall+', \''+jsonData.FromWhichHeightOccuredtheFall+'\', '+jsonData.IsDefectedDuetomisusebypatient+', \''+jsonData.Whichkindofmisuse+'\', '+jsonData.IsSomethingstuckinsidedevice+', \''+jsonData.WhatStuckinside+'\', '+jsonData.Adverseeventassociatedtodefect+', \''+jsonData.Adverseeventassociatedwithdefect+'\', \''+jsonData.OtherInformation+'\', '+jsonData.Isproductcartridgestuckedindevice+', '+jsonData.Isreplacementofproductrequested+', \''+jsonData.Subject+'\',\''+jsonData.Priority+'\',\''+jsonData.Status+'\','+jsonData.userid+',\''+jsonData.username+'\')';
+        var formattedData='INSERT INTO salesforce.Case (FMA_DeviceName__c, FMA_Dosage__c, FMA_DosageForm__c, FMA_BatchSerialnumber__c, Description, FMA_Dateoffirstuse__c, FMA_Expirydate__c, FMA_Initialpatientname__c, FMA_Initialpatientsurname__c, FMA_Age__c, FMA_Gender__c, FMA_Quantityofproductsconcerned__c, FMA_NameofComplainant__c, FMA_Defectdescription__c, FMA_Isthecomplaintsampleavailable__c, FMA_Expecteddateofsamplereceived__c, FMA_Hasresponsebeenrequested__c, FMA_Ispatientfamiliarwithdeviceusage__c, FMA_Sincewhendoespatientusethiskind__c, FMA_Isthedevicephysicallydamaged__c, FMA_where__c, FMA_Thedamageisduetoanaccidentalfall__c, FMA_Fromwhichheightisoccurredhefall__c, FMA_Isthedefectduetoamisusebypatient__c, FMA_whichkindofmisuse__c, FMA_Issomethingstuckinsidethedevice__c, FMA_whatstuckinside__c, FMA_Adverseeventassociatedtodefect__c, FMA_Adverseeventassociatedwithdefect__c, FMA_OtherInformation__c, FMA_Isproductcartridgestuckedindevice__c, FMA_Isreplacementofproductrequested__c, Subject, Priority, Status,fma_loginuserid__c,fma_feedbackcreator__c) VALUES (\''+jsonData.DeviceName+'\', \''+jsonData.Dosage+'\', \''+jsonData.DosageForm+'\', \''+jsonData.BatchSerialNbr+'\', \''+jsonData.Description+'\', \''+jsonData.DateOfFirstUse+'\', \''+jsonData.ExpiryDate+'\', \''+jsonData.InitialPatientName+'\', \''+jsonData.InitialPatientSurName+'\', '+jsonData.Age+', \''+jsonData.Gender+'\', '+jsonData.QtyOfProductsConcerned+', \''+jsonData.NameOfCompliant+'\', \''+jsonData.DefectDescription+'\', '+jsonData.IsComplaintSampleAvailable+', \''+jsonData.ExpectedDateOfSampleReceived+'\', '+jsonData.HasResponseBeenRequested+', '+jsonData.IsPatientFamiliarWithDeviceUsage+', \''+jsonData.SinceWhenPatientUseThisDevice+'\', '+jsonData.IsDevicePhysicallyDamaged+', \''+jsonData.Where+'\', '+jsonData.DamageDuetoAccidentalFall+', \''+jsonData.FromWhichHeightOccuredtheFall+'\', '+jsonData.IsDefectedDuetomisusebypatient+', \''+jsonData.Whichkindofmisuse+'\', '+jsonData.IsSomethingstuckinsidedevice+', \''+jsonData.WhatStuckinside+'\', '+jsonData.Adverseeventassociatedtodefect+', \''+jsonData.Adverseeventassociatedwithdefect+'\', \''+jsonData.OtherInformation+'\', '+jsonData.Isproductcartridgestuckedindevice+', '+jsonData.Isreplacementofproductrequested+', \''+jsonData.Subject+'\',\''+jsonData.Priority+'\',\''+jsonData.Status+'\','+jsonData.userid+',\''+jsonData.username+'\') RETURNING id';
 
          console.log(formattedData);
         
-        conn.query('INSERT INTO salesforce.Case (FMA_DeviceName__c, FMA_Dosage__c, FMA_DosageForm__c, FMA_BatchSerialnumber__c, Description,    FMA_Dateoffirstuse__c, FMA_Expirydate__c, FMA_Initialpatientname__c, FMA_Initialpatientsurname__c, FMA_Age__c, FMA_Gender__c, FMA_Quantityofproductsconcerned__c, FMA_NameofComplainant__c, FMA_Defectdescription__c, FMA_Isthecomplaintsampleavailable__c, FMA_Expecteddateofsamplereceived__c, FMA_Hasresponsebeenrequested__c, FMA_Ispatientfamiliarwithdeviceusage__c, FMA_Sincewhendoespatientusethiskind__c, FMA_Isthedevicephysicallydamaged__c, FMA_where__c, FMA_Thedamageisduetoanaccidentalfall__c, FMA_Fromwhichheightisoccurredhefall__c, FMA_Isthedefectduetoamisusebypatient__c, FMA_whichkindofmisuse__c, FMA_Issomethingstuckinsidethedevice__c, FMA_whatstuckinside__c, FMA_Adverseeventassociatedtodefect__c, FMA_Adverseeventassociatedwithdefect__c, FMA_OtherInformation__c, FMA_Isproductcartridgestuckedindevice__c, FMA_Isreplacementofproductrequested__c, Subject, Priority, Status,fma_loginuserid__c,fma_feedbackcreator__c) VALUES (\''+jsonData.DeviceName+'\', \''+jsonData.Dosage+'\', \''+jsonData.DosageForm+'\', \''+jsonData.BatchSerialNbr+'\', \''+jsonData.Description+'\', \''+jsonData.DateOfFirstUse+'\', \''+jsonData.ExpiryDate+'\', \''+jsonData.InitialPatientName+'\', \''+jsonData.InitialPatientSurName+'\', '+jsonData.Age+', \''+jsonData.Gender+'\', '+jsonData.QtyOfProductsConcerned+', \''+jsonData.NameOfCompliant+'\', \''+jsonData.DefectDescription+'\', '+jsonData.IsComplaintSampleAvailable+', \''+jsonData.ExpectedDateOfSampleReceived+'\', '+jsonData.HasResponseBeenRequested+', '+jsonData.IsPatientFamiliarWithDeviceUsage+', \''+jsonData.SinceWhenPatientUseThisDevice+'\', '+jsonData.IsDevicePhysicallyDamaged+', \''+jsonData.Where+'\', '+jsonData.DamageDuetoAccidentalFall+', \''+jsonData.FromWhichHeightOccuredtheFall+'\', '+jsonData.IsDefectedDuetomisusebypatient+', \''+jsonData.Whichkindofmisuse+'\', '+jsonData.IsSomethingstuckinsidedevice+', \''+jsonData.WhatStuckinside+'\', '+jsonData.Adverseeventassociatedtodefect+', \''+jsonData.Adverseeventassociatedwithdefect+'\', \''+jsonData.OtherInformation+'\', '+jsonData.Isproductcartridgestuckedindevice+', '+jsonData.Isreplacementofproductrequested+', \''+jsonData.Subject+'\',\''+jsonData.Priority+'\',\''+jsonData.Status+'\','+jsonData.userid+',\''+jsonData.username+'\')',
+        conn.query('INSERT INTO salesforce.Case (FMA_DeviceName__c, FMA_Dosage__c, FMA_DosageForm__c, FMA_BatchSerialnumber__c, Description,    FMA_Dateoffirstuse__c, FMA_Expirydate__c, FMA_Initialpatientname__c, FMA_Initialpatientsurname__c, FMA_Age__c, FMA_Gender__c, FMA_Quantityofproductsconcerned__c, FMA_NameofComplainant__c, FMA_Defectdescription__c, FMA_Isthecomplaintsampleavailable__c, FMA_Expecteddateofsamplereceived__c, FMA_Hasresponsebeenrequested__c, FMA_Ispatientfamiliarwithdeviceusage__c, FMA_Sincewhendoespatientusethiskind__c, FMA_Isthedevicephysicallydamaged__c, FMA_where__c, FMA_Thedamageisduetoanaccidentalfall__c, FMA_Fromwhichheightisoccurredhefall__c, FMA_Isthedefectduetoamisusebypatient__c, FMA_whichkindofmisuse__c, FMA_Issomethingstuckinsidethedevice__c, FMA_whatstuckinside__c, FMA_Adverseeventassociatedtodefect__c, FMA_Adverseeventassociatedwithdefect__c, FMA_OtherInformation__c, FMA_Isproductcartridgestuckedindevice__c, FMA_Isreplacementofproductrequested__c, Subject, Priority, Status,fma_loginuserid__c,fma_feedbackcreator__c) VALUES (\''+jsonData.DeviceName+'\', \''+jsonData.Dosage+'\', \''+jsonData.DosageForm+'\', \''+jsonData.BatchSerialNbr+'\', \''+jsonData.Description+'\', \''+jsonData.DateOfFirstUse+'\', \''+jsonData.ExpiryDate+'\', \''+jsonData.InitialPatientName+'\', \''+jsonData.InitialPatientSurName+'\', '+jsonData.Age+', \''+jsonData.Gender+'\', '+jsonData.QtyOfProductsConcerned+', \''+jsonData.NameOfCompliant+'\', \''+jsonData.DefectDescription+'\', '+jsonData.IsComplaintSampleAvailable+', \''+jsonData.ExpectedDateOfSampleReceived+'\', '+jsonData.HasResponseBeenRequested+', '+jsonData.IsPatientFamiliarWithDeviceUsage+', \''+jsonData.SinceWhenPatientUseThisDevice+'\', '+jsonData.IsDevicePhysicallyDamaged+', \''+jsonData.Where+'\', '+jsonData.DamageDuetoAccidentalFall+', \''+jsonData.FromWhichHeightOccuredtheFall+'\', '+jsonData.IsDefectedDuetomisusebypatient+', \''+jsonData.Whichkindofmisuse+'\', '+jsonData.IsSomethingstuckinsidedevice+', \''+jsonData.WhatStuckinside+'\', '+jsonData.Adverseeventassociatedtodefect+', \''+jsonData.Adverseeventassociatedwithdefect+'\', \''+jsonData.OtherInformation+'\', '+jsonData.Isproductcartridgestuckedindevice+', '+jsonData.Isreplacementofproductrequested+', \''+jsonData.Subject+'\',\''+jsonData.Priority+'\',\''+jsonData.Status+'\','+jsonData.userid+',\''+jsonData.username+'\') RETURNING id',
                 function(err, result) {
                     done();
                     if(err){
@@ -167,21 +163,10 @@ router.post('/insertCase', function(req, res) {
                         }
                         else{
                             console.log(result);
-                            conn.query('SELECT Max(Id) as maxid from salesforce.Case',
-                               function(err,result){
-                                    done();
-                                    if(result.rowCount > 0){
-                                        res.json({
-                                           caseid:result.rows[0].maxid,
-                                           msgid: 1,
-                                           message: 'Success.'});
-                                    }else{
-                                        res.json({
-                                                caseid: -1,
-                                                msgid: 1,
-                                                message: 'Success.'});
-                                    }
-                                });
+                            res.json({
+                                caseid:result.rows[0].id,
+                                msgid: 1,
+                                message: 'Success.'});
                         }
             });
     });
