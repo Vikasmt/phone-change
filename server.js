@@ -67,8 +67,7 @@ router.post('/uploadfile', function(req, res) {
                  }else{
                       conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+ filename +', '+imagedata+', '+caseid+') RETURNING id',
                          function(err, result) {
-                          console.log(result);
-                          console.log(result.rows[0].id);
+                         var attachmentrowid = result.rows[0].id;
                          if(err){
                                 res.json({
                                         attachementid: -1,
@@ -78,7 +77,7 @@ router.post('/uploadfile', function(req, res) {
                             else{
                                 var columname = 'fma_attachment' + loopid + '__c';
                                 console.log('columname:' + columname);
-                                var attachmentUrl = baseUrl + 'api/showImage?imageid=' +result.rows[0].id;
+                                var attachmentUrl = baseUrl + 'api/showImage?imageid=' +attachmentrowid;
                                 console.log('attachmentUrl:'+attachmentUrl);
                                 
                                 conn.query('UPDATE salesforce.Case SET '+columname+' = \''+attachmentUrl+'\' WHERE id='+caseid+'',
@@ -92,7 +91,7 @@ router.post('/uploadfile', function(req, res) {
                                         }
                                         else{
                                             res.json({
-                                            attachementid: result.rows[0].id,
+                                            attachementid: attachmentrowid,
                                             msgid: 1,
                                             message: 'Success.'});
                                         }
