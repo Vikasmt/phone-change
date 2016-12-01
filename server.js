@@ -250,9 +250,13 @@ router.get('/showImage', function(req, res) {
                      //res.end(result.rows[0].body);
                      //res.json(result.rows[0].body);
                     
-                    res.contentType('image/png');
-                    console.log(JSON.stringify(result.rows[0].body));
-                    res.end(result.rows[0].body);
+                    var img = new Buffer(result.rows[0].body, 'base64');
+                    res.writeHead(200, {
+                     'Content-Type': 'image/png',
+                     'Content-Length': img.length
+                   });
+                    console.log('length:'+img.length);
+                    res.end(img);
                 }
             });
     });
