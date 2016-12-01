@@ -165,6 +165,7 @@ router.get('/ValidateAdmin', function(req, res) {
 router.post('/insertCase', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
+        var handleNull = "NULL";
         
         console.log(req.body);
         var jsonData = req.body;
@@ -181,7 +182,7 @@ router.post('/insertCase', function(req, res) {
         
         if(jsonData.Description === null || jsonData.Description === "null" || jsonData.Description.length < 1) { jsonData.Description = 'NULL' } else { jsonData.Description = ''+jsonData.Description+'' };
         
-        if(jsonData.DateOfFirstUse === null || jsonData.DateOfFirstUse === "null" || jsonData.DateOfFirstUse.length < 1) { jsonData.DateOfFirstUse = '\'NULL\'' } else { jsonData.DateOfFirstUse = '\''+jsonData.DateOfFirstUse+'\'' };
+        if(jsonData.DateOfFirstUse === null || jsonData.DateOfFirstUse === "null" || jsonData.DateOfFirstUse.length < 1) { jsonData.DateOfFirstUse = '\''+handleNull+'\'' } else { jsonData.DateOfFirstUse = '\''+jsonData.DateOfFirstUse+'\'' };
         
         if(jsonData.ExpiryDate === null || jsonData.ExpiryDate === "null" || jsonData.ExpiryDate.length < 1) { jsonData.ExpiryDate = 'NULL' } else { jsonData.ExpiryDate = ''+jsonData.ExpiryDate+'' };
         
