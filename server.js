@@ -181,7 +181,7 @@ router.post('/insertCase', function(req, res) {
         
         if(jsonData.Description === null || jsonData.Description === "null" || jsonData.Description.length < 1) { jsonData.Description = 'NULL' } else { jsonData.Description = ''+jsonData.Description+'' };
         
-        if(jsonData.DateOfFirstUse === null || jsonData.DateOfFirstUse === "null" || jsonData.DateOfFirstUse.length < 1) { jsonData.DateOfFirstUse = 'NULL' } else { jsonData.DateOfFirstUse = '\''+jsonData.DateOfFirstUse+'\'' };
+        if(jsonData.DateOfFirstUse === null || jsonData.DateOfFirstUse === "null" || jsonData.DateOfFirstUse.length < 1) { jsonData.DateOfFirstUse = '\'NULL\'' } else { jsonData.DateOfFirstUse = '\''+jsonData.DateOfFirstUse+'\'' };
         
         if(jsonData.ExpiryDate === null || jsonData.ExpiryDate === "null" || jsonData.ExpiryDate.length < 1) { jsonData.ExpiryDate = 'NULL' } else { jsonData.ExpiryDate = ''+jsonData.ExpiryDate+'' };
         
@@ -239,6 +239,8 @@ router.post('/insertCase', function(req, res) {
         if(jsonData.Status === null || jsonData.Status === "null" || jsonData.Status.length < 1) { jsonData.Status = 'NULL' } else { jsonData.Status = ''+jsonData.Status+'' };
         if(jsonData.userid === null || jsonData.userid === "null" || jsonData.userid.length < 1) { jsonData.userid = 'NULL' } else { jsonData.userid = ''+jsonData.userid+'' };
         if(jsonData.username === null || jsonData.username === "null" || jsonData.username.length < 1) { jsonData.username = 'NULL' } else { jsonData.username = ''+jsonData.username+'' };
+        
+        console.log(jsonData);
         
         //---------------End Format Data---------------
         
