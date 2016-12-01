@@ -67,6 +67,8 @@ router.post('/uploadfile', function(req, res) {
                  }else{
                       conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+ filename +', '+imagedata+', '+caseid+') RETURNING id',
                          function(err, result) {
+                          console.log(result);
+                          console.log(result.rows);
                          if(err){
                                 res.json({
                                         attachementid: -1,
