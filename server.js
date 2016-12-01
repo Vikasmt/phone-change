@@ -66,7 +66,13 @@ router.post('/uploadfile', function(req, res) {
                       conn.query('with rows as (INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+ filename +', '+imagedata+', '+caseid+') RETURNING id)',
                          function(err, result) {
                             done(); 
-                         if(err){
+                          conn.query('SELECT rows.id from rows',
+                            function(err,result){
+                              res.json(result);
+                          });
+                          
+                          
+                         /*if(err){
                                 res.json({
                                         attachementid: rows,
                                         msgid: 2,
@@ -77,7 +83,7 @@ router.post('/uploadfile', function(req, res) {
                                         attachementid: rows,
                                         msgid: 1,
                                         message: 'Success.'});
-                            }
+                            }*/
                      });
                  }
              });
