@@ -165,7 +165,7 @@ router.get('/ValidateAdmin', function(req, res) {
 router.post('/insertCase', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
-        var handleNull = "NULL";
+        var handleNull = 'NULL';
         
         console.log(req.body);
         var jsonData = req.body;
