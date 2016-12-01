@@ -79,7 +79,6 @@ router.post('/uploadfile', function(req, res) {
                                 console.log('columname:' + columname);
                                 var attachmentUrl = baseUrl + 'api/showImage?imageid=' +attachmentrowid;
                                 console.log('attachmentUrl:'+attachmentUrl);
-                                console.log('Query:'+'UPDATE salesforce.Case SET '+columname+' = \''+attachmentUrl+'\' WHERE id='+caseid+'');
                                 
                                 conn.query('UPDATE salesforce.Case SET '+columname+' = \''+attachmentUrl+'\' WHERE id='+caseid+'',
                                     function(err,result){
