@@ -174,7 +174,7 @@ router.post('/insertCase', function(req, res) {
         //-------------------------------------------Framing Query-------------------------------------------
         if (jsonData.DeviceName !== undefined && jsonData.DeviceName !== null && jsonData.DeviceName !== "null" && jsonData.DeviceName.length > 0)
         { insertQueryData += 'FMA_DeviceName__c,'; valuesData += '\'' + jsonData.DeviceName + '\'' + ','; }
-        else {res.json({caseid: -1,msgid: 2,message: 'Please select device name.'});}
+        else { return res.json({caseid: -1,msgid: 2,message: 'Please select device name.'});}
         
 
         if (jsonData.Dosage !== undefined && jsonData.Dosage !== null && jsonData.Dosage !== "null" && jsonData.Dosage.length > 1)
@@ -206,7 +206,7 @@ router.post('/insertCase', function(req, res) {
 
         if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
         { insertQueryData += 'FMA_Gender__c,'; valuesData += '\'' + jsonData.Gender + '\'' + ','; }
-        else {res.json({caseid: -1,msgid: 2,message: 'Please select gender.'});}
+        else { return res.json({caseid: -1,msgid: 2,message: 'Please select gender.'});}
 
         if (jsonData.QtyOfProductsConcerned !== undefined && jsonData.QtyOfProductsConcerned !== null && jsonData.QtyOfProductsConcerned !== "null" && jsonData.QtyOfProductsConcerned.length > 0)
         { insertQueryData += 'FMA_Quantityofproductsconcerned__c,'; valuesData += jsonData.QtyOfProductsConcerned + ','; }
@@ -282,11 +282,11 @@ router.post('/insertCase', function(req, res) {
         
         if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
         { insertQueryData += 'fma_loginuserid__c,'; valuesData += '\'' + jsonData.userid + '\'' + ','; }
-        else {res.json({caseid: -1,msgid: 2,message: 'userid should not be empty.'});}
+        else { return res.json({caseid: -1,msgid: 2,message: 'userid should not be empty.'});}
 
         if (jsonData.username !== undefined && jsonData.username !== null && jsonData.username !== "null" && jsonData.username.length > 0)
         { insertQueryData += 'fma_feedbackcreator__c'; valuesData += '\'' + jsonData.username + '\''; }
-        else {res.json({caseid: -1,msgid: 2,message: 'username should not be empty.'});}
+        else { return res.json({caseid: -1,msgid: 2,message: 'username should not be empty.'});}
         
         //-------------------------------------------End Framing Query-------------------------------------------
         
@@ -298,17 +298,17 @@ router.post('/insertCase', function(req, res) {
                     done();
                     if(err){
                         console.log(err.message);
-                            res.json({
+                            return res.json({
                                     caseid: -1,
                                     msgid: 2,
                                     message: err.message});
                         }
                         else{
                             console.log(result);
-                            res.json({
-                                caseid:result.rows[0].id,
-                                msgid: 1,
-                                message: 'Success.'});
+                            return res.json({
+                                    caseid:result.rows[0].id,
+                                    msgid: 1,
+                                    message: 'Success.'});
                         } 
             });
     });
