@@ -280,8 +280,8 @@ router.post('/insertCase', function(req, res) {
         if (jsonData.Status !== undefined && jsonData.Status !== null && jsonData.Status !== "null" && jsonData.Status.length > 0)
         { insertQueryData += 'Status,'; valuesData += '\'' + jsonData.Status + '\'' + ','; }
         
+        console.log('UserID Length:' +jsonData.userid.length);
         console.log('UserID:' +jsonData.userid);
-        console.log('UserID Length:' +jsonData.userid.toString().length);
 
         if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.length > 0)
         { insertQueryData += 'fma_loginuserid__c,'; valuesData += '\'' + jsonData.userid + '\'' + ','; }
