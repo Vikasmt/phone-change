@@ -28,10 +28,10 @@ router.get('/getContacts', function(req, res) {
             function(err,result){
                 done();
                 if(err){
-                    res.status(400).json({error: err.message});
+                    return res.status(400).json({error: err.message});
                 }
                 else{
-                    res.json(result.rows);
+                    return res.json(result.rows);
                 }
             });
     });
@@ -61,15 +61,15 @@ router.post('/uploadfile', function(req, res) {
              conn.query('SELECT *from salesforce.Case WHERE id='+caseid+'',
                 function(err,result){
                  if (err != null || result.rowCount == 0) {
-                      res.json({
-                            msgid: 2,
-                            message: 'case id not found.'});
+                      return res.json({
+                                msgid: 2,
+                                message: 'case id not found.'});
                  }else{
                       conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+ filename +', '+imagedata+', '+caseid+') RETURNING id',
                          function(err, result) {
                          var attachmentrowid = result.rows[0].id;
                          if(err){
-                                res.json({
+                                return res.json({
                                         attachementid: -1,
                                         msgid: 2,
                                         message: err.message});
@@ -84,16 +84,16 @@ router.post('/uploadfile', function(req, res) {
                                     function(err,result){
                                         done();
                                         if(err){
-                                            res.json({
-                                            attachementid: -1,
-                                            msgid: 2,
-                                            message: err.message});
+                                            return res.json({
+                                                    attachementid: -1,
+                                                    msgid: 2,
+                                                    message: err.message});
                                         }
                                         else{
-                                            res.json({
-                                            attachementid: attachmentrowid,
-                                            msgid: 1,
-                                            message: 'Success.'});
+                                           return res.json({
+                                                    attachementid: attachmentrowid,
+                                                    msgid: 1,
+                                                    message: 'Success.'});
                                         }
                                     });
                                 }
