@@ -171,6 +171,8 @@ router.post('/insertCase', function(req, res) {
         var insertQueryData = 'INSERT INTO salesforce.Case (';
         var valuesData=' VALUES (';
         
+        console.log(jsonData.DeviceName);
+        
         //-------------------------------------------Framing Query-------------------------------------------
         if (jsonData.DeviceName !== null && jsonData.DeviceName !== "null" && jsonData.DeviceName.length > 0)
         { insertQueryData += 'FMA_DeviceName__c,'; valuesData += '\'' + jsonData.DeviceName + '\'' + ','; }
