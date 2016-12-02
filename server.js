@@ -173,7 +173,7 @@ router.post('/insertCase', function(req, res) {
         
         //-------------------------------------------Framing Query-------------------------------------------
         if (jsonData.DeviceName !== "undefined" && jsonData.DeviceName !== null && jsonData.DeviceName !== "null" && jsonData.DeviceName.length > 0)
-        { insertQueryData += 'FMA_DeviceName__c,'; valuesData += '\'' + jsonData.DeviceName + '\'' + ','; }
+        { insertQueryData += 'FMA_DeviceName__c,'; valuesData += '\'' + jsonData.DeviceName + '\'' + ','; } 
 
         if (jsonData.Dosage !== "undefined" && jsonData.Dosage !== null && jsonData.Dosage !== "null" && jsonData.Dosage.length > 1)
         { insertQueryData += 'FMA_Dosage__c,'; valuesData += '\'' + jsonData.Dosage + '\'' + ','; }
