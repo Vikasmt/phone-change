@@ -130,12 +130,11 @@ router.get('/ValidateAdmin', function(req, res) {
              'SELECT firstname, lastname, username,email, phone from UserManagement where email=\''+emailaddress+'\'',
              function(err,result){
               if (err != null || result.rowCount == 0) {
-                   res.json({
-                        userid: -1,
-                        username:'',
-                        msgid: 2,
-                        message: 'Invalid email.'});
-                    //res.status(401).json({error: 'Invalid email.'});
+                   return  res.json({
+                            userid: -1,
+                            username:'',
+                            msgid: 2,
+                            message: 'Invalid email.'});
                 }
                  else{
                        conn.query(
@@ -143,18 +142,18 @@ router.get('/ValidateAdmin', function(req, res) {
                            function(err,result){
                                done();
                                if(err != null || result.rowCount == 0){
-                                   res.json({
-                                       userid: -1,
-                                       username:'',
-                                       msgid: 3,
-                                       message: 'Invalid password.'});
+                                   return  res.json({
+                                           userid: -1,
+                                           username:'',
+                                           msgid: 3,
+                                           message: 'Invalid password.'});
                                }
                                else{
-                                   res.json({
-                                       userid:result.rows[0].id,
-                                       username:result.rows[0].username,
-                                       msgid: 1,
-                                       message: 'Success.'});
+                                  return res.json({
+                                           userid:result.rows[0].id,
+                                           username:result.rows[0].username,
+                                           msgid: 1,
+                                           message: 'Success.'});
                                }
                             });
                  }
@@ -323,10 +322,10 @@ router.get('/getProducts', function(req, res) {
             function(err,result){
                 done();
                 if(err){
-                    res.status(400).json({error: err.message});
+                   return res.status(400).json({error: err.message});
                 }
                 else{
-                    res.json(result.rows);
+                    return res.json(result.rows);
                 }
             });
     });
@@ -345,12 +344,12 @@ router.post('/CreateUser', function(req, res) {
              function(err, result) {
                 done(); 
              if(err){
-                    res.json({
+                    return res.json({
                             msgid: 2,
                             message: err.message});
                 }
                 else{
-                    res.json({
+                    return res.json({
                             msgid: 1,
                             message: 'Success.'});
                 }
@@ -368,10 +367,10 @@ router.get('/showImage', function(req, res) {
             function(err,result){
                 done();
                 if (err != null || result.rowCount == 0) {
-                   res.json({
-                        userid: -1,
-                        msgid: 2,
-                        message: 'Invalid imageid.'});
+                   return res.json({
+                            userid: -1,
+                            msgid: 2,
+                            message: 'Invalid imageid.'});
                 }
                 else{
                     var img = new Buffer(result.rows[0].body, 'base64');
@@ -393,10 +392,10 @@ router.get('/getUsers', function(req, res) {
             function(err,result){
                 done();
                 if(err){
-                    res.status(400).json({error: err.message});
+                    return res.status(400).json({error: err.message});
                 }
                 else{
-                    res.json(result.rows);
+                    return res.json(result.rows);
                 }
             });
  });
@@ -418,7 +417,7 @@ app.post('/update', function(req, res) {
                   function(err, result) {
                     done();
                     if (err) {
-                        res.status(400).json({error: err.message});
+                        return res.status(400).json({error: err.message});
                     }
                     else {
                         // this will still cause jquery to display 'Record updated!'
@@ -427,7 +426,7 @@ app.post('/update', function(req, res) {
                             port: portnbr,
                             result: result
                         })*/
-                        res.json({port:
+                        return res.json({port:
                                 app.get('port'),
                                 result: result});
                     }
@@ -436,7 +435,7 @@ app.post('/update', function(req, res) {
                 else {
                     done();
                     //res.json(result);
-                    res.json({port:
+                    return res.json({port:
                                 app.get('port'),
                                 result: result});
                 }
