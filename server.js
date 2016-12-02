@@ -173,6 +173,8 @@ router.post('/insertCase', function(req, res) {
         
         console.log(jsonData.DeviceName);
         
+        if(jsonData.DeviceName!=="undefined"){console.log('true');}else{console.log('false');}
+        
         //-------------------------------------------Framing Query-------------------------------------------
         if (jsonData.DeviceName !== null && jsonData.DeviceName !== "null" && jsonData.DeviceName.length > 0)
         { insertQueryData += 'FMA_DeviceName__c,'; valuesData += '\'' + jsonData.DeviceName + '\'' + ','; }
