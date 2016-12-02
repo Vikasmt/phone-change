@@ -286,7 +286,7 @@ router.post('/insertCase', function(req, res) {
         //-------------------------------------------End Framing Query-------------------------------------------
         
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
-        console.log(combinedQuery);
+        console.log(combinedQuery); 
         
         conn.query(combinedQuery,
                 function(err, result) {
