@@ -280,14 +280,13 @@ router.post('/insertCase', function(req, res) {
         if (jsonData.Status !== undefined && jsonData.Status !== null && jsonData.Status !== "null" && jsonData.Status.length > 0)
         { insertQueryData += 'Status,'; valuesData += '\'' + jsonData.Status + '\'' + ','; }
         
-        console.log('UserID Length:' +jsonData.userid.length);
-        console.log('UserID:' +jsonData.userid);
-
-        if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.length > 0)
+        if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
         { insertQueryData += 'fma_loginuserid__c,'; valuesData += '\'' + jsonData.userid + '\'' + ','; }
+        else {res.json({caseid: -1,msgid: 2,message: 'userid should not be empty.'});}
 
         if (jsonData.username !== undefined && jsonData.username !== null && jsonData.username !== "null" && jsonData.username.length > 0)
         { insertQueryData += 'fma_feedbackcreator__c'; valuesData += '\'' + jsonData.username + '\''; }
+        else {res.json({caseid: -1,msgid: 2,message: 'username should not be empty.'});}
         
         //-------------------------------------------End Framing Query-------------------------------------------
         
