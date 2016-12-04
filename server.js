@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var nodemailer = require('nodemailer');
 var pg = require('pg');
 
 var app = express();
@@ -16,8 +17,31 @@ var router = express.Router();
 
 var baseUrl='https://phone-change-con.herokuapp.com/';
 
-router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
+router.get('/', function(req, res) { 
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'suneel@touchoncloud.com', // Your email id
+            pass: 'chaitanya866' // Your password
+        }
+    });
+    
+    var mailOptions = {
+        from: 'suneel@touchoncloud.com', // sender address
+        to: 'sunilsvsnlr@gmail.com', // list of receivers
+        subject: 'Email Test from Nodejs', // Subject line
+        text: 'test mail from nodejs' //, // plaintext body
+    };
+    
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            console.log(error);
+            res.json({yo: 'error'});
+        }else{
+            console.log('Message sent: ' + info.response);
+            res.json({yo: info.response});
+        };
+    });
 });
 
 router.get('/getContacts', function(req, res) {
