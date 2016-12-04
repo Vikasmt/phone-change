@@ -18,7 +18,7 @@ var router = express.Router();
 var baseUrl='https://phone-change-con.herokuapp.com/';
 
 router.get('/', function(req, res) { 
-    var transporter = nodemailer.createTransport({
+    var transporter = nodemailer.createTransport("SMTP",{
         service: 'Gmail',
         auth: {
             user: 'suneel@touchoncloud.com', // Your email id
@@ -27,16 +27,15 @@ router.get('/', function(req, res) {
     });
     
     var mailOptions = {
-        from: 'suneel@touchoncloud.com', // sender address
-        to: 'sunilsvsnlr@gmail.com', // list of receivers
-        subject: 'Email Test from Nodejs', // Subject line
-        text: 'test mail from nodejs' //, // plaintext body
+        to: 'sunilsvsnlr@gmail.com',
+        subject: 'Email Test from Nodejs',
+        text: 'test mail from nodejs'
     };
     
     transporter.sendMail(mailOptions, function(error, info){
         if(error){
             console.log(error);
-            res.json({yo: 'error'});
+            res.json(error);
         }else{
             console.log('Message sent: ' + info.response);
             res.json({yo: info.response});
