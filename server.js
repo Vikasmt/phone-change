@@ -18,13 +18,19 @@ var router = express.Router();
 var baseUrl='https://phone-change-con.herokuapp.com/';
 
 router.get('/', function(req, res) { 
-    var transporter = nodemailer.createTransport("SMTP",{
-        service: 'Gmail',
+    
+    var smtpConfig = {
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true, // use SSL, 
+                      // you can try with TLS, but port is then 587
         auth: {
-            user: 'suneel@touchoncloud.com', // Your email id
-            pass: 'chaitanya866' // Your password
+          user: 'suneel@touchoncloud.com', // Your email id
+          pass: 'chaitanya866' // Your password
         }
-    });
+  };
+    
+    var transporter = nodemailer.createTransport(smtpConfig);
     
     var mailOptions = {
         to: 'sunilsvsnlr@gmail.com',

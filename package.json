@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "express": "^4.13.1",
-    "nodemailer": "^0.7.1",
+    "nodemailer": "^2.6.0",
     "body-parser": "^1.13.2",
     "pg": "^4.4.0"
   },
