@@ -76,7 +76,7 @@ router.post('/uploadfile', function(req, res) {
                             }
                             else{
                                 var columname = '';
-                                if(loopid === 6){
+                                if(loopid === '6' || loopid === 6){
                                     columname = 'FMA_Barcode_Attachment__c';
                                 }else{
                                     columname = 'fma_attachment' + loopid + '__c';
