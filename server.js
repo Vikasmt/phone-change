@@ -75,7 +75,12 @@ router.post('/uploadfile', function(req, res) {
                                         message: err.message});
                             }
                             else{
-                                var columname = 'fma_attachment' + loopid + '__c';
+                                var columname = '';
+                                if(loopid === 6){
+                                    columname = 'barcode_attachment__c';
+                                }else{
+                                    columname = 'fma_attachment' + loopid + '__c';
+                                }
                                 console.log('columname:' + columname);
                                 var attachmentUrl = baseUrl + 'api/showImage?imageid=' +attachmentrowid;
                                 console.log('attachmentUrl:'+attachmentUrl);
