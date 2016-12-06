@@ -54,7 +54,7 @@ router.post('/uploadfile', function(req, res) {
     var contenttype = splitteddata[3];
     var imagedata = splitteddata[4];
     
-    var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+filename +', '+imagedata+', '+caseid+') RETURNING id';
+    var formattedData='INSERT INTO caseattachment (name, contenttype, herokucaseid) VALUES ('+filename +',  \''+contenttype+'\', '+caseid+') RETURNING id';
     console.log('formattedQuery:'+formattedData);
     
          pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
@@ -66,7 +66,7 @@ router.post('/uploadfile', function(req, res) {
                                 msgid: 2,
                                 message: 'case id not found.'});
                  }else{
-                      conn.query('INSERT INTO caseattachment (name, contenttype, body, herokucaseid) VALUES ('+filename+', '+contenttype+', '+imagedata+', '+caseid+') RETURNING id',
+                      conn.query('INSERT INTO caseattachment (name, contenttype, body, herokucaseid) VALUES ('+filename+', \''+contenttype+'\', '+imagedata+', '+caseid+') RETURNING id',
                          function(err, result) {
                          if(err){
                                 return res.json({
