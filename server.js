@@ -376,7 +376,7 @@ router.get('/showImage', function(req, res) {
                 else{
                     var img = new Buffer(result.rows[0].body, 'base64');
                     res.writeHead(200, {
-                     'Content-Type': result.rows[0].contenttype,
+                     'Content-Type': "image/png",
                      'Content-Length': img.length
                    });
                     res.end(img);
