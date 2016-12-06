@@ -375,7 +375,7 @@ router.get('/showImage', function(req, res) {
                 }
                 else{
                     var contenttype = result.rows[0].contenttype;
-                    contenttype = contenttype.replace('"','');
+                    contenttype = contenttype.replaceAll('"','');
                     console.log(contenttype);
                     var img = new Buffer(result.rows[0].body, 'base64');
                     res.writeHead(200, {
