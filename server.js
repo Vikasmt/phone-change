@@ -371,12 +371,12 @@ router.get('/showImage', function(req, res) {
                    return res.json({
                             userid: -1,
                             msgid: 2,
-                            message: 'Invalid imageid.'});
+                            message: 'Invalid id.'});
                 }
                 else{
                     var img = new Buffer(result.rows[0].body, 'base64');
                     res.writeHead(200, {
-                     'Content-Type': 'image/png',
+                     'Content-Type': ''+result.rows[0].contenttype+'',
                      'Content-Length': img.length
                    });
                     res.end(img);
