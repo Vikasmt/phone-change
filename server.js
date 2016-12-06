@@ -51,7 +51,8 @@ router.post('/uploadfile', function(req, res) {
     var caseid = splitteddata[0];
     var loopid = splitteddata[1];
     var filename = splitteddata[2];
-    var imagedata = splitteddata[3];
+    var contenttype = splitteddata[3];
+    var imagedata = splitteddata[4];
     
     var formattedData='INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+filename +', '+imagedata+', '+caseid+') RETURNING id';
     console.log('formattedQuery:'+formattedData);
@@ -65,7 +66,7 @@ router.post('/uploadfile', function(req, res) {
                                 msgid: 2,
                                 message: 'case id not found.'});
                  }else{
-                      conn.query('INSERT INTO caseattachment (name, body, herokucaseid) VALUES ('+ filename +', '+imagedata+', '+caseid+') RETURNING id',
+                      conn.query('INSERT INTO caseattachment (name, contenttype, body, herokucaseid) VALUES ('+filename+', '+contenttype+', '+imagedata+', '+caseid+') RETURNING id',
                          function(err, result) {
                          var attachmentrowid = result.rows[0].id;
                          if(err){
@@ -75,12 +76,7 @@ router.post('/uploadfile', function(req, res) {
                                         message: err.message});
                             }
                             else{
-                                var columname = '';
-                                if(loopid === '6' || loopid === 6){
-                                    columname = 'FMA_Barcode_Attachment__c';
-                                }else{
-                                    columname = 'fma_attachment' + loopid + '__c';
-                                }
+                                var columname = 'fma_attachment' + loopid + '__c';
                                 console.log('columname:' + columname);
                                 var attachmentUrl = baseUrl + 'api/showImage?imageid=' +attachmentrowid;
                                 console.log('attachmentUrl:'+attachmentUrl);
