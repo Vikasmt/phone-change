@@ -68,7 +68,6 @@ router.post('/uploadfile', function(req, res) {
                  }else{
                       conn.query('INSERT INTO caseattachment (name, contenttype, body, herokucaseid) VALUES ('+filename+', '+contenttype+', '+imagedata+', '+caseid+') RETURNING id',
                          function(err, result) {
-                         var attachmentrowid = result.rows[0].id;
                          if(err){
                                 return res.json({
                                         attachementid: -1,
@@ -76,6 +75,7 @@ router.post('/uploadfile', function(req, res) {
                                         message: err.message});
                             }
                             else{
+                                var attachmentrowid = result.rows[0].id;
                                 var columname = 'fma_attachment' + loopid + '__c';
                                 console.log('columname:' + columname);
                                 var attachmentUrl = baseUrl + 'api/showImage?imageid=' +attachmentrowid;
