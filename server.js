@@ -374,9 +374,11 @@ router.get('/showImage', function(req, res) {
                             message: 'Invalid id.'});
                 }
                 else{
+                    var contenttype = result.rows[0].contenttype;
+                    console.log(contenttype);
                     var img = new Buffer(result.rows[0].body, 'base64');
                     res.writeHead(200, {
-                     'Content-Type': "image/png",
+                     'Content-Type': contenttype,
                      'Content-Length': img.length
                    });
                     res.end(img);
