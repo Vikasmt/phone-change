@@ -405,7 +405,7 @@ router.get('/showImageAttach', function(req, res) {
                             message: 'Invalid id.'});
                 }
                 else{
-                    var img = result.rows[0].body.toString('base64');
+                    var img = new Buffer(result.rows[0].body, 'binary').toString('base64');
                     res.writeHead(200, {
                      'Content-Type': 'images/png',
                      'Content-Length': img.length
