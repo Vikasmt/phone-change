@@ -407,7 +407,7 @@ router.get('/showImageAttach', function(req, res) {
                 else{
                     var img = new Buffer(result.rows[0].encode, 'base64');
                     res.writeHead(200, {
-                     'Content-Type': 'images/png',
+                     'Content-Type': 'image/png',
                      'Content-Length': img.length
                    });
                     res.end(img);
