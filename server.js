@@ -395,7 +395,7 @@ router.get('/showImageAttach', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT id, encode(body,\'base64\') FROM Salesforce.Attachment WHERE id = '+imageid+'',
+            'SELECT *FROM Salesforce.Attachment WHERE id = '+imageid+'',
             function(err,result){
                 done();
                 if (err != null || result.rowCount == 0) {
