@@ -395,7 +395,7 @@ router.get('/showImageAttach', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT id, encode(body,''base64'') FROM Salesforce.Attachment WHERE id = '+imageid+'',
+            'SELECT id, encode(body,\'base64\') FROM Salesforce.Attachment WHERE id = '+imageid+'',
             function(err,result){
                 done();
                 if (err != null || result.rowCount == 0) {
@@ -405,7 +405,7 @@ router.get('/showImageAttach', function(req, res) {
                             message: 'Invalid id.'});
                 }
                 else{
-                    var img = new Buffer(result.rows[0].encode, 'base64');
+                    var img = new Buffer(result.rows[0].body, 'base64');
                     res.writeHead(200, {
                      'Content-Type': 'image/png',
                      'Content-Length': img.length
