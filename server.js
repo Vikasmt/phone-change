@@ -389,6 +389,33 @@ router.get('/showImage', function(req, res) {
     });
 });
 
+router.get('/showImageAttach', function(req, res) {
+    var imageid = req.param('imageid');
+    console.log('ImageId:'+imageid);
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        conn.query(
+            'SELECT *FROM Salesforce.Attachment WHERE id = '+imageid+'',
+            function(err,result){
+                done();
+                if (err != null || result.rowCount == 0) {
+                   return res.json({
+                            userid: -1,
+                            msgid: 2,
+                            message: 'Invalid id.'});
+                }
+                else{
+                    var img = new Buffer(result.rows[0].body, 'base64');
+                    res.writeHead(200, {
+                     'Content-Type': 'images/png',
+                     'Content-Length': img.length
+                   });
+                    res.end(img);
+                }
+            });
+    });
+});
+
 router.get('/getUsers', function(req, res) {
  pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
      if (err) console.log(err);
