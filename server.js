@@ -5,7 +5,7 @@ var pg = require('pg');
 var app = express();
 
 app.set('port', process.env.PORT || 5000);
-var conString = "postgres://nxxxbrtxucsbtf:2104b93ac8d0538c0b30441ebf1f7b454d0c56376369152598c1649c83e42746@ec2-54-235-153-124.compute-1.amazonaws.com:5432/d4f49ko012i477";
+//var conString = "postgres://nxxxbrtxucsbtf:2104b93ac8d0538c0b30441ebf1f7b454d0c56376369152598c1649c83e42746@ec2-54-235-153-124.compute-1.amazonaws.com:5432/d4f49ko012i477";
 //var client = new pg.Client(conString);
 //client.connect();
 app.use(express.static('public'));
@@ -20,7 +20,7 @@ app.post('/CreateUser', function(req, res) {
     var formattedData='INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\')';
     console.log('formattedQuery:'+formattedData);
     
-    pg.connect(conString, function (err, conn, done) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
          if (err) console.log(err);
          conn.query('INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\')',
              function(err, result) {
@@ -44,12 +44,12 @@ app.post('/update', function(req, res) {
         // watch for any connect issues
         if (err) console.log(err);
         conn.query(
-            'UPDATE usermanagement SET Phone = $1 WHERE LOWER(firstname) = LOWER($2) AND LOWER(password) = LOWER($3) AND LOWER(email) = LOWER($4)',
-            [req.body.phone.trim(), req.body.firstName.trim(), req.body.password.trim(), req.body.email.trim()],
+            'UPDATE salesforce.Contact SET Phone = $1, MobilePhone = $1 WHERE LOWER(FirstName) = LOWER($2) AND LOWER(LastName) = LOWER($3) AND LOWER(Email) = LOWER($4)',
+            [req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
             function(err, result) {
                 if (err != null || result.rowCount == 0) {
-                  conn.query('INSERT INTO usermanagement (Phone,firstname, password, email) VALUES ($1, $2, $3, $4)',
-                  [req.body.phone.trim(), req.body.firstName.trim(), req.body.password.trim(), req.body.email.trim()],
+                  conn.query('INSERT INTO salesforce.Contact (Phone, MobilePhone, FirstName, LastName, Email) VALUES ($1, $2, $3, $4, $5)',
+                  [req.body.phone.trim(), req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
                   function(err, result) {
                     done();
                     if (err) {
@@ -70,7 +70,6 @@ app.post('/update', function(req, res) {
         );
     });
 });
-
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
