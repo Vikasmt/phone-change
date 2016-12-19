@@ -11,12 +11,12 @@ app.use(bodyParser.json());
 
 var router = express.Router();
 
-router.post('/CreateUser', function(req, res) {
-    //console.log(req.body);
+app.post('/CreateUser', function(req, res) {
+    console.log(req.body);
     var jsonData = req.body;
     
-    //var formattedData='INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.name+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')';
-    //console.log('formattedQuery:'+formattedData);
+    var formattedData='INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.name+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\')';
+    console.log('formattedQuery:'+formattedData);
     
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
          if (err) console.log(err);
