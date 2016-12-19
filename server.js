@@ -42,11 +42,11 @@ app.post('/update', function(req, res) {
         // watch for any connect issues
         if (err) console.log(err);
         conn.query(
-            'UPDATE UserManagement SET Phone = $1 WHERE LOWER(firstname) = LOWER($2) AND LOWER(password) = LOWER($3) AND LOWER(email) = LOWER($4)',
+            'UPDATE usermanagement SET Phone = $1 WHERE LOWER(firstname) = LOWER($2) AND LOWER(password) = LOWER($3) AND LOWER(email) = LOWER($4)',
             [req.body.phone.trim(), req.body.firstName.trim(), req.body.password.trim(), req.body.email.trim()],
             function(err, result) {
                 if (err != null || result.rowCount == 0) {
-                  conn.query('INSERT INTO UserManagement (Phone,firstname, password, email) VALUES ($1, $2, $3, $4)',
+                  conn.query('INSERT INTO usermanagement (Phone,firstname, password, email) VALUES ($1, $2, $3, $4)',
                   [req.body.phone.trim(), req.body.firstName.trim(), req.body.password.trim(), req.body.email.trim()],
                   function(err, result) {
                     done();
