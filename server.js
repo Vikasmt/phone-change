@@ -5,7 +5,7 @@ var pg = require('pg');
 var app = express();
 
 app.set('port', process.env.PORT || 5000);
-//var conString = "postgres://nxxxbrtxucsbtf:2104b93ac8d0538c0b30441ebf1f7b454d0c56376369152598c1649c83e42746@ec2-54-235-153-124.compute-1.amazonaws.com:5432/d4f49ko012i477";
+var conString = "postgres://nxxxbrtxucsbtf:2104b93ac8d0538c0b30441ebf1f7b454d0c56376369152598c1649c83e42746@ec2-54-235-153-124.compute-1.amazonaws.com:5432/d4f49ko012i477";
 //var client = new pg.Client(conString);
 //client.connect();
 app.use(express.static('public'));
@@ -20,7 +20,7 @@ app.post('/CreateUser', function(req, res) {
     var formattedData='INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\')';
     console.log('formattedQuery:'+formattedData);
     
-    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+    pg.connect(conString, function (err, conn, done) {
          if (err) console.log(err);
          conn.query('INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\')',
              function(err, result) {
