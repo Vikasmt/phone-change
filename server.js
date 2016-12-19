@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var pg = require('pg');
 
-var app = express();
+var app = express.Router();
 
 app.set('port', process.env.PORT || 5000);
 
