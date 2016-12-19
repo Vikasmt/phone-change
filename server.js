@@ -20,7 +20,7 @@ app.post('/CreateUser', function(req, res) {
     var formattedData='INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')';
     console.log('formattedQuery:'+formattedData);
     
-    pg.connect(conString, function (err, conn, done) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
          if (err) console.log(err);
          conn.query('INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')',
              function(err, result) {
