@@ -23,12 +23,12 @@
 
                 $("#message").hide();
 
-                var firstName = $("#firstName").val();
+                var firstname = $("#firstname").val();
                 var email = $("#email").val();
                 var phone = $("#phone").val();
                 var password = $("#password").val();
 
-                if (firstName.length == 0 || email.length == 0 || phone.length == 0  || password.length == 0) {
+                if (firstname.length == 0 || email.length == 0 || phone.length == 0  || password.length == 0) {
                     errorMessage.text("All of the fields are required.");
                     error.show();
                 }
@@ -37,7 +37,7 @@
                         url: event.target.action,
                         method: event.target.method,
                         data: JSON.stringify({
-                            firstName: firstName,
+                            firstname: firstname,
                             email: email,
                             phone: phone,
                             password: password
@@ -45,7 +45,7 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function(data) {
-                            $("#firstName").val("");
+                            $("#firstname").val("");
                             $("#email").val("");
                             $("#phone").val("");
                             $("#password").val("");
@@ -80,8 +80,8 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="For verification" required>
+                        <label for="firstname">First Name</label>
+                        <input type="text" class="form-control" id="firstname" placeholder="For verification" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
