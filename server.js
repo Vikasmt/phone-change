@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 var router = express.Router();
 
-router.post('/CreateUser', function(req, res) {
+app.post('/CreateUser', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
     
