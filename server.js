@@ -16,6 +16,9 @@ app.get('/getusers', function(req, res) {
         conn.query(
             'SELECT * FROM usermanagement',
             function(err,result){
+                res.render('getusers', {
+                  items: rows
+                });
                 done();
                 if(err){
                     return res.status(400).json({error: err.message});
