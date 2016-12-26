@@ -14,7 +14,7 @@ app.get('/getusers', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT * FROM usermanagement',
+            'SELECT firstname, email, phone FROM usermanagement',
             function(err,result){
                 res.render('getusers', {
                   items: rows
