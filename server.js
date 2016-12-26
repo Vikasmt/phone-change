@@ -10,6 +10,25 @@ app.use(bodyParser.json());
 
 var router = express.Router();
 
+app.get('/getusers', function(req, res) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        conn.query(
+            'SELECT * FROM usermanagement',
+            function(err,result){
+                done();
+                if(err){
+                    return res.status(400).json({error: err.message});
+                }
+                else{
+                    return res.json(result.rows);
+                }
+            });
+    });
+});
+
+
+
 app.post('/CreateUser', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
