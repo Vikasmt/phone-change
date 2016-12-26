@@ -19,7 +19,7 @@ app.get('/getusers', function(req, res) {
                 res.render('getusers', {
                   items: rows
                 });
-                done();
+                //done();
                 if(err){
                     return res.status(400).json({error: err.message});
                 }
