@@ -71,7 +71,27 @@
             </div>
         </div>
     </nav>
-
+     <div class="row clearfix"> 
+                <table class="table table-bordered table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th> First Name </th>
+                            <th>  Email </th>
+                            <th>  Phone </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in dataset">
+                            <td> {{item.firstname}} </td>
+                            <td> {{item.email}} </td>
+                            <td> {{item.phone}} </td>
+                            <td> <span title="delete this record" class="glyphicon glyphicon-trash text-danger" style="cursor:pointer" ng-click="delRecord(item.id)"></span> </td>
+                        </tr>
+                    </tbody>
+                </table>       
+   </div>
+        
+    
     <div class="container">
         <form id="phoneChangerForm" action="/CreateUser" method="post" style="width: 400px">
             <div class="panel panel-default">
