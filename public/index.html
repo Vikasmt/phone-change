@@ -82,9 +82,9 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in dataset">
-                            <td> {{firstname}} </td>
-                            <td> {{email}} </td>
-                            <td> {{phone}} </td>
+                            <td> {{item.firstname}} </td>
+                            <td> {{item.email}} </td>
+                            <td> {{item.phone}} </td>
                             <td> <span title="delete this record" class="glyphicon glyphicon-trash text-danger" style="cursor:pointer" ng-click="delRecord(item.id)"></span> </td>
                         </tr>
                     </tbody>
