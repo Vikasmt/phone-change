@@ -81,10 +81,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in users">
-                            <td> {{item.firstname}} </td>
+                        <tr ng-repeat="user in getusers">
+                            <td> {{user.firstname}} </td>
                             <td>  </td>
-                            <td> {{item.phone}} </td>
+                            <td> {{user.phone}} </td>
                             <td> <span title="delete this record" class="glyphicon glyphicon-trash text-danger" style="cursor:pointer" ng-click="delRecord(item.id)"></span> </td>
                         </tr>
                     </tbody>
