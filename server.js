@@ -16,7 +16,7 @@ app.get('/getusers', function(req, res) {
         conn.query(
             'SELECT firstname, email, phone FROM usermanagement',
             function(err,result){
-                
+                $scope.dataset = result;
                 done();
                 if(err){
                     return res.status(400).json({error: err.message});
