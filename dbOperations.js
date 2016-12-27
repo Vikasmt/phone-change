@@ -8,6 +8,7 @@ module.exports = {
         var query = client.query("select * from usermanagement");
         query.on("row", function (row, result) { 
             result.addRow(row); 
+            console.log(row);
         });
         query.on("end", function (result) {          
             client.end();
