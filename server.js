@@ -37,9 +37,6 @@ app.post('/CreateUser', function(req, res) {
     var formattedData='INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')';
     console.log('formattedQuery:'+formattedData);
     
-    var conformattedData='INSERT INTO salesforce.Contact (Name, Email, Phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\')';
-    console.log('formattedQuery:'+conformattedData);
-    
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
          if (err) console.log(err);
          conn.query('INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')',
@@ -57,10 +54,18 @@ app.post('/CreateUser', function(req, res) {
                 }
          });
      });
+});
+
+app.post('/CreateUser', function(req, res) {
+    console.log(req.body);
+    var jsonData = req.body;
+    
+    var formattedData='INSERT INTO salesforce.Contact (Name, Email, Phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', 1234567899)';
+    console.log('formattedQuery:'+formattedData);
     
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
          if (err) console.log(err);
-         conn.query('INSERT INTO salesforce.Contact (Name, Email, Phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\')',
+         conn.query('INSERT INTO salesforce.Contact (Name, Email, Phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', 1234567899)',
              function(err, result) {
                 done(); 
              if(err){
