@@ -60,7 +60,18 @@
                 }
             });
         });
-
+    $( document ).ready(function() {
+          $('.container').hide();
+          $('.clearfix').hide();
+         $( ".createuser" ).on( "click", function() {
+           $('.container').show();
+           $('.clearfix').hide();
+         });
+        $( ".userlist" ).on( "click", function() {
+           $('.container').hide();
+           $('.clearfix').show();
+         });
+    });
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
         <script> 
@@ -110,6 +121,8 @@
             </div>
         </div>
     </nav>
+    <button type="submit" class="btn btn-primary createuser">Create User</button>
+    <button type="submit" class="btn btn-primary userlist">Users List</button>
      <div class="row clearfix"> 
                 <table class="table table-bordered table-hover table-condensed" style="margin: 0 0 0 146px;max-width: 85% !important;">
                     <thead>
