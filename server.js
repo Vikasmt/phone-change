@@ -57,29 +57,35 @@ app.post('/CreateUser', function(req, res) {
 });
 
 app.post('/CreateUser', function(req, res) {
-    console.log(req.body);
-    var jsonData = req.body;
-    
-    var formattedData='INSERT INTO salesforce.Contact (Name, Email, Phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', 1234567899)';
-    console.log('formattedQuery:'+formattedData);
-    
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-         if (err) console.log(err);
-         conn.query('INSERT INTO salesforce.Contact (Name, Email, Phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', 1234567899)',
-             function(err, result) {
-                done(); 
-             if(err){
-                    return res.json({
-                            msgid: 2,
-                            message: err.message});
+        // watch for any connect issues
+        if (err) console.log(err);
+        conn.query(
+            'UPDATE salesforce.Contact SET Phone = $1, WHERE LOWER(FirstName) = LOWER($2) AND LOWER(Email) = LOWER($3)',
+            [req.body.phone.trim(), req.body.firstName.trim(), req.body.email.trim()],
+            function(err, result) {
+                if (err != null || result.rowCount == 0) {
+                  conn.query('INSERT INTO salesforce.Contact (Phone, FirstName, Email) VALUES ($1, $2, $3, $4, $5)',
+                  [req.body.phone.trim(), req.body.firstName.trim(), req.body.email.trim()],
+                  function(err, result) {
+                    done();
+                    if (err) {
+                        res.status(400).json({error: err.message});
+                    }
+                    else {
+                        // this will still cause jquery to display 'Record updated!'
+                        // eventhough it was inserted
+                        res.json(result);
+                    }
+                  });
                 }
-                else{
-                    return res.json({
-                            msgid: 1,
-                            message: 'Success.'});
+                else {
+                    done();
+                    res.json(result);
                 }
-         });
-     });
+            }
+        );
+    });
 });
 
 
