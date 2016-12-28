@@ -34,12 +34,12 @@ app.post('/CreateUser', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
     
-    var formattedData='INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')';
+    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')';
     console.log('formattedQuery:'+formattedData);
     
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
          if (err) console.log(err);
-         conn.query('INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')',
+         conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')',
              function(err, result) {
                 done(); 
              if(err){
@@ -56,17 +56,17 @@ app.post('/CreateUser', function(req, res) {
      });
 });
 
-app.post('/CreateUser', function(req, res) {
+app.post('/update', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         // watch for any connect issues
         if (err) console.log(err);
         conn.query(
-            'UPDATE salesforce.Contact SET Phone = $1, WHERE LOWER(FirstName) = LOWER($2) AND LOWER(Email) = LOWER($3)',
-            [req.body.phone.trim(), req.body.firstName.trim(), req.body.email.trim()],
+            'UPDATE salesforce.Contact SET Phone = $1, MobilePhone = $1 WHERE LOWER(FirstName) = LOWER($2) AND LOWER(LastName) = LOWER($3) AND LOWER(Email) = LOWER($4)',
+            [req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
             function(err, result) {
                 if (err != null || result.rowCount == 0) {
-                  conn.query('INSERT INTO salesforce.Contact (Phone, FirstName, Email) VALUES ($1, $2, $3, $4, $5)',
-                  [req.body.phone.trim(), req.body.firstName.trim(), req.body.email.trim()],
+                  conn.query('INSERT INTO salesforce.Contact (Phone, MobilePhone, FirstName, LastName, Email) VALUES ($1, $2, $3, $4, $5)',
+                  [req.body.phone.trim(), req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
                   function(err, result) {
                     done();
                     if (err) {
