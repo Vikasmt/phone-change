@@ -30,7 +30,7 @@ app.get('/getusers', function(req, res) {
 
 
 
-app.post('/', function(req, res) {
+app.post('/update', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
     
@@ -56,7 +56,7 @@ app.post('/', function(req, res) {
      });
 });
 
-app.post('/update', function(req, res) {
+app.post('/', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         // watch for any connect issues
         if (err) console.log(err);
