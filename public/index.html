@@ -16,20 +16,15 @@
         $(function() {
             $("#phoneChangerForm").submit(function(event) {
                 event.preventDefault();
-
                 var errorMessage = $("#errorMessage");
                 var error = $("#error");
                 error.hide();
-
                 $("#message").hide();
-
-                var firstname = $("#firstName").val();
-                var lastname = $("#lastName").val();
+                var firstName = $("#firstName").val();
+                var lastName = $("#lastName").val();
                 var email = $("#email").val();
                 var phone = $("#phone").val();
-                var password = $("#password").val();
-
-                if (firstName.length == 0 || lastName.length == 0 || email.length == 0 || phone.length == 0  || password.length == 0) {
+                if (firstName.length == 0 || lastName.length == 0 || email.length == 0 || phone.length == 0) {
                     errorMessage.text("All of the fields are required.");
                     error.show();
                 }
@@ -41,8 +36,7 @@
                             firstName: firstName,
                             lastName: lastName,
                             email: email,
-                            phone: phone,
-                            password: password
+                            phone: phone
                         }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -51,7 +45,6 @@
                             $("#lastName").val("");
                             $("#email").val("");
                             $("#phone").val("");
-                            $("#password").val("");
                             $("#messageMessage").text("Record updated!");
                             $("#message").show();
                         },
@@ -63,7 +56,8 @@
                 }
             });
         });
-    $( document ).ready(function() {
+        
+         $( document ).ready(function() {
           $('.container').hide();
           $('.clearfix').hide();
          $( ".createuser" ).on( "click", function() {
@@ -76,6 +70,8 @@
          });
     });
     </script>
+   
+    
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
         <script> 
             var myApp = angular.module('postgreSQL',[ ]);              
@@ -156,7 +152,7 @@
         <form id="phoneChangerForm" action="/update" method="post" style="width: 400px">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">User Registration</h3>
+                    <h3 class="panel-title">Update Your Phone Number</h3>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
@@ -175,10 +171,6 @@
                         <label for="phone">Phone</label>
                         <input type="tel" class="form-control" id="phone" placeholder="New Phone Number" required>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="text" class="form-control" id="password" placeholder="For verification" required>
-                    </div>
                 </div>
                 <div class="panel-footer">
                     <div id="message" class="alert alert-info" role="alert" style="display: none;">
@@ -190,7 +182,7 @@
                         <span class="sr-only">Error:</span>
                         <span id="errorMessage"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create User</button>
+                    <button type="submit" class="btn btn-primary">Update Phone Number</button>
                 </div>
             </div>
         </form>
