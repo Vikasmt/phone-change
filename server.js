@@ -30,7 +30,7 @@ app.get('/getusers', function(req, res) {
 
 
 
-app.post('/', function(req, res) {
+app.post('/createuser', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
     
