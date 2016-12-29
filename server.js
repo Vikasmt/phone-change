@@ -34,12 +34,12 @@ app.post('/update', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
     
-    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password) VALUES (\''+jsonData.firstName+'\', \''+jsonData.lastName+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')';
+    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone) VALUES (\''+jsonData.firstName+'\', \''+jsonData.lastName+'\', \''+jsonData.email+'\', 1234567899)';
     console.log('formattedQuery:'+formattedData);
     
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
          if (err) console.log(err);
-         conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password) VALUES (\''+jsonData.firstName+'\', \''+jsonData.lastName+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')',
+         conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone) VALUES (\''+jsonData.firstName+'\', \''+jsonData.lastName+'\', \''+jsonData.email+'\', 1234567899)',
              function(err, result) {
                 done(); 
              if(err){
@@ -56,7 +56,7 @@ app.post('/update', function(req, res) {
      });
 });
 
-app.post('/', function(req, res) {
+app.post('/update', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         // watch for any connect issues
         if (err) console.log(err);
