@@ -13,50 +13,77 @@
         }
     </style>
 </head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-route.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js" type="text/javascript" charset="utf-8"></script>
 <body>
 
 <script>
-var app = angular.module("myShoppingList", []); 
-app.controller("myCtrl", function($scope) {
-    var vm = this;
-    $scope.products = ["Milk", "Bread", "Cheese"];
+    var app = angular.module("userApp", ['ngResource','userApp.constant']);
+    var userAppConstants = angular.module("userApp.constant", []);
     
-    vm.createUser = function(userInformation) {
-        if(angular.isDefined(userInformation) && userInformation !== null){
-            alert(userInformation.firstname);
+    app.config(['$resourceProvider', function ($resourceProvider) {
+            // Don't strip trailing slashes from calculated URLs
+            $resourceProvider.defaults.stripTrailingSlashes = false;
+        }]);
+    
+    userAppConstants.constant('apiUrl', 'https://phone-change-con.herokuapp.com/api/');
+    
+    app.factory("userAppService", function($resource, apiUrl){
+         return {
+            userService: function (token) {
+                return $resource(apiUrl, null, {
+                    createUser: { method: "POST", url: apiUrl + "/CreateUser" },
+                });
+            }
+        };
+    });
+    
+    app.controller("userCtrl", function($scope, userAppService) {
+        $scope.user={};
+        $scope.test=function(){
+            alert('hello');
         }
-    };
-});
+
+        $scope.createUser = function(userInformation) {
+            if(angular.isDefined(userInformation) && userInformation !== null) {
+                alert('started');
+                userAppService.userService('').createUser(userInformation)
+                    .$promise.then(function (response) {
+                        alert('Success');
+                    }).catch(function (errors){
+                        alert('failed');
+                    });
+            }
+        };
+    });
 </script>
 
-<div class="container" ng-app="myShoppingList" ng-controller="myCtrl">
-        <form id="createuserForm" action="/CreateUser" method="post" style="width: 400px">
-            <div class="panel panel-default">
+<div id="createuserForm"class="container" ng-app="userApp" ng-controller="userCtrl" style="width: 400px" ng-init="test()">
+    <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Create User</h3>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" ng-model="vm.user.firstname" id="firstName" placeholder="Enter first name" required>
+                        <input type="text" class="form-control" ng-model="user.firstname" id="firstName" placeholder="Enter first name" required>
                     </div>
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" ng-model="vm.user.lastname" placeholder="Enter lastname" required>
+                        <input type="text" class="form-control" id="lastName" ng-model="user.lastname" placeholder="Enter lastname" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" ng-model="vm.user.email" placeholder="Enter email address" required>
+                        <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Enter email address" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="tel" class="form-control" id="phone" ng-model="vm.user.phone" placeholder="Enter phone number" required>
+                        <input type="tel" class="form-control" id="phone" ng-model="user.phone" placeholder="Enter phone number" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="tel" class="form-control" id="password" ng-model="vm.user.password" placeholder="Enter password" required>
+                        <input type="tel" class="form-control" id="password" ng-model="user.password" placeholder="Enter password" required>
                     </div>
                 </div>
                 <div class="panel-footer">
@@ -69,10 +96,10 @@ app.controller("myCtrl", function($scope) {
                         <span class="sr-only">Error:</span>
                         <span id="errorMessage"></span>
                     </div>
-                    <button type="button" class="btn btn-primary" ng-click=vm.createUser(vm.user)>Create User</button>
+                    <button class="btn btn-primary" ng-click="createUser(user)">Create User</button>
                 </div>
             </div>
-        </form>
-    </div>
+</div>
+
 </body>
 </html>
