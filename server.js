@@ -125,6 +125,7 @@ router.get('/getContact', function(req, res) {
 router.get('/ValidateAdmin', function(req, res) {
     var emailaddress = req.headers.email;
     var password = req.headers.password;
+    var timestamp = '';
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
@@ -290,6 +291,10 @@ router.post('/insertCase', function(req, res) {
         
         //-------------------------------------------End Framing Query-------------------------------------------
         
+        //timestamp
+        if (jsonData.jsonData !== undefined && jsonData.jsonData !== null && jsonData.jsonData !== "null" && jsonData.jsonData.length > 0)
+        { timestamp = jsonData.timestamp; }
+        
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
         console.log(combinedQuery); 
         
@@ -301,6 +306,7 @@ router.post('/insertCase', function(req, res) {
                             return res.json({
                                     caseid: -1,
                                     msgid: 2,
+                                    timestamp: timestamp,
                                     message: err.message});
                         }
                         else{
@@ -308,6 +314,7 @@ router.post('/insertCase', function(req, res) {
                             return res.json({
                                     caseid:result.rows[0].id,
                                     msgid: 1,
+                                    timestamp: timestamp,
                                     message: 'Success.'});
                         } 
             });
