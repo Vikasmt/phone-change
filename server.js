@@ -292,7 +292,7 @@ router.post('/insertCase', function(req, res) {
         //-------------------------------------------End Framing Query-------------------------------------------
         
         //timestamp
-        if (jsonData.jsonData !== undefined && jsonData.jsonData !== null && jsonData.jsonData !== "null" && jsonData.jsonData.length > 0)
+        if (jsonData.timestamp !== undefined && jsonData.timestamp !== null && jsonData.timestamp !== "null" && jsonData.timestamp.length > 0)
         { timestamp = jsonData.timestamp; }
         
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
