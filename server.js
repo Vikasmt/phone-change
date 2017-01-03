@@ -125,7 +125,6 @@ router.get('/getContact', function(req, res) {
 router.get('/ValidateAdmin', function(req, res) {
     var emailaddress = req.headers.email;
     var password = req.headers.password;
-    var timestamp = '';
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
@@ -169,6 +168,7 @@ router.post('/insertCase', function(req, res) {
         
         console.log(req.body);
         var jsonData = req.body;
+        var timestamp = '';
         var insertQueryData = 'INSERT INTO salesforce.Case (';
         var valuesData=' VALUES (';
         
