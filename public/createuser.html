@@ -39,7 +39,7 @@
         };
     });
     
-    app.controller("userCtrl", function($scope, $http) {
+    app.controller("userCtrl", function($scope, $http, userAppService, apiUrl) {
         $scope.user={};
         $scope.test=function(){
             alert('hello');
@@ -55,7 +55,10 @@
                         }
                 }
                 
-                $http.post('/CreateUser',userInformation,config)
+                var createuserurl=apiUrl+'/CreateUser';
+                alert(createuserurl);
+                
+                $http.post(createuserurl,userInformation,config)
                     .then(function (data, status, headers, config) {
                         alert('Success');
                         $scope.PostDataResponse = data;
