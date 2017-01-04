@@ -13,10 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css" />
     
     <style>
-        body {
-            padding-top: 60px;
-            font-family: Roboto;
-        }
+        
         .form-control:invalid, .custom-file-control:invalid {
     background-image: -webkit-linear-gradient(bottom, #9E7CC1 2px, rgba(213, 0, 0, 0) 2px), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.26) 1px, transparent 1px);
     background-image: -o-linear-gradient(bottom, #d50000 2px, rgba(213, 0, 0, 0) 2px), -o-linear-gradient(bottom, rgba(0, 0, 0, 0.26) 1px, transparent 1px);
@@ -43,12 +40,16 @@
          background-color: #79589F;
          border-color: #79589F; 
     }
+    .table thead th{
+    font-weight: 400;
+    font-size: 1em;
+    background: #ffffff;
+    color: #79589f;
+    border-top:none;
+    }
         
-        table, th, td {
-             border: 1px solid black;
-             border-collapse: collapse;
-        }
     </style>
+    
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js" type="text/javascript" charset="utf-8"></script>
@@ -168,16 +169,19 @@
             </div>
             </div>
     </div>
-    <!--
-    <table style="width:80%">
+  
+    <table style="width:80%;margin:0 auto;" class="table table-striped table-hover">
+      <thead>
         <tr>
-            <th>Sync ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>E-Mail</th>
-            <th>Phone</th>
-            <th>Active</th>
+            <th><label>Sync ID</label></th>
+              <th><label>First Name</label></th>
+              <th><label>Last Name</label></th>
+              <th><label>E-Mail</label></th>
+              <th><label>Phone</label></th>
+              <th><label>Active</label></th>
         </tr>
+       </thead>
+       <tbody> 
         <tr ng-repeat="item in userlist.data">
             <td>{{item.sfid}}</td>
             <td>{{item.firstname}}</td>
@@ -186,8 +190,9 @@
             <td>{{item.phone}}</td>
             <td>{{item.active}}</td>
         </tr>
+    </tbody>
     </table>
-    -->
+    
 </div>
 </body>
 </html>
