@@ -439,7 +439,7 @@ router.get('/getUsers', function(req, res) {
  pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
      if (err) console.log(err);
         conn.query(
-            'SELECT *from UserManagement',
+            'SELECT um.id, um.firstname, um.lastname, um.email, um.phone, um.contactid, um.active, sc.sfid from UserManagement um, Salesforce.Contact sc where um.contactid=sc.id',
             function(err,result){
                 done();
                 if(err){
