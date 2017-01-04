@@ -153,6 +153,24 @@ router.get('/ValidateAdmin', function(req, res) {
                                            msgid: 3,
                                            message: 'Invalid password.'});
                                }
+                               else if(result.rows[0].active == 0){
+                                  return  res.json({
+                                           userid: -1,
+                                           firstname:'',
+                                           lastname:'',
+                                           username:'',
+                                           msgid: 4,
+                                           message: 'User is inactive.'}); 
+                               }
+                               else if(result.rows[0].sfid == null || result.rows[0].sfid.length == 0){
+                                  return  res.json({
+                                           userid: -1,
+                                           firstname:'',
+                                           lastname:'',
+                                           username:'',
+                                           msgid: 4,
+                                           message: 'User is not synced. Please wait...'}); 
+                               }
                                else{
                                   return res.json({
                                            userid:result.rows[0].sfid,
