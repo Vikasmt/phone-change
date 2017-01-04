@@ -453,7 +453,7 @@ router.get('/getUsers', function(req, res) {
  });
 });
 
-router.put('/updateStatus'function(req, res){
+router.put('/updateStatus', function(req, res){
     var user_id = req.param('id');
     pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
