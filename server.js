@@ -383,10 +383,10 @@ router.post('/CreateUser', function(req, res) {
                         var contactid = result.rows[0].id;
                         console.log('contactid: '+contactid);
                         
-                        var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', '+contactid+', 'true')';
+                        var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', '+contactid+', '1')';
                         console.log('formatted UserManagement Query:'+formattedData);
                         
-                        conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\', 'true')',
+                        conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\', '1')',
                          function(err, result) {
                             done();
                              if(err){
