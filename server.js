@@ -367,7 +367,7 @@ router.post('/CreateUser', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
     
-    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', '+contactid+', 1)';
+    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', test, 1)';
     console.log('formatted UserManagement Query:'+formattedData);
     
     var formattedData='INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\')  RETURNING id';
