@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Moldtek Heroku Integration App</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    
+    <style>
+        body {
+            padding-top: 60px;
+        }
+        
+        table, th, td {
+             border: 1px solid black;
+             border-collapse: collapse;
+        }
+    </style>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js" type="text/javascript" charset="utf-8"></script>
+<body>
+
+<script>
+    var app = angular.module("userApp", ['ngResource','userApp.constant']);
+    var userAppConstants = angular.module("userApp.constant", []);
+    
+    app.config(['$resourceProvider', function ($resourceProvider) {
+            // Don't strip trailing slashes from calculated URLs
+            $resourceProvider.defaults.stripTrailingSlashes = false;
+        }]);
+    
+    userAppConstants.constant('apiUrl', 'https://phone-change-con.herokuapp.com/api/');
+    
+    app.factory("userAppService", function($resource, apiUrl){
+         return {
+            userService: function (token) {
+                return $resource(apiUrl, null, {
+                    createUser: { method: "POST", url: apiUrl + "/CreateUser" },
+                });
+            }
+        };
+    });
+    
+    app.controller("userCtrl", function($scope, $http, apiUrl) {
+        $scope.user={};
+        $scope.test=function(){
+            alert('hello');
+        }
+        $scope.createUser = function(userInformation) {
+            if(angular.isDefined(userInformation) && userInformation !== null) {
+                var config = {
+                    headers : {
+                        'Content-Type': 'application/json'
+                        }
+                }
+                
+                var createuserurl = apiUrl + 'CreateUser';
+                
+                $http.post(createuserurl,userInformation,config)
+                    .then(function (data, status, headers, config) {
+                        alert('Success');
+                        getUsers();
+                    })
+                    .catch(function (data, status, header, config) {
+                        console.log(data);
+                    });
+            }
+        };
+        
+        $scope.getUsers = function () {
+            var getUsersUrl = apiUrl + 'getUsers';
+             var config = {
+                    headers : {
+                        'Content-Type': 'application/json'
+                        }
+                }
+            $http.get(getUsersUrl, config)
+                .then(function (data, status, config) {
+                    $scope.userlist = angular.fromJson(angular.toJson(data));
+                })
+                .catch(function (data, status, config) {
+                    console.log(data);
+                    alert('failed to retreive users list');
+                });
+        };
+    });
+</script>
+
+<div ng-app="userApp" ng-controller="userCtrl" ng-init="getUsers()" >
+    <div id="createuserForm" class="container" style="width: 400px">
+        <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Create User</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" ng-model="user.firstname" id="firstName" placeholder="Enter first name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" ng-model="user.lastname" placeholder="Enter lastname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Enter email address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" class="form-control" id="phone" ng-model="user.phone" placeholder="Enter phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="tel" class="form-control" id="password" ng-model="user.password" placeholder="Enter password" required>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div id="message" class="alert alert-info" role="alert" style="display: none;">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        <span id="messageMessage"></span>
+                    </div>
+                    <div id="error" class="alert alert-danger" role="alert" style="display: none;">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        <span id="errorMessage"></span>
+                    </div>
+                    <button class="btn btn-primary" ng-click="createUser(user)">Create User</button>
+                </div>
+            </div>
+    </div>
+    
+    <table style="width:80%">
+        <tr>
+            <th>Sync ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>E-Mail</th>
+            <th>Phone</th>
+            <th>Active</th>
+        </tr>
+        <tr ng-repeat="item in userlist.data">
+            <td>{{item.sfid}}</td>
+            <td>{{item.firstname}}</td>
+            <td>{{item.lastname}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.phone}}</td>
+            <td>{{item.active}}</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
