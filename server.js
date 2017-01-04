@@ -153,7 +153,7 @@ router.get('/ValidateAdmin', function(req, res) {
                                            msgid: 3,
                                            message: 'Invalid password.'});
                                }
-                               else if(result.rows[0].active == 0){
+                               else if(result.rows[0].active == true){
                                   return  res.json({
                                            userid: -1,
                                            firstname:'',
