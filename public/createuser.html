@@ -55,10 +55,12 @@
                         }
                 }
                 
+                var createuserurl = apiUrl + 'CreateUser';
+                
                 $http.post(createuserurl,userInformation,config)
                     .then(function (data, status, headers, config) {
                         alert('Success');
-                        $scope.PostDataResponse = data;
+                        alert(data);
                     })
                     .catch(function (data, status, header, config) {
                         alert('failed');
