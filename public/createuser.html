@@ -6,17 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Moldtek Heroku Integration App</title>
     <!-- Material Design fonts -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css" />
     
     <style>
         body {
             padding-top: 60px;
+            font-family: Roboto;
         }
+        .form-control:invalid, .custom-file-control:invalid {
+    background-image: -webkit-linear-gradient(bottom, #9E7CC1 2px, rgba(213, 0, 0, 0) 2px), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.26) 1px, transparent 1px);
+    background-image: -o-linear-gradient(bottom, #d50000 2px, rgba(213, 0, 0, 0) 2px), -o-linear-gradient(bottom, rgba(0, 0, 0, 0.26) 1px, transparent 1px);
+    background-image: linear-gradient(to top, #9E7CC1 2px, rgba(213, 0, 0, 0) 2px), linear-gradient(to top, rgba(0, 0, 0, 0.26) 1px, transparent 1px);
+}
+    .panel-title{
+    color: #79589F;
+    text-align: center;
+    font-size: 1.75rem;
+    margin: 1em 0;
+    font-weight: 300;}
+     .panel-title i{
+        font-size: 2em;
+     }
+    .panel-title span{
+        display: block;
+    }
+    .btn-div{
+        width: 100%;
+        margin:20px auto;
+        text-align: center;
+    }
+    .btn.btn-raised.btn-success,.btn.btn-raised.btn-success:hover{
+         background-color: #79589F;
+         border-color: #79589F; 
+    }
         
         table, th, td {
              border: 1px solid black;
@@ -96,10 +122,12 @@
 </script>
 
 <div ng-app="userApp" ng-controller="userCtrl" ng-init="getUsers()" >
-    <div id="createuserForm" class="container" style="width: 400px">
+    <div id="createuserForm" class="container" style="width: 450px">
+       <div class="form-horizontal">
         <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Create User</h3>
+                
+                    <h3 class="panel-title"><i class="material-icons">&#xE853</i><span>Create User</span></h3>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
@@ -133,11 +161,14 @@
                         <span class="sr-only">Error:</span>
                         <span id="errorMessage"></span>
                     </div>
-                    <button class="btn btn-primary" ng-click="createUser(user)">Create User</button>
+                    <div class="btn-div">
+                    <button class="btn btn-raised btn-success" ng-click="createUser(user)">Create User</button>
+                    </div>
                 </div>
             </div>
+            </div>
     </div>
-    
+    <!--
     <table style="width:80%">
         <tr>
             <th>Sync ID</th>
@@ -156,6 +187,7 @@
             <td>{{item.active}}</td>
         </tr>
     </table>
+    -->
 </div>
 </body>
 </html>
