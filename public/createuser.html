@@ -72,19 +72,19 @@
         };
         
         $scope.getUsers = function () {
-            var createuserurl = apiUrl + 'getUsers';
+            var getUsersUrl = apiUrl + 'getUsers';
              var config = {
                     headers : {
                         'Content-Type': 'application/json'
                         }
                 }
-            $http.get(createuserurl, config)
+            $http.get(getUsersUrl, config)
                 .then(function (data, status, config) {
-                    alert('Success');
                     $scope.userlist = angular.fromJson(angular.toJson(data));
                 })
                 .catch(function (data, status, config) {
-                    alert('failed');
+                    console.log(data);
+                    alert('failed to retreive users list');
                 });
         };
     });
@@ -131,11 +131,9 @@
                     <button class="btn btn-primary" ng-click="createUser(user)">Create User</button>
                 </div>
             </div>
-    {{userlist}}
+    </div>
     
-</div>
-    
-    <table style="width:100%">
+    <table style="width:80%">
         <tr>
             <th>First Name</th>
             <th>Last Name</th>
