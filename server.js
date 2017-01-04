@@ -385,6 +385,7 @@ router.post('/CreateUser', function(req, res) {
                     }
                     else{
                         var contactid = result.rows[0].id;
+                        console.log('contactid: '+contactid);
                         conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', '+contactid+', 1)',
                          function(err, result) {
                             done();
