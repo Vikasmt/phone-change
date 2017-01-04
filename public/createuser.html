@@ -198,7 +198,8 @@
               <th><label>Last Name</label></th>
               <th><label>E-Mail</label></th>
               <th><label>Phone</label></th>
-              <th><label>Active</label></th>
+              <th><label>Status</label></th>
+              <th><label>Change Status</label></th>
         </tr>
        </thead>
        <tbody> 
@@ -209,7 +210,8 @@
             <td>{{item.lastname}}</td>
             <td>{{item.email}}</td>
             <td>{{item.phone}}</td>
-            <td><label class="btn btn-success"><i class="material-icons">check_box</i><label>{{item.active}}</label><a href="javascript:void(0)" class="btn btn-raised btn-danger">Inactive</a></label></td>
+            <td><i class="material-icons">check_box</i></td>
+           <td><a href="javascript:void(0)" class="btn btn-raised btn-danger">Inactive</a></td>
         </tr>
     </tbody>
     </table>
