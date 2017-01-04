@@ -386,7 +386,7 @@ router.post('/CreateUser', function(req, res) {
                         var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', '+contactid+', '1')';
                         console.log('formatted UserManagement Query:'+formattedData);
                         
-                        conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\', '1')',
+                        conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\')',
                          function(err, result) {
                             done();
                              if(err){
