@@ -54,6 +54,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <body>
 
 <script>
@@ -123,6 +124,7 @@
 </script>
 
 <div ng-app="userApp" ng-controller="userCtrl" ng-init="getUsers()" >
+
     <div id="createuserForm" class="container" style="width: 450px">
        <div class="form-horizontal">
         <div class="panel panel-default">
@@ -173,6 +175,7 @@
     <table style="width:80%;margin:0 auto;" class="table table-striped table-hover">
       <thead>
         <tr>
+        <th><label>Action</label></th>
             <th><label>Sync ID</label></th>
               <th><label>First Name</label></th>
               <th><label>Last Name</label></th>
@@ -183,6 +186,7 @@
        </thead>
        <tbody> 
         <tr ng-repeat="item in userlist.data">
+        <td><i class="material-icons">&#xE150;</i></td>
             <td>{{item.sfid}}</td>
             <td>{{item.firstname}}</td>
             <td>{{item.lastname}}</td>
