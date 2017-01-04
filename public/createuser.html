@@ -39,7 +39,7 @@
         };
     });
     
-    app.controller("userCtrl", function($scope, userAppService) {
+    app.controller("userCtrl", function($scope, $http) {
         $scope.user={};
         $scope.test=function(){
             alert('hello');
@@ -48,12 +48,28 @@
         $scope.createUser = function(userInformation) {
             if(angular.isDefined(userInformation) && userInformation !== null) {
                 alert('started');
-                userAppService.userService('').createUser(userInformation)
+                
+                var config = {
+                    headers : {
+                        'Content-Type': 'application/json'
+                        }
+                }
+                
+                $http.post('/CreateUser',userInformation,config)
+                    .then(function (data, status, headers, config) {
+                        alert('Success');
+                        $scope.PostDataResponse = data;
+                    })
+                    .catch(function (data, status, header, config) {
+                        alert('failed');
+                    });
+                
+                /*userAppService.userService('').createUser(userInformation)
                     .$promise.then(function (response) {
                         alert('Success');
                     }).catch(function (errors){
                         alert('failed');
-                    });
+                    });*/
             }
         };
     });
