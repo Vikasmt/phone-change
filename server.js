@@ -343,25 +343,40 @@ router.post('/CreateUser', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
     
-    var formattedData='INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.name+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')';
-    console.log('formattedQuery:'+formattedData);
+    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\')';
+    console.log('formatted UserManagement Query:'+formattedData);
+    
+    var formattedData='INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\')';
+    console.log('formatted Salesforce.Contact Query:'+formattedData);
     
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
          if (err) console.log(err);
-         conn.query('INSERT INTO UserManagement (firstname, email, phone, password) VALUES (\''+jsonData.name+'\', \''+jsonData.email+'\', 1234567899, \''+jsonData.password+'\')',
+        conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\')  RETURNING id',
              function(err, result) {
-                done(); 
-             if(err){
-                    return res.json({
-                            msgid: 2,
-                            message: err.message});
-                }
-                else{
-                    return res.json({
-                            msgid: 1,
-                            message: 'Success.'});
-                }
-         });
+                done();
+                if(err){
+                        return res.json({
+                                msgid: 2,
+                                message: err.message});
+                    }
+                    else{
+                        var contactid = result.rows[0].id;
+                        conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\')',
+                         function(err, result) {
+                            done();
+                             if(err){
+                                    return res.json({
+                                            msgid: 2,
+                                            message: err.message});
+                                }
+                                else{
+                                    return res.json({
+                                            msgid: 1,
+                                            message: 'Success.'});
+                                }
+                        });
+                    }
+        });
      });
 });
 
