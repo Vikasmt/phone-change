@@ -133,6 +133,8 @@ router.get('/ValidateAdmin', function(req, res) {
               if (err != null || result.rowCount == 0) {
                    return  res.json({
                             userid: -1,
+                            firstname:'',
+                            lastname:'',
                             username:'',
                             msgid: 2,
                             message: 'Invalid email.'});
@@ -145,14 +147,17 @@ router.get('/ValidateAdmin', function(req, res) {
                                if(err != null || result.rowCount == 0){
                                    return  res.json({
                                            userid: -1,
+                                           firstname:'',
+                                           lastname:'',
                                            username:'',
                                            msgid: 3,
                                            message: 'Invalid password.'});
                                }
                                else{
-                                console.log(result.rows[0]);
                                   return res.json({
                                            userid:result.rows[0].sfid,
+                                           firstname:result.rows[0].firstname,
+                                           lastname:result.rows[0].lastname,
                                            username:result.rows[0].username,
                                            msgid: 1,
                                            message: 'Success.'});
