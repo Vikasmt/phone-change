@@ -453,6 +453,42 @@ router.get('/getUsers', function(req, res) {
  });
 });
 
+router.put('/updateStatus'function(req, res){
+    var user_id = req.param('id');
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done){
+          if (err) console.log(err);
+         conn.query(
+             'SELECT *from UserManagement where id='+user_id+'',
+             function(err,result){
+                done();
+                if(err){
+                    res.status(400).json({error: err.message});
+                }
+                else{
+                    var activeStatus = true;
+                    if(result.rows[0].active == null || result.rows[0].active == false)
+                        activeStatus = true;
+                    else
+                        activeStatus = false;
+                    
+                    var queryStr = 'Update UserManagement set active='+activeStatus+' where id='+user_id+'';
+                    console.log(queryStr);
+                    
+                    conn.query(queryStr, 
+                        function(err,result){
+                        done();
+                        if(err){
+                            return res.status(400).json({error: err.message});
+                        }
+                        else{
+                            return res.json(true);
+                        }
+                    });
+                }
+            });
+     });
+});
+
 app.use('/api', router);
 
 app.post('/update', function(req, res) {
