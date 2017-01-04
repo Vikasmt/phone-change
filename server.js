@@ -128,7 +128,7 @@ router.get('/ValidateAdmin', function(req, res) {
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
-             'SELECT firstname, lastname, username,email, phone from UserManagement where email=\''+emailaddress+'\'',
+             'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\'',
              function(err,result){
               if (err != null || result.rowCount == 0) {
                    return  res.json({
@@ -139,7 +139,7 @@ router.get('/ValidateAdmin', function(req, res) {
                 }
                  else{
                        conn.query(
-                            'SELECT id, firstname, lastname, username, email, phone from UserManagement where email=\''+emailaddress+'\' and password=\''+password+'\'',
+                            'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.active, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\' and um.password=\''+password+'\' and um.contactid=sc.id',
                            function(err,result){
                                done();
                                if(err != null || result.rowCount == 0){
@@ -150,8 +150,9 @@ router.get('/ValidateAdmin', function(req, res) {
                                            message: 'Invalid password.'});
                                }
                                else{
+                                console.log(result.rows[0]);
                                   return res.json({
-                                           userid:result.rows[0].id,
+                                           userid:result.rows[0].sfid,
                                            username:result.rows[0].username,
                                            msgid: 1,
                                            message: 'Success.'});
@@ -361,7 +362,7 @@ router.post('/CreateUser', function(req, res) {
                     }
                     else{
                         var contactid = result.rows[0].id;
-                        conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\')',
+                        conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', '+contactid+', 1)',
                          function(err, result) {
                             done();
                              if(err){
