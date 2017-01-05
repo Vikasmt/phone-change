@@ -506,7 +506,7 @@ router.put('/forgotPassword', function(req,res){
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
-             'SELECT id, email, phone, firstname, lastname, mobilephone from UserManagement where email=\''+emailAddress+'\'',
+             'SELECT id, firstname, lastname, username, email, phone from UserManagement where trim(email)=\''+emailAddress+'\'',
              function(err,result){
                 done();
                 if(err){
@@ -514,7 +514,7 @@ router.put('/forgotPassword', function(req,res){
                 }
                 else{
                     var resetPassword = randomstring.generate(12);
-                    var queryStr = 'Update UserManagement set password='+resetPassword+' where email=\''+emailAddress+'\'';
+                    var queryStr = 'Update UserManagement set password=\''+resetPassword+'\' where trim(email)=\''+emailAddress+'\'';
                     console.log(queryStr);
                     
                     conn.query(queryStr, 
