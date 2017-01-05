@@ -8,8 +8,8 @@ var pg = require('pg');
 var emailhost = 'smtp.gmail.com';
 var emailport = 465;
 var emailsecure = true;
-var emailuser = 'suneel@touchoncloud.com';
-var emailpassword = 'chaitanya866';
+var emailuser = 'mercknotification@gmail.com';
+var emailpassword = 'merck@123';
 /************************END*******************************/
 
 
