@@ -18,7 +18,10 @@ var router = express.Router();
 var baseUrl='https://phone-change-con.herokuapp.com/';
 
 router.get('/', function(req, res) { 
-    
+    sendEmail('asdf');
+});
+
+function sendEmail(currentpassword){
     var smtpConfig = {
         host: 'smtp.gmail.com',
         port: 465,
@@ -34,8 +37,8 @@ router.get('/', function(req, res) {
     
     var mailOptions = {
         to: 'sunilsvsnlr@gmail.com',
-        subject: 'Email Test from Nodejs',
-        text: 'test mail from nodejs'
+        subject: 'Email Test from Nodejs:'+currentpassword,
+        text: 'test mail from nodejs'+currentpassword
     };
     
     transporter.sendMail(mailOptions, function(error, info){
@@ -47,7 +50,7 @@ router.get('/', function(req, res) {
             res.json({yo: info.response});
         };
     });
-});
+};
 
 router.get('/getContacts', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
