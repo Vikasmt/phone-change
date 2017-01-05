@@ -9,6 +9,8 @@
   "dependencies": {
     "express": "^4.13.1",
     "body-parser": "^1.13.2",
+    "nodemailer": "^2.6.0",
+    "randomstring": "^1.1.5",
     "pg": "^4.4.0"
   },
   "engines": {

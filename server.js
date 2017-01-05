@@ -1,6 +1,17 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var nodemailer = require('nodemailer');
+var randomstring = require("randomstring");
 var pg = require('pg');
+
+/******************EMAIL Variables*************************/
+var emailhost = 'smtp.gmail.com';
+var emailport = 465;
+var emailsecure = true;
+var emailuser = 'suneel@touchoncloud.com';
+var emailpassword = 'chaitanya866';
+/************************END*******************************/
+
 
 var app = express();
 
@@ -489,6 +500,40 @@ router.put('/updateStatus', function(req, res){
      });
 });
 
+router.put('/forgotPassword', function(req,res){
+    var emailAddress = req.param('email').trim();
+     pg.connect(process.env.DATABASE_URL, function (err, conn, done){
+          if (err) console.log(err);
+         conn.query(
+             'SELECT id, email, phone, firstname, lastname, mobilephone from UserManagement where email='+emailAddress+'',
+             function(err,result){
+                done();
+                if(err){
+                    res.status(400).json({error: 'Email not found.'});
+                }
+                else{
+                    var resetPassword = randomstring.generate(12);
+                    var queryStr = 'Update UserManagement set password='+resetPassword+' where email='+emailAddress+'';
+                    console.log(queryStr);
+                    
+                    conn.query(queryStr, 
+                        function(err,result){
+                        done();
+                        if(err){
+                            return res.status(400).json({error: err.message});
+                        }
+                        else{
+                            var resultStr = sendEmail(emailAddress, resetPassword);
+                            return res.json(resultStr);
+                        }
+                    });
+                    
+                    res.json(result.rows);
+                }
+            });
+     });
+});
+
 app.use('/api', router);
 
 app.post('/update', function(req, res) {
@@ -531,6 +576,37 @@ app.post('/update', function(req, res) {
         );
     });
 });
+
+function sendEmail(toemail, currentpassword){
+    var smtpConfig = {
+        host: emailhost,
+        port: emailport,
+        secure: emailsecure, // use SSL, 
+                      // you can try with TLS, but port is then 587
+        auth: {
+          user: emailuser, // Your email id
+          pass: emailpassword // Your password
+        }
+  };
+    
+    var transporter = nodemailer.createTransport(smtpConfig);
+    
+    var mailOptions = {
+        to: toemail,
+        subject: 'Password Reset',
+        text: 'Your password is successfully reset.\nYour current password: '+currentpassword
+    };
+    
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            console.log(error);
+            return error;
+        }else{
+            console.log('Message sent: ' + info.response);
+            return "true";
+        };
+    });
+};
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
