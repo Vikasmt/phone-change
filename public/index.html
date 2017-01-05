@@ -100,18 +100,18 @@
 	
 	 app.config(function($routeProvider) {
 		$routeProvider
-			.when('/',
+			.when('/', {
 				templateUrl : 'public/index.html',
                 controller  : 'mainCtrl'
             })
-			.when('/createuser',
+			.when('/createuser', {
 				templateUrl : 'public/createuser.html',
                 controller  : 'createCtrl'
             })
-			.when('/userslist',
+			.when('/userslist', {
 				templateUrl : 'public/UsersList.html',
                 controller  : 'userCtrl'
-            })
+            });
 	 });
 	
     var userAppConstants = angular.module("mainApp.constant", []);
