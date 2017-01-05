@@ -21,7 +21,7 @@ router.get('/', function(req, res) {
     sendEmail('asdf');
 });
 
-function sendEmail(currentpassword){
+function sendEmail(toemail, currentpassword){
     var smtpConfig = {
         host: 'smtp.gmail.com',
         port: 465,
@@ -36,18 +36,18 @@ function sendEmail(currentpassword){
     var transporter = nodemailer.createTransport(smtpConfig);
     
     var mailOptions = {
-        to: 'sunilsvsnlr@gmail.com',
-        subject: 'Email Test from Nodejs:'+currentpassword,
-        text: 'test mail from nodejs'+currentpassword
+        to: toemail,
+        subject: 'Password Reset',
+        text: 'Your password is successfully reset.\nYour current password: '+currentpassword
     };
     
     transporter.sendMail(mailOptions, function(error, info){
         if(error){
             console.log(error);
-            res.json(error);
+            return error;
         }else{
             console.log('Message sent: ' + info.response);
-            res.json({yo: info.response});
+            return "true";
         };
     });
 };
