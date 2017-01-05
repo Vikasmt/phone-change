@@ -502,6 +502,7 @@ router.put('/updateStatus', function(req, res){
 
 router.put('/forgotPassword', function(req,res){
     var emailAddress = req.param('email').trim();
+    console.log(emailAddress);
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
@@ -527,8 +528,6 @@ router.put('/forgotPassword', function(req,res){
                             return res.json(resultStr);
                         }
                     });
-                    
-                    res.json(result.rows);
                 }
             });
      });
