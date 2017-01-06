@@ -131,7 +131,7 @@
                 
                 $http.put(updateStatusurl, null, config)
                     .then(function (data, status, headers, config) {
-                        getUsers();
+                        $scope.getUsers();
                     })
                     .catch(function (data, status, header, config) {
                         console.log(data);
