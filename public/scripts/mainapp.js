@@ -57,7 +57,19 @@
             });
     }]);
     
-    myapp.controller("mainCtrl", function($scope, $http, apiUrl) {
-        $scope.message="test";
+    myapp.controller("mainCtrl", function($scope, $http, $state, apiUrl) {
+        $scope.load = function(){
+            $scope.isclicked = false;
+        }
+        
+        $scope.navigatecreateuser = function(){
+            $scope.isclicked = true;
+            $state.go('createuser');
+        }
+        
+        $scope.navigateuserslist = function(){
+            $scope.isclicked = true;
+            $state.go('userlist');
+        }
     });
 })();
