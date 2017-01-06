@@ -154,7 +154,7 @@
                 var updateStatusurl = apiUrl + 'updateUser';
                 console.log(updateStatusurl);
                 
-                $http.post(updateStatusurl, userInfo, config)
+                $http.post(updateStatusurl,userInfo,config)
                     .then(function (data, status, headers, config) {
                         $scope.getUsers();
                     })
