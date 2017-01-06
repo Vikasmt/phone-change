@@ -89,78 +89,16 @@
 
     
 </head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script src="scripts/controllers/createuser.js"></script>
+    
 <body>
 
-<script>
-    var app = angular.module("mainApp", ['ngRoute','mainApp.constant']);
-	var userAppConstants = angular.module('mainApp.constant', []);
-    userAppConstants.constant('apiUrl', 'https://phone-change-con.herokuapp.com/api/');
-    
-    app.controller("createCtrl", function($scope, $http, apiUrl) {
-        $scope.user={};
-        $scope.createUser = function(userInformation) {
-            if(angular.isDefined(userInformation) && userInformation !== null) {
-                var config = {
-                    headers : {
-                        'Content-Type': 'application/json'
-                        }
-                }
-                
-                var createuserurl = apiUrl + 'CreateUser';
-                
-                $http.post(createuserurl,userInformation,config)
-                    .then(function (data, status, headers, config) {
-                        $scope.user={};
-                        alert('Success');
-                    })
-                    .catch(function (data, status, header, config) {
-                        console.log(data);
-                    });
-            }
-        };
-    });
-    
-    
-</script>
-
-<div ng-app="mainApp" ng-controller="createCtrl">
+<div ng-controller="createCtrl">
 <!--index page-->
 <div style="width: 100%;    background: #8460aa;">
 <img src="https://www.merck-cap.com/resource/1478119071000/Images/images/layer_15.png" style="width: 77px;height: 42px;margin: 10px 14px;" />
 </div>
-<!--<div class="row state-overview" style="width: 60%;margin: 65px auto;">
-                            <div class="col-md-6" style="">
-                                <section class="panel" onclick="">
-                                    <div class="symbol yellow" style="float: left;">
-                                        <i class="material-icons">person_add</i>
-                                    </div>
-                                   <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">
-                                       
-                                        <p style="padding: 1em 0;font-size: 1.2em;">Create Users</p>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class=" col-md-6">
-                                 <section class="panel" onclick="">
-                                    <div class="symbol purple" style="float: left;">
-                                        <i class="material-icons">group</i>
-                                    </div>
-                                      <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">
-                                          
-                                        <p style=" padding: 1em 0;font-size: 1.2em;color: rgba(0, 0, 0, 0.87);">List Of Users</p>
-                                    </div>
-                                </section>
-                            </div>
-                          
-                        </div>-->
-
-
-<!--end index page-->
-<!--create users-->
     <div id="createuserForm" class="container" style="width: 450px">
        <div class="form-horizontal">
         <div class="panel panel-default">
@@ -207,43 +145,6 @@
             </div>
             </div>
     </div>
-  <!--end create users-->
-  <!-- users list-->
-  <!--<div>
-<div class="col-md-4" style="margin:0 120px;">
-  <span style="display: inline-block;float: left;line-height: 3em;">User Category :</span>
-  <select class="form-control" style="display: inline-block;float: left;width: 200px;margin: 0 1em;">
-      <option value="1">1</option>
-      <option value="2">2</option>
-  </select>
-  </div>
-    <!--<table style="width:80%;margin:70px auto;" class="table table-striped table-hover">
-      <thead>
-        <tr>
-        <th><label>Action</label></th>
-              <th><label>First Name</label></th>
-              <th><label>Last Name</label></th>
-              <th><label>E-Mail</label></th>
-              <th><label>Phone</label></th>
-              <th><label>Status</label></th>
-              <th><label>Change Status</label></th>
-        </tr>
-       </thead>
-       <tbody> 
-        <tr ng-repeat="item in userlist.data">
-        <td><i class="material-icons">&#xE150;</i></td>
-          
-            <td>{{item.firstname}}</td>
-            <td>{{item.lastname}}</td>
-            <td>{{item.email}}</td>
-            <td>{{item.phone}}</td>
-            <td style="text-align: center;"><i class="material-icons" style="font-size: 1.6em;color: rgba(76, 175, 80, 0.81);margin-left: -25px;">check_box</i></td>
-           <td><a href="javascript:void(0)" class="btn btn-warning" style="background-color: rgba(153, 153, 153, 0.2);border-color: rgba(153, 153, 153, 0.2);">Inactive</a></td>
-        </tr>
-    </tbody>
-    </table>
-    </div>-->
-    <!--end userslist-->
 </div>
 </body>
 </html>
