@@ -98,7 +98,7 @@
     var app = angular.module("mainApp", ['ngRoute','mainApp.constant']);
 	var userAppConstants = angular.module('mainApp.constant', []);
     
-	 app.config(function($routeProvider) {
+	 /*app.config(function($routeProvider) {
 		$routeProvider
 			.when('/', {
 				templateUrl : 'index.html',
@@ -112,55 +112,13 @@
 				templateUrl : 'UsersList.html',
                 controller  : 'userCtrl'
             });
-	 });
+	 });*/
 	
     
     userAppConstants.constant('apiUrl', 'https://phone-change-con.herokuapp.com/api/');
     
     app.controller("mainCtrl", function($scope, $http, apiUrl) {
         $scope.message="test";
-    });
-    
-    app.controller("createCtrl", function($scope, $http, apiUrl) {
-        $scope.user={};
-        $scope.createUser = function(userInformation) {
-            if(angular.isDefined(userInformation) && userInformation !== null) {
-                var config = {
-                    headers : {
-                        'Content-Type': 'application/json'
-                        }
-                }
-                
-                var createuserurl = apiUrl + 'CreateUser';
-                
-                $http.post(createuserurl,userInformation,config)
-                    .then(function (data, status, headers, config) {
-                        alert('Success');
-                    })
-                    .catch(function (data, status, header, config) {
-                        console.log(data);
-                    });
-            }
-        };
-    });
-    
-    app.controller("userCtrl", function($scope, $http, apiUrl) {
-        $scope.getUsers = function () {
-            var getUsersUrl = apiUrl + 'getUsers';
-             var config = {
-                    headers : {
-                        'Content-Type': 'application/json'
-                        }
-                }
-            $http.get(getUsersUrl, config)
-                .then(function (data, status, config) {
-                    $scope.userlist = angular.fromJson(angular.toJson(data));
-                })
-                .catch(function (data, status, config) {
-                    console.log(data);
-                    alert('failed to retreive users list');
-                });
-        };
     });
 </script>
 
@@ -178,7 +136,7 @@
                                     </div>
                                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">
                                        
-                                        <a ng-href="#createuser"> <p style="padding: 1em 0;font-size: 1.2em;">Create Users</p></a>
+                                        <a href="createuser"> <p style="padding: 1em 0;font-size: 1.2em;">Create Users</p></a>
                                     </div>
                                 </section>
                             </div>
@@ -189,12 +147,11 @@
                                     </div>
                                       <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">
                                           
-                                        <a ng-href="#userslist"> <p style=" padding: 1em 0;font-size: 1.2em;color: rgba(0, 0, 0, 0.87);">List Of Users</p></a>
+                                        <a href="userslist"> <p style=" padding: 1em 0;font-size: 1.2em;color: rgba(0, 0, 0, 0.87);">List Of Users</p></a>
                                     </div>
                                 </section>
                             </div>
                         </div>
     </div>
-    <div ng-view></div>
 </body>
 </html>

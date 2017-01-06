@@ -96,14 +96,29 @@
 <body>
 
 <script>
-    var app = angular.module("mainApp");
+    var app = angular.module("mainApp", ['ngRoute','mainApp.constant']);
+	var userAppConstants = angular.module('mainApp.constant', []);
+    userAppConstants.constant('apiUrl', 'https://phone-change-con.herokuapp.com/api/');
     
-    app.factory("userAppService", function($resource, apiUrl){
-         return {
-            userService: function (token) {
-                return $resource(apiUrl, null, {
-                    createUser: { method: "POST", url: apiUrl + "/CreateUser" },
-                });
+    app.controller("createCtrl", function($scope, $http, apiUrl) {
+        $scope.user={};
+        $scope.createUser = function(userInformation) {
+            if(angular.isDefined(userInformation) && userInformation !== null) {
+                var config = {
+                    headers : {
+                        'Content-Type': 'application/json'
+                        }
+                }
+                
+                var createuserurl = apiUrl + 'CreateUser';
+                
+                $http.post(createuserurl,userInformation,config)
+                    .then(function (data, status, headers, config) {
+                        alert('Success');
+                    })
+                    .catch(function (data, status, header, config) {
+                        console.log(data);
+                    });
             }
         };
     });
@@ -111,7 +126,7 @@
     
 </script>
 
-<div ng-controller="createCtrl">
+<div ng-app="mainApp" ng-controller="createCtrl">
 <!--index page-->
 <div style="width: 100%;    background: #8460aa;">
 <img src="https://www.merck-cap.com/resource/1478119071000/Images/images/layer_15.png" style="width: 77px;height: 42px;margin: 10px 14px;" />
