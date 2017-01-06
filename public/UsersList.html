@@ -110,7 +110,11 @@
                 }
             $http.get(getUsersUrl, config)
                 .then(function (data, status, config) {
-                    $scope.userlist = angular.fromJson(angular.toJson(data));
+                    var users = angular.fromJson(angular.toJson(data));
+                    angular.forEach(users.data, function(user){
+                       user.isEdit = false; 
+                    });
+                    $scope.userlist = users.data;
                 })
                 .catch(function (data, status, config) {
                     console.log(data);
@@ -138,6 +142,27 @@
                     });
             }
         };
+        
+        $scope.updateUser = function(userInfo) {
+            if(angular.isDefined(userInfo) && userInfo !== null) {
+                var config = {
+                    headers : {
+                        'Content-Type': 'application/json'
+                        }
+                }
+                
+                var updateStatusurl = apiUrl + 'updateUser';
+                console.log(updateStatusurl);
+                
+                $http.post(updateStatusurl, userInfo, config)
+                    .then(function (data, status, headers, config) {
+                        $scope.getUsers();
+                    })
+                    .catch(function (data, status, header, config) {
+                        console.log(data);
+                    });
+            }
+        };
     });
 </script>
     
@@ -151,8 +176,9 @@
 <div class="col-md-4" style="margin:0 120px;">
   <span style="display: inline-block;float: left;line-height: 3em;">User Category :</span>
   <select class="form-control" style="display: inline-block;float: left;width: 200px;margin: 0 1em;">
-      <option value="1">1</option>
-      <option value="2">2</option>
+      <option value="All">All</option>
+      <option value="Active">Active</option>
+      <option value="InActive">InActive</option>
   </select>
   </div>
     <table style="width:80%;margin:70px auto;" class="table table-striped table-hover">
@@ -168,13 +194,12 @@
         </tr>
        </thead>
        <tbody> 
-        <tr ng-repeat="item in userlist.data">
-        <td><i class="material-icons">&#xE150;</i></td>
-          
-            <td>{{item.firstname}}</td>
-            <td>{{item.lastname}}</td>
-            <td>{{item.email}}</td>
-            <td>{{item.phone}}</td>
+        <tr ng-repeat="item in userlist">
+        <td><i class="material-icons" ng-click="{{item.isEdit = true}}">&#xE150;</i></td>
+            <td><div ng-hide={{item.isEdit === true}}>{{item.firstname}}</div></td>
+            <td><div ng-hide={{item.isEdit === true}}>{{item.lastname}}</div></td>
+            <td><div ng-hide={{item.isEdit === true}}>{{item.email}}</div></td>
+            <td><div ng-hide={{item.isEdit === true}}>{{item.phone}}</div></td>
             <td style="text-align: center;"><i class="material-icons" style="font-size: 1.6em;color: rgba(76, 175, 80, 0.81);margin-left: -25px;">check_box</i></td>
            <td><a href="javascript:void(0)" ng-click="updateStatus(item)" class="btn btn-warning" style="background-color: rgba(153, 153, 153, 0.2);border-color: rgba(153, 153, 153, 0.2);">{{item.active===true ? "Active" : "InActive"}}</a></td>
         </tr>
