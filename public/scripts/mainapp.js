@@ -38,7 +38,7 @@
         $urlRouterProvider.otherwise("/");
         $stateProvider
             .state('home', {
-                url: '/',
+                url: '/home',
                 templateUrl: 'index.html',
                 controller: 'mainCtrl',
                 controllerAs: 'vm'
