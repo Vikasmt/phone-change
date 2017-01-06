@@ -557,19 +557,18 @@ router.post('/updateUserInfo', function(req, res) {
         
         conn.query('SELECT *from UserManagement where id='+user_id+'',
             function(err,result){
-                done();
                 if(err){
                     return res.status(400).json({error: err.message});
                 }
                 else{
-                    var contactId = result.rows[0].contacid;
+                    var contactId = result.rows[0].contacid.trim();
+                    console.log('contactId:'+contactId);
                     
                     var contactQueryStr = 'Update Salesforce.Contact set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email+'\', phone=\''+jsonData.phone+'\' where id='+contactId+'';
                     console.log(contactQueryStr);
                     
                     conn.query(userManagementQueryStr, 
                         function(err,result){
-                            done();
                             if(err){
                                 return res.status(400).json({error: err.message});
                             }
@@ -581,7 +580,7 @@ router.post('/updateUserInfo', function(req, res) {
                                             return res.status(400).json({error: err.message});
                                         }
                                         else{
-                                            return res.json({
+                                            return res.status(200).json({
                                                         msgid: 1,
                                                         message: 'Success.'});
                                         }
