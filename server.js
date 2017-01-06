@@ -546,46 +546,50 @@ router.put('/forgotPassword', function(req,res){
      });
 });
 
-app.use('/api', router);
-
-app.post('/update', function(req, res) {
+app.post('/updateUser', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-        // watch for any connect issues
-        if (err) console.log(err);
-        conn.query(
-            'UPDATE salesforce.Contact SET Phone = $1, MobilePhone = $1 WHERE LOWER(FirstName) = LOWER($2) AND LOWER(LastName) = LOWER($3) AND LOWER(Email) = LOWER($4)',
-            [req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
-            function(err, result) {
-                if (err != null || result.rowCount == 0) {
-                  conn.query('INSERT INTO salesforce.Contact (Phone, MobilePhone, FirstName, LastName, Email) VALUES ($1, $2, $3, $4, $5)',
-                  [req.body.phone.trim(), req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
-                  function(err, result) {
-                    done();
-                    if (err) {
-                        return res.status(400).json({error: err.message});
-                    }
-                    else {
-                        // this will still cause jquery to display 'Record updated!'
-                        // eventhough it was inserted
-                        /*var testResult=JSON.stringify{
-                            port: portnbr,
-                            result: result
-                        })*/
-                        return res.json({port:
-                                app.get('port'),
-                                result: result});
-                    }
-                  });
+        console.log(req.body);
+        var jsonData = req.body;
+        var user_id = jsonData.id;
+        
+        var userManagementQueryStr = 'Update UserManagement set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email+'\', phone=\''+jsonData.phone+'\' where id='+user_id+'';
+        console.log(userManagementQueryStr);
+        
+        conn.query('SELECT *from UserManagement where id='+user_id+'',
+            function(err,result){
+                done();
+                if(err){
+                    return res.status(400).json({error: err.message});
                 }
-                else {
-                    done();
-                    //res.json(result);
-                    return res.json({port:
-                                app.get('port'),
-                                result: result});
+                else{
+                    var contactId = result.rows[0].contacid;
+                    
+                    var contactQueryStr = 'Update Salesforce.Contact set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email+'\', phone=\''+jsonData.phone+'\' where id='+contactId+'';
+                    console.log(contactQueryStr);
+                    
+                    conn.query(userManagementQueryStr, 
+                        function(err,result){
+                            done();
+                            if(err){
+                                return res.status(400).json({error: err.message});
+                            }
+                            else{
+                                conn.query(contactQueryStr, 
+                                    function(err,result){
+                                        done();
+                                        if(err){
+                                            return res.status(400).json({error: err.message});
+                                        }
+                                        else{
+                                            return res.json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                        }
+                                });
+                            }
+                    });
                 }
-            }
-        );
+            });
     });
 });
 
@@ -619,6 +623,8 @@ function sendEmail(toemail, currentpassword){
         };
     });
 };
+
+app.use('/api', router);
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
