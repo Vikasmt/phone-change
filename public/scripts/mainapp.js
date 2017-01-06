@@ -38,19 +38,19 @@
         $urlRouterProvider.otherwise("/");
         $stateProvider
             .state('home', {
-                url: 'Home',
+                url: '/home',
                 templateUrl: 'index.html',
                 controller: 'mainCtrl',
                 controllerAs: 'vm'
             })
             .state('createuser', {
-                url: 'CreateUser',
+                url: '/CreateUser',
                 templateUrl: 'createuser.html',
                 controller: 'createCtrl',
                 controllerAs: 'vm'
             })
             .state('userlist', {
-                url: 'Users',
+                url: '/Users',
                 templateUrl: 'UsersList.html',
                 controller: 'userCtrl',
                 controllerAs: 'vm'
