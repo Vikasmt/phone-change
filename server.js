@@ -561,7 +561,7 @@ router.post('/updateUserInfo', function(req, res) {
                     return res.status(400).json({error: err.message});
                 }
                 else{
-                    var contactId = result.rows[0].contacid.trim();
+                    var contactId = result.rows[0].contactid;
                     console.log('contactId:'+contactId);
                     
                     var contactQueryStr = 'Update Salesforce.Contact set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email+'\', phone=\''+jsonData.phone+'\' where id='+contactId+'';
