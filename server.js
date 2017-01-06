@@ -546,7 +546,7 @@ router.put('/forgotPassword', function(req,res){
      });
 });
 
-app.post('/updateUser', function(req, res) {
+router.post('/updateUser', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         console.log(req.body);
         var jsonData = req.body;
