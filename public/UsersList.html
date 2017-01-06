@@ -195,11 +195,11 @@
        </thead>
        <tbody> 
         <tr ng-repeat="item in userlist">
-        <td><i class="material-icons" ng-click="{{item.isEdit = true}}">&#xE150;</i></td>
-            <td><div ng-hide={{item.isEdit === true}}>{{item.firstname}}</div></td>
-            <td><div ng-hide={{item.isEdit === true}}>{{item.lastname}}</div></td>
-            <td><div ng-hide={{item.isEdit === true}}>{{item.email}}</div></td>
-            <td><div ng-hide={{item.isEdit === true}}>{{item.phone}}</div></td>
+        <td><i class="material-icons" ng-click="item.isEdit = true">&#xE150;</i></td>
+            <td><div ng-hide="item.isEdit === true">{{item.firstname}}</div></td>
+            <td><div ng-hide=item.isEdit === true>{{item.lastname}}</div></td>
+            <td><div ng-hide=item.isEdit === true>{{item.email}}</div></td>
+            <td><div ng-hide=item.isEdit === true>{{item.phone}}</div></td>
             <td style="text-align: center;"><i class="material-icons" style="font-size: 1.6em;color: rgba(76, 175, 80, 0.81);margin-left: -25px;">check_box</i></td>
            <td><a href="javascript:void(0)" ng-click="updateStatus(item)" class="btn btn-warning" style="background-color: rgba(153, 153, 153, 0.2);border-color: rgba(153, 153, 153, 0.2);">{{item.active===true ? "Active" : "InActive"}}</a></td>
         </tr>
