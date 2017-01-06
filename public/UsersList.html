@@ -112,6 +112,10 @@
                 .then(function (data, status, config) {
                     var users = angular.fromJson(angular.toJson(data));
                     angular.forEach(users.data, function(user){
+                       user.firstname = user.firstname.trim();
+                       user.lastname = user.lastname.trim();
+                       user.email = user.email.trim();
+                       user.phone = user.phone.trim();
                        user.isEdit = false; 
                     });
                     $scope.userlist = users.data;
