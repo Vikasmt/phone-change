@@ -1,6 +1,6 @@
 (function(){
 var app = angular.module("mainApp");
-app.controller("createCtrl", function($scope, $http, apiUrl) {
+app.controller("createCtrl", function($scope, $http, $state, apiUrl) {
         $scope.user={};
         $scope.createUser = function(userInformation) {
             if(angular.isDefined(userInformation) && userInformation !== null) {
@@ -15,7 +15,7 @@ app.controller("createCtrl", function($scope, $http, apiUrl) {
                 $http.post(createuserurl,userInformation,config)
                     .then(function (data, status, headers, config) {
                         $scope.user={};
-                        alert('Success');
+                        $state.go('home');
                     })
                     .catch(function (data, status, header, config) {
                         console.log(data);
