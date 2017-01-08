@@ -1,6 +1,9 @@
 (function(){
 var app = angular.module("mainApp");
 app.controller("userCtrl", function($scope, $http, apiUrl) {
+        $scope.filteredUserlist = [];
+        $scope.status = {'All','Active','InActive'};
+    
         $scope.getUsers = function () {
             var getUsersUrl = apiUrl + 'getUsers';
              var config = {
@@ -18,7 +21,8 @@ app.controller("userCtrl", function($scope, $http, apiUrl) {
                        user.phone = user.phone.trim();
                        user.isEdit = false; 
                     });
-                    $scope.userlist = users.data;
+                    $scope.userlist = angular.copy(users.data);
+                    $scope.filteredUserlist = angular.copy(users.data);
                 })
                 .catch(function (data, status, config) {
                     console.log(data);
