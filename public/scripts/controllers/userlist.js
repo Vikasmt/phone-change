@@ -1,8 +1,7 @@
 (function(){
 var app = angular.module("mainApp");
 app.controller("userCtrl", function($scope, $http, apiUrl) {
-        $scope.filteredUserlist = [];
-        $scope.status = {'All','Active','InActive'};
+        $scope.status = [{"status": "All"},{"status": "Active"},{"status": "InActive"}]
     
         $scope.getUsers = function () {
             var getUsersUrl = apiUrl + 'getUsers';
@@ -22,7 +21,6 @@ app.controller("userCtrl", function($scope, $http, apiUrl) {
                        user.isEdit = false; 
                     });
                     $scope.userlist = angular.copy(users.data);
-                    $scope.filteredUserlist = angular.copy(users.data);
                 })
                 .catch(function (data, status, config) {
                     console.log(data);
