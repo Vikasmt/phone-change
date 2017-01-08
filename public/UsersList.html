@@ -101,7 +101,7 @@
 <div class="col-md-4" style="margin:0 120px;">
   <span style="display: inline-block;float: left;line-height: 3em;">User Category :</span>
   <select class="form-control" style="display: inline-block;float: left;width: 200px;margin: 0 1em;">
-      <option ng-repeat="item in statuslist" value={{item.status}} ng-selected="selectedStatus" />
+      <option ng-repeat="item in statuslist" ng-selected="selectedStatus">{{item.status}}</option>
   </select>
 {{selectedStatus}}
   </div>
@@ -119,7 +119,8 @@
        </thead>
        <tbody> 
            {{selectedStatus}}
-        <tr ng-repeat="item in userlist | filter: (selectedStatus==='All' ? ({active : true} || {active : false}) : selectedStatus==='InActive' ? {active : false} : {active : true}">
+        <!--<tr ng-repeat="item in userlist | filter: (selectedStatus==='All' ? ({active : true} || {active : false}) : selectedStatus==='InActive' ? {active : false} : {active : true}">-->
+        <tr ng-repeat="item in userlist">
         <td><i class="material-icons" ng-click="item.isEdit = true">&#xE150;</i></td>
             <td>
                 <div ng-hide="item.isEdit === true">{{item.firstname}}</div>
