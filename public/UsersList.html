@@ -90,6 +90,7 @@
     
 </head>
     <script src="scripts/controllers/userlist.js"></script>
+    <script src="scripts/mainapp.js"></script>
 <body>
     
 <div ng-controller="userCtrl" ng-init="getUsers()" >
@@ -147,6 +148,7 @@
            <td><a href="javascript:void(0)" ng-click="updateStatus(item)" class="btn btn-warning" style="background-color: rgba(153, 153, 153, 0.2);border-color: rgba(153, 153, 153, 0.2);">{{item.active===true ? "Active" : "InActive"}}</a></td>
             <td ng-hide="item.isEdit === false">
                 <button class="btn btn-raised btn-success btn-primary" ng-click="updateUser(item)">Update</button>
+                <button class="btn btn-raised btn-success btn-primary" ng-click="navigateuserslist()">Cancel</button>
             </td>
         </tr>
     </tbody>
