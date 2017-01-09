@@ -1,6 +1,17 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var nodemailer = require('nodemailer');
+var randomstring = require("randomstring");
 var pg = require('pg');
+
+/******************EMAIL Variables*************************/
+var emailhost = 'smtp.gmail.com';
+var emailport = 465;
+var emailsecure = true;
+var emailuser = 'mercknotification@gmail.com';
+var emailpassword = 'merck@123';
+/************************END*******************************/
+
 
 var app = express();
 
@@ -372,36 +383,47 @@ router.post('/CreateUser', function(req, res) {
     
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
          if (err) console.log(err);
-        conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\')  RETURNING id',
-             function(err, result) {
-                if(err){
-                        return res.json({
-                                msgid: 2,
-                                message: err.message});
-                    }
-                    else{
-                        var contactid = result.rows[0].id;
-                        console.log('contactid: '+contactid);
-                        
-                        var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\')';
-                        console.log('formatted UserManagement Query:'+formattedData);
-                        
-                        conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\',true)',
+        
+        conn.query(
+             'SELECT count(*) from UserManagement where trim(email)=\''+jsonData.email.trim()+'\'',
+             function(err, result){
+                done();
+                if(result.rows[0].count > 0){
+                    res.status(400).json({error: 'Email already exist.'});
+                }
+                 else{
+                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\')  RETURNING id',
                          function(err, result) {
-                            done();
-                             if(err){
+                            if(err){
                                     return res.json({
                                             msgid: 2,
                                             message: err.message});
                                 }
                                 else{
-                                    return res.json({
-                                            msgid: 1,
-                                            message: 'Success.'});
+                                    var contactid = result.rows[0].id;
+                                    console.log('contactid: '+contactid);
+
+                                    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\')';
+                                    console.log('formatted UserManagement Query:'+formattedData);
+
+                                    conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\',true)',
+                                     function(err, result) {
+                                        done();
+                                         if(err){
+                                                return res.json({
+                                                        msgid: 2,
+                                                        message: err.message});
+                                            }
+                                            else{
+                                                return res.json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                            }
+                                    });
                                 }
-                        });
-                    }
-        });
+                    });
+                 }
+             });
      });
 });
 
@@ -489,48 +511,119 @@ router.put('/updateStatus', function(req, res){
      });
 });
 
-app.use('/api', router);
+router.put('/forgotPassword', function(req,res){
+    var emailAddress = req.param('email').trim();
+    console.log(emailAddress);
+     pg.connect(process.env.DATABASE_URL, function (err, conn, done){
+          if (err) console.log(err);
+         conn.query(
+             'SELECT id, firstname, lastname, username, email, phone from UserManagement where trim(email)=\''+emailAddress+'\'',
+             function(err,result){
+                done();
+                if(err){
+                    res.status(400).json({error: 'Email not found.'});
+                }
+                else{
+                    var resetPassword = randomstring.generate(12);
+                    var queryStr = 'Update UserManagement set password=\''+resetPassword+'\' where trim(email)=\''+emailAddress+'\'';
+                    console.log(queryStr);
+                    
+                    conn.query(queryStr, 
+                        function(err,result){
+                        done();
+                        if(err){
+                            return res.status(400).json({error: err.message});
+                        }
+                        else{
+                            var resultStr = sendEmail(emailAddress, resetPassword);
+                            return res.json({
+                                            msgid: 1,
+                                            message: 'Success.'});
+                        }
+                    });
+                }
+            });
+     });
+});
 
-app.post('/update', function(req, res) {
+router.post('/updateUserInfo', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-        // watch for any connect issues
-        if (err) console.log(err);
-        conn.query(
-            'UPDATE salesforce.Contact SET Phone = $1, MobilePhone = $1 WHERE LOWER(FirstName) = LOWER($2) AND LOWER(LastName) = LOWER($3) AND LOWER(Email) = LOWER($4)',
-            [req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
-            function(err, result) {
-                if (err != null || result.rowCount == 0) {
-                  conn.query('INSERT INTO salesforce.Contact (Phone, MobilePhone, FirstName, LastName, Email) VALUES ($1, $2, $3, $4, $5)',
-                  [req.body.phone.trim(), req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
-                  function(err, result) {
-                    done();
-                    if (err) {
-                        return res.status(400).json({error: err.message});
-                    }
-                    else {
-                        // this will still cause jquery to display 'Record updated!'
-                        // eventhough it was inserted
-                        /*var testResult=JSON.stringify{
-                            port: portnbr,
-                            result: result
-                        })*/
-                        return res.json({port:
-                                app.get('port'),
-                                result: result});
-                    }
-                  });
+        console.log(req.body);
+        var jsonData = req.body;
+        var user_id = jsonData.id;
+        
+        var userManagementQueryStr = 'Update UserManagement set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email+'\', phone=\''+jsonData.phone+'\' where id='+user_id+'';
+        console.log(userManagementQueryStr);
+        
+        conn.query('SELECT *from UserManagement where id='+user_id+'',
+            function(err,result){
+                if(err){
+                    return res.status(400).json({error: err.message});
                 }
-                else {
-                    done();
-                    //res.json(result);
-                    return res.json({port:
-                                app.get('port'),
-                                result: result});
+                else{
+                    var contactId = result.rows[0].contactid;
+                    console.log('contactId:'+contactId);
+                    
+                    var contactQueryStr = 'Update Salesforce.Contact set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email+'\', phone=\''+jsonData.phone+'\' where id='+contactId+'';
+                    console.log(contactQueryStr);
+                    
+                    conn.query(userManagementQueryStr, 
+                        function(err,result){
+                            if(err){
+                                return res.status(400).json({error: err.message});
+                            }
+                            else{
+                                conn.query(contactQueryStr, 
+                                    function(err,result){
+                                        done();
+                                        if(err){
+                                            return res.status(400).json({error: err.message});
+                                        }
+                                        else{
+                                            return res.status(200).json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                        }
+                                });
+                            }
+                    });
                 }
-            }
-        );
+            });
     });
 });
+
+function sendEmail(toemail, currentpassword){
+    var smtpConfig = {
+        host: emailhost,
+        port: emailport,
+        secure: emailsecure, // use SSL, 
+                      // you can try with TLS, but port is then 587
+        auth: {
+          user: emailuser, // Your email id
+          pass: emailpassword // Your password
+        }
+  };
+    
+    var transporter = nodemailer.createTransport(smtpConfig);
+    
+    var mailOptions = {
+        to: toemail,
+        subject: 'Password Reset',
+        text: 'Your password is successfully reset.\nYour current password: '+currentpassword
+    };
+    
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            console.log(error);
+            return error;
+        }else{
+            console.log('Message sent: ' + info.response);
+            return "true";
+        };
+    });
+};
+
+app.use('/api', router);
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
