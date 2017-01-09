@@ -1,7 +1,7 @@
 (function(){
 var app = angular.module("mainApp");
 app.controller("userCtrl", function($scope, $http, apiUrl) {
-        $scope.status = [{"status": "All"},{"status": "Active"},{"status": "InActive"}]
+        $scope.statuslist = [{"status": "All"},{"status": "Active"},{"status": "InActive"}]
     
         $scope.getUsers = function () {
             var getUsersUrl = apiUrl + 'getUsers';
