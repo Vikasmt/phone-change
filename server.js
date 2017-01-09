@@ -8,8 +8,8 @@ var pg = require('pg');
 var emailhost = 'smtp.gmail.com';
 var emailport = 465;
 var emailsecure = true;
-var emailuser = 'mercknotification@gmail.com';
-var emailpassword = 'merck@123';
+var emailuser = 'fmanotify@gmail.com';
+var emailpassword = 'mttl@123';
 /************************END*******************************/
 
 
