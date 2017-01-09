@@ -89,16 +89,7 @@
     
 </head>
     <script src="scripts/controllers/userlist.js"></script>
-    <script>
-        angular.module('PopupDemo').controller('PopupDemoCont', ['$scope','$modal',function ($scope, $modal) {
-        $scope.open = function () {
-        console.log('opening pop up');
-        var modalInstance = $modal.open({
-        templateUrl: 'popup.html',
-        });
-        }
-        }]);
-    </script>    
+        
 
 <body ng-app="PopupDemo">
 <div ng-controller="PopupDemoCont">
@@ -123,7 +114,7 @@
       <thead>
         <tr>
               <th><label>Action</label></th>
-              <th><label>Action 1</label></th>
+              
               <th><label>First Name</label></th>
               <th><label>Last Name</label></th>
               <th><label>E-Mail</label></th>
@@ -137,7 +128,7 @@
         <!--<tr ng-repeat="item in userlist | filter: (selectedStatus==='All' ? ({active : true} || {active : false}) : selectedStatus==='InActive' ? {active : false} : {active : true}">-->
         <tr ng-repeat="item in userlist">
         <td><i class="material-icons" ng-click="item.isEdit = true">&#xE150;</i></td>
-            <td><i class="material-icons" ng-click="open()">&#xE150;</i></td>
+            
             <td>
                 <div ng-hide="item.isEdit === true">{{item.firstname}}</div>
                 <div ng-hide="item.isEdit === false">
