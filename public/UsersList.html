@@ -83,173 +83,25 @@
     color: #fff;
     font-size: 5em;
 }
-
     </style>
 
 
     
 </head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="scripts/controllers/userlist.js"></script>
 <body>
-
-<script>
-    var app = angular.module("userApp", ['ngResource','userApp.constant']);
-    var userAppConstants = angular.module("userApp.constant", []);
     
-    app.config(['$resourceProvider', function ($resourceProvider) {
-            // Don't strip trailing slashes from calculated URLs
-            $resourceProvider.defaults.stripTrailingSlashes = false;
-        }]);
-    
-    userAppConstants.constant('apiUrl', 'https://phone-change-con.herokuapp.com/api/');
-    
-    app.factory("userAppService", function($resource, apiUrl){
-         return {
-            userService: function (token) {
-                return $resource(apiUrl, null, {
-                    createUser: { method: "POST", url: apiUrl + "/CreateUser" },
-                });
-            }
-        };
-    });
-    
-    app.controller("userCtrl", function($scope, $http, apiUrl) {
-        $scope.user={};
-        $scope.test=function(){
-            alert('hello');
-        }
-        $scope.createUser = function(userInformation) {
-            if(angular.isDefined(userInformation) && userInformation !== null) {
-                var config = {
-                    headers : {
-                        'Content-Type': 'application/json'
-                        }
-                }
-                
-                var createuserurl = apiUrl + 'CreateUser';
-                
-                $http.post(createuserurl,userInformation,config)
-                    .then(function (data, status, headers, config) {
-                        alert('Success');
-                        getUsers();
-                    })
-                    .catch(function (data, status, header, config) {
-                        console.log(data);
-                    });
-            }
-        };
-        
-        $scope.getUsers = function () {
-            var getUsersUrl = apiUrl + 'getUsers';
-             var config = {
-                    headers : {
-                        'Content-Type': 'application/json'
-                        }
-                }
-            $http.get(getUsersUrl, config)
-                .then(function (data, status, config) {
-                    $scope.userlist = angular.fromJson(angular.toJson(data));
-                })
-                .catch(function (data, status, config) {
-                    console.log(data);
-                    alert('failed to retreive users list');
-                });
-        };
-    });
-</script>
-
-<div ng-app="userApp" ng-controller="userCtrl" ng-init="getUsers()" >
+<div ng-controller="userCtrl" ng-init="getUsers()" >
 <!--index page-->
 <div style="width: 100%;    background: #8460aa;">
 <img src="https://www.merck-cap.com/resource/1478119071000/Images/images/layer_15.png" style="width: 77px;height: 42px;margin: 10px 14px;" />
 </div>
-<!--<div class="row state-overview" style="width: 60%;margin: 65px auto;">
-                            <div class="col-md-6" style="">
-                                <section class="panel" onclick="">
-                                    <div class="symbol yellow" style="float: left;">
-                                        <i class="material-icons">person_add</i>
-                                    </div>
-                                   <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">
-                                       
-                                        <p style="padding: 1em 0;font-size: 1.2em;">Create Users</p>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class=" col-md-6">
-                                 <section class="panel" onclick="">
-                                    <div class="symbol purple" style="float: left;">
-                                        <i class="material-icons">group</i>
-                                    </div>
-                                      <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">
-                                          
-                                        <p style=" padding: 1em 0;font-size: 1.2em;color: rgba(0, 0, 0, 0.87);">List Of Users</p>
-                                    </div>
-                                </section>
-                            </div>
-                          
-                        </div>-->
-
-
-<!--end index page-->
-<!--create users-->
-    <!--<div id="createuserForm" class="container" style="width: 450px">
-       <div class="form-horizontal">
-        <div class="panel panel-default">
-                <div class="panel-heading">
-                
-                    <h3 class="panel-title"><i class="material-icons">&#xE853</i><span>Create User</span></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" ng-model="user.firstname" id="firstName" placeholder="Enter first name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" ng-model="user.lastname" placeholder="Enter lastname" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Enter email address" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" class="form-control" id="phone" ng-model="user.phone" placeholder="Enter phone number" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="tel" class="form-control" id="password" ng-model="user.password" placeholder="Enter password" required>
-                    </div>
-                </div>
-                <div class="panel-footer">
-                    <div id="message" class="alert alert-info" role="alert" style="display: none;">
-                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                        <span id="messageMessage"></span>
-                    </div>
-                    <div id="error" class="alert alert-danger" role="alert" style="display: none;">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                        <span class="sr-only">Error:</span>
-                        <span id="errorMessage"></span>
-                    </div>
-                    <div class="btn-div">
-                    <button class="btn btn-raised btn-success btn-primary" ng-click="createUser(user)">Create User</button>
-                    </div>
-                </div>
-            </div>
-            </div>
-    </div>-->
-  <!--end create users-->
-  <!-- users list-->
   <div>
 <div class="col-md-4" style="margin:0 120px;">
-  <span style="display: inline-block;float: left;line-height: 3em;">User Category :</span>
+  <!--<span style="display: inline-block;float: left;line-height: 3em;">User Category :</span>
   <select class="form-control" style="display: inline-block;float: left;width: 200px;margin: 0 1em;">
-      <option value="1">1</option>
-      <option value="2">2</option>
-  </select>
+      <option ng-repeat="item in statuslist" ng-selected="selectedStatus">{{item.status}}</option>
+  </select>-->
   </div>
     <table style="width:80%;margin:70px auto;" class="table table-striped table-hover">
       <thead>
@@ -264,20 +116,43 @@
         </tr>
        </thead>
        <tbody> 
-        <tr ng-repeat="item in userlist.data">
-        <td><i class="material-icons">&#xE150;</i></td>
-          
-            <td>{{item.firstname}}</td>
-            <td>{{item.lastname}}</td>
-            <td>{{item.email}}</td>
-            <td>{{item.phone}}</td>
+           {{selectedStatus}}
+        <!--<tr ng-repeat="item in userlist | filter: (selectedStatus==='All' ? ({active : true} || {active : false}) : selectedStatus==='InActive' ? {active : false} : {active : true}">-->
+        <tr ng-repeat="item in userlist">
+        <td><i class="material-icons" ng-click="item.isEdit = true">&#xE150;</i></td>
+            <td>
+                <div ng-hide="item.isEdit === true">{{item.firstname}}</div>
+                <div ng-hide="item.isEdit === false">
+                    <input type="text" id="firstname" ng-model="item.firstname" placeholder="Enter firstname" required>
+                </div>
+            </td>
+            <td>
+                <div ng-hide="item.isEdit === true">{{item.lastname}}</div>
+                <div ng-hide="item.isEdit === false">
+                    <input type="text" id="lastname" ng-model="item.lastname" placeholder="Enter lastname" required>
+                </div>
+            </td>
+            <td>
+                <div ng-hide="item.isEdit === true">{{item.email}}</div>
+                <div ng-hide="item.isEdit === false">
+                    <input type="email" id="email" ng-model="item.email" placeholder="Enter email" required>
+                </div>
+            </td>
+            <td>
+                <div ng-hide="item.isEdit === true">{{item.phone}}</div>
+                <div ng-hide="item.isEdit === false">
+                    <input type="text" id="phone" ng-model="item.phone" placeholder="Enter phone" required  ng-maxlength="10">
+                </div>
+            </td>
             <td style="text-align: center;"><i class="material-icons" style="font-size: 1.6em;color: rgba(76, 175, 80, 0.81);margin-left: -25px;">check_box</i></td>
-           <td><a href="javascript:void(0)" class="btn btn-warning" style="background-color: rgba(153, 153, 153, 0.2);border-color: rgba(153, 153, 153, 0.2);">Inactive</a></td>
+           <td><a href="javascript:void(0)" ng-click="updateStatus(item)" class="btn btn-warning" style="background-color: rgba(153, 153, 153, 0.2);border-color: rgba(153, 153, 153, 0.2);">{{item.active===true ? "Active" : "InActive"}}</a></td>
+            <td ng-hide="item.isEdit === false">
+                <button class="btn btn-raised btn-success btn-primary" ng-click="updateUser(item)">Update</button>
+            </td>
         </tr>
     </tbody>
     </table>
     </div>
-    <!--end userslist-->
 </div>
 </body>
 </html>
