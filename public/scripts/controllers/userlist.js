@@ -69,16 +69,5 @@ app.controller("userCtrl", function($scope, $http, apiUrl) {
                     });
             }
         };
-        $scope.canceluser = function(userInfo) {
-            if(angular.isDefined(userInfo) && userInfo !== null) {
-                var config = {
-                    headers : {
-                        'Content-Type': 'application/json'
-                        }
-                }
-                $scope.getUsers();
-
-            }
-        };
     });    
 })();
