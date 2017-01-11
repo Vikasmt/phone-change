@@ -609,8 +609,8 @@ function sendEmail(toemail, currentpassword){
     var mailOptions = {
         to: toemail,
         subject: 'FMA - Finished Reset Password',
-        text: 'Merck feedback managemant app recently received a request to reset the password for your user.\Please use this current password to login:'+currentpassword,
-        text: 'Thanks'
+        text: 'Merck feedback managemant app recently received a request to reset the password for your user.\Please use this current password to login:'+currentpassword
+        
     };
     
     transporter.sendMail(mailOptions, function(error, info){
