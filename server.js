@@ -609,7 +609,7 @@ function sendEmail(toemail, currentpassword){
     var mailOptions = {
         to: toemail,
         subject: 'FMA - Finished Reset Password',
-        text: '<html> Merck feedback managemant app recently received a request to reset the password.\n\nPlease use this current password to login: <b>'+currentpassword+'</b> \n\n Thanks </html>'
+        text: 'Merck Feedback Managemant App recently received a request to reset the password.\n\nPlease use this current password to login: '+currentpassword+' \n\n Thanks'
         
     };
     
