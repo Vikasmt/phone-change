@@ -1,6 +1,6 @@
 (function(){
 var app = angular.module("mainApp");
-app.controller("createCtrl", function($scope, $http, $state, apiUrl) {
+app.controller("createCtrl", function($scope, $http, $window, apiUrl) {
         $scope.user={};
         $scope.createUser = function(userInformation) {
             if(angular.isDefined(userInformation) && userInformation !== null) {
@@ -15,7 +15,7 @@ app.controller("createCtrl", function($scope, $http, $state, apiUrl) {
                 $http.post(createuserurl,userInformation,config)
                     .then(function (data, status, headers, config) {
                         $scope.user={};
-                        $state.go('home');
+                        $window.location.href = "https://phone-change-con.herokuapp.com";
                     })
                     .catch(function (data, status, header, config) {
                         console.log(data);
