@@ -317,7 +317,7 @@ router.post('/insertCase', function(req, res) {
         { insertQueryData += 'Status,'; valuesData += '\'' + jsonData.Status + '\'' + ','; }
         
         if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
-        { insertQueryData += 'contact,'; valuesData += '\'' + jsonData.userid + '\'' + ','; }
+        { insertQueryData += 'fma_loginuserid__c,'; valuesData += '\'' + jsonData.userid + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'userid should not be empty.'});}
 
         if (jsonData.username !== undefined && jsonData.username !== null && jsonData.username !== "null" && jsonData.username.length > 0)
