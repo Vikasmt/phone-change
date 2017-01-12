@@ -361,7 +361,7 @@ router.get('/getProducts', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT Administration__c,Data_Transfer__c,Dosage_Form__c,Drug_Substance__c,E_Device_used_with__c,Product_Description__c,Product_Type__c,Quality_Contact_Notified__c,Serial_Batch_code__c,Software_Version__c,Sub_Category__c FROM salesforce.FMA_Product__c WHERE Product_Type__c = '+productType+'',
+            'SELECT Administration__c,Data_Transfer__c,Dosage_Form__c,Drug_Substance__c,E_Device_used_with__c,Product_Description__c,Product_Type__c,Quality_Contact_Notified__c,Serial_Batch_code__c,Software_Version__c,Sub_Category__c FROM salesforce.FMA_Product__c',
             function(err,result){
                 done();
                 if(err){
