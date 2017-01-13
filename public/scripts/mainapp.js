@@ -47,7 +47,7 @@
                 url: '/CreateUser',
                 templateUrl: 'createuser.html',
                 controller: 'createCtrl',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
                 params: {
                     'userdata': undefined,
                     'mode': undefined
