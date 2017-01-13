@@ -5,6 +5,7 @@ app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
         $scope.usersMainList = [];
     
         $scope.getUsers = function () {
+            $scope.selectedOption = "All";
             var getUsersUrl = apiUrl + 'getUsers';
              var config = {
                     headers : {
