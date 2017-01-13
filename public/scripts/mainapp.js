@@ -48,6 +48,10 @@
                 templateUrl: 'createuser.html',
                 controller: 'createCtrl',
                 controllerAs: 'vm'
+                params: {
+                    'userdata': undefined,
+                    'mode': undefined
+                }
             })
             .state('userlist', {
                 url: '/Users',

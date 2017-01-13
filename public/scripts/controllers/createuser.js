@@ -1,7 +1,13 @@
 (function(){
 var app = angular.module("mainApp");
-app.controller("createCtrl", function($scope, $http, $window, apiUrl) {
+app.controller("createCtrl", function($scope, $http, $state, $stateParams, apiUrl) {
         $scope.user={};
+        
+        $scope.bindParameters = function(){
+            $scope.user = angular.isDefined($stateParams.userdata) ? $stateParams.userdata : {};
+            $scope.mode = angular.isDefined($stateParams.mode) ? $stateParams.mode : 'C';
+        }
+    
         $scope.createUser = function(userInformation) {
             if(angular.isDefined(userInformation) && userInformation !== null) {
                 var config = {
@@ -10,12 +16,13 @@ app.controller("createCtrl", function($scope, $http, $window, apiUrl) {
                         }
                 }
                 
-                var createuserurl = apiUrl + 'CreateUser';
+                var createuserurl = apiUrl + $scope.mode==='E'? 'updateUserInfo' : 'CreateUser';
+                console.log(createuserurl);
                 
                 $http.post(createuserurl,userInformation,config)
                     .then(function (data, status, headers, config) {
                         $scope.user={};
-                        $window.location.href = "https://phone-change-con.herokuapp.com";
+                        $state.go('userlist');
                     })
                     .catch(function (data, status, header, config) {
                         console.log(data);

@@ -94,7 +94,7 @@
     
 <body>
 
-<div ng-controller="createCtrl">
+<div ng-controller="createCtrl" ng-init="bindParameters()">
 <!--index page-->
 
     <div id="createuserForm" class="container" style="width: 450px">
@@ -137,7 +137,7 @@
                         <span id="errorMessage"></span>
                     </div>
                     <div class="btn-div">
-                    <button class="btn btn-raised btn-success btn-primary" ng-click="createUser(user)">Create User</button>
+                        <button class="btn btn-raised btn-success btn-primary" ng-click="createUser(user)">Create User</button>
                     </div>
                 </div>
             </div>

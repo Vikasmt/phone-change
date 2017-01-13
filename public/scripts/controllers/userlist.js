@@ -1,6 +1,6 @@
 (function(){
 var app = angular.module("mainApp");
-app.controller("userCtrl", function($scope, $http, apiUrl) {
+app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
         $scope.statuslist = [{"status": "All"},{"status": "Active"},{"status": "InActive"}]
     
         $scope.getUsers = function () {
@@ -27,6 +27,10 @@ app.controller("userCtrl", function($scope, $http, apiUrl) {
                     alert('failed to retreive users list');
                 });
         };
+    
+        $scope.redirectToEdit = function(userInfo){
+            $state.go('createuser', {'userdata':userInfo, 'mode':'E'});
+        }
         
         $scope.updateStatus = function(userInfo) {
             if(angular.isDefined(userInfo) && userInfo !== null) {
