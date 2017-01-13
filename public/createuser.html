@@ -121,7 +121,7 @@
                         <label for="phone">Phone</label>
                         <input type="text" class="form-control" id="phone" ng-model="user.phone" placeholder="Enter phone number" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-hide="mode==='E'">
                         <label for="password">Password</label>
                         <input type="text" class="form-control" id="password" ng-model="user.password" placeholder="Enter password" required>
                     </div>
