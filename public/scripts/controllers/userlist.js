@@ -1,7 +1,8 @@
 (function(){
 var app = angular.module("mainApp");
 app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
-        $scope.statuslist = [{"status": "All"},{"status": "Active"},{"status": "InActive"}]
+        $scope.userlist = [];
+        $scope.usersMainList = [];
     
         $scope.getUsers = function () {
             var getUsersUrl = apiUrl + 'getUsers';
@@ -21,6 +22,7 @@ app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
                        user.isEdit = false; 
                     });
                     $scope.userlist = angular.copy(users.data);
+                    $scope.usersMainList = angular.copy(users.data);
                 })
                 .catch(function (data, status, config) {
                     console.log(data);
@@ -73,5 +75,24 @@ app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
                     });
             }
         };
+    
+        $scope.filterUsers = function(option){
+            $scope.userlist = [];
+            if(option==="All"){
+                $scope.userlist = angular.copy($scope.usersMainList);
+            }else if(option==="Active"){
+                angular.forEach(usersMainList,function(user){
+                    if(user.active===true){
+                        $scope.userlist.push(user);
+                    }
+                });
+            }else if(option==="InActive"){
+                angular.forEach(usersMainList,function(user){
+                    if(user.active===false){
+                        $scope.userlist.push(user);
+                    }
+                });
+            }
+        }
     });    
 })();

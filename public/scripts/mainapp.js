@@ -44,7 +44,7 @@
                 controllerAs: 'vm'
             })
             .state('createuser', {
-                url: '/CreateUser',
+                url: '/userAction',
                 templateUrl: 'createuser.html',
                 controller: 'createCtrl',
                 controllerAs: 'vm',
@@ -54,7 +54,7 @@
                 }
             })
             .state('userlist', {
-                url: '/Users',
+                url: '/users',
                 templateUrl: 'UsersList.html',
                 controller: 'userCtrl',
                 controllerAs: 'vm'
