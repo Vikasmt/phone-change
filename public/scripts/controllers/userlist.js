@@ -81,13 +81,13 @@ app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
             if(option==="All"){
                 $scope.userlist = angular.copy($scope.usersMainList);
             }else if(option==="Active"){
-                angular.forEach(usersMainList,function(user){
+                angular.forEach($scope.usersMainList,function(user){
                     if(user.active===true){
                         $scope.userlist.push(user);
                     }
                 });
             }else if(option==="InActive"){
-                angular.forEach(usersMainList,function(user){
+                angular.forEach($scope.usersMainList,function(user){
                     if(user.active===false){
                         $scope.userlist.push(user);
                     }
