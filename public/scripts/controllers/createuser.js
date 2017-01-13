@@ -5,7 +5,9 @@ app.controller("createCtrl", function($scope, $http, $state, $stateParams, apiUr
         
         $scope.bindParameters = function(){
             $scope.user = angular.isDefined($stateParams.userdata) ? $stateParams.userdata : {};
+            console.log($scope.user);
             $scope.mode = angular.isDefined($stateParams.mode) ? $stateParams.mode : 'C';
+            console.log($scope.mode);
         }
     
         $scope.createUser = function(userInformation) {
@@ -16,7 +18,7 @@ app.controller("createCtrl", function($scope, $http, $state, $stateParams, apiUr
                         }
                 }
                 
-                var createuserurl = apiUrl + $scope.mode==='E'? 'updateUserInfo' : 'CreateUser';
+                var createuserurl = apiUrl + ($scope.mode==='E' ? 'updateUserInfo' : 'CreateUser');
                 console.log(createuserurl);
                 
                 $http.post(createuserurl,userInformation,config)
