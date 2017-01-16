@@ -91,14 +91,22 @@
 
     
 </head>
+  <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
 
+  <script>
+    var app = angular.module('myApp', []);
+
+    app.controller('createCtrl', function($scope) {
+      $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
+    });
+  </script>
 <script src="scripts/controllers/createuser.js"></script>
     
-<body>
+<body ng-app="myApp">
 
-<div>
+
 <!--index page-->
-  <ng-form name="createuserForm" ng-controller="createCtrl">
+  <ng-form name="myForm" ng-controller="createCtrl">
     <div id="createuserForm" class="container" style="width: 450px">
        <div class="form-horizontal">
         <div class="panel panel-default">
@@ -122,9 +130,9 @@
                     <div class="form-group">
                         <label for="phone">Phone</label>
                         <input type="text" class="form-control" id="phone" ng-model="user.phone" name="phone" ng-pattern="phoneNumbr" ng-model="phone"  placeholder="Enter phone number" required>
-                        <span class="error" ng-show="createuserForm.phone.$error.required">Required!</span>
-                        <span class="error" ng-show="createuserForm.phone.$error.minlength">Phone no not less that 10 char.</span>
-                        <span class="error" ng-show="createuserForm.phone.$error.maxlength">Phone no not more than 11 char.</span>
+                        <span class="error" ng-show="myForm.phone.$error.required">Required!</span>
+                        <span class="error" ng-show="myForm.phone.$error.minlength">Phone no not less that 10 char.</span>
+                        <span class="error" ng-show="myForm.phone.$error.maxlength">Phone no not more than 11 char.</span>
      
                     </div>
                     <div class="form-group">
@@ -150,6 +158,6 @@
             </div>
     </div>
       </ng-form>
-</div>
+
 </body>
 </html>
