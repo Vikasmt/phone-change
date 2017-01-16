@@ -121,7 +121,7 @@
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" ng-model="user.phone" ng-pattern="phoneNumbr" placeholder="Enter phone number" required>
+                        <input type="text" class="form-control" id="phone" ng-model="user.phone" name="phone" ng-pattern="phoneNumbr" ng-model="phone"  placeholder="Enter phone number" required>
                         <span class="error" ng-show="createuserForm.phone.$error.required">Required!</span>
                         <span class="error" ng-show="createuserForm.phone.$error.minlength">Phone no not less that 10 char.</span>
                         <span class="error" ng-show="createuserForm.phone.$error.maxlength">Phone no not more than 11 char.</span>
