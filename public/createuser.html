@@ -83,6 +83,9 @@
     color: #fff;
     font-size: 5em;
 }
+        .error {
+      color: red;
+    }
     </style>
 
 
@@ -93,9 +96,9 @@
     
 <body>
 
-<div ng-controller="createCtrl">
+<div>
 <!--index page-->
-
+  <ng-form name="createuserForm" ng-controller="createCtrl">
     <div id="createuserForm" class="container" style="width: 450px">
        <div class="form-horizontal">
         <div class="panel panel-default">
@@ -146,6 +149,7 @@
             </div>
             </div>
     </div>
+      </ng-form>
 </div>
 </body>
 </html>
