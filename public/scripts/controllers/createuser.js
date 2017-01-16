@@ -1,7 +1,6 @@
 (function(){
 var app = angular.module("mainApp");
-app.controller("createCtrl", function($scope, $http, $state, $stateParams, apiUrl) {
-     var name = $('input[name="name"]').val();
+       var name = $('input[name="name"]').val();
 if (name.length < 3)
 {
     alert('Please enter a name 3 characters or more.');
@@ -23,6 +22,8 @@ if((phone.length < 6) || (!intRegex.test(phone)))
      alert('Please enter a valid phone number.');
      return false;
 }
+app.controller("createCtrl", function($scope, $http, $state, $stateParams, apiUrl) {
+   
         $scope.user={};
       
         $scope.bindParameters = function(){
