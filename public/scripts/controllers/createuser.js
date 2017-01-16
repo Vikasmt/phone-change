@@ -1,7 +1,7 @@
 (function(){
 var app = angular.module("mainApp");
 app.controller("createCtrl", function($scope, $http, $state, $stateParams, apiUrl) {
-          $scope.phoneNumbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
+     
         $scope.user={};
       
         $scope.bindParameters = function(){
