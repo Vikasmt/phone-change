@@ -606,7 +606,7 @@ router.put('/changePassword', function(req, res) {
         console.log(oldPassword);
         console.log(newPassword);
         
-        var userManagementQueryStr = 'Update UserManagement set password=\''+newPassword+'\' where id='+user_id+' and password=password=\''+oldPassword+'\'';
+        var userManagementQueryStr = 'Update UserManagement set password=\''+newPassword+'\' where id='+user_id+' and password=\''+oldPassword+'\'';
         console.log(userManagementQueryStr);
         
         conn.query('SELECT *from UserManagement where id='+user_id+'',
