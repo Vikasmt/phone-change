@@ -1,6 +1,6 @@
 (function(){
 var app = angular.module("mainApp");
-       var name = $('input[name="name"]').val();
+      
 
 
 app.controller("createCtrl", function($scope, $http, $state, $stateParams, apiUrl) {
