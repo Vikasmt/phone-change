@@ -93,39 +93,7 @@
 </head>
 
 <script src="scripts/controllers/createuser.js"></script>
-    <script>
-        $(document).ready(function(){
-        $(".ctuser").click(function(){
-        alert("hi");
-    
-    //validate name
-var name = $('input[name="name"]').val();
-if (name.length < 3)
-{
-    alert('Please enter a name 3 characters or more.');
-    return false;
-}
 
-//validate email
-var email = $('input[name="email"]').val(),
-    emailReg = /^([w-.]+@([w-]+.)+[w-]{2,4})?$/;
-if(!emailReg.test(email) || email == '')
-{
-     alert('Please enter a valid email address.');
-     return false;
-}
-
-//validate phone
-var phone = $('input[name="phone"]').val(),
-    intRegex = ([0-9]{10})|(\([0-9]{3}\)\s+[0-9]{3}\-[0-9]{4});
-if((phone.length < 6) || (!intRegex.test(phone)))
-{
-     alert('Please enter a valid phone number.');
-     return false;
-}
-        });
-        });
-    </script>
     
 <body ng-app="myApp">
 
@@ -155,7 +123,11 @@ if((phone.length < 6) || (!intRegex.test(phone)))
                     <div class="form-group">
                         <label for="phone">Phone</label>
                         <input type="text" class="form-control" id="phone" ng-model="user.phone" name="phone" ng-pattern="phoneNumbr" ng-model="phone"  placeholder="Enter phone number" required>
-                      
+                      <br />
+                        <span class="error" ng-show="myForm.phone.$error.required">Required!</span>
+      <span class="error" ng-show="myForm.phone.$error.minlength">Phone no not less that 10 char.</span>
+      <span class="error" ng-show="myForm.phone.$error.maxlength">Phone no not more than 11 char.</span>
+     
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
