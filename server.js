@@ -385,15 +385,14 @@ router.post('/CreateUser', function(req, res) {
          if (err) console.log(err);
         
         conn.query(
-             var emailAddress = jsonData.email.trim();
-             'SELECT count(*) from UserManagement where trim(email)=\''+emailAddress+'\'',
+             'SELECT count(*) from UserManagement where trim(email)=\''+jsonData.email+'\'',
              function(err, result){
                 done();
                 if(result.rows[0].count > 0){
                     res.status(400).json({error: 'Email already exist.'});
                 }
                  else{
-                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+emailAddress+'\', \''+jsonData.phone+'\')  RETURNING id',
+                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\')  RETURNING id',
                          function(err, result) {
                             if(err){
                                     return res.json({
@@ -404,10 +403,10 @@ router.post('/CreateUser', function(req, res) {
                                     var contactid = result.rows[0].id;
                                     console.log('contactid: '+contactid);
 
-                                    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+emailAddress+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\')';
+                                    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\')';
                                     console.log('formatted UserManagement Query:'+formattedData);
 
-                                    conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+emailAddress+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\',true)',
+                                    conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\',true)',
                                      function(err, result) {
                                         done();
                                          if(err){
@@ -417,8 +416,8 @@ router.post('/CreateUser', function(req, res) {
                                             }
                                             else{
                                                 var subject = 'Welcome Mail';
-                                                var text = 'Greetings!!!\n\n Welcome '+jsonData.firstname+',\nPlease use below credentials to login portal.\n\E-Mail: '+emailAddress+'\nPassword: '+jsonData.password+'\n\nThanks';
-                                                var resultStr = sendEmail(emailAddress, subject, text);
+                                                var text = 'Greetings!!!\n\n Welcome '+jsonData.firstname+',\nPlease use below credentials to login portal.\n\E-Mail: '+jsonData.email+'\nPassword: '+jsonData.password+'\n\nThanks';
+                                                var resultStr = sendEmail(jsonData.email, subject, text);
                                                 return res.json({
                                                         msgid: 1,
                                                         message: 'Success.'});
@@ -591,6 +590,43 @@ router.post('/updateUserInfo', function(req, res) {
                                                         message: 'Success.'});
                                         }
                                 });
+                            }
+                    });
+                }
+            });
+    });
+});
+
+router.put('/changePassword', function(req, res) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        var user_id = req.param('id');
+        var oldPassword = req.param('oldPassword');
+        var newPassword = req.param('newPassword');
+        console.log(user_id);
+        console.log(oldPassword);
+        console.log(newPassword);
+        
+        var userManagementQueryStr = 'Update UserManagement set password=\''+jsonData.newPassword+'\' where id='+user_id+' and password=password=\''+oldPassword+'\'';
+        console.log(userManagementQueryStr);
+        
+        conn.query('SELECT *from UserManagement where id='+user_id+'',
+            function(err,result){
+                if(err){
+                    return res.status(400).json({error: err.message});
+                }
+                else{
+                    var contactId = result.rows[0].contactid;
+                    console.log('contactId:'+contactId);
+                    
+                    conn.query(userManagementQueryStr, 
+                        function(err,result){
+                            if(err){
+                                return res.status(400).json({error: err.message});
+                            }
+                            else{
+                                return res.status(200).json({
+                                            msgid: 1,
+                                            message: 'Success.'});
                             }
                     });
                 }
