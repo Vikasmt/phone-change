@@ -385,14 +385,15 @@ router.post('/CreateUser', function(req, res) {
          if (err) console.log(err);
         
         conn.query(
-             'SELECT count(*) from UserManagement where trim(email)=\''+jsonData.email.trim()+'\'',
+             var emailAddress = jsonData.email.trim();
+             'SELECT count(*) from UserManagement where trim(email)=\''+emailAddress+'\'',
              function(err, result){
                 done();
                 if(result.rows[0].count > 0){
                     res.status(400).json({error: 'Email already exist.'});
                 }
                  else{
-                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\')  RETURNING id',
+                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+emailAddress+'\', \''+jsonData.phone+'\')  RETURNING id',
                          function(err, result) {
                             if(err){
                                     return res.json({
@@ -403,10 +404,10 @@ router.post('/CreateUser', function(req, res) {
                                     var contactid = result.rows[0].id;
                                     console.log('contactid: '+contactid);
 
-                                    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\')';
+                                    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+emailAddress+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\')';
                                     console.log('formatted UserManagement Query:'+formattedData);
 
-                                    conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\',true)',
+                                    conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+emailAddress+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+contactid+'\',true)',
                                      function(err, result) {
                                         done();
                                          if(err){
@@ -415,6 +416,9 @@ router.post('/CreateUser', function(req, res) {
                                                         message: err.message});
                                             }
                                             else{
+                                                var subject = 'Welcome Mail';
+                                                var text = 'Greetings!!!\n\n Welcome '+jsonData.firstname+',\nPlease use below credentials to login portal.\n\E-Mail: '+emailAddress+'\nPassword: '+jsonData.password+'\n\nThanks';
+                                                var resultStr = sendEmail(emailAddress, subject, text);
                                                 return res.json({
                                                         msgid: 1,
                                                         message: 'Success.'});
@@ -535,7 +539,9 @@ router.put('/forgotPassword', function(req,res){
                             return res.status(400).json({error: err.message});
                         }
                         else{
-                            var resultStr = sendEmail(emailAddress, resetPassword);
+                            var subject = 'FMA - Finished Reset Password';
+                            var text = 'Merck Feedback Managemant App recently received a request to reset the password.\n\nPlease use this current password to login:  '+resetPassword+' \n\n Thanks';
+                            var resultStr = sendEmail(emailAddress, subject, text);
                             return res.json({
                                             msgid: 1,
                                             message: 'Success.'});
@@ -592,7 +598,7 @@ router.post('/updateUserInfo', function(req, res) {
     });
 });
 
-function sendEmail(toemail, currentpassword){
+function sendEmail(toemail, subject, text){
     var smtpConfig = {
         host: emailhost,
         port: emailport,
@@ -608,8 +614,8 @@ function sendEmail(toemail, currentpassword){
     
     var mailOptions = {
         to: toemail,
-        subject: 'FMA - Finished Reset Password',
-        text: 'Merck Feedback Managemant App recently received a request to reset the password.\n\nPlease use this current password to login:  '+currentpassword+' \n\n Thanks'
+        subject: subject,
+        text: text
         
     };
     
