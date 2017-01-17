@@ -110,15 +110,18 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" ng-model="user.firstname" ng-minlength="3" ng-maxlength="3" id="firstName" name="name" placeholder="Enter first name" required>
+                        <input type="text" class="form-control" ng-model="user.firstname" id="firstName" name="firstname" placeholder="Enter first name" required ng-maxlength="80">
+                        <span class="error" ng-show="myForm.firstname.$error.maxlength">Phone no not more than 80 char.</span>
                     </div>
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" ng-model="user.lastname" placeholder="Enter lastname" required>
+                        <input type="text" class="form-control" name="lastname" id="lastName" ng-model="user.lastname" placeholder="Enter lastname" required  ng-maxlength="80" >
+                        <span class="error" ng-show="myForm.lastname.$error.maxlength">Phone no not more than 80 char.</span>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Enter email address" name="email" required>
+                        <span class="error" ng-show="myForm.email.$error.required">Email is required.</span>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
