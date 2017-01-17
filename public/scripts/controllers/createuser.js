@@ -4,8 +4,9 @@ var app = angular.module("mainApp");
 
 
 app.controller("createCtrl", function($scope, $http, $state, $stateParams, apiUrl) {
-     $scope.phoneNumbr = /^\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})$/;
+  
         $scope.user={};
+ 
       
         $scope.bindParameters = function(){
             $scope.user = angular.isDefined($stateParams.userdata) ? $stateParams.userdata : {};
