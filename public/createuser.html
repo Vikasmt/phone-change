@@ -120,8 +120,8 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Enter email address" name="email" required>
-                         <span class="error"  ng-show="myForm.email.$submitted && myForm.email.$error.email">Invalid email address.</span>
+                        <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Enter email address" name="email" required ng-pattern="/^\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})$/">
+                         <span class="error"  ng-show="myForm.email.$error.pattern">Invalid email address.</span>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
@@ -135,7 +135,7 @@
                         <label for="password">Password</label>
                         <input type="text" class="form-control" id="password" name="userPassword" ng-model="user.password" placeholder="Enter password" required ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/">
                         
-                                <span class="error" ng-show="myForm.userPassword.$error.pattern">please enter 8 letter and one capital nad one numaric</span>
+                                <span class="error" ng-show="myForm.userPassword.$error.pattern">please enter 8 letter and one capital and one numaricwith special symbol</span>
                             
                     </div>
                 </div>
