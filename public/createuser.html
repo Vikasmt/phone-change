@@ -121,14 +121,14 @@
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Enter email address" name="email" required>
-                        <span class="error" ng-show="myForm.email.$error.required">Email is required.</span>
+                         <span class="error"  ng-show="myForm.email.$submitted && myForm.email.$error.email">Invalid email address.</span>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="text" class="form-control" ng-minlength="10" ng-maxlength="11" id="phone" ng-model="user.phone" name="phone" ng-pattern="phoneNumbr" ng-model="phone"  placeholder="Enter phone number" required>
+                        <input type="text" class="form-control" ng-minlength="10"  id="phone" ng-model="user.phone" name="phone" ng-pattern="phoneNumbr" ng-model="phone"  placeholder="Enter phone number" required>
                        <span class="error"  ng-show="myForm.phone.$submitted && myForm.phone.$invalid">please enter valid phone number.</span>
                         <span class="error" ng-show="myForm.phone.$error.minlength">Phone no not less that 10 char.</span>
-                        <span class="error" ng-show="myForm.phone.$error.maxlength">Phone no not more than 11 char.</span>
+                      
      
                     </div>
                     <div class="form-group">
