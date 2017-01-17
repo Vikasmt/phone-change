@@ -134,11 +134,9 @@
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="text" class="form-control" id="password" name="userPassword" ng-model="user.password" placeholder="Enter password" required ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/">
-                          <div ng-messages="myForm.userPassword.$error">
-                              <div ng-message="pattern">Password should be atleast 8 characters long
-                                and should contain one number,one character and one special character
-                              </div>
-                           </div>    
+                        
+                                <span class="error" ng-show="myForm.userPassword.$error.pattern">please enter 8 letter and one capital nad one numaric</span>
+                            
                     </div>
                 </div>
                 <div class="panel-footer">
