@@ -213,7 +213,7 @@ router.post('/insertCase', function(req, res) {
         { insertQueryData += 'FMA_DeviceName__c,'; valuesData += '\'' + jsonData.DeviceName + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'Please select device name.'});}
 		
-		if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
+	if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
         { insertQueryData += 'ContactId,'; valuesData += '\'' + jsonData.userid + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'Userid should not be empty.'});}
         
@@ -221,7 +221,7 @@ router.post('/insertCase', function(req, res) {
         { insertQueryData += 'FMA_Product__c,'; valuesData += '\'' + jsonData.ProductId + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'ProductId should not be empty.'});}
 		
-		if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
+	if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
         { insertQueryData += 'FMA_Gender__c,'; valuesData += '\'' + jsonData.Gender + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'Please select gender.'});}
 
@@ -311,7 +311,7 @@ router.post('/insertCase', function(req, res) {
 		
 	  insertQueryData += 'Priority,'; valuesData += '\'' + 'Medium' + '\'' + ',';
 		
-	  insertQueryData += 'Status,'; valuesData += '\'' + 'New' + '\'';		
+	  insertQueryData += 'Status'; valuesData += '\'' + 'New' + '\'';		
 		
 	/*
 	*****************************Additional Fields. Not using after final feedback from Ingrid
