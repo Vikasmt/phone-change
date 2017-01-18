@@ -213,7 +213,7 @@ router.post('/insertCase', function(req, res) {
         { insertQueryData += 'FMA_DeviceName__c,'; valuesData += '\'' + jsonData.DeviceName + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'Please select device name.'});}
 		
-	if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
+	      if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
         { insertQueryData += 'ContactId,'; valuesData += '\'' + jsonData.userid + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'Userid should not be empty.'});}
         
@@ -221,7 +221,7 @@ router.post('/insertCase', function(req, res) {
         { insertQueryData += 'FMA_Product__c,'; valuesData += '\'' + jsonData.ProductId + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'ProductId should not be empty.'});}
 		
-	if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
+	      if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
         { insertQueryData += 'FMA_Gender__c,'; valuesData += '\'' + jsonData.Gender + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'Please select gender.'});}
 
@@ -243,23 +243,23 @@ router.post('/insertCase', function(req, res) {
         if (jsonData.Age !== undefined && jsonData.Age !== null && jsonData.Age !== "null" && jsonData.Age.length > 0)
         { insertQueryData += 'FMA_Age__c,'; valuesData += jsonData.Age + ','; }
 		
-	if (jsonData.Phoneno !== undefined && jsonData.Phoneno !== null && jsonData.Phoneno !== "null" && jsonData.Phoneno.length > 0)
-        { insertQueryData += 'FMA_Phoneno__c,'; valuesData += jsonData.Phoneno + ','; }
-		
-	if (jsonData.Email !== undefined && jsonData.Email !== null && jsonData.Email !== "null" && jsonData.Email.length > 0)
-        { insertQueryData += 'FMA_Email__c,'; valuesData += jsonData.Email + ','; }
-		
-	if (jsonData.Whoobservedthedefect !== undefined && jsonData.Whoobservedthedefect !== null && jsonData.Whoobservedthedefect !== "null" && jsonData.Whoobservedthedefect.length > 0)
-        { insertQueryData += 'FMA_Whoobservedthedefect__c,'; valuesData += jsonData.Whoobservedthedefect + ','; }
-		
-	if (jsonData.HastheNurseHCPconfirmedthedefect !== undefined && jsonData.HastheNurseHCPconfirmedthedefect !== null && jsonData.HastheNurseHCPconfirmedthedefect !== "null" && jsonData.HastheNurseHCPconfirmedthedefect.length > 0)
+      	if (jsonData.Phoneno !== undefined && jsonData.Phoneno !== null && jsonData.Phoneno !== "null" && jsonData.Phoneno.length > 0)
+        { insertQueryData += 'FMA_Phoneno__c,'; valuesData += '\'' + jsonData.Phoneno + '\'' + ','; }
+      		
+      	if (jsonData.Email !== undefined && jsonData.Email !== null && jsonData.Email !== "null" && jsonData.Email.length > 0)
+        { insertQueryData += 'FMA_Email__c,'; valuesData += '\'' + jsonData.Email + '\'' + ','; }
+      		
+      	if (jsonData.Whoobservedthedefect !== undefined && jsonData.Whoobservedthedefect !== null && jsonData.Whoobservedthedefect !== "null" && jsonData.Whoobservedthedefect.length > 0)
+        { insertQueryData += 'FMA_Whoobservedthedefect__c,'; valuesData += '\'' + jsonData.Whoobservedthedefect + '\'' + ','; }
+      		
+      	if (jsonData.HastheNurseHCPconfirmedthedefect !== undefined && jsonData.HastheNurseHCPconfirmedthedefect !== null && jsonData.HastheNurseHCPconfirmedthedefect !== "null" && jsonData.HastheNurseHCPconfirmedthedefect.length > 0)
         { insertQueryData += 'FMA_HastheNurseHCPconfirmedthedefect__c,'; valuesData += jsonData.HastheNurseHCPconfirmedthedefect + ','; }
-		
-	if (jsonData.Hasthepatientbeentrained !== undefined && jsonData.Hasthepatientbeentrained !== null && jsonData.Hasthepatientbeentrained !== "null" && jsonData.Hasthepatientbeentrained.length > 0)
+      		
+      	if (jsonData.Hasthepatientbeentrained !== undefined && jsonData.Hasthepatientbeentrained !== null && jsonData.Hasthepatientbeentrained !== "null" && jsonData.Hasthepatientbeentrained.length > 0)
         { insertQueryData += 'FMA_Hasthepatientbeentrained__c,'; valuesData += jsonData.Hasthepatientbeentrained + ','; }
-		
-	if (jsonData.Whomadethetraining !== undefined && jsonData.Whomadethetraining !== null && jsonData.Whomadethetraining !== "null" && jsonData.Whomadethetraining.length > 0)
-        { insertQueryData += 'FMA_Whomadethetraining__c,'; valuesData += jsonData.Whomadethetraining + ','; }
+      		
+      	if (jsonData.Whomadethetraining !== undefined && jsonData.Whomadethetraining !== null && jsonData.Whomadethetraining !== "null" && jsonData.Whomadethetraining.length > 0)
+        { insertQueryData += 'FMA_Whomadethetraining__c,'; valuesData += '\'' + jsonData.Whomadethetraining + '\'' + ','; }
 
         if (jsonData.NameOfCompliant !== undefined && jsonData.NameOfCompliant !== null && jsonData.NameOfCompliant !== "null" && jsonData.NameOfCompliant.length > 1)
         { insertQueryData += 'FMA_NameofComplainant__c,'; valuesData += '\'' + jsonData.NameOfCompliant + '\'' + ','; }
@@ -303,15 +303,15 @@ router.post('/insertCase', function(req, res) {
         if (jsonData.Isreplacementofproductrequested !== undefined && jsonData.Isreplacementofproductrequested !== null && jsonData.Isreplacementofproductrequested !== "null" && jsonData.Isreplacementofproductrequested.length > 0)
         { insertQueryData += 'FMA_Isreplacementofproductrequested__c,'; valuesData += jsonData.Isreplacementofproductrequested + ','; }
 		
-	if (jsonData.Subject !== undefined && jsonData.Subject !== null && jsonData.Subject !== "null" && jsonData.Subject.length > 0)
+      	if (jsonData.Subject !== undefined && jsonData.Subject !== null && jsonData.Subject !== "null" && jsonData.Subject.length > 0)
         { insertQueryData += 'Subject,'; valuesData += '\'' + jsonData.Subject + '\'' + ','; }
-		
-	if (jsonData.Description !== undefined && jsonData.Description !== null && jsonData.Description !== "null" && jsonData.Description.length > 1)
+      		
+      	if (jsonData.Description !== undefined && jsonData.Description !== null && jsonData.Description !== "null" && jsonData.Description.length > 1)
         { insertQueryData += 'Description,'; valuesData += '\'' + jsonData.Description + '\'' + ','; }
 		
-	  insertQueryData += 'Priority,'; valuesData += '\'' + 'Medium' + '\'' + ',';
+	        insertQueryData += 'Priority,'; valuesData += '\'' + 'Medium' + '\'' + ',';
 		
-	  insertQueryData += 'Status'; valuesData += '\'' + 'New' + '\'';		
+	        insertQueryData += 'Status'; valuesData += '\'' + 'New' + '\'';		
 		
 	/*
 	*****************************Additional Fields. Not using after final feedback from Ingrid
