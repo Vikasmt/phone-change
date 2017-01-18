@@ -212,6 +212,18 @@ router.post('/insertCase', function(req, res) {
         if (jsonData.DeviceName !== undefined && jsonData.DeviceName !== null && jsonData.DeviceName !== "null" && jsonData.DeviceName.length > 0)
         { insertQueryData += 'FMA_DeviceName__c,'; valuesData += '\'' + jsonData.DeviceName + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'Please select device name.'});}
+		
+		if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
+        { insertQueryData += 'ContactId,'; valuesData += '\'' + jsonData.userid + '\'' + ','; }
+        else { return res.json({caseid: -1,msgid: 2,message: 'Userid should not be empty.'});}
+        
+        if (jsonData.ProductId !== undefined && jsonData.ProductId !== null && jsonData.ProductId !== "null" && jsonData.ProductId.toString().length > 0)
+        { insertQueryData += 'FMA_Product__c,'; valuesData += '\'' + jsonData.ProductId + '\'' + ','; }
+        else { return res.json({caseid: -1,msgid: 2,message: 'ProductId should not be empty.'});}
+		
+		if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
+        { insertQueryData += 'FMA_Gender__c,'; valuesData += '\'' + jsonData.Gender + '\'' + ','; }
+        else { return res.json({caseid: -1,msgid: 2,message: 'Please select gender.'});}
 
         if (jsonData.BatchSerialNbr !== undefined && jsonData.BatchSerialNbr !== null && jsonData.BatchSerialNbr !== "null" && jsonData.BatchSerialNbr.length > 1)
         { insertQueryData += 'FMA_BatchSerialnumber__c,'; valuesData += '\'' + jsonData.BatchSerialNbr + '\'' + ','; }
@@ -236,10 +248,6 @@ router.post('/insertCase', function(req, res) {
 		
 		if (jsonData.Email !== undefined && jsonData.Email !== null && jsonData.Email !== "null" && jsonData.Email.length > 0)
         { insertQueryData += 'FMA_Email__c,'; valuesData += jsonData.Email + ','; }
-
-        if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
-        { insertQueryData += 'FMA_Gender__c,'; valuesData += '\'' + jsonData.Gender + '\'' + ','; }
-        else { return res.json({caseid: -1,msgid: 2,message: 'Please select gender.'});}
 		
 		if (jsonData.Whoobservedthedefect !== undefined && jsonData.Whoobservedthedefect !== null && jsonData.Whoobservedthedefect !== "null" && jsonData.Whoobservedthedefect.length > 0)
         { insertQueryData += 'FMA_Whoobservedthedefect__c,'; valuesData += jsonData.Whoobservedthedefect + ','; }
@@ -294,14 +302,6 @@ router.post('/insertCase', function(req, res) {
 
         if (jsonData.Isreplacementofproductrequested !== undefined && jsonData.Isreplacementofproductrequested !== null && jsonData.Isreplacementofproductrequested !== "null" && jsonData.Isreplacementofproductrequested.length > 0)
         { insertQueryData += 'FMA_Isreplacementofproductrequested__c,'; valuesData += jsonData.Isreplacementofproductrequested + ','; }
-
-        if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
-        { insertQueryData += 'ContactId,'; valuesData += '\'' + jsonData.userid + '\'' + ','; }
-        else { return res.json({caseid: -1,msgid: 2,message: 'Userid should not be empty.'});}
-        
-        if (jsonData.ProductId !== undefined && jsonData.ProductId !== null && jsonData.ProductId !== "null" && jsonData.ProductId.toString().length > 0)
-        { insertQueryData += 'FMA_Product__c,'; valuesData += '\'' + jsonData.ProductId + '\'' + ','; }
-        else { return res.json({caseid: -1,msgid: 2,message: 'ProductId should not be empty.'});}
 		
 		if (jsonData.Subject !== undefined && jsonData.Subject !== null && jsonData.Subject !== "null" && jsonData.Subject.length > 0)
         { insertQueryData += 'Subject,'; valuesData += '\'' + jsonData.Subject + '\'' + ','; }
@@ -311,7 +311,7 @@ router.post('/insertCase', function(req, res) {
 		
 		insertQueryData += 'Priority,'; valuesData += '\'Medium\'' + ',';
 		
-		insertQueryData += 'Status,'; valuesData += '\'New\'' + ',';		
+		insertQueryData += 'Status,'; valuesData += '\'New\'';		
 		
 		/*
 		*******Additional Fields. Not using after final feedback from Ingrid
