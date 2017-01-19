@@ -65,12 +65,12 @@ router.post('/productImageSync', function(req, res) {
     console.log(sfdcproductid);
     console.log(contenttype);
     
-    var getPoductIDQuery = 'SELECT id from salesforce.FMA_Product__c WHERE sfid=\''+sfdcproductid+'\'';
+    var getPoductIDQuery = 'SELECT id from salesforce.FMA_Product__c WHERE sfid='+sfdcproductid+'';
     console.log('getPoductIDQuery:'+getPoductIDQuery);
     
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
        if (err) console.log(err);
-        conn.query('SELECT id from salesforce.FMA_Product__c WHERE sfid=\''+sfdcproductid+'\'',
+        conn.query('SELECT id from salesforce.FMA_Product__c WHERE sfid='+sfdcproductid+'',
            function(err,result){
             if (err != null || result.rowCount == 0) {
                 return res.json({
