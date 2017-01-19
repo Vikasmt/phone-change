@@ -96,7 +96,7 @@ router.post('/productImageSync', function(req, res) {
                                             }
                                     });
                             }else{
-                                conn.query('UPDATE productattachment SET body='+imagedata+', name='+filename+', contenttype='+contenttype+' WHERE sfdcproductid='+sfdcproductid+',
+                                conn.query('UPDATE productattachment SET body='+imagedata+', name='+filename+', contenttype='+contenttype+' WHERE sfdcproductid='+sfdcproductid+'',
                                     function(err,result){
                                      if(err){
                                             return res.json({
