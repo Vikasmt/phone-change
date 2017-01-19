@@ -504,11 +504,19 @@ router.post('/CreateUser', function(req, res) {
 
 router.get('/showImage', function(req, res) {
     var imageid = req.param('imageid');
+    var fromLoc = req.param('fromloc');
     console.log('ImageId:'+imageid);
+    
+    var query = '';
+        if(fromLoc == "Product"){
+            query = 'SELECT *FROM productattachment WHERE sfdcproductid = '+imageid+'';
+        }else{
+            query = 'SELECT *FROM caseattachment WHERE id = '+imageid+'';
+        }
+    
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
-        conn.query(
-            'SELECT *FROM caseattachment WHERE id = '+imageid+'',
+        conn.query(query,
             function(err,result){
                 done();
                 if (err != null || result.rowCount == 0) {
@@ -671,9 +679,9 @@ router.post('/updateUserInfo', function(req, res) {
 
 router.put('/changePassword', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-        var user_id = req.headers.id;
-        var oldPassword = req.headers.oldPassword;
-        var newPassword = req.headers.newPassword;
+        var user_id = req.param('id');
+        var oldPassword = req.param('oldPassword');
+        var newPassword = req.param('newPassword');
         console.log(user_id);
         console.log(oldPassword);
         console.log(newPassword);
