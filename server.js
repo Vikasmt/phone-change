@@ -433,13 +433,17 @@ router.get('/getProducts', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT Name,Product_Description__c, Product_Type__c, Serial_Batch_code__c,Type__c FROM salesforce.FMA_Product__c',
+            'SELECT sfid, Name,Product_Description__c, Product_Type__c, Serial_Batch_code__c,Type__c,Name as imageUrl FROM salesforce.FMA_Product__c',
             function(err,result){
                 done();
                 if(err){
                    return res.status(400).json({error: err.message});
                 }
                 else{
+                    
+                    for(var i=0; i<result.rows.length; i++){
+                        result.rows[i].imageUrl = baseUrl + 'api/showImage?imageid=\'' +result.rows[i].sfid+'\'&fromloc=Product';
+                    }
                     return res.json(result.rows);
                 }
             });
@@ -509,7 +513,7 @@ router.get('/showImage', function(req, res) {
     
     var query = '';
         if(fromLoc == "Product"){
-            query = 'SELECT *FROM productattachment WHERE sfdcproductid = '+imageid+'';
+            query = 'SELECT *FROM productattachment WHERE sfdcproductid = \''+imageid+'\'';
         }else{
             query = 'SELECT *FROM caseattachment WHERE id = '+imageid+'';
         }
