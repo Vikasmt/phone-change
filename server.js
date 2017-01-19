@@ -79,21 +79,37 @@ router.post('/productImageSync', function(req, res) {
             }else{
                 var productId = result.rows[0].id;
                 console.log(productId);
-                var query='INSERT INTO productattachment (name, contenttype, body, sfdcproductid, herokuproductid) VALUES ('+filename+', \''+contenttype+'\', \''+imagedata+'\', \''+sfdcproductid+'\', '+productId+')';
-                console.log(query);
-                //conn.query('INSERT INTO productattachment (id, name, contenttype, body, sfdcproductid, herokuproductid) VALUES (2, '+filename+', \''+contenttype+'\', \''+imagedata+'\', \''+sfdcproductid+'\', '+productId+')',
-                conn.query('INSERT INTO productattachment (name, contenttype, sfdcproductid, herokuproductid, body) VALUES ('+filename+', '+contenttype+', '+sfdcproductid+', '+productId+', '+imagedata+')',
-                    function(err,result){
-                    if(err){
-                        return res.json({
-                            msgid: 2,
-                            message: err});
-                        }else {
-                            return res.json({
-                                msgid: 1,
-                                message: 'Success.'});
-                        }
-                });
+                
+                conn.query('SELECT id, sfdcproductid from productattachment WHERE sfdcproductid='+sfdcproductid+'',
+                        function(err,result){
+                            if (err != null || result.rowCount == 0){
+                                conn.query('INSERT INTO productattachment (name, contenttype, sfdcproductid, herokuproductid, body) VALUES ('+filename+', '+contenttype+', '+sfdcproductid+', '+productId+', '+imagedata+')',
+                                    function(err,result){
+                                        if(err){
+                                            return res.json({
+                                                msgid: 2,
+                                                message: err});
+                                            }else {
+                                                return res.json({
+                                                    msgid: 1,
+                                                    message: 'Success.'});
+                                            }
+                                    });
+                            }else{
+                                conn.query('UPDATE productattachment SET body='+imagedata+', name='+filename+', contenttype='+contenttype+' WHERE sfdcproductid='+sfdcproductid+',
+                                    function(err,result){
+                                     if(err){
+                                            return res.json({
+                                                msgid: 2,
+                                                message: err});
+                                        }else {
+                                            return res.json({
+                                                msgid: 1,
+                                                message: 'Success.'});
+                                        }
+                                });
+                            }
+                    });
             }
         });
     });
