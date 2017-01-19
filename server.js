@@ -147,6 +147,7 @@ router.get('/ValidateAdmin', function(req, res) {
                             firstname:'',
                             lastname:'',
                             username:'',
+			    uhrkid:'',
                             msgid: 2,
                             message: 'Invalid email.'});
                 }
@@ -161,6 +162,7 @@ router.get('/ValidateAdmin', function(req, res) {
                                            firstname:'',
                                            lastname:'',
                                            username:'',
+					   uhrkid:'',
                                            msgid: 3,
                                            message: 'Invalid password.'});
                                }
@@ -170,6 +172,7 @@ router.get('/ValidateAdmin', function(req, res) {
                                            firstname:'',
                                            lastname:'',
                                            username:'',
+					   uhrkid:'',
                                            msgid: 4,
                                            message: 'User is inactive.'}); 
                                }
@@ -179,6 +182,7 @@ router.get('/ValidateAdmin', function(req, res) {
                                            firstname:'',
                                            lastname:'',
                                            username:'',
+					   uhrkid:'',
                                            msgid: 4,
                                            message: 'User is not synced. Please wait...'}); 
                                }
@@ -188,6 +192,7 @@ router.get('/ValidateAdmin', function(req, res) {
                                            firstname:result.rows[0].firstname,
                                            lastname:result.rows[0].lastname,
                                            username:result.rows[0].username,
+					   uhrkid:result.rows[0].id,
                                            msgid: 1,
                                            message: 'Success.'});
                                }
