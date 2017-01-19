@@ -86,7 +86,7 @@ router.post('/productImageSync', function(req, res) {
                     if(err){
                         return res.json({
                             msgid: 2,
-                            message: err});
+                            message: err.message});
                         }else {
                               return res.json({
                                         msgid: 1,
