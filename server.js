@@ -448,13 +448,11 @@ router.post('/insertCase', function(req, res) {
 });
 
 router.get('/getProducts', function(req, res) {
-	var type;
-	if(req.param('producttype') === 'Medical') type = 'Medical Device';
-	if(req.param('producttype') === 'Combination') type = 'Combination Product';
+    var productType = req.param('producttype');
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT sfid, Name,Product_Description__c, Product_Type__c, Serial_Batch_code__c,Type__c, Name as imageUrl FROM salesforce.FMA_Product__c WHERE Type__c=\''+type+'\'',
+            'SELECT sfid, Name,Product_Description__c, Product_Type__c, Serial_Batch_code__c,Type__c,Name as imageUrl FROM salesforce.FMA_Product__c',
             function(err,result){
                 done();
                 if(err){
