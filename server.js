@@ -445,7 +445,7 @@ router.get('/getProducts', function(req, res) {
                 else{
                     
                     for(var i=0; i<result.rows.length; i++){
-                        result.rows[i].imageUrl = baseUrl + 'api/showImage?imageid=\'' +result.rows[i].sfid+'\'&fromloc=Product';
+                        result.rows[i].imageUrl = baseUrl + 'api/showImage?imageid='+result.rows[i].sfid+'&fromloc=Product';
                     }
                     return res.json(result.rows);
                 }
