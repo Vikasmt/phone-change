@@ -81,7 +81,7 @@ router.post('/productImageSync', function(req, res) {
                 console.log(productId);
                 conn.query('INSERT INTO productattachment (name, contenttype, body, sfdcproductid, herokuproductid) VALUES ('+filename+', \''+contenttype+'\', '+imagedata+', \''+sfdcproductid+'\', '+productId+')',
                     function(err,result){
-                    f(err){
+                    if(err){
                         return res.json({
                             msgid: 2,
                             message: err.message});
