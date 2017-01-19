@@ -82,7 +82,7 @@ router.post('/productImageSync', function(req, res) {
                 var query='INSERT INTO productattachment (id, name, contenttype, body, sfdcproductid, herokuproductid) VALUES (2, '+filename+', \''+contenttype+'\', \''+imagedata+'\', \''+sfdcproductid+'\', '+productId+')';
                 console.log(query);
                 //conn.query('INSERT INTO productattachment (id, name, contenttype, body, sfdcproductid, herokuproductid) VALUES (2, '+filename+', \''+contenttype+'\', \''+imagedata+'\', \''+sfdcproductid+'\', '+productId+')',
-                conn.query('INSERT INTO productattachment (id, name, contenttype) VALUES (2, '+filename+', \''+contenttype+'\')',
+                conn.query('INSERT INTO productattachment (id, name, contenttype) VALUES (2, '+filename+', '+contenttype+')',
                     function(err,result){
                     if(err){
                         return res.json({
