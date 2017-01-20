@@ -135,7 +135,7 @@
                     <div class="form-group" ng-hide="mode==='E'">
                         <label for="password">Password</label>
                         <!--<input type="text" class="form-control" id="password" name="userPassword" ng-model="user.password" placeholder="Enter password" required ng-pattern = "/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/">-->
-                        <input type="tel" class="form-control" id="password" ng-model="user.password" placeholder="Enter password" required>
+                        <input type="tel" class="form-control" id="password" ng-model="user.password" name="userPassword" ng-pattern = "/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" placeholder="Enter password" required>
                                 <span class="error" ng-show="myForm.userPassword.$error.pattern">please enter 8 letter and one capital and one numaric with special symbol</span>
                             
                     </div>
