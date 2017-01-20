@@ -512,8 +512,8 @@ router.post('/CreateUser', function(req, res) {
                                                         message: err.message});
                                             }
                                             else{
-                                                var subject = 'Welcome Mail';
-                                                var text = 'Greetings!!!\n\n Welcome '+jsonData.firstname+',\nPlease use below credentials to login portal.\n\E-Mail: '+jsonData.email+'\nPassword: '+jsonData.password+'\n\nThanks';
+                                                var subject = 'Welcome To Feedback Application';
+                                                var text = 'Greetings!!!\n\n Welcome '+jsonData.firstname+',\n\nPlease use below credentials to login portal.\n\E-Mail: '+jsonData.email+'\nPassword: '+jsonData.password+'\n\nThanks';
                                                 var resultStr = sendEmail(jsonData.email, subject, text);
                                                 return res.json({
                                                         msgid: 1,
