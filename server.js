@@ -257,8 +257,8 @@ router.get('/ValidateAdmin', function(req, res) {
                                   return res.json({
                                            userid:result.rows[0].sfid,
                                            firstname:result.rows[0].firstname,
-                                           lastname:result.rows[0].lastname,
-                                           username:result.rows[0].email,
+					   lastname:result.rows[0].lastname,
+					   username:result.rows[0].email,
 					   uhrkid:result.rows[0].id,
                                            msgid: 1,
                                            message: 'Success.'});
