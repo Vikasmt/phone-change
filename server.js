@@ -293,9 +293,9 @@ router.post('/insertCase', function(req, res) {
         { insertQueryData += 'FMA_Product__c,'; valuesData += '\'' + jsonData.ProductId + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'ProductId should not be empty.'});}
 		
-	      if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
+	if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
         { insertQueryData += 'FMA_Gender__c,'; valuesData += '\'' + jsonData.Gender + '\'' + ','; }
-        else { return res.json({caseid: -1,msgid: 2,message: 'Please select gender.'});}
+        //else { return res.json({caseid: -1,msgid: 2,message: 'Please select gender.'});}
 
         if (jsonData.BatchSerialNbr !== undefined && jsonData.BatchSerialNbr !== null && jsonData.BatchSerialNbr !== "null" && jsonData.BatchSerialNbr.length > 1)
         { insertQueryData += 'FMA_BatchSerialnumber__c,'; valuesData += '\'' + jsonData.BatchSerialNbr + '\'' + ','; }
