@@ -481,7 +481,7 @@ router.get('/getProductsCount', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT count(id) AS sfCount FROM salesforce.FMA_Product__c WHERE Type__c=\''+type+'\' GROUP BY Id',
+            'SELECT count(id) AS sfCount FROM salesforce.FMA_Product__c GROUP BY Id',
             function(err,result){
                 done();
                 if(err){
