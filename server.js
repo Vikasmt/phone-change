@@ -457,7 +457,7 @@ router.get('/getProducts', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT sfid, Name,Product_Description__c, Product_Type__c, Serial_Batch_code__c,Type__c, Product_Germany_Description__c, Product_Italy_Description__c, BrandingColor__c FROM salesforce.FMA_Product__c WHERE Type__c=\''+type+'\'',
+            'SELECT count(sfid) sfcount, Name,Product_Description__c, Product_Type__c, Serial_Batch_code__c,Type__c, Product_Germany_Description__c, Product_Italy_Description__c, BrandingColor__c FROM salesforce.FMA_Product__c WHERE Type__c=\''+type+'\'',
             function(err,result){
                 done();
                 if(err){
