@@ -647,7 +647,7 @@ router.put('/forgotPassword', function(req,res){
                         }
                         else{
                             var subject = 'FMA - Finished Reset Password';
-                            var text = 'Merck Feedback Managemant App recently received a request to reset the password.\n\nUsername/Email: '+emailAddress+' \n\nPlease use this current password to login:  '+resetPassword+' \n\n Thanks';
+                            var text = 'Merck Feedback Managemant App recently received a request to reset the password.\n\nUsername/Email: '+emailAddress+' \n\ncurrent password :  '+resetPassword+' \n\n Thanks';
                             var resultStr = sendEmail(emailAddress, subject, text);
                             return res.json({
                                             msgid: 1,
