@@ -11,13 +11,7 @@
 
   <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script>
-    var app = angular.module('myApp', []);
-    app.controller('myCtrl', function($scope) {
-        $scope.names = ["Emil", "Tobias", "Linus"];
-    });
-</script>
+    
     <style>
         
         .form-control:invalid, .custom-file-control:invalid {
@@ -103,15 +97,10 @@
 
     
 <body>
-<div ng-app="myApp" ng-controller="myCtrl">
 
-<select ng-model="selectedName" ng-options="x for x in names">
-</select>
-
-</div>
 
 <!--index page-->
-  <ng-form name="myForm" ng-controller="createCtrl" ng-app="myLang" ng-init="bindParameters()">
+  <ng-form name="myForm" ng-controller="createCtrl"  ng-init="bindParameters()">
     <div id="createuserForm" class="container" style="width: 450px">
        <div class="form-horizontal">
         <div class="panel panel-default">
