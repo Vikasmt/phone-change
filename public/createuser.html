@@ -133,7 +133,12 @@
                       
      
                     </div>
-      
+                    <div class="form-group">
+                        <label for="language">Language</label>
+                       <select ng-model="selectedName" ng-options="x for x in names">
+                   </select>
+
+                  </div>
                     
                     <div class="form-group" ng-hide="mode==='E'">
                         <label for="password">Password</label>
