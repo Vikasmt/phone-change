@@ -11,7 +11,12 @@
 
   <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css" />
-    
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope) {
+            $scope.names = ["Emil", "Tobias", "Linus"];
+        });
+   </script>
     <style>
         
         .form-control:invalid, .custom-file-control:invalid {
@@ -133,6 +138,13 @@
                       
      
                     </div>
+      
+                    <div class="form-group" ng-app="myApp" ng-controller="myCtrl">
+                        <label for="language">Language</label>
+                       <select ng-model="selectedName" ng-options="x for x in names">
+                   </select>
+
+                  </div>
                     <div class="form-group" ng-hide="mode==='E'">
                         <label for="password">Password</label>
                         <!--<input type="text" class="form-control" id="password" name="userPassword" ng-model="user.password" placeholder="Enter password" required ng-pattern = "/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/">-->
