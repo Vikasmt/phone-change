@@ -13,6 +13,7 @@ app.controller("createCtrl", function($scope, $http, $state, $stateParams, apiUr
             console.log($scope.user);
             $scope.mode = angular.isDefined($stateParams.mode) ? $stateParams.mode : 'C';
             console.log($scope.mode);
+            $scope.language = ["Emil", "Tobias", "Linus"];
         }
     
         $scope.createUser = function(userInformation) {
