@@ -494,6 +494,24 @@ router.get('/getProductsCount', function(req, res) {
     });
 });
 
+router.get('/myFeedbacks', function(req, res) {
+    var case_id = req.param('id');
+     pg.connect(process.env.DATABASE_URL, function (err, conn, done){
+          if (err) console.log(err);
+         conn.query(
+             'SELECT id, CaseNumber, Description, createddate, Status from case where id='+case_id+' order by createddate desc limit 10',
+             function(err,result){
+                done();
+                if(err){
+                    res.status(400).json({error: err.message});
+                }
+                else{
+                    res.json(result.rows);
+                }
+            });
+     });
+});
+
 router.post('/CreateUser', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
