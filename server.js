@@ -499,7 +499,7 @@ router.get('/myFeedbacks', function(req, res) {
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
-             'SELECT id, CaseNumber, Description, createddate, Status from case where id='+case_id+' order by createddate desc limit 10',
+             'SELECT id, CaseNumber, Description, createddate, Status from salesforce.case where id='+case_id+' order by createddate desc limit 10',
              function(err,result){
                 done();
                 if(err){
