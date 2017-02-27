@@ -452,26 +452,25 @@ router.post('/insertCase', function(req, res) {
 
 router.get('/getProducts', function(req, res) {
 	var type;
-	if(req.param('producttype') === 'Medical') type = 'Medical Device';
+    if(req.param('producttype') === 'Medical') type = 'Medical Device';
 	if(req.param('producttype') === 'Combination') type = 'Combination Product';
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT sfid, Name, Product_Description__c, Product_Type__c, Serial_Batch_code__c,Type__c, Product_Germany_Description__c, Product_Italy_Description__c, BrandingColor__c, Serial_Batch_code_format__c, Serial_Batch_code_contains__c FROM salesforce.FMA_Product__c WHERE Type__c=\''+type+'\'',
+            'SELECT sfid, Name, Product_Type__c, Type__c, Product_Description__c, Product_Italy_Description__c, Serial_Batch_code__c, Serial_Batch_code_format__c, Serial_Batch_code_contains__c, BrandingColor__c FROM salesforce.FMA_Product__c WHERE Type__c=\''+type+'\'',
             function(err,result){
                 done();
                 if(err){
                    return res.status(400).json({error: err.message});
                 }
-                else{
-                    
+                else{                    
                     for(var i=0; i<result.rows.length; i++){
                         result.rows[i].imageUrl = baseUrl + 'api/showImage?imageid='+result.rows[i].sfid+'&fromloc=Product';
                     }
                     return res.json(result.rows);
                 }
             });
-    });
+     });
 });
 
 router.get('/getProductsCount', function(req, res) {
