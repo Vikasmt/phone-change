@@ -206,7 +206,7 @@ router.get('/ValidateAdmin', function(req, res) {
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
-             'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\'',
+             'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\'',
              function(err,result){
               if (err != null || result.rowCount == 0) {
                    return  res.json({
@@ -215,12 +215,14 @@ router.get('/ValidateAdmin', function(req, res) {
                             lastname:'',
                             username:'',
 			    uhrkid:'',
+			    language:'',
+			    country:'',
                             msgid: 2,
                             message: 'Invalid email.'});
                 }
                  else{
                        conn.query(
-                            'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.active, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\' and um.password=\''+password+'\' and um.contactid=sc.id',
+                            'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.active, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\' and um.password=\''+password+'\' and um.contactid=sc.id',
                            function(err,result){
                                done();
                                if(err != null || result.rowCount == 0){
@@ -230,6 +232,8 @@ router.get('/ValidateAdmin', function(req, res) {
                                            lastname:'',
                                            username:'',
 					   uhrkid:'',
+					   language:'',
+			                   country:'',
                                            msgid: 3,
                                            message: 'Invalid password.'});
                                }
@@ -240,6 +244,8 @@ router.get('/ValidateAdmin', function(req, res) {
                                            lastname:'',
                                            username:'',
 					   uhrkid:'',
+					   language:'',
+			                   country:'',
                                            msgid: 4,
                                            message: 'User is inactive.'}); 
                                }
@@ -250,6 +256,8 @@ router.get('/ValidateAdmin', function(req, res) {
                                            lastname:'',
                                            username:'',
 					   uhrkid:'',
+					   language:'',
+			                   country:'',
                                            msgid: 4,
                                            message: 'User is not synced. Please wait...'}); 
                                }
@@ -260,6 +268,8 @@ router.get('/ValidateAdmin', function(req, res) {
 					   lastname:result.rows[0].lastname,
 					   username:result.rows[0].email,
 					   uhrkid:result.rows[0].id,
+					   language:result.rows[0].language,
+			                   country:result.rows[0].country,
                                            msgid: 1,
                                            message: 'Success.'});
                                }
