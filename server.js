@@ -494,11 +494,11 @@ router.get('/getProductsCount', function(req, res) {
 });
 
 router.get('/myFeedbacks', function(req, res) {
-    var contact_id = req.param('id');
+    //var contact_id = req.param('id');
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
-             'SELECT sfid, casenumber, description, createddate, status from salesforce.case where contactid =\''+contact_id+'\'',
+             'SELECT sfid, casenumber, description, createddate, status from salesforce.case order by createddate desc Limit 10',
              function(err,result){
                 done();
                 if(err){
