@@ -493,7 +493,7 @@ router.get('/getProductsCount', function(req, res) {
     });
 });
 
-router.get('/myFeedbacks', function(req, res) {
+router.get('/getMyFeedbacks', function(req, res) {
     var contact_id = req.param('id');
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
