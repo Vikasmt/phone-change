@@ -35,7 +35,7 @@ router.get('/getContacts', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT id, email, phone, firstname, lastname, mobilephone from salesforce.Contact',
+            'SELECT id, email, phone, firstname, lastname from salesforce.Contact',
             function(err,result){
                 done();
                 if(err){
