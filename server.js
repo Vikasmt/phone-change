@@ -48,6 +48,24 @@ router.get('/getContacts', function(req, res) {
     });
 });
 
+router.get('/getCaseAttachments', function(req, res) {
+    var case_id = req.param('id');
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        conn.query(
+            'SELECT id, body, herokicaseid from caseattachment where herokucaseid= '+case_id+'',
+            function(err,result){
+                done();
+                if(err){
+                    return res.status(400).json({error: err.message});
+                }
+                else{
+                    return res.json(result.rows);
+                }
+            });
+    });
+});
+
 router.post('/productImageSync', function(req, res) {
     var contentType = req.headers['content-type'];
     var mime = contentType.split(';')[0];
