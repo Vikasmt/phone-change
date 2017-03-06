@@ -610,7 +610,7 @@ router.get('/showImage', function(req, res) {
                      'Content-Type': contenttype,
                      'Content-Length': img.length
                    });
-                    res.end(img);
+                    res.json(img);
                 }
             });
     });
