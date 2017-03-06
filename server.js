@@ -53,7 +53,7 @@ router.get('/getCaseAttachments', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT id, body, herokicaseid from caseattachment where herokucaseid= '+case_id+'',
+            'SELECT id, body, herokucaseid from caseattachment where herokucaseid= '+case_id+'',
             function(err,result){
                 done();
                 if(err){
