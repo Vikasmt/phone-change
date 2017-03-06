@@ -605,12 +605,12 @@ router.get('/showImage', function(req, res) {
                     contenttype = contenttype.replace('"','').replace('"','');
                     //contenttype = contenttype.replace('"','');
                     console.log(contenttype);
-                    var img = result.rows[0].body;
+                    var img = new Buffer(result.rows[0].body, 'base64');
                     res.writeHead(200, {
                      'Content-Type': contenttype,
                      'Content-Length': img.length
                    });
-                    res.json(img);
+                    res.end(img);
                 }
             });
     });
