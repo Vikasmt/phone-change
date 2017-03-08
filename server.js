@@ -462,6 +462,7 @@ router.post('/insertCase', function(req, res) {
                         console.log(err.message);
                             return res.json({
                                     caseid: -1,
+				    sfid: 1,
                                     msgid: 2,
                                     timestamp: timestamp,
                                     message: err.message});
@@ -470,6 +471,7 @@ router.post('/insertCase', function(req, res) {
                             console.log(result);
                             return res.json({
                                     caseid:result.rows[0].id,
+				    sfid: result.rows[0].sfid,
                                     msgid: 1,
                                     timestamp: timestamp,
                                     message: 'Success.'});
