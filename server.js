@@ -173,11 +173,12 @@ router.post('/uploadfile', function(req, res) {
                             else{
                                 var attachmentrowid = result.rows[0].id;
                                 var columname = 'fma_attachment' + loopid + '__c';
+			        var herokucaseid = 'fma_herokucaseid__c';
                                 console.log('columname:' + columname);
                                 var attachmentUrl = baseUrl + 'api/showImage?imageid=' +attachmentrowid;
                                 console.log('attachmentUrl:'+attachmentUrl);
                                 
-                                conn.query('UPDATE salesforce.Case SET '+columname+' = \''+attachmentUrl+'\' WHERE id='+caseid+'',
+                                conn.query('UPDATE salesforce.Case SET '+columname+' = \''+attachmentUrl+'\', '+herokucaseid+' = \''+caseid+'\' WHERE id='+caseid+'',
                                     function(err,result){
                                         done();
                                         if(err){
