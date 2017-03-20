@@ -220,7 +220,7 @@ router.get('/getContact', function(req, res) {
 });
 
 router.get('/ValidateAdmin', function(req, res) {
-    var emailaddress = req.headers.email;
+    var emailaddress = req.headers.email.toLowerCase().trim();
     var password = req.headers.password;
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
@@ -560,7 +560,7 @@ router.post('/CreateUser', function(req, res) {
                     res.status(400).json({error: 'Email already exist.'});
                 }
                  else{
-                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\')  RETURNING id',
+                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\')  RETURNING id',
                          function(err, result) {
                             if(err){
                                     return res.json({
@@ -571,10 +571,10 @@ router.post('/CreateUser', function(req, res) {
                                     var contactid = result.rows[0].id;
                                     console.log('contactid: '+contactid);
 
-                                    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, language, country, contactid) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+jsonData.language+'\', \''+jsonData.country+'\', \''+contactid+'\')';
+                                    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, language, country, contactid) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+jsonData.language+'\', \''+jsonData.country+'\', \''+contactid+'\')';
                                     console.log('formatted UserManagement Query:'+formattedData);
 
-                                    conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, language, country, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+jsonData.language+'\', \''+jsonData.country+'\', \''+contactid+'\',true)',
+                                    conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, language, country, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+jsonData.language+'\', \''+jsonData.country+'\', \''+contactid+'\',true)',
                                      function(err, result) {
                                         done();
                                          if(err){
@@ -745,7 +745,7 @@ router.post('/updateUserInfo', function(req, res) {
                     var contactId = result.rows[0].contactid;
                     console.log('contactId:'+contactId);
                     
-                    var contactQueryStr = 'Update Salesforce.Contact set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email+'\', phone=\''+jsonData.phone+'\' where id='+contactId+'';
+                    var contactQueryStr = 'Update Salesforce.Contact set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email.toLowerCase().trim()+'\', phone=\''+jsonData.phone+'\' where id='+contactId+'';
                     console.log(contactQueryStr);
                     
                     conn.query(userManagementQueryStr, 
