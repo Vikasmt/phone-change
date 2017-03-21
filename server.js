@@ -67,8 +67,8 @@ router.get('/getCaseAttachments', function(req, res) {
 });
 
 router.get('/getDisclaimercontent', function(req, res) {
-    var country = req.headers.country.trim();
-    var language = req.headers.language.trim();
+    var country = req.headers.country.toLowerCase().trim();
+    var language = req.headers.language.toLowerCase().trim();
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
