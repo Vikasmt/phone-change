@@ -73,6 +73,7 @@ router.get('/getDisclaimercontent', function(req, res) {
         if (err) console.log(err);
         conn.query(
             'SELECT id, country, language, content from disclaimercontent where country= \''+country+'\' and language= \''+language+'\'',
+	     [req.body.country.trim(), req.body.language.trim(), req.body.content.trim()],
             function(err,result){
                 done();
                 if(err){
