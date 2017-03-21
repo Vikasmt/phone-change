@@ -72,7 +72,7 @@ router.get('/getDisclaimercontent', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT id, country, language, content from disclaimercontent where country= '+country+' and language= '+language+'',
+            'SELECT id, country, language, content from disclaimercontent where country= \''+country+'\' and language= \''+language+'\'',
             function(err,result){
                 done();
                 if(err){
