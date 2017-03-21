@@ -80,7 +80,7 @@ router.get('/getDisclaimercontent', function(req, res) {
                     return res.status(400).json({error: err.message});
                 }
                 else{
-                    return res.json(result.rows);
+                    return res.json(result);
                 }
             });
     });
