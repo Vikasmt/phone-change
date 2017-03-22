@@ -73,14 +73,14 @@ router.get('/getDisclaimercontent', function(req, res) {
         if (err) console.log(err);
         conn.query(
             'SELECT id, country, language, content from disclaimercontent where country= \''+country+'\' and language= \''+language+'\'',
-	    [req.body.country.trim(), req.body.language.trim()],
+	    //[req.body.country.trim(), req.body.language.trim()],
             function(err,result){
                 done();
                 if(err){
                     return res.status(400).json({error: err.message});
                 }
                 else{
-                    return res.json(result.rows);
+                    return res.json(result.rows.trim());
                 }
             });
     });
