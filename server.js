@@ -72,15 +72,15 @@ router.get('/getDisclaimercontent', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT id, country, language, content from disclaimercontent where country= \''+country+'\' and language= \''+language+'\'',
-	    //[req.body.country.trim(), req.body.language.trim()],
+            'SELECT country, language, content from disclaimercontent where country= \''+country+'\' and language= \''+language+'\'',
+	    [req.body.country.trim(), req.body.language.trim(), req.body.content.trim()],
             function(err,result){
                 done();
                 if(err){
                     return res.status(400).json({error: err.message});
                 }
                 else{
-                    return res.json(result.rows.trim());
+                    return res.json(result.rows);
                 }
             });
     });
