@@ -4,8 +4,7 @@ app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
         $scope.helplist = [];
         $scope.helpMainList = [];
     
-        $scope.getHelp = function () {
-            $scope.selectedOption = "All";
+        $scope.getHelpcontent = function () {
             var getHelpUrl = apiUrl + 'getHelpcontent';
              var config = {
                     headers : {
