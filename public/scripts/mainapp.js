@@ -81,5 +81,9 @@
             $scope.isclicked = true;
             $state.go('userlist');
         }
+        $scope.navigatehelplist = function(){
+            $scope.isclicked = true;
+            $state.go('helplist');
+        }
     });
 })();
