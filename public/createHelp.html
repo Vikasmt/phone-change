@@ -111,13 +111,13 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" ng-model="user.title" id="title" name="title" placeholder="Enter title" required ng-maxlength="80">
-                        <span class="error" ng-show="myForm.title.$error.maxlength">Phone no not more than 80 char.</span>
+                        <input type="text" class="form-control" ng-model="help.title" id="title" name="title" placeholder="Enter title" required ng-maxlength="80">
+                        <span class="error" ng-show="myForm.title.$error.maxlength">title no not more than 80 char.</span>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input type="text" class="form-control" name="description" id="description" ng-model="user.description" placeholder="Enter lastname" required  ng-maxlength="80" >
-                        <span class="error" ng-show="myForm.description.$error.maxlength">Phone no not more than 80 char.</span>
+                        <input type="text" class="form-control" name="description" id="description" ng-model="help.description" placeholder="Enter lastname" required  ng-maxlength="80" >
+                        <span class="error" ng-show="myForm.description.$error.maxlength">Description no not more than 80 char.</span>
                     </div>
                 </div>
                 <div class="panel-footer">
@@ -131,7 +131,7 @@
                         <span id="errorMessage"></span>
                     </div>
                     <div class="btn-div">
-                    <button class="btn btn-raised btn-success btn-primary ctuser" ng-click="CreateHelp(Help)">{{mode==='E' ? 'Update Help' : 'Create Help'}}</button>
+                    <button class="btn btn-raised btn-success btn-primary ctuser" ng-click="CreateHelp(help)">{{mode==='E' ? 'Update Help' : 'Create Help'}}</button>
                     </div>
                 </div>
             </div>
