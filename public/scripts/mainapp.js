@@ -64,6 +64,16 @@
                 templateUrl: 'HelpList.html',
                 controller: 'HelpCtrl',
                 controllerAs: 'vm'
+            })
+             .state('createHelp', {
+                url: '/helpAction',
+                templateUrl: 'createHelp.html',
+                controller: 'createHelpCtrl',
+                controllerAs: 'vm',
+                params: {
+                    'helpdata': undefined,
+                    'mode': undefined
+                }
             });
     }]);
     
@@ -84,6 +94,10 @@
         $scope.navigatehelplist = function(){
             $scope.isclicked = true;
             $state.go('helplist');
+        }
+         $scope.navigatecreatehelp = function(){
+            $scope.isclicked = true;
+            $state.go('createHelp');
         }
     });
 })();
