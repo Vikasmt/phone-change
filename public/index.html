@@ -103,6 +103,7 @@
     <script src="scripts/appHttpInterceptor.js"></script>
     <script src="scripts/controllers/createuser.js"></script>
     <script src="scripts/controllers/userlist.js"></script>
+    <script src="scripts/controllers/helplist.js"></script>
 <body>
   <div style="width: 100%;    background: #8460aa;">
      
@@ -137,7 +138,7 @@
                     </div>
     </div>
 </div>
-<div ng-app="mainApp" ng-controller="mainCtrl" ng-init="">
+<div ng-app="mainApp" ng-controller="mainCtrl" ng-init="load()">
 <!--index page-->
 <div ng-hide="isclicked===true">
   
@@ -153,12 +154,12 @@
                 </section>
                 </div>
                     <div class=" col-md-6">
-                        <section class="panel" onclick="" ng-click="">
+                        <section class="panel" onclick="" ng-click="navigatehelpslist()">
                             <div class="symbol purple" style="float: left;">
                                 <i class="material-icons">group</i>
                             </div>
                     <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">                              
-                        <a ng-click=""> <p style=" padding: 1em 0;font-size: 1.2em;color: rgba(0, 0, 0, 0.87);">List Of Help</p></a>
+                        <a ng-click="navigatehelpslist()"> <p style=" padding: 1em 0;font-size: 1.2em;color: rgba(0, 0, 0, 0.87);">List Of Help</p></a>
                     </div>
                         </section>
                     </div>
