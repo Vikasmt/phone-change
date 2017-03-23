@@ -58,6 +58,12 @@
                 templateUrl: 'UsersList.html',
                 controller: 'userCtrl',
                 controllerAs: 'vm'
+            })
+           .state('helplist', {
+                url: '/Helplist',
+                templateUrl: 'HelpList.html',
+                controller: 'HelpCtrl',
+                controllerAs: 'vm'
             });
     }]);
     
