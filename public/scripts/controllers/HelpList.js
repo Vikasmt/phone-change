@@ -27,7 +27,7 @@ app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
                 });
         };
     
-        /*$scope.redirectToEdit = function(HelpInfo){
+        $scope.redirectToEdit = function(HelpInfo){
             $state.go('createhelp', {'helpdata':HelpInfo, 'mode':'E'});
         }
         
@@ -45,13 +45,13 @@ app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
                 
                 $http.post(updateHelpurl, HelpInfo, config)
                     .then(function (data, status, headers, config) {
-                        $scope.getHelp();
+                        $scope.getHelpcontent();
                     })
                     .catch(function (data, status, header, config) {
                         console.log(data);
                     });
             }
-        };*/
+        };
     
         
     });    
