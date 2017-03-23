@@ -29,7 +29,7 @@ app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
         };
     
         $scope.redirectToEdit = function(HelpInfo){
-            $state.go('createhelp', {'helpdata':userInfo, 'mode':'E'});
+            $state.go('createhelp', {'helpdata':HelpInfo, 'mode':'E'});
         }
         
         
