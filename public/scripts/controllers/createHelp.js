@@ -15,7 +15,7 @@ app.controller("createHelpCtrl", function($scope, $http, $state, $stateParams, a
             console.log($scope.mode);
           }
     
-        $scope.CreateHelp = function(userInformation) {
+        $scope.CreateHelp = function(helpInformation) {
                 
             if(angular.isDefined(helpInformation) && helpInformation !== null) {
                 var config = {
