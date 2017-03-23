@@ -125,9 +125,32 @@ router.post('/CreateHelp', function(req, res) {
                                                         message: 'Success.'});
                                             }
                                     });
-                                
-                    
-                 
+             });
+     });
+
+router.post('/updateHelpInfo', function(req, res) {
+    console.log(req.body);
+    var jsonData = req.body;
+    
+    var formattedData='UPDATE INTO Helptable (title, discription) VALUES (\''+jsonData.title+'\', \''+jsonData.discription+'\')  RETURNING id';
+    console.log('formatted Helptable Query:'+formattedData);
+    
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+         if (err) console.log(err);
+                    conn.query('UPDATE INTO Helptable (title, discription) VALUES (\''+jsonData.title+'\', \''+jsonData.discription+'\')  RETURNING id',
+                         function(err, result) {
+			    done();
+                            if(err){
+                                    return res.json({
+                                            msgid: 2,
+                                            message: err.message});
+                                }
+                                            else{
+                                                return res.json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                            }
+                                    });
              });
      });
 
