@@ -102,6 +102,36 @@ router.get('/getHelpcontent', function(req, res) {
     });
 });
 
+router.post('/CreateHelp', function(req, res) {
+    console.log(req.body);
+    var jsonData = req.body;
+    
+    var formattedData='INSERT INTO Helptable (title, discription) VALUES (\''+jsonData.title+'\', \''+jsonData.discription+'\')  RETURNING id';
+    console.log('formatted Helptable Query:'+formattedData);
+    
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+         if (err) console.log(err);
+                    conn.query('INSERT INTO Helptable (title, discription) VALUES (\''+jsonData.title+'\', \''+jsonData.discription+'\')  RETURNING id',
+                         function(err, result) {
+			    done();
+                            if(err){
+                                    return res.json({
+                                            msgid: 2,
+                                            message: err.message});
+                                }
+                                            else{
+                                                return res.json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                            }
+                                    });
+                                
+                    
+                 
+             });
+     });
+
+
 router.post('/productImageSync', function(req, res) {
     var contentType = req.headers['content-type'];
     var mime = contentType.split(';')[0];
