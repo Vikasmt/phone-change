@@ -137,6 +137,33 @@
                     </div>
     </div>
 </div>
+<div ng-app="mainApp" ng-controller="mainCtrl" ng-init="">
+<!--index page-->
+<div ng-hide="isclicked===true">
+  
+    <div class="row state-overview" style="width: 60%;margin: 65px auto;">
+            <div class="col-md-6" style="">
+                <section class="panel" on ng-click="">
+                    <div class="symbol yellow" style="float: left;">
+                        <i class="material-icons">person_add</i>
+                    </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">
+                        <a ng-click=""> <p style="padding: 1em 0;font-size: 1.2em;">Create Help</p></a>
+                    </div>
+                </section>
+                </div>
+                    <div class=" col-md-6">
+                        <section class="panel" onclick="" ng-click="">
+                            <div class="symbol purple" style="float: left;">
+                                <i class="material-icons">group</i>
+                            </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">                              
+                        <a ng-click=""> <p style=" padding: 1em 0;font-size: 1.2em;color: rgba(0, 0, 0, 0.87);">List Of Help</p></a>
+                    </div>
+                        </section>
+                    </div>
+    </div>
+</div>
     
     <div ui-view></div>
 </div>
