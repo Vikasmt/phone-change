@@ -110,7 +110,7 @@
        <tbody> 
           
         <!--<tr ng-repeat="item in userlist | filter: (selectedStatus==='All' ? ({active : true} || {active : false}) : selectedStatus==='InActive' ? {active : false} : {active : true}">-->
-        <tr ng-repeat="item in helplist">
+        <tr ng-repeat="item in Helplist">
         <td><i class="material-icons" ng-click="redirectToEdit(item)">&#xE150;</i></td>
             <td>
                 <div ng-hide="item.isEdit === true">{{item.title}}</div>
