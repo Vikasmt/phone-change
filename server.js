@@ -102,6 +102,23 @@ router.get('/getHelpcontent', function(req, res) {
     });
 });
 
+router.get('/getHelpdata', function(req, res) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        conn.query(
+            'SELECT id, eng_question, eng_answer, ita_question, ita_answer, email, helpcontactnum from Helpcontent',
+            function(err,result){
+                done();
+                if(err){
+                    return res.status(400).json({error: err.message});
+                }
+                else{
+                    return res.json(result.rows);
+                }
+            });
+    });
+});
+
 router.post('/CreateHelp', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
