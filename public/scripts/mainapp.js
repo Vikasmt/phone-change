@@ -97,13 +97,13 @@
             $state.go('userlist');
         }
         $scope.navigatehelplist = function(){
-            $scope.isclickedd = true;
             $scope.isclicked = true;
+            $scope.isclickedd = true;
             $state.go('helplist');
         }
          $scope.navigatecreatehelp = function(){
+            $scope.isclicked = true;
             $scope.isclickedd = true;
-             $scope.isclicked = true;
             $state.go('createHelp');
         }
     });
