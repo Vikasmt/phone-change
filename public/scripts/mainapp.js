@@ -81,25 +81,29 @@
         $scope.load = function(){
             $scope.isclicked = false;
         }
-        $scope.disable = function(){
-            $scope.isclicked = true;
+         $scope.loadd = function(){
+            $scope.isclicked = false;
         }
         
         $scope.navigatecreateuser = function(){
             $scope.isclicked = true;
+            $scope.isclickedd = true;
             $state.go('createuser');
         }
         
         $scope.navigateuserslist = function(){
             $scope.isclicked = true;
+            $scope.isclickedd = true;
             $state.go('userlist');
         }
         $scope.navigatehelplist = function(){
+            $scope.isclickedd = true;
             $scope.isclicked = true;
             $state.go('helplist');
         }
          $scope.navigatecreatehelp = function(){
-            $scope.isclicked = true;
+            $scope.isclickedd = true;
+             $scope.isclicked = true;
             $state.go('createHelp');
         }
     });
