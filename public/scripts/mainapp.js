@@ -79,7 +79,7 @@
     
     myapp.controller("mainCtrl", function($scope, $http, $state, apiUrl) {
         $scope.load = function(){
-            $scope.isclicked = true;
+            $scope.isclicked = false;
         }
         
         $scope.navigatecreateuser = function(){
@@ -92,11 +92,11 @@
             $state.go('userlist');
         }
         $scope.navigatehelplist = function(){
-            $scope.isclicked = true;
+            $scope.isclicked = false;
             $state.go('helplist');
         }
          $scope.navigatecreatehelp = function(){
-            $scope.isclicked = true;
+            $scope.isclicked = false;
             $state.go('createHelp');
         }
     });
