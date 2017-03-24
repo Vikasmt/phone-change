@@ -89,7 +89,7 @@ router.get('/getHelpcontent', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT id, title, discription from Helptable',
+            'SELECT id, title, discription, isexpand from Helptable',
             function(err,result){
                 done();
                 if(err){
