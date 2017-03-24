@@ -79,7 +79,7 @@
     
     myapp.controller("mainCtrl", function($scope, $http, $state, apiUrl) {
         $scope.load = function(){
-            $scope.isclicked = false;
+            $scope.isclicked = true;
         }
         
         $scope.navigatecreateuser = function(){
