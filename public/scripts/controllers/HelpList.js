@@ -49,7 +49,7 @@ app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
                 
                 $http.post(updateHelpurl, HelpInfo, config)
                     .then(function (data, status, headers, config) {
-                        $scope.getHelpcontent();
+                        $scope.getHelpdata();
                     })
                     .catch(function (data, status, header, config) {
                         console.log(data);
