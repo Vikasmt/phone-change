@@ -81,6 +81,9 @@
         $scope.load = function(){
             $scope.isclicked = false;
         }
+        $scope.disable = function(){
+            $scope.isclicked = true;
+        }
         
         $scope.navigatecreateuser = function(){
             $scope.isclicked = true;
@@ -92,11 +95,11 @@
             $state.go('userlist');
         }
         $scope.navigatehelplist = function(){
-            $scope.isclicked = false;
+            $scope.isclicked = true;
             $state.go('helplist');
         }
          $scope.navigatecreatehelp = function(){
-            $scope.isclicked = false;
+            $scope.isclicked = true;
             $state.go('createHelp');
         }
     });
