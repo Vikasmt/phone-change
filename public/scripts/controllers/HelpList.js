@@ -4,8 +4,8 @@ app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
         $scope.helplist = [];
         $scope.helpMainList = [];
     
-        $scope.getHelpcontent = function () {
-            var getHelpUrl = apiUrl + 'getHelpcontent';
+        $scope.getHelpdata = function () {
+            var getHelpUrl = apiUrl + 'getHelpdata';
              var config = {
                     headers : {
                         'Content-Type': 'application/json'
@@ -15,8 +15,12 @@ app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
                 .then(function (data, status, config) {
                     var Help = angular.fromJson(angular.toJson(data));
                     angular.forEach(Help.data, function(Help){
-                       Help.title = Help.title.trim();
-                       Help.discription = Help.discription.trim();
+                       Help.eng_question = Help.eng_question.trim();
+                       Help.eng_answer = Help.eng_answer.trim();
+                       Help.ita_question = Help.ita_question.trim();
+                       Help.ita_answer = Help.ita_answer.trim();
+                       Help.email = Help.email.trim();
+                       Help.helpcontactnum = Help.helpcontactnum.trim();
                     });
                     $scope.Helplist = angular.copy(Help.data);
                     $scope.HelpMainList = angular.copy(Help.data);
