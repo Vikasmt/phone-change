@@ -15,12 +15,12 @@ app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
                 .then(function (data, status, config) {
                     var Help = angular.fromJson(angular.toJson(data));
                     angular.forEach(Help.data, function(Help){
-                       Help.eng_question = Help.eng_question.trim();
-                       Help.eng_answer = Help.eng_answer.trim();
+                       Help.eng_question = Help.eng_question;
+                       Help.eng_answer = Help.eng_answer;
                        Help.ita_question = Help.ita_question.trim();
-                       Help.ita_answer = Help.ita_answer.trim();
-                       Help.email = Help.email.trim();
-                       Help.helpcontactnum = Help.helpcontactnum.trim();
+                       Help.ita_answer = Help.ita_answer;
+                       Help.email = Help.email;
+                       Help.helpcontactnum = Help.helpcontactnum;
                     });
                     $scope.Helplist = angular.copy(Help.data);
                     $scope.HelpMainList = angular.copy(Help.data);
