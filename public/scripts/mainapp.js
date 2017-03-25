@@ -83,7 +83,7 @@
             })
             .state('createDisclaimer', {
                 url: '/helpAction',
-                templateUrl: 'createDisclaimer.html',
+                templateUrl: 'createdisclaimer.html',
                 controller: 'createDisclaimerCtrl',
                 controllerAs: 'vm',
                 params: {
