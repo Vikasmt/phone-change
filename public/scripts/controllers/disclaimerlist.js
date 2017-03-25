@@ -4,8 +4,8 @@ app.controller("DisclaimerCtrl", function($scope, $http, $state, apiUrl) {
         $scope.helplist = [];
         $scope.helpMainList = [];
     
-        $scope.getDisclaimercontent = function () {
-            var getDisclaimerUrl = apiUrl + 'getDisclaimercontent';
+        $scope.getDisclaimerdata = function () {
+            var getDisclaimerUrl = apiUrl + 'getDisclaimerdata';
              var config = {
                     headers : {
                         'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ app.controller("DisclaimerCtrl", function($scope, $http, $state, apiUrl) {
                 
                 $http.post(updateDisclaimerurl, DisclaimerInfo, config)
                     .then(function (data, status, headers, config) {
-                        $scope.getDisclaimercontent();
+                        $scope.getDisclaimerdata();
                     })
                     .catch(function (data, status, header, config) {
                         console.log(data);
