@@ -29,7 +29,7 @@ app.controller("DisclaimerCtrl", function($scope, $http, $state, apiUrl) {
         };
     
         $scope.redirectToEdit = function(DisclaimerInfo){
-            $state.go('createDisclaimer', {'Disclaimerdata':DisclaimerInfo, 'mode':'E'});
+            $state.go('createDisclaimer', {'disclaimerdata':DisclaimerInfo, 'mode':'E'});
         }
         
         
