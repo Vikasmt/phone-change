@@ -1,29 +1,26 @@
 (function(){
 var app = angular.module("mainApp");
-app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
+app.controller("DisclaimerCtrl", function($scope, $http, $state, apiUrl) {
         $scope.helplist = [];
         $scope.helpMainList = [];
     
-        $scope.getHelpdata = function () {
-            var getHelpUrl = apiUrl + 'getHelpdata';
+        $scope.getDisclaimerdata = function () {
+            var getDisclaimerUrl = apiUrl + 'getDisclaimerdata';
              var config = {
                     headers : {
                         'Content-Type': 'application/json'
                         }
                 }
-            $http.get(getHelpUrl, config)
+            $http.get(getDisclaimerUrl, config)
                 .then(function (data, status, config) {
-                    var Help = angular.fromJson(angular.toJson(data));
-                    angular.forEach(Help.data, function(Help){
-                       Help.eng_question = Help.eng_question;
-                       Help.eng_answer = Help.eng_answer;
-                       Help.ita_question = Help.ita_question.trim();
-                       Help.ita_answer = Help.ita_answer;
-                       Help.email = Help.email;
-                       Help.helpcontactnum = Help.helpcontactnum;
+                    var Disclaimer = angular.fromJson(angular.toJson(data));
+                    angular.forEach(Disclaimer.data, function(Disclaimer){
+                       Disclaimer.country = Disclaimer.country.trim();
+                       Disclaimer.language = Disclaimer.language.trim();
+                       Disclaimer.content = Disclaimer.content.trim();
                     });
-                    $scope.Helplist = angular.copy(Help.data);
-                    $scope.HelpMainList = angular.copy(Help.data);
+                    $scope.Disclaimerlist = angular.copy(Disclaimer.data);
+                    $scope.DisclaimerMainList = angular.copy(Disclaimer.data);
                 })
                 .catch(function (data, status, config) {
                     console.log(data);
@@ -31,25 +28,25 @@ app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
                 });
         };
     
-        $scope.redirectToEdit = function(HelpInfo){
-            $state.go('createHelp', {'helpdata':HelpInfo, 'mode':'E'});
+        $scope.redirectToEdit = function(DisclaimerInfo){
+            $state.go('createDisclaimer', {'Disclaimerdata':DisclaimerInfo, 'mode':'E'});
         }
         
         
-        $scope.updateHelp = function(HelpInfo) {
-            if(angular.isDefined(HelpInfo) && HelpInfo !== null) {
+        $scope.updateDisclaimer = function(DisclaimerInfo) {
+            if(angular.isDefined(DisclaimerInfo) && DisclaimerInfo !== null) {
                 var config = {
                     headers : {
                         'Content-Type': 'application/json'
                         }
                 }
                 
-                var updateHelpurl = apiUrl + 'updateHelpInfo';
-                console.log(updateHelpurl);
+                var updateDisclaimerurl = apiUrl + 'updateDisclaimerInfo';
+                console.log(updateDisclaimerurl);
                 
-                $http.post(updateHelpurl, HelpInfo, config)
+                $http.post(updateDisclaimerurl, DisclaimerInfo, config)
                     .then(function (data, status, headers, config) {
-                        $scope.getHelpdata();
+                        $scope.getDisclaimerdata();
                     })
                     .catch(function (data, status, header, config) {
                         console.log(data);
