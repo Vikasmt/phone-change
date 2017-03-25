@@ -87,7 +87,7 @@
                 controller: 'createDisclaimerCtrl',
                 controllerAs: 'vm',
                 params: {
-                    'Disclaimerdata': undefined,
+                    'disclaimerdata': undefined,
                     'mode': undefined
                 }
             });
