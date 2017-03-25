@@ -85,6 +85,24 @@ router.get('/getDisclaimercontent', function(req, res) {
     });
 });
 
+router.get('/getDisclaimerdata', function(req, res) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        conn.query(
+            'SELECT id, country, language, content from disclaimercontent',
+            function(err,result){
+                done();
+                if(err){
+                    return res.status(400).json({error: err.message});
+                }
+                else{
+                    return res.json(result.rows);
+                }
+            });
+    });
+});
+
+
 router.get('/getHelpcontent', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
