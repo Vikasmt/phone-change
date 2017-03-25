@@ -5,7 +5,7 @@ var app = angular.module("mainApp");
 
 app.controller("createDisclaimerCtrl", function($scope, $http, $state, $stateParams, apiUrl) {
   
-        $scope.help={};
+        $scope.disclaimer={};
  
       
           $scope.bindParameters = function(){
