@@ -74,6 +74,22 @@
                     'helpdata': undefined,
                     'mode': undefined
                 }
+            })
+           .state('disclaimerlist', {
+                url: '/Disclaimerlist',
+                templateUrl: 'disclaimerlist.html',
+                controller: 'DisclaimerCtrl',
+                controllerAs: 'vm'
+            })
+            .state('createDisclaimer', {
+                url: '/helpAction',
+                templateUrl: 'createDisclaimer.html',
+                controller: 'createDisclaimerCtrl',
+                controllerAs: 'vm',
+                params: {
+                    'Disclaimerdata': undefined,
+                    'mode': undefined
+                }
             });
     }]);
     
@@ -81,30 +97,44 @@
         $scope.load = function(){
             $scope.isclicked = false;
         }
-         $scope.loadd = function(){
-            $scope.isclicked = false;
-        }
         
         $scope.navigatecreateuser = function(){
             $scope.isclicked = true;
-            $scope.isclickedd = true;
+            $scope.isclickedhelp = true;
+            $scope.isclickeddisclaimer = true;
             $state.go('createuser');
         }
         
         $scope.navigateuserslist = function(){
             $scope.isclicked = true;
-            $scope.isclickedd = true;
+            $scope.isclickedhelp = true;
+            $scope.isclickeddisclaimer = true;
             $state.go('userlist');
         }
         $scope.navigatehelplist = function(){
             $scope.isclicked = true;
-            $scope.isclickedd = true;
+            $scope.isclickedhelp = true;
+            $scope.isclickeddisclaimer = true;
             $state.go('helplist');
         }
          $scope.navigatecreatehelp = function(){
             $scope.isclicked = true;
-            $scope.isclickedd = true;
+            $scope.isclickedhelp = true;
+             $scope.isclickeddisclaimer = true;
             $state.go('createHelp');
         }
+         $scope.navigatedisclaimerlist = function(){
+            $scope.isclicked = true;
+            $scope.isclickedhelp = true;
+             $scope.isclickeddisclaimer = true;
+            $state.go('disclaimerlist');
+        }
+         $scope.navigatecreatedisclaimer = function(){
+            $scope.isclicked = true;
+            $scope.isclickedhelp = true;
+            $scope.isclickeddisclaimer = true;
+            $state.go('createDisclaimer');
+        }
+        
     });
 })();
