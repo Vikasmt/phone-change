@@ -190,6 +190,58 @@ router.post('/updateHelpInfo', function(req, res) {
              });
      });
 
+router.post('/CreateDisclaimer', function(req, res) {
+    console.log(req.body);
+    var jsonData = req.body;
+    
+    var formattedData='INSERT INTO disclaimercontent (country, language, content) VALUES (\''+jsonData.country+'\', \''+jsonData.language+'\', \''+jsonData.content+'\')  RETURNING id';
+    console.log('formatted table Query:'+formattedData);
+    
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+         if (err) console.log(err);
+                    conn.query('INSERT INTO disclaimercontent (country, language, content) VALUES (\''+jsonData.country+'\', \''+jsonData.language+'\', \''+jsonData.content+'\')  RETURNING id',
+                         function(err, result) {
+			    done();
+                            if(err){
+                                    return res.json({
+                                            msgid: 2,
+                                            message: err.message});
+                                }
+                                            else{
+                                                return res.json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                            }
+                                    });
+             });
+     });
+
+router.post('/updateDisclaimerInfo', function(req, res) {
+    console.log(req.body);
+    var jsonData = req.body;
+    var disclaimer_id = jsonData.id;
+    
+    var formattedData='UPDATE disclaimercontent SET country = \''+jsonData.country+'\', language = \''+jsonData.language+'\', content = \''+jsonData.content+'\' where id='+disclaimer_id+'';
+    console.log('formatted table Query:'+formattedData);
+    
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+         if (err) console.log(err);
+                    conn.query('UPDATE disclaimercontent SET country = \''+jsonData.country+'\', language = \''+jsonData.language+'\', content = \''+jsonData.content+'\'  where id='+disclaimer_id+'',
+                         function(err, result) {
+			    done();
+                            if(err){
+                                    return res.json({
+                                            msgid: 2,
+                                            message: err.message});
+                                }
+                                            else{
+                                                return res.json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                            }
+                                    });
+             });
+     });
 
 router.post('/productImageSync', function(req, res) {
     var contentType = req.headers['content-type'];
