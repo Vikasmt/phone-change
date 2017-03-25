@@ -88,11 +88,11 @@
 
     
 </head>
-    <script src="scripts/controllers/HelpList.js"></script>
+    <script src="scripts/controllers/Disclaimerlist.js"></script>
     <script src="scripts/mainapp.js"></script>
 <body>
     
-<div ng-controller="HelpCtrl" ng-init="getHelpdata()" >
+<div ng-controller="DisclaimerCtrl" ng-init="getDisclaimerdata()" >
 <!--index page-->
 
   <div>
@@ -102,55 +102,35 @@
       <thead>
         <tr>
         <th><label>Action</label></th>
-              <th><label>English Question</label></th>
-             <th><label>English Answer</label></th>
-             <th><label>Italy Question</label></th>
-             <th><label>Italy Answer</label></th>
-             <th><label>Email</label></th>
-              <th><label>Contact Number</label></th>
+              <th><label>Country</label></th>
+             <th><label>Language</label></th>
+             <th><label>Content</label></th>
         </tr>
        </thead>
        <tbody> 
           
         <!--<tr ng-repeat="item in userlist | filter: (selectedStatus==='All' ? ({active : true} || {active : false}) : selectedStatus==='InActive' ? {active : false} : {active : true}">-->
-        <tr ng-repeat="item in Helplist">
+        <tr ng-repeat="item in Disclaimerlist">
         <td><i class="material-icons" ng-click="redirectToEdit(item)">&#xE150;</i></td>
             <td>
-                <div ng-hide="item.isEdit === true">{{item.eng_question}}</div>
+                <div ng-hide="item.isEdit === true">{{item.country}}</div>
                 <!--<div ng-hide="item.isEdit === false">
                     <input type="text" id="title" ng-model="item.title" placeholder="Enter title" required>
                 </div>-->
             </td>
             <td>
-                <div ng-hide="item.isEdit === true">{{item.eng_answer}}</div>
+                <div ng-hide="item.isEdit === true">{{item.language}}</div>
                 <!--<div ng-hide="item.isEdit === false">
                     <input type="text" id="discription" ng-model="item.discription" placeholder="Enter discription" required>
                 </div>-->
             </td>
              <td>
-                <div ng-hide="item.isEdit === true">{{item.ita_question}}</div>
+                <div ng-hide="item.isEdit === true">{{item.content}}</div>
                 <!--<div ng-hide="item.isEdit === false">
                     <input type="text" id="discription" ng-model="item.discription" placeholder="Enter discription" required>
                 </div>-->
             </td>
-             <td>
-                <div ng-hide="item.isEdit === true">{{item.ita_answer}}</div>
-                <!--<div ng-hide="item.isEdit === false">
-                    <input type="text" id="discription" ng-model="item.discription" placeholder="Enter discription" required>
-                </div>-->
-            </td>
-             <td>
-                <div ng-hide="item.isEdit === true">{{item.email}}</div>
-                <!--<div ng-hide="item.isEdit === false">
-                    <input type="text" id="discription" ng-model="item.discription" placeholder="Enter discription" required>
-                </div>-->
-            </td>
-             <td>
-                <div ng-hide="item.isEdit === true">{{item.helpcontactnum}}</div>
-                <!--<div ng-hide="item.isEdit === false">
-                    <input type="text" id="discription" ng-model="item.discription" placeholder="Enter discription" required>
-                </div>-->
-            </td>
+             
             
         </tr>
     </tbody>
