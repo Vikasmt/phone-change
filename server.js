@@ -54,8 +54,8 @@ router.post('/inserttree', function(req, res) {
         
         //-------------------------------------------Framing Query-------------------------------------------
 
-        if (jsonData.Needlebatchnumber !== undefined && jsonData.Needlebatchnumber !== null && jsonData.Needlebatchnumber !== "null" && jsonData.Needlebatchnumber.length > 0)
-        { insertQueryData += 'NI_Needlebatchnumber__c,'; valuesData += '\'' + jsonData.Needlebatchnumber + '\'' + ','; }
+      
+        insertQueryData += 'NI_Needlebatchnumber__c,'; valuesData += '\'' + jsonData.Needlebatchnumber + '\'' + ','; 
 	   
         insertQueryData += 'Case__c,'; valuesData += '\'' + jsonData.caseid + '\'' + ',';
 
