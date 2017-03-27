@@ -96,47 +96,49 @@
     myapp.controller("mainCtrl", function($scope, $http, $state, apiUrl) {
         $scope.load = function(){
             $scope.isclicked = false;
-            $scope.isclickedhelp = false;
-            $scope.isclickeddisclaimer = false;
         }
         
         $scope.navigatecreateuser = function(){
             $scope.isclicked = true;
-            $scope.isclickedhelp = true;
-            $scope.isclickeddisclaimer = true;
             $state.go('createuser');
         }
         
         $scope.navigateuserslist = function(){
             $scope.isclicked = true;
-            $scope.isclickedhelp = true;
-            $scope.isclickeddisclaimer = true;
             $state.go('userlist');
-        }
-        $scope.navigatehelplist = function(){
-            $scope.isclicked = true;
-            $scope.isclickedhelp = true;
-            $scope.isclickeddisclaimer = true;
-            $state.go('helplist');
-        }
-         $scope.navigatecreatehelp = function(){
-            $scope.isclicked = true;
-            $scope.isclickedhelp = true;
-             $scope.isclickeddisclaimer = true;
-            $state.go('createHelp');
-        }
-         $scope.navigatedisclaimerlist = function(){
-            $scope.isclicked = true;
-            $scope.isclickedhelp = true;
-             $scope.isclickeddisclaimer = true;
-            $state.go('disclaimerlist');
-        }
-         $scope.navigatecreatedisclaimer = function(){
-            $scope.isclicked = true;
-            $scope.isclickedhelp = true;
-            $scope.isclickeddisclaimer = true;
-            $state.go('createDisclaimer');
         }
         
     });
+    myapp.controller("helpCtrl", function($scope, $http, $state, apiUrl) {
+        $scope.help = function(){
+            $scope.isclickedhelp = false;
+        }
+        
+        $scope.navigatehelplist = function(){
+            $scope.isclickedhelp = true;
+            $state.go('helplist');
+        }
+         $scope.navigatecreatehelp = function(){
+            $scope.isclickedhelp = true;
+            $state.go('createHelp');
+        }
+ 
+    });
+	
+	myapp.controller("disclaimerCtrl", function($scope, $http, $state, apiUrl) {
+        $scope.disclaimer = function(){
+            $scope.isclickeddisclaimer = false;
+        }
+        
+        $scope.navigatedisclaimerlist = function(){
+            $scope.isclickeddisclaimer = true;
+            $state.go('disclaimerlist');
+        }
+         $scope.navigatecreatedisclaimer = function(){
+            $scope.isclickeddisclaimer = true;
+            $state.go('createDisclaimer');
+        }
+ 
+    });
+    
 })();
