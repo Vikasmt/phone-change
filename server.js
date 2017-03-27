@@ -31,46 +31,6 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
-router.post('/insertDecisiontree', function(req, res) {
-    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-        if (err) console.log(err);
-        
-        console.log(req.body);
-        var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
-        var valuesData=' VALUES (';
-        
-        //-------------------------------------------Framing Query-------------------------------------------
-        
-        
-
-        if (jsonData.Needlebatchnumber !== undefined && jsonData.Needlebatchnumber !== null && jsonData.Needlebatchnumber !== "null" && jsonData.Needlebatchnumber.length > 0)
-        { insertQueryData += 'NI_Needlebatchnumber__c,'; valuesData += '\'' + jsonData.Needlebatchnumber + '\'' + ','; }
-		
-        
-        var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
-        console.log(combinedQuery); 
-        
-        conn.query(combinedQuery,
-                function(err, result) {
-                    done();
-                    if(err){
-                        console.log(err.message);
-                            return res.json({
-                                    msgid: 2,
-                                    message: err.message});
-                        }
-                        else{
-                            console.log(result);
-                            return res.json({
-                                    msgid: 1,
-                                    message: 'Success.'});
-                        } 
-            });
-    });
-});
-
-
-
 router.get('/getContacts', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
