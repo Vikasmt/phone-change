@@ -44,11 +44,7 @@ router.post('/insertDecisiontree', function(req, res) {
     var splitteddata=data.replace("{","").replace("}","").split(',');
     
     var caseid = splitteddata[0];
-    var loopid = splitteddata[1];
-    var filename = splitteddata[2];
-    var contenttype = splitteddata[3];
-    var imagedata = splitteddata[4];
-	console.log(req.body);
+    console.log(req.body);
     var jsonData = req.body;
     
     var formattedData='INSERT INTO salesforce.IVOP_DecisionTree__c (NI_Needlebatchnumber__c, Case__c) VALUES (\''+jsonData.Needlebatchnumber+'\', \''+jsonData.caseid+'\')  RETURNING id';
