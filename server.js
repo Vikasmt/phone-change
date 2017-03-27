@@ -39,16 +39,9 @@ router.post('/inserttree', function(req, res) {
         var jsonData = req.body;
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES (';
-        
-        //-------------------------------------------Framing Query-------------------------------------------
 
-      
         insertQueryData += 'NI_Needlebatchnumber__c,'; valuesData += '\'' + jsonData.Needlebatchnumber + '\'' + ','; 
-	   
-        insertQueryData += 'Case__c,'; valuesData += '\'' + jsonData.caseid + '\'' + ',';
 
-
-        
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
         console.log(combinedQuery); 
         
