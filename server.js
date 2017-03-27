@@ -63,7 +63,7 @@ router.post('/insertDecisiontree', function(req, res) {
         { insertQueryData += 'NI_Needlebatchnumber__c,'; valuesData += '\'' + jsonData.Needlebatchnumber + '\'' + ','; }
 		
         
-        var combinedQuery = insertQueryData + ')' + valuesData + ') WHERE id='+caseid+'';
+        var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
         console.log(combinedQuery); 
         
         conn.query(combinedQuery,
