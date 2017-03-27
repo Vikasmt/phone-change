@@ -51,12 +51,12 @@ router.post('/insertDecisiontree', function(req, res) {
 	console.log(req.body);
     var jsonData = req.body;
     
-    var formattedData='INSERT INTO salesforce.IVOP_DecisionTree__c (NI_Needlebatchnumber__c) VALUES (\''+jsonData.Needlebatchnumber+'\')  RETURNING id';
+    var formattedData='INSERT INTO salesforce.IVOP_DecisionTree__c (NI_Needlebatchnumber__c, Case__c) VALUES (\''+jsonData.Needlebatchnumber+'\', \''+jsonData.caseid+'\')  RETURNING id';
     console.log('formatted Query:'+formattedData);
     
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
          if (err) console.log(err);
-                    conn.query('INSERT INTO salesforce.IVOP_DecisionTree__c (NI_Needlebatchnumber__c) VALUES (\''+jsonData.Needlebatchnumber+'\')  RETURNING id',
+                    conn.query('INSERT INTO salesforce.IVOP_DecisionTree__c (NI_Needlebatchnumber__c, Case__c) VALUES (\''+jsonData.Needlebatchnumber+'\', \''+jsonData.caseid+'\')  RETURNING id',
                          function(err, result) {
 			    done();
                             if(err){
