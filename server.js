@@ -31,6 +31,57 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+router.post('/inserttree', function(req, res) {
+    var contentType = req.headers['content-type'];
+    var mime = contentType.split(';')[0];
+    
+    console.log('contenttype:'+mime);
+    
+    var data=req.body.toString();
+    console.log('Body:'+data);
+    
+    var splitteddata=data.replace("{","").replace("}","").split(',');
+    
+    var caseid = splitteddata[0];
+	
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        
+        console.log(req.body);
+        var jsonData = req.body;
+        var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
+        var valuesData=' VALUES (';
+        
+        //-------------------------------------------Framing Query-------------------------------------------
+
+        if (jsonData.Needlebatchnumber !== undefined && jsonData.Needlebatchnumber !== null && jsonData.Needlebatchnumber !== "null" && jsonData.Needlebatchnumber.length > 0)
+        { insertQueryData += 'NI_Needlebatchnumber__c,'; valuesData += '\'' + jsonData.Needlebatchnumber + '\'' + ','; }
+	   
+	    if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
+        { insertQueryData += 'Case__c,'; valuesData += '\'' + jsonData.caseid + '\'' + ','; }
+
+
+        
+        var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
+        console.log(combinedQuery); 
+        
+        conn.query(combinedQuery,
+                function(err, result) {
+			                done();
+                            if(err){
+                                    return res.json({
+                                            msgid: 2,
+                                            message: err.message});
+                                }
+                                            else{
+                                                return res.json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                            }
+                });
+    });
+});
+
 router.post('/insertDecisiontree', function(req, res) {
     
     var contentType = req.headers['content-type'];
