@@ -32,6 +32,18 @@ router.get('/', function(req, res) {
 });
 
 router.post('/inserttree', function(req, res) {
+	var contentType = req.headers['content-type'];
+    var mime = contentType.split(';')[0];
+    
+    console.log('contenttype:'+mime);
+    
+    var data=req.body.toString();
+    console.log('Body:'+data);
+    
+    var splitteddata=data.replace("{","").replace("}","").split(',');
+    
+    var caseid = splitteddata[0];
+	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         
@@ -39,9 +51,17 @@ router.post('/inserttree', function(req, res) {
         var jsonData = req.body;
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES (';
+        
+        //-------------------------------------------Framing Query-------------------------------------------
 
-        insertQueryData += 'NI_Needlebatchnumber__c,'; valuesData += '\'' + jsonData.Needlebatchnumber + '\'' + ','; 
+        if (jsonData.Needlebatchnumber !== undefined && jsonData.Needlebatchnumber !== null && jsonData.Needlebatchnumber !== "null" && jsonData.Needlebatchnumber.length > 0)
+        { insertQueryData += 'NI_Needlebatchnumber__c,'; valuesData += '\'' + jsonData.Needlebatchnumber + '\'' + ','; }
+	   
+	    if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
+        { insertQueryData += 'Case__c'; valuesData += '\'' + jsonData.caseid + '\''}
 
+
+        
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
         console.log(combinedQuery); 
         
