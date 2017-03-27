@@ -96,6 +96,8 @@
     myapp.controller("mainCtrl", function($scope, $http, $state, apiUrl) {
         $scope.load = function(){
             $scope.isclicked = false;
+            $scope.isclickedhelp = false;
+            $scope.isclickeddisclaimer = false;
         }
         
         $scope.navigatecreateuser = function(){
