@@ -100,11 +100,15 @@
         
         $scope.navigatecreateuser = function(){
             $scope.isclicked = true;
+            $scope.isclickedhelp = true;
+            $scope.isclickeddisclaimer = true;
             $state.go('createuser');
         }
         
         $scope.navigateuserslist = function(){
             $scope.isclicked = true;
+            $scope.isclickedhelp = true;
+            $scope.isclickeddisclaimer = true;
             $state.go('userlist');
         }
         
