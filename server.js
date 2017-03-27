@@ -31,6 +31,48 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+router.post('/insertDecisiontree', function(req, res) {
+    
+    var contentType = req.headers['content-type'];
+    var mime = contentType.split(';')[0];
+    
+    console.log('contenttype:'+mime);
+    
+    var data=req.body.toString();
+    console.log('Body:'+data);
+    
+    var splitteddata=data.replace("{","").replace("}","").split(',');
+    
+    var caseid = splitteddata[0];
+    var loopid = splitteddata[1];
+    var filename = splitteddata[2];
+    var contenttype = splitteddata[3];
+    var imagedata = splitteddata[4];
+	console.log(req.body);
+    var jsonData = req.body;
+    
+    var formattedData='INSERT INTO salesforce.IVOP_DecisionTree__c (NI_Needlebatchnumber__c) VALUES (\''+jsonData.Needlebatchnumber+'\')  RETURNING id';
+    console.log('formatted Query:'+formattedData);
+    
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+         if (err) console.log(err);
+                    conn.query('INSERT INTO salesforce.IVOP_DecisionTree__c (NI_Needlebatchnumber__c) VALUES (\''+jsonData.Needlebatchnumber+'\')  RETURNING id',
+                         function(err, result) {
+			    done();
+                            if(err){
+                                    return res.json({
+                                            msgid: 2,
+                                            message: err.message});
+                                }
+                                            else{
+                                                return res.json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                            }
+                                    });
+             });
+     });
+
 router.get('/getContacts', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
