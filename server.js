@@ -51,12 +51,38 @@ router.post('/insertDecisiontree', function(req, res) {
         var jsonData = req.body;
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES (';
-     
-
+        
+	if (jsonData.Needleissue !== undefined && jsonData.Needleissue !== null && jsonData.Needleissue !== "null" && jsonData.Needleissue.length > 0)
+        { insertQueryData += 'GF_Needleissue__c,'; valuesData += '\'' + jsonData.Needleissue + '\'' + ','; }
+	
+	if (jsonData.Powerfailure !== undefined && jsonData.Powerfailure !== null && jsonData.Powerfailure !== "null" && jsonData.Powerfailure.length > 0)
+        { insertQueryData += 'GF_Powerfailure__c,'; valuesData += '\'' + jsonData.Powerfailure + '\'' + ','; }
+	    
+	if (jsonData.Cartridgeissue !== undefined && jsonData.Cartridgeissue !== null && jsonData.Cartridgeissue !== "null" && jsonData.Cartridgeissue.length > 0)
+        { insertQueryData += 'GF_Cartridgeissue__c,'; valuesData += '\'' + jsonData.Cartridgeissue + '\'' + ','; }
+	    
+        if (jsonData.InjectionDoseissue !== undefined && jsonData.InjectionDoseissue !== null && jsonData.InjectionDoseissue !== "null" && jsonData.InjectionDoseissue.length > 0)
+        { insertQueryData += 'GF_InjectionDoseissue__c,'; valuesData += '\'' + jsonData.InjectionDoseissue + '\'' + ','; }
+	    
+        if (jsonData.Dataandtransfer !== undefined && jsonData.Dataandtransfer !== null && jsonData.Dataandtransfer !== "null" && jsonData.Dataandtransfer.length > 0)
+        { insertQueryData += 'GF_Dataandtransfer__c,'; valuesData += '\'' + jsonData.Dataandtransfer + '\'' + ','; }
+	    
+        if (jsonData.Devicefunctioningoptions !== undefined && jsonData.Devicefunctioningoptions !== null && jsonData.Devicefunctioningoptions !== "null" && jsonData.Devicefunctioningoptions.length > 0)
+        { insertQueryData += 'GF_Devicefunctioningoptions__c,'; valuesData += '\'' + jsonData.Devicefunctioningoptions + '\'' + ','; }
+	    
+        if (jsonData.OthersVariousissue !== undefined && jsonData.OthersVariousissue !== null && jsonData.OthersVariousissue !== "null" && jsonData.OthersVariousissue.length > 0)
+        { insertQueryData += 'GF_OthersVariousissue__c,'; valuesData += '\'' + jsonData.OthersVariousissue + '\'' + ','; }
+        
         if (jsonData.Needlebatchnumber !== undefined && jsonData.Needlebatchnumber !== null && jsonData.Needlebatchnumber !== "null" && jsonData.Needlebatchnumber.length > 0)
         { insertQueryData += 'NI_Needlebatchnumber__c,'; valuesData += '\'' + jsonData.Needlebatchnumber + '\'' + ','; }
+	    
+	if (jsonData.Needleattachmentdetachment !== undefined && jsonData.Needleattachmentdetachment !== null && jsonData.Needleattachmentdetachment !== "null" && jsonData.Needleattachmentdetachment.length > 0)
+        { insertQueryData += 'NI_Needleattachmentdetachment__c,'; valuesData += '\'' + jsonData.Needleattachmentdetachment + '\'' + ','; }
+	    
+        if (jsonData.Otherneedleissue !== undefined && jsonData.Otherneedleissue !== null && jsonData.Otherneedleissue !== "null" && jsonData.Otherneedleissue.length > 0)
+        { insertQueryData += 'NI_Otherneedleissue__c,'; valuesData += '\'' + jsonData.Otherneedleissue + '\'' + ','; }
 	   
-	    if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
+	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'Case__c'; valuesData += '\'' + jsonData.caseid + '\''}
 
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
