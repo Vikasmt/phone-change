@@ -51,9 +51,6 @@ router.post('/insertDecisiontree', function(req, res) {
         var jsonData = req.body;
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES (';
-	    	   
-	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
-        { insertQueryData += 'Case__c,'; valuesData += '\'' + jsonData.caseid + '\'' + ','; }
         
 	if (jsonData.Needleissue !== undefined && jsonData.Needleissue !== null && jsonData.Needleissue !== "null" && jsonData.Needleissue.length > 0)
         { insertQueryData += 'GF_Needleissue__c,'; valuesData += '\'' + jsonData.Needleissue + '\'' + ','; }
@@ -84,67 +81,9 @@ router.post('/insertDecisiontree', function(req, res) {
 	    
         if (jsonData.Otherneedleissue !== undefined && jsonData.Otherneedleissue !== null && jsonData.Otherneedleissue !== "null" && jsonData.Otherneedleissue.length > 0)
         { insertQueryData += 'NI_Otherneedleissue__c,'; valuesData += '\'' + jsonData.Otherneedleissue + '\'' + ','; }
-	    
-	if (jsonData.DeviceDatainformationdisplayed !== undefined && jsonData.DeviceDatainformationdisplayed !== null && jsonData.DeviceDatainformationdisplayed !== "null" && jsonData.DeviceDatainformationdisplayed.length > 0)
-        { insertQueryData += 'DT_DeviceDatainformationdisplayed__c,'; valuesData += '\'' + jsonData.DeviceDatainformationdisplayed + '\'' + ','; }
-	    
-	if (jsonData.DatatransferfromedevicetoEasypod !== undefined && jsonData.DatatransferfromedevicetoEasypod !== null && jsonData.DatatransferfromedevicetoEasypod !== "null" && jsonData.DatatransferfromedevicetoEasypod.length > 0)
-        { insertQueryData += 'DT_DatatransferfromedevicetoEasypod__c,'; valuesData += '\'' + jsonData.DatatransferfromedevicetoEasypod + '\'' + ','; }
-	    
-	if (jsonData.InfodisplayedbyedeviceifYES !== undefined && jsonData.InfodisplayedbyedeviceifYES !== null && jsonData.InfodisplayedbyedeviceifYES !== "null" && jsonData.InfodisplayedbyedeviceifYES.length > 0)
-        { insertQueryData += 'DT_InfodisplayedbyedeviceifYES__c,'; valuesData += '\'' + jsonData.InfodisplayedbyedeviceifYES + '\'' + ','; }
-	    
-        if (jsonData.Provideserialnumberoftransmitter !== undefined && jsonData.Provideserialnumberoftransmitter !== null && jsonData.Provideserialnumberoftransmitter !== "null" && jsonData.Provideserialnumberoftransmitter.length > 0)
-        { insertQueryData += 'DT_Provideserialnumberoftransmitter__c,'; valuesData += '\'' + jsonData.Provideserialnumberoftransmitter + '\'' + ','; }
-	    
-	if (jsonData.Wasuserabletoperformdatatransfer !== undefined && jsonData.Wasuserabletoperformdatatransfer !== null && jsonData.Wasuserabletoperformdatatransfer !== "null" && jsonData.Wasuserabletoperformdatatransfer.length > 0)
-        { insertQueryData += 'DT_Wasuserabletoperformdatatransfer__c,'; valuesData += '\'' + jsonData.Wasuserabletoperformdatatransfer + '\'' + ','; }
-	    
-	if (jsonData.Wasuserabletoseeuploadeddata !== undefined && jsonData.Wasuserabletoseeuploadeddata !== null && jsonData.Wasuserabletoseeuploadeddata !== "null" && jsonData.Wasuserabletoseeuploadeddata.length > 0)
-        { insertQueryData += 'DT_Wasuserabletoseeuploadeddata__c,'; valuesData += '\'' + jsonData.Wasuserabletoseeuploadeddata + '\'' + ','; }
-	    
-	if (jsonData.Pleaseprovidediscrepancyanddate !== undefined && jsonData.Pleaseprovidediscrepancyanddate !== null && jsonData.Pleaseprovidediscrepancyanddate !== "null" && jsonData.Pleaseprovidediscrepancyanddate.length > 0)
-        { insertQueryData += 'DT_Pleaseprovidediscrepancyanddate__c,'; valuesData += '\'' + jsonData.Pleaseprovidediscrepancyanddate + '\'' + ','; }
-	    
-	if (jsonData.Datewhenissueoccurred !== undefined && jsonData.Datewhenissueoccurred !== null && jsonData.Datewhenissueoccurred !== "null" && jsonData.Datewhenissueoccurred.length > 0)
-        { insertQueryData += 'DT_Datewhenissueoccurred__c,'; valuesData += '\'' + jsonData.Datewhenissueoccurred + '\'' + ','; }
-	    
-	if (jsonData.userabletoperformdatatransferifno !== undefined && jsonData.userabletoperformdatatransferifno !== null && jsonData.userabletoperformdatatransferifno !== "null" && jsonData.userabletoperformdatatransferifno.length > 0)
-        { insertQueryData += 'DT_userabletoperformdatatransferifno__c,'; valuesData += '\'' + jsonData.userabletoperformdatatransferifno + '\'' + ','; }
-	    
-	if (jsonData.Isitarecurrentfailure !== undefined && jsonData.Isitarecurrentfailure !== null && jsonData.Isitarecurrentfailure !== "null" && jsonData.Isitarecurrentfailure.length > 0)
-        { insertQueryData += 'DT_Isitarecurrentfailure__c,'; valuesData += '\'' + jsonData.userabletoperformdatatransferifno + '\'' + ','; }
-	    
-	if (jsonData.ifyesPleaseprovidefrequency !== undefined && jsonData.ifyesPleaseprovidefrequency !== null && jsonData.ifyesPleaseprovidefrequency !== "null" && jsonData.ifyesPleaseprovidefrequency.length > 0)
-        { insertQueryData += 'DT_ifyesPleaseprovidefrequency__c,'; valuesData += '\'' + jsonData.ifyesPleaseprovidefrequency + '\'' + ','; }
-	    
-	if (jsonData.Accesstothemainmenu !== undefined && jsonData.Accesstothemainmenu !== null && jsonData.Accesstothemainmenu !== "null" && jsonData.Accesstothemainmenu.length > 0)
-        { insertQueryData += 'DF_Accesstothemainmenu__c,'; valuesData += '\'' + jsonData.Accesstothemainmenu + '\'' + ','; }
-	    
-	if (jsonData.somethingdisplayedpreventingacess !== undefined && jsonData.somethingdisplayedpreventingacess !== null && jsonData.somethingdisplayedpreventingacess !== "null" && jsonData.somethingdisplayedpreventingacess.length > 0)
-        { insertQueryData += 'DF_somethingdisplayedpreventingacess__c,'; valuesData += '\'' + jsonData.somethingdisplayedpreventingacess + '\'' + ','; }
-	    
-	if (jsonData.Linkedtoadeviceoption !== undefined && jsonData.Linkedtoadeviceoption !== null && jsonData.Linkedtoadeviceoption !== "null" && jsonData.Linkedtoadeviceoption.length > 0)
-        { insertQueryData += 'DF_Linkedtoadeviceoption__c,'; valuesData += '\'' + jsonData.Linkedtoadeviceoption + '\'' + ','; }
-	    
-	if (jsonData.Commentifno !== undefined && jsonData.Commentifno !== null && jsonData.Commentifno !== "null" && jsonData.Commentifno.length > 0)
-        { insertQueryData += 'DF_Commentifno__c,'; valuesData += '\'' + jsonData.Commentifno + '\'' + ','; }
-	    
-	    if (jsonData.Isdevicefunctioningslowerthanusual !== undefined && jsonData.Isdevicefunctioningslowerthanusual !== null && jsonData.Isdevicefunctioningslowerthanusual !== "null" && jsonData.Isdevicefunctioningslowerthanusual.length > 0)
-        { insertQueryData += 'DF_Isdevicefunctioningslowerthanusual__c,'; valuesData += '\'' + jsonData.Isdevicefunctioningslowerthanusual + '\'' + ','; }
-	    
-	    if (jsonData.Whenithasobservedforthefirsttime !== undefined && jsonData.Whenithasobservedforthefirsttime !== null && jsonData.Whenithasobservedforthefirsttime !== "null" && jsonData.Whenithasobservedforthefirsttime.length > 0)
-        { insertQueryData += 'DF_Whenithasobservedforthefirsttime__c,'; valuesData += '\'' + jsonData.Whenithasobservedforthefirsttime + '\'' + ','; }
-	    
-	    if (jsonData.Isthedevicelouderthanusually !== undefined && jsonData.Isthedevicelouderthanusually !== null && jsonData.Isthedevicelouderthanusually !== "null" && jsonData.Isthedevicelouderthanusually.length > 0)
-        { insertQueryData += 'DF_Isthedevicelouderthanusually__c,'; valuesData += '\'' + jsonData.Isthedevicelouderthanusually + '\'' + ','; }
-	    
-	    if (jsonData.Whenithasbeenobservedforthefirsttime !== undefined && jsonData.Whenithasbeenobservedforthefirsttime !== null && jsonData.Whenithasbeenobservedforthefirsttime !== "null" && jsonData.Whenithasbeenobservedforthefirsttime.length > 0)
-        { insertQueryData += 'DF_Whenithasbeenobservedforthefirsttime__c,'; valuesData += '\'' + jsonData.Whenithasbeenobservedforthefirsttime + '\'' + ','; }
-	    
-	    if (jsonData.Commentifdifferentbehaviour !== undefined && jsonData.Commentifdifferentbehaviour !== null && jsonData.Commentifdifferentbehaviour !== "null" && jsonData.Commentifdifferentbehaviour.length > 0)
-        { insertQueryData += 'DF_Commentifdifferentbehaviour__c'; valuesData += '\'' + jsonData.Commentifdifferentbehaviour + '\''}
-	    
+	   
+	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
+        { insertQueryData += 'Case__c'; valuesData += '\'' + jsonData.caseid + '\''}
 
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
         console.log(combinedQuery); 
