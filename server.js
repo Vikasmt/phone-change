@@ -32,6 +32,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/insertDecisiontree', function(req, res) {
+    console.log('............insertDecisiontree...............');
     var contentType = req.headers['content-type'];
     var mime = contentType.split(';')[0];
     
@@ -609,7 +610,7 @@ router.get('/ValidateAdmin', function(req, res) {
 router.post('/insertCase', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
-        
+        console.log('............insertCase...............');
         console.log(req.body);
         var jsonData = req.body;
         var timestamp = '';
@@ -723,7 +724,8 @@ router.post('/insertCase', function(req, res) {
 		
 	        insertQueryData += 'Priority,'; valuesData += '\'' + 'Medium' + '\'' + ',';
 		
-	        insertQueryData += 'Status'; valuesData += '\'' + 'New' + '\'';		
+	        insertQueryData += 'Status'; valuesData += '\'' + 'New' + '\'';	
+	 console.log('............insertCase...1............');
 		
 	/*
 	*****************************Additional Fields. Not using after final feedback from Ingrid
@@ -775,7 +777,7 @@ router.post('/insertCase', function(req, res) {
         
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
         console.log(combinedQuery); 
-        
+        console.log('............insertCase...2............');
         conn.query(combinedQuery,
                 function(err, result) {
                     done();
