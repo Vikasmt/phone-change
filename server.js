@@ -1025,10 +1025,7 @@ router.post('/updateUserInfo', function(req, res) {
         console.log(req.body);
         var jsonData = req.body;
         var user_id = jsonData.id;
-        if(jsonData.lastname === 'undefined'){
-	     var userManagementQueryStr = 'Update UserManagement set language=\''+jsonData.language+'\', country=\''+jsonData.country+'\' where id='+user_id+'';
-	     console.log('..........Undefined User Info.............'+userManagementQueryStr);
-	}else{
+
         var userManagementQueryStr = 'Update UserManagement set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email+'\', phone=\''+jsonData.phone+'\', language=\''+jsonData.language+'\', country=\''+jsonData.country+'\' where id='+user_id+'';
         console.log('.........Non.Undefined User Info.............'+userManagementQueryStr);
         
@@ -1066,7 +1063,6 @@ router.post('/updateUserInfo', function(req, res) {
                     });
                 }
             });
-        }
     });
 });
 
