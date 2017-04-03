@@ -1028,7 +1028,7 @@ router.post('/updateUserInfo', function(req, res) {
         if(jsonData.src == 'ios'){
 	   var userManagementQueryStr = 'Update UserManagement set language=\''+jsonData.language+'\', country=\''+jsonData.country+'\' where id='+user_id+'';
            console.log('.........Undefined User Info.............'+userManagementQueryStr);
-	   conn.query(contactQueryStr, 
+	   conn.query(userManagementQueryStr, 
                       function(err,result){
                                done();
                                if(err){
