@@ -31,7 +31,7 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
-router.post('/insertDecisiontree', function(req, res) {
+router.post('/insertNeedleIssue', function(req, res) {
     console.log('............insertDecisiontree...............');
     var contentType = req.headers['content-type'];
     var mime = contentType.split(';')[0];
@@ -51,94 +51,65 @@ router.post('/insertDecisiontree', function(req, res) {
         console.log(req.body);
         var jsonData = req.body;
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
-        var valuesData=' VALUES (';
-        
-	if (jsonData.Needleissue !== undefined && jsonData.Needleissue !== null && jsonData.Needleissue !== "null" && jsonData.Needleissue.length > 0)
-        { insertQueryData += 'GF_Needleissue__c,'; valuesData += '\'' + jsonData.Needleissue + '\'' + ','; }
+        var valuesData=' VALUES (';        
 	
-	if (jsonData.Powerfailure !== undefined && jsonData.Powerfailure !== null && jsonData.Powerfailure !== "null" && jsonData.Powerfailure.length > 0)
-        { insertQueryData += 'GF_Powerfailure__c,'; valuesData += '\'' + jsonData.Powerfailure + '\'' + ','; }
+    if (jsonData.NeedleBatchNumber !== undefined && jsonData.NeedleBatchNumber !== null && jsonData.NeedleBatchNumber !== "null" && jsonData.NeedleBatchNumber.length > 0)
+        { insertQueryData += 'NI_NeedleBatchNumber__c,'; valuesData += '\'' + jsonData.NeedleBatchNumber + '\'' + ','; }
 	    
-	if (jsonData.Cartridgeissue !== undefined && jsonData.Cartridgeissue !== null && jsonData.Cartridgeissue !== "null" && jsonData.Cartridgeissue.length > 0)
-        { insertQueryData += 'GF_Cartridgeissue__c,'; valuesData += '\'' + jsonData.Cartridgeissue + '\'' + ','; }
+	if (jsonData.NeedleAttachmentDetachment !== undefined && jsonData.NeedleAttachmentDetachment !== null && jsonData.NeedleAttachmentDetachment !== "null" && jsonData.NeedleAttachmentDetachment.length > 0)
+        { insertQueryData += 'NI_NeedleAttachmentDetachment__c,'; valuesData += '\'' + jsonData.NeedleAttachmentDetachment + '\'' + ','; }
 	    
-        if (jsonData.InjectionDoseissue !== undefined && jsonData.InjectionDoseissue !== null && jsonData.InjectionDoseissue !== "null" && jsonData.InjectionDoseissue.length > 0)
-        { insertQueryData += 'GF_InjectionDoseissue__c,'; valuesData += '\'' + jsonData.InjectionDoseissue + '\'' + ','; }
+    if (jsonData.therNeedleIssue !== undefined && jsonData.therNeedleIssue !== null && jsonData.therNeedleIssue !== "null" && jsonData.therNeedleIssue.length > 0)
+        { insertQueryData += 'NI_OtherNeedleIssue__c,'; valuesData += '\'' + jsonData.therNeedleIssue + '\'' + ','; }
+	
+	// Needle warning message - Needle warning message selection
+	
+	if (jsonData.NeedleWarningMessageSelection !== undefined && jsonData.NeedleWarningMessageSelection !== null && jsonData.NeedleWarningMessageSelection !== "null" && jsonData.NeedleWarningMessageSelection.length > 0)
+        { insertQueryData += 'NW_NeedleWarningMessageSelection__c,'; valuesData += '\'' + jsonData.NeedleWarningMessageSelection + '\'' + ','; }
 	    
-        if (jsonData.Dataandtransfer !== undefined && jsonData.Dataandtransfer !== null && jsonData.Dataandtransfer !== "null" && jsonData.Dataandtransfer.length > 0)
-        { insertQueryData += 'GF_Dataandtransfer__c,'; valuesData += '\'' + jsonData.Dataandtransfer + '\'' + ','; }
+	if (jsonData.IsWarningmsgDisplayedWhenNedleAttd !== undefined && jsonData.IsWarningmsgDisplayedWhenNedleAttd !== null && jsonData.IsWarningmsgDisplayedWhenNedleAttd !== "null" && jsonData.IsWarningmsgDisplayedWhenNedleAttd.length > 0)
+        { insertQueryData += 'NW_IsWarningmsgDisplayedWhenNedleAttd__c,'; valuesData += '\'' + jsonData.IsWarningmsgDisplayedWhenNedleAttd + '\'' + ','; }
 	    
-        if (jsonData.Devicefunctioningoptions !== undefined && jsonData.Devicefunctioningoptions !== null && jsonData.Devicefunctioningoptions !== "null" && jsonData.Devicefunctioningoptions.length > 0)
-        { insertQueryData += 'GF_Devicefunctioningoptions__c,'; valuesData += '\'' + jsonData.Devicefunctioningoptions + '\'' + ','; }
+    if (jsonData.IsTheInjectionStillPossible !== undefined && jsonData.IsTheInjectionStillPossible !== null && jsonData.IsTheInjectionStillPossible !== "null" && jsonData.IsTheInjectionStillPossible.length > 0)
+        { insertQueryData += 'NW_IsTheInjectionStillPossible__c,'; valuesData += '\'' + jsonData.IsTheInjectionStillPossible + '\'' + ','; }
+	
+	if (jsonData.MessageDisplayByInterruptingTheInje !== undefined && jsonData.MessageDisplayByInterruptingTheInje !== null && jsonData.MessageDisplayByInterruptingTheInje !== "null" && jsonData.MessageDisplayByInterruptingTheInje.length > 0)
+        { insertQueryData += 'NW_MessageDisplayByInterruptingTheInje__c,'; valuesData += '\'' + jsonData.MessageDisplayByInterruptingTheInje + '\'' + ','; }
 	    
-        if (jsonData.OthersVariousissue !== undefined && jsonData.OthersVariousissue !== null && jsonData.OthersVariousissue !== "null" && jsonData.OthersVariousissue.length > 0)
-        { insertQueryData += 'GF_OthersVariousissue__c,'; valuesData += '\'' + jsonData.OthersVariousissue + '\'' + ','; }
-        
-        if (jsonData.Needlebatchnumber !== undefined && jsonData.Needlebatchnumber !== null && jsonData.Needlebatchnumber !== "null" && jsonData.Needlebatchnumber.length > 0)
-        { insertQueryData += 'NI_Needlebatchnumber__c,'; valuesData += '\'' + jsonData.Needlebatchnumber + '\'' + ','; }
+		
+	if (jsonData.DeviceWarningMsgUponStart !== undefined && jsonData.DeviceWarningMsgUponStart !== null && jsonData.DeviceWarningMsgUponStart !== "null" && jsonData.DeviceWarningMsgUponStart.length > 0)
+        { insertQueryData += 'NW_DeviceWarningMsgUponStart__c,'; valuesData += '\'' + jsonData.DeviceWarningMsgUponStart + '\'' + ','; }
 	    
-	if (jsonData.Needleattachmentdetachment !== undefined && jsonData.Needleattachmentdetachment !== null && jsonData.Needleattachmentdetachment !== "null" && jsonData.Needleattachmentdetachment.length > 0)
-        { insertQueryData += 'NI_Needleattachmentdetachment__c,'; valuesData += '\'' + jsonData.Needleattachmentdetachment + '\'' + ','; }
+    if (jsonData.DoesNeedleCavityShowResidue !== undefined && jsonData.DoesNeedleCavityShowResidue !== null && jsonData.DoesNeedleCavityShowResidue !== "null" && jsonData.DoesNeedleCavityShowResidue.length > 0)
+        { insertQueryData += 'NW_DoesNeedleCavityShowResidue__c,'; valuesData += '\'' + jsonData.DoesNeedleCavityShowResidue + '\'' + ','; }
 	    
-        if (jsonData.Otherneedleissue !== undefined && jsonData.Otherneedleissue !== null && jsonData.Otherneedleissue !== "null" && jsonData.Otherneedleissue.length > 0)
-        { insertQueryData += 'NI_Otherneedleissue__c,'; valuesData += '\'' + jsonData.Otherneedleissue + '\'' + ','; }
+		
+	if (jsonData.IsNeedleStillAttachedtoCartridge !== undefined && jsonData.IsNeedleStillAttachedtoCartridge !== null && jsonData.IsNeedleStillAttachedtoCartridge !== "null" && jsonData.IsNeedleStillAttachedtoCartridge.length > 0)
+        { insertQueryData += 'NW_IsNeedleStillAttachedtoCartridge__c,'; valuesData += '\'' + jsonData.IsNeedleStillAttachedtoCartridge + '\'' + ','; }
 	    
-	if (jsonData.DeviceDatainformationdisplayed !== undefined && jsonData.DeviceDatainformationdisplayed !== null && jsonData.DeviceDatainformationdisplayed !== "null" && jsonData.DeviceDatainformationdisplayed.length > 0)
-        { insertQueryData += 'DT_DeviceDatainformationdisplayed__c,'; valuesData += '\'' + jsonData.DeviceDatainformationdisplayed + '\'' + ','; }
+    if (jsonData.NeedleDetatchedByPushing !== undefined && jsonData.NeedleDetatchedByPushing !== null && jsonData.NeedleDetatchedByPushing !== "null" && jsonData.NeedleDetatchedByPushing.length > 0)
+        { insertQueryData += 'NW_NeedleDetatchedByPushing__c,'; valuesData += '\'' + jsonData.NeedleDetatchedByPushing + '\'' + ','; }
 	    
-	if (jsonData.DatatransferfromedevicetoEasypod !== undefined && jsonData.DatatransferfromedevicetoEasypod !== null && jsonData.DatatransferfromedevicetoEasypod !== "null" && jsonData.DatatransferfromedevicetoEasypod.length > 0)
-        { insertQueryData += 'DT_DatatransferfromedevicetoEasypod__c,'; valuesData += '\'' + jsonData.DatatransferfromedevicetoEasypod + '\'' + ','; }
+	if (jsonData.DoestheNeedleButtonReact !== undefined && jsonData.DoestheNeedleButtonReact !== null && jsonData.DoestheNeedleButtonReact !== "null" && jsonData.DoestheNeedleButtonReact.length > 0)
+        { insertQueryData += 'NW_DoestheNeedleButtonReact__c,'; valuesData += '\'' + jsonData.DoestheNeedleButtonReact + '\'' + ','; }
+	
 	    
-	if (jsonData.InfodisplayedbyedeviceifYES !== undefined && jsonData.InfodisplayedbyedeviceifYES !== null && jsonData.InfodisplayedbyedeviceifYES !== "null" && jsonData.InfodisplayedbyedeviceifYES.length > 0)
-        { insertQueryData += 'DT_InfodisplayedbyedeviceifYES__c,'; valuesData += '\'' + jsonData.InfodisplayedbyedeviceifYES + '\'' + ','; }
-	    
-        if (jsonData.Provideserialnumberoftransmitter !== undefined && jsonData.Provideserialnumberoftransmitter !== null && jsonData.Provideserialnumberoftransmitter !== "null" && jsonData.Provideserialnumberoftransmitter.length > 0)
-        { insertQueryData += 'DT_Provideserialnumberoftransmitter__c,'; valuesData += '\'' + jsonData.Provideserialnumberoftransmitter + '\'' + ','; }
-	    
-	if (jsonData.Wasuserabletoperformdatatransfer !== undefined && jsonData.Wasuserabletoperformdatatransfer !== null && jsonData.Wasuserabletoperformdatatransfer !== "null" && jsonData.Wasuserabletoperformdatatransfer.length > 0)
-        { insertQueryData += 'DT_Wasuserabletoperformdatatransfer__c,'; valuesData += '\'' + jsonData.Wasuserabletoperformdatatransfer + '\'' + ','; }
-	    
-	if (jsonData.Wasuserabletoseeuploadeddata !== undefined && jsonData.Wasuserabletoseeuploadeddata !== null && jsonData.Wasuserabletoseeuploadeddata !== "null" && jsonData.Wasuserabletoseeuploadeddata.length > 0)
-        { insertQueryData += 'DT_Wasuserabletoseeuploadeddata__c,'; valuesData += '\'' + jsonData.Wasuserabletoseeuploadeddata + '\'' + ','; }
-	    
-	if (jsonData.Pleaseprovidediscrepancyanddate !== undefined && jsonData.Pleaseprovidediscrepancyanddate !== null && jsonData.Pleaseprovidediscrepancyanddate !== "null" && jsonData.Pleaseprovidediscrepancyanddate.length > 0)
-        { insertQueryData += 'DT_Pleaseprovidediscrepancyanddate__c,'; valuesData += '\'' + jsonData.Pleaseprovidediscrepancyanddate + '\'' + ','; }
-	    
-	if (jsonData.Datewhenissueoccurred !== undefined && jsonData.Datewhenissueoccurred !== null && jsonData.Datewhenissueoccurred !== "null" && jsonData.Datewhenissueoccurred.length > 0)
-        { insertQueryData += 'DT_Datewhenissueoccurred__c,'; valuesData += '\'' + jsonData.Datewhenissueoccurred + '\'' + ','; }
-	    
-	if (jsonData.userabletoperformdatatransferifno !== undefined && jsonData.userabletoperformdatatransferifno !== null && jsonData.userabletoperformdatatransferifno !== "null" && jsonData.userabletoperformdatatransferifno.length > 0)
-        { insertQueryData += 'DT_userabletoperformdatatransferifno__c,'; valuesData += '\'' + jsonData.userabletoperformdatatransferifno + '\'' + ','; }
-	    
-	if (jsonData.Isitarecurrentfailure !== undefined && jsonData.Isitarecurrentfailure !== null && jsonData.Isitarecurrentfailure !== "null" && jsonData.Isitarecurrentfailure.length > 0)
-        { insertQueryData += 'DT_Isitarecurrentfailure__c,'; valuesData += '\'' + jsonData.userabletoperformdatatransferifno + '\'' + ','; }
-	    
-	if (jsonData.ifyesPleaseprovidefrequency !== undefined && jsonData.ifyesPleaseprovidefrequency !== null && jsonData.ifyesPleaseprovidefrequency !== "null" && jsonData.ifyesPleaseprovidefrequency.length > 0)
-        { insertQueryData += 'DT_ifyesPleaseprovidefrequency__c,'; valuesData += '\'' + jsonData.ifyesPleaseprovidefrequency + '\'' + ','; }
-	    
-	if (jsonData.Accesstothemainmenu !== undefined && jsonData.Accesstothemainmenu !== null && jsonData.Accesstothemainmenu !== "null" && jsonData.Accesstothemainmenu.length > 0)
-        { insertQueryData += 'DF_Accesstothemainmenu__c,'; valuesData += '\'' + jsonData.Accesstothemainmenu + '\'' + ','; }
-	    
-	if (jsonData.somethingdisplayedpreventingacess !== undefined && jsonData.somethingdisplayedpreventingacess !== null && jsonData.somethingdisplayedpreventingacess !== "null" && jsonData.somethingdisplayedpreventingacess.length > 0)
-        { insertQueryData += 'DF_somethingdisplayedpreventingacess__c,'; valuesData += '\'' + jsonData.somethingdisplayedpreventingacess + '\'' + ','; }
-	    
-	if (jsonData.Linkedtoadeviceoption !== undefined && jsonData.Linkedtoadeviceoption !== null && jsonData.Linkedtoadeviceoption !== "null" && jsonData.Linkedtoadeviceoption.length > 0)
-        { insertQueryData += 'DF_Linkedtoadeviceoption__c,'; valuesData += '\'' + jsonData.Linkedtoadeviceoption + '\'' + ','; }
-	    
-	if (jsonData.Commentifno !== undefined && jsonData.Commentifno !== null && jsonData.Commentifno !== "null" && jsonData.Commentifno.length > 0)
-        { insertQueryData += 'DF_Commentifno__c,'; valuesData += '\'' + jsonData.Commentifno + '\'' + ','; }
-	    
-	if (jsonData.Isdevicefunctioningslowerthanusual !== undefined && jsonData.Isdevicefunctioningslowerthanusual !== null && jsonData.Isdevicefunctioningslowerthanusual !== "null" && jsonData.Isdevicefunctioningslowerthanusual.length > 0)
-        { insertQueryData += 'DF_Isdevicefunctioningslowerthanusual__c,'; valuesData += '\'' + jsonData.Isdevicefunctioningslowerthanusual + '\'' + ','; }
-	    
-	if (jsonData.Whenithasobservedforthefirsttime !== undefined && jsonData.Whenithasobservedforthefirsttime !== null && jsonData.Whenithasobservedforthefirsttime !== "null" && jsonData.Whenithasobservedforthefirsttime.length > 0)
-        { insertQueryData += 'DF_Whenithasobservedforthefirsttime__c,'; valuesData += '\'' + jsonData.Whenithasobservedforthefirsttime + '\'' + ','; }
-	    
-	if (jsonData.Isthedevicelouderthanusually !== undefined && jsonData.Isthedevicelouderthanusually !== null && jsonData.Isthedevicelouderthanusually !== "null" && jsonData.Isthedevicelouderthanusually.length > 0)
-        { insertQueryData += 'DF_Isthedevicelouderthanusually__c,'; valuesData += '\'' + jsonData.Isthedevicelouderthanusually + '\'' + ','; }
-	    
-	if (jsonData.Whenithasbeenobservedforthefirsttime !== undefined && jsonData.Whenithasbeenobservedforthefirsttime !== null && jsonData.Whenithasbeenobservedforthefirsttime !== "null" && jsonData.Whenithasbeenobservedforthefirsttime.length > 0)
-        { insertQueryData += 'DF_Whenithasbeenobservedforthefirsttime__c,'; valuesData += '\'' + jsonData.Whenithasbeenobservedforthefirsttime + '\'' + ','; }
+    if (jsonData.FrequencyoftheWMdiplay !== undefined && jsonData.FrequencyoftheWMdiplay !== null && jsonData.FrequencyoftheWMdiplay !== "null" && jsonData.FrequencyoftheWMdiplay.length > 0)
+        { insertQueryData += 'NW_FrequencyoftheWMdiplay__c,'; valuesData += '\'' + jsonData.FrequencyoftheWMdiplay + '\'' + ','; }
+	
+	
+	if (jsonData.WhenApproximatelyIssueObservedLastly !== undefined && jsonData.WhenApproximatelyIssueObservedLastly !== null && jsonData.WhenApproximatelyIssueObservedLastly !== "null" && jsonData.WhenApproximatelyIssueObservedLastly.length > 0)
+        { insertQueryData += 'NW_WhenApproximatelyIssueObservedLastly__c,'; valuesData += '\'' + jsonData.WhenApproximatelyIssueObservedLastly + '\'' + ','; }
+
+    if (jsonData.ApproximateDate !== undefined && jsonData.ApproximateDate !== null && jsonData.ApproximateDate !== "null" && jsonData.ApproximateDate.length > 0)
+        { insertQueryData += 'NW_ApproximateDate__c,'; valuesData += '\'' + jsonData.ApproximateDate + '\'' + ','; }
+	
+	
+	if (jsonData.WarngMsgDisplayedAtParticularStep !== undefined && jsonData.WarngMsgDisplayedAtParticularStep !== null && jsonData.WarngMsgDisplayedAtParticularStep !== "null" && jsonData.WarngMsgDisplayedAtParticularStep.length > 0)
+        { insertQueryData += 'NW_WarngMsgDisplayedAtParticularStep__c,'; valuesData += '\'' + jsonData.WarngMsgDisplayedAtParticularStep + '\'' + ','; }
+
+	if (jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== undefined && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== null && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== "null" && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc.length > 0)
+        { insertQueryData += 'NW_IsMsgDisplayedOnUseOfNewNdleBatc__c,'; valuesData += '\'' + jsonData.IsMsgDisplayedOnUseOfNewNdleBatc + '\'' + ','; }
 	   
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'Case__c'; valuesData += '\'' + jsonData.caseid + '\''}
@@ -1055,7 +1026,7 @@ router.post('/updateUserInfo', function(req, res) {
         var jsonData = req.body;
         var user_id = jsonData.id;
         
-        var userManagementQueryStr = 'Update UserManagement set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email+'\', phone=\''+jsonData.phone+'\' where id='+user_id+'';
+        var userManagementQueryStr = 'Update UserManagement set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email+'\', phone=\''+jsonData.phone+'\', language=\''+jsonData.language+'\', country=\''+jsonData.country+'\' where id='+user_id+'';
         console.log(userManagementQueryStr);
         
         conn.query('SELECT *from UserManagement where id='+user_id+'',
