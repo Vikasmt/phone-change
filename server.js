@@ -1027,7 +1027,18 @@ router.post('/updateUserInfo', function(req, res) {
         var user_id = jsonData.id;
         if(jsonData.src == 'ios'){
 	   var userManagementQueryStr = 'Update UserManagement set language=\''+jsonData.language+'\', country=\''+jsonData.country+'\' where id='+user_id+'';
-           console.log('.........Undefined User Info.............'+userManagementQueryStr); 
+           console.log('.........Undefined User Info.............'+userManagementQueryStr);
+	   conn.query(contactQueryStr, 
+                      function(err,result){
+                               done();
+                               if(err){
+                                  return res.status(400).json({error: err.message});
+                               } else{
+                                  return res.status(200).json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                               }
+                    });           
 	}else{
            var userManagementQueryStr = 'Update UserManagement set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email+'\', phone=\''+jsonData.phone+'\', language=\''+jsonData.language+'\', country=\''+jsonData.country+'\' where id='+user_id+'';
            console.log('.........Non.Undefined User Info.............'+userManagementQueryStr);
