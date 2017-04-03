@@ -213,6 +213,81 @@ router.post('/insertDataandtransfer', function(req, res) {
 });
 
 
+router.post('/insertDiviceGeneralFunctioning', function(req, res) {
+    console.log('............insertDiviceGeneralFunctioning...............');
+    var contentType = req.headers['content-type'];
+    var mime = contentType.split(';')[0];
+    
+    console.log('contenttype:'+mime);
+    
+    var data=req.body.toString();
+    console.log('Body:'+data);
+    
+    var splitteddata=data.replace("{","").replace("}","").split(',');
+    
+    var caseid = splitteddata[0];
+	
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        
+        console.log(req.body);
+        var jsonData = req.body;
+        var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
+        var valuesData=' VALUES (';        
+	
+	if (jsonData.AccessToTheMainMenu !== undefined && jsonData.AccessToTheMainMenu !== null && jsonData.AccessToTheMainMenu !== "null" && jsonData.AccessToTheMainMenu.length > 0)
+        { insertQueryData += 'DF_Accesstothemainmenu__c,'; valuesData += '\'' + jsonData.AccessToTheMainMenu + '\'' + ','; }
+	    
+	if (jsonData.SomeThingDisplayedPreventingAcess !== undefined && jsonData.SomeThingDisplayedPreventingAcess !== null && jsonData.SomeThingDisplayedPreventingAcess !== "null" && jsonData.SomeThingDisplayedPreventingAcess.length > 0)
+        { insertQueryData += 'DF_somethingdisplayedpreventingacess__c,'; valuesData += '\'' + jsonData.SomeThingDisplayedPreventingAcess + '\'' + ','; }
+	    
+	if (jsonData.LinkedToaDeviceOption !== undefined && jsonData.LinkedToaDeviceOption !== null && jsonData.LinkedToaDeviceOption !== "null" && jsonData.LinkedToaDeviceOption.length > 0)
+        { insertQueryData += 'DF_Linkedtoadeviceoption__c,'; valuesData += '\'' + jsonData.LinkedToaDeviceOption + '\'' + ','; }
+	    
+	if (jsonData.CommentIfNo !== undefined && jsonData.CommentIfNo !== null && jsonData.CommentIfNo !== "null" && jsonData.CommentIfNo.length > 0)
+        { insertQueryData += 'DF_Commentifno__c,'; valuesData += '\'' + jsonData.CommentIfNo + '\'' + ','; }
+	    
+	if (jsonData.ChangeIndevicesBehaviour !== undefined && jsonData.ChangeIndevicesBehaviour !== null && jsonData.ChangeIndevicesBehaviour !== "null" && jsonData.ChangeIndevicesBehaviour.length > 0)
+        { insertQueryData += 'DF_Changeindevicesbehaviour__c,'; valuesData += '\'' + jsonData.ChangeIndevicesBehaviour + '\'' + ','; }
+	    
+	if (jsonData.IsDeviceFunctioningSlowerThanUsual !== undefined && jsonData.IsDeviceFunctioningSlowerThanUsual !== null && jsonData.IsDeviceFunctioningSlowerThanUsual !== "null" && jsonData.IsDeviceFunctioningSlowerThanUsual.length > 0)
+        { insertQueryData += 'DF_Isdevicefunctioningslowerthanusual__c,'; valuesData += '\'' + jsonData.IsDeviceFunctioningSlowerThanUsual + '\'' + ','; }
+	    
+	if (jsonData.WhenItHasObservedForTheFirstTime !== undefined && jsonData.WhenItHasObservedForTheFirstTime !== null && jsonData.WhenItHasObservedForTheFirstTime !== "null" && jsonData.WhenItHasObservedForTheFirstTime.length > 0)
+        { insertQueryData += 'DF_Whenithasobservedforthefirsttime__c,'; valuesData += '\'' + jsonData.WhenItHasObservedForTheFirstTime + '\'' + ','; }
+	    
+	if (jsonData.IsTheDeviceLouderThanUsually !== undefined && jsonData.IsTheDeviceLouderThanUsually !== null && jsonData.IsTheDeviceLouderThanUsually !== "null" && jsonData.IsTheDeviceLouderThanUsually.length > 0)
+        { insertQueryData += 'DF_Isthedevicelouderthanusually__c,'; valuesData += '\'' + jsonData.IsTheDeviceLouderThanUsually + '\'' + ','; }
+	    
+	if (jsonData.WhenItHasBeenObservedForTheFirstTime !== undefined && jsonData.WhenItHasBeenObservedForTheFirstTime !== null && jsonData.WhenItHasBeenObservedForTheFirstTime !== "null" && jsonData.WhenItHasBeenObservedForTheFirstTime.length > 0)
+        { insertQueryData += 'DF_Whenithasbeenobservedforthefirsttime__c,'; valuesData += '\'' + jsonData.WhenItHasBeenObservedForTheFirstTime + '\'' + ','; }
+       	   
+	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
+        { insertQueryData += 'Case__c'; valuesData += '\'' + jsonData.caseid + '\''}
+
+        var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
+        console.log(combinedQuery); 
+        
+        conn.query(combinedQuery,
+                function(err, result) {
+			                done();
+                            if(err){
+                                    return res.json({
+                                            msgid: 2,
+                                            message: err.message});
+                                   }
+                                            else{
+                                                return res.json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                   }
+                });
+    });
+});
+
+
+
+
 router.get('/getContacts', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
