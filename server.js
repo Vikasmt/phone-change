@@ -156,38 +156,38 @@ router.post('/insertDataandtransfer', function(req, res) {
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES (';        
 	
-	if (jsonData.DeviceDatainformationdisplayed !== undefined && jsonData.DeviceDatainformationdisplayed !== null && jsonData.DeviceDatainformationdisplayed !== "null" && jsonData.DeviceDatainformationdisplayed.length > 0)
-        { insertQueryData += 'DT_DeviceDatainformationdisplayed__c,'; valuesData += '\'' + jsonData.DeviceDatainformationdisplayed + '\'' + ','; }
+	if (jsonData.DeviceDataInformationDisplayed !== undefined && jsonData.DeviceDataInformationDisplayed !== null && jsonData.DeviceDataInformationDisplayed !== "null" && jsonData.DeviceDataInformationDisplayed.length > 0)
+        { insertQueryData += 'DT_DeviceDatainformationdisplayed__c,'; valuesData += '\'' + jsonData.DeviceDataInformationDisplayed + '\'' + ','; }
 	    
-	if (jsonData.DatatransferfromedevicetoEasypod !== undefined && jsonData.DatatransferfromedevicetoEasypod !== null && jsonData.DatatransferfromedevicetoEasypod !== "null" && jsonData.DatatransferfromedevicetoEasypod.length > 0)
-        { insertQueryData += 'DT_DatatransferfromedevicetoEasypod__c,'; valuesData += '\'' + jsonData.DatatransferfromedevicetoEasypod + '\'' + ','; }
+	if (jsonData.DataTransferFromEdeviceToEasypod !== undefined && jsonData.DataTransferFromEdeviceToEasypod !== null && jsonData.DataTransferFromEdeviceToEasypod !== "null" && jsonData.DataTransferFromEdeviceToEasypod.length > 0)
+        { insertQueryData += 'DT_DatatransferfromedevicetoEasypod__c,'; valuesData += '\'' + jsonData.DataTransferFromEdeviceToEasypod + '\'' + ','; }
 	    
-	if (jsonData.InfodisplayedbyedeviceifYES !== undefined && jsonData.InfodisplayedbyedeviceifYES !== null && jsonData.InfodisplayedbyedeviceifYES !== "null" && jsonData.InfodisplayedbyedeviceifYES.length > 0)
-        { insertQueryData += 'DT_InfodisplayedbyedeviceifYES__c,'; valuesData += '\'' + jsonData.InfodisplayedbyedeviceifYES + '\'' + ','; }
+	if (jsonData.InfoDisplayedByEdeviceIfYes !== undefined && jsonData.InfoDisplayedByEdeviceIfYes !== null && jsonData.InfoDisplayedByEdeviceIfYes !== "null" && jsonData.InfoDisplayedByEdeviceIfYes.length > 0)
+        { insertQueryData += 'DT_InfodisplayedbyedeviceifYES__c,'; valuesData += '\'' + jsonData.InfoDisplayedByEdeviceIfYes + '\'' + ','; }
 	    
-        if (jsonData.Provideserialnumberoftransmitter !== undefined && jsonData.Provideserialnumberoftransmitter !== null && jsonData.Provideserialnumberoftransmitter !== "null" && jsonData.Provideserialnumberoftransmitter.length > 0)
-        { insertQueryData += 'DT_Provideserialnumberoftransmitter__c,'; valuesData += '\'' + jsonData.Provideserialnumberoftransmitter + '\'' + ','; }
+        if (jsonData.ProvideSerialNumberOfTransmitter !== undefined && jsonData.ProvideSerialNumberOfTransmitter !== null && jsonData.ProvideSerialNumberOfTransmitter !== "null" && jsonData.ProvideSerialNumberOfTransmitter.length > 0)
+        { insertQueryData += 'DT_Provideserialnumberoftransmitter__c,'; valuesData += '\'' + jsonData.ProvideSerialNumberOfTransmitter + '\'' + ','; }
 	    
-	if (jsonData.Wasuserabletoperformdatatransfer !== undefined && jsonData.Wasuserabletoperformdatatransfer !== null && jsonData.Wasuserabletoperformdatatransfer !== "null" && jsonData.Wasuserabletoperformdatatransfer.length > 0)
-        { insertQueryData += 'DT_Wasuserabletoperformdatatransfer__c,'; valuesData += '\'' + jsonData.Wasuserabletoperformdatatransfer + '\'' + ','; }
+	if (jsonData.WasUserAbleToPerformDataTransfer !== undefined && jsonData.WasUserAbleToPerformDataTransfer !== null && jsonData.WasUserAbleToPerformDataTransfer !== "null" && jsonData.WasUserAbleToPerformDataTransfer.length > 0)
+        { insertQueryData += 'DT_Wasuserabletoperformdatatransfer__c,'; valuesData += '\'' + jsonData.WasUserAbleToPerformDataTransfer + '\'' + ','; }
 	    
-	if (jsonData.Wasuserabletoseeuploadeddata !== undefined && jsonData.Wasuserabletoseeuploadeddata !== null && jsonData.Wasuserabletoseeuploadeddata !== "null" && jsonData.Wasuserabletoseeuploadeddata.length > 0)
-        { insertQueryData += 'DT_Wasuserabletoseeuploadeddata__c,'; valuesData += '\'' + jsonData.Wasuserabletoseeuploadeddata + '\'' + ','; }
+	if (jsonData.WasUserAbleToSeeUploadedData !== undefined && jsonData.WasUserAbleToSeeUploadedData !== null && jsonData.WasUserAbleToSeeUploadedData !== "null" && jsonData.WasUserAbleToSeeUploadedData.length > 0)
+        { insertQueryData += 'DT_Wasuserabletoseeuploadeddata__c,'; valuesData += '\'' + jsonData.WasUserAbleToSeeUploadedData + '\'' + ','; }
 	    
-	if (jsonData.Pleaseprovidediscrepancyanddate !== undefined && jsonData.Pleaseprovidediscrepancyanddate !== null && jsonData.Pleaseprovidediscrepancyanddate !== "null" && jsonData.Pleaseprovidediscrepancyanddate.length > 0)
-        { insertQueryData += 'DT_Pleaseprovidediscrepancyanddate__c,'; valuesData += '\'' + jsonData.Pleaseprovidediscrepancyanddate + '\'' + ','; }
+	if (jsonData.PleaseProvideDiscrepancyAndDate !== undefined && jsonData.PleaseProvideDiscrepancyAndDate !== null && jsonData.PleaseProvideDiscrepancyAndDate !== "null" && jsonData.PleaseProvideDiscrepancyAndDate.length > 0)
+        { insertQueryData += 'DT_Pleaseprovidediscrepancyanddate__c,'; valuesData += '\'' + jsonData.PleaseProvideDiscrepancyAndDate + '\'' + ','; }
 	    
-	if (jsonData.Datewhenissueoccurred !== undefined && jsonData.Datewhenissueoccurred !== null && jsonData.Datewhenissueoccurred !== "null" && jsonData.Datewhenissueoccurred.length > 0)
-        { insertQueryData += 'DT_Datewhenissueoccurred__c,'; valuesData += '\'' + jsonData.Datewhenissueoccurred + '\'' + ','; }
+	if (jsonData.DateWhenIssueOccurred !== undefined && jsonData.DateWhenIssueOccurred !== null && jsonData.DateWhenIssueOccurred !== "null" && jsonData.DateWhenIssueOccurred.length > 0)
+        { insertQueryData += 'DT_Datewhenissueoccurred__c,'; valuesData += '\'' + jsonData.DateWhenIssueOccurred + '\'' + ','; }
 	    
-	if (jsonData.userabletoperformdatatransferifno !== undefined && jsonData.userabletoperformdatatransferifno !== null && jsonData.userabletoperformdatatransferifno !== "null" && jsonData.userabletoperformdatatransferifno.length > 0)
-        { insertQueryData += 'DT_userabletoperformdatatransferifno__c,'; valuesData += '\'' + jsonData.userabletoperformdatatransferifno + '\'' + ','; }
+	if (jsonData.UserAbleToPerformDataTransferIfNo !== undefined && jsonData.UserAbleToPerformDataTransferIfNo !== null && jsonData.UserAbleToPerformDataTransferIfNo !== "null" && jsonData.UserAbleToPerformDataTransferIfNo.length > 0)
+        { insertQueryData += 'DT_userabletoperformdatatransferifno__c,'; valuesData += '\'' + jsonData.UserAbleToPerformDataTransferIfNo + '\'' + ','; }
 	    
-	if (jsonData.Isitarecurrentfailure !== undefined && jsonData.Isitarecurrentfailure !== null && jsonData.Isitarecurrentfailure !== "null" && jsonData.Isitarecurrentfailure.length > 0)
-        { insertQueryData += 'DT_Isitarecurrentfailure__c,'; valuesData += '\'' + jsonData.Isitarecurrentfailure + '\'' + ','; }
+	if (jsonData.IsitaRecurrentFailure !== undefined && jsonData.IsitaRecurrentFailure !== null && jsonData.IsitaRecurrentFailure !== "null" && jsonData.IsitaRecurrentFailure.length > 0)
+        { insertQueryData += 'DT_Isitarecurrentfailure__c,'; valuesData += '\'' + jsonData.IsitaRecurrentFailure + '\'' + ','; }
 	    
-	if (jsonData.ifyesPleaseprovidefrequency !== undefined && jsonData.ifyesPleaseprovidefrequency !== null && jsonData.ifyesPleaseprovidefrequency !== "null" && jsonData.ifyesPleaseprovidefrequency.length > 0)
-        { insertQueryData += 'DT_ifyesPleaseprovidefrequency__c,'; valuesData += '\'' + jsonData.ifyesPleaseprovidefrequency + '\'' + ','; }
+	if (jsonData.IfYesPleaseProvideFrequency !== undefined && jsonData.IfYesPleaseProvideFrequency !== null && jsonData.IfYesPleaseProvideFrequency !== "null" && jsonData.IfYesPleaseProvideFrequency.length > 0)
+        { insertQueryData += 'DT_ifyesPleaseprovidefrequency__c,'; valuesData += '\'' + jsonData.IfYesPleaseProvideFrequency + '\'' + ','; }
        	   
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'Case__c'; valuesData += '\'' + jsonData.caseid + '\''}
