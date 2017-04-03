@@ -184,7 +184,7 @@ router.post('/insertDataandtransfer', function(req, res) {
         { insertQueryData += 'DT_userabletoperformdatatransferifno__c,'; valuesData += '\'' + jsonData.userabletoperformdatatransferifno + '\'' + ','; }
 	    
 	if (jsonData.Isitarecurrentfailure !== undefined && jsonData.Isitarecurrentfailure !== null && jsonData.Isitarecurrentfailure !== "null" && jsonData.Isitarecurrentfailure.length > 0)
-        { insertQueryData += 'DT_Isitarecurrentfailure__c,'; valuesData += '\'' + jsonData.userabletoperformdatatransferifno + '\'' + ','; }
+        { insertQueryData += 'DT_Isitarecurrentfailure__c,'; valuesData += '\'' + jsonData.Isitarecurrentfailure + '\'' + ','; }
 	    
 	if (jsonData.ifyesPleaseprovidefrequency !== undefined && jsonData.ifyesPleaseprovidefrequency !== null && jsonData.ifyesPleaseprovidefrequency !== "null" && jsonData.ifyesPleaseprovidefrequency.length > 0)
         { insertQueryData += 'DT_ifyesPleaseprovidefrequency__c,'; valuesData += '\'' + jsonData.ifyesPleaseprovidefrequency + '\'' + ','; }
