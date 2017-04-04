@@ -1108,6 +1108,8 @@ router.put('/forgotPassword', function(req,res){
          conn.query(
              'SELECT id, firstname, lastname, username, email, phone from UserManagement where trim(email)=\''+emailAddress+'\'',
              function(err,result){
+		console.log('.........forgotPassword........err.....'+err);
+		console.log('.........forgotPassword........result.....'+result);
                 done();
                 if(err){
                     res.status(400).json({error: 'Email not found.'});
