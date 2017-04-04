@@ -4,8 +4,8 @@ app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
         $scope.helplist = [];
         $scope.helpMainList = [];
     
-        $scope.getHelpdata = function () {
-            var getHelpUrl = apiUrl + 'getHelpdata';
+        $scope.getHelpcontent = function () {
+            var getHelpUrl = apiUrl + 'getHelpcontent';
              var config = {
                     headers : {
                         'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
                 
                 $http.post(updateHelpurl, HelpInfo, config)
                     .then(function (data, status, headers, config) {
-                        $scope.getHelpdata();
+                        $scope.getHelpcontent();
                     })
                     .catch(function (data, status, header, config) {
                         console.log(data);
