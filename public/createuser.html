@@ -113,30 +113,44 @@
                         <label for="firstName">First Name</label>
                         <input type="text" class="form-control" ng-model="user.firstname" id="firstName" name="firstname" placeholder="Enter first name" required ng-maxlength="80">
                         <span class="error" ng-show="myForm.firstname.$error.maxlength">Phone no not more than 80 char.</span>
+                        <span style="color:red" ng-show="myForm.firstname.$dirty && myForm.firstname.$invalid">
+                        <span ng-show="myForm.firstname.$error.required">firstname is required.</span>
+                        </span>
                     </div>
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
                         <input type="text" class="form-control" name="lastname" id="lastName" ng-model="user.lastname" placeholder="Enter lastname" required  ng-maxlength="80" >
                         <span class="error" ng-show="myForm.lastname.$error.maxlength">Phone no not more than 80 char.</span>
+                        <span style="color:red" ng-show="myForm.lastname.$dirty && myForm.firstname.$invalid">
+                        <span ng-show="myForm.lastname.$error.required">lastname is required.</span>
+                        </span>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <!--<input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Enter email address" name="email" required ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/">-->
-                         <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Enter email address" required>
-                        <span class="error"  ng-show="myForm.email.$error.pattern">Invalid email address.</span>
+                        <input type="email" class="form-control" id="email" ng-model="user.email" name="email" placeholder="Enter email address" required>
+                        <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+                        <span ng-show="myForm.email.$error.required">Email is required.</span>
+                        <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+                        </span>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
                         <input type="text" class="form-control" ng-minlength="10" id="phone" ng-model="user.phone" name="phone" ng-pattern="phoneNumbr" ng-model="phone"  placeholder="Enter phone number" required>
                        <span class="error"  ng-show="myForm.phone.$submitted && myForm.phone.$invalid">please enter valid phone number.</span>
                         <span class="error" ng-show="myForm.phone.$error.minlength">Phone no not less that 10 char.</span>
+                        <span style="color:red" ng-show="myForm.phone.$dirty && myForm.phone.$invalid">
+                        <span ng-show="myForm.phone.$error.required">phone is required.</span>
+                        </span>
                       
      
                     </div>
                     <div class="form-group">
                         <label for="language">Language</label>
                        <select class="form-control" id="language" ng-model="user.language" name="language" ng-pattern="language" ng-model="selectedLanguage" ng-options="x for x in language" placeholder="Select language" required>
-                           
+                        <span style="color:red" ng-show="myForm.language.$dirty && myForm.language.$invalid">
+                        <span ng-show="myForm.language.$error.required">language is required.</span>
+                        </span>   
                    </select>
 
                   </div>
@@ -144,7 +158,9 @@
                     <div class="form-group">
                         <label for="country">Country</label>
                        <select class="form-control" id="country" ng-model="user.country" name="country" ng-pattern="country" ng-model="selectedCountry" ng-options="x for x in country" placeholder="Select Country" required>
-                           
+                        <span style="color:red" ng-show="myForm.country.$dirty && myForm.country.$invalid">
+                        <span ng-show="myForm.country.$error.required">country is required.</span>
+                        </span>    
                    </select>
 
                   </div>
@@ -153,7 +169,10 @@
                         <label for="password">Password</label>
                         <!--<input type="text" class="form-control" id="password" name="userPassword" ng-model="user.password" placeholder="Enter password" required ng-pattern = "/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/">-->
                         <input type="tel" class="form-control" id="password" name="userPassword" ng-model="user.password" placeholder="Enter password" ng-pattern = "/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/" required>
-                                <span class="error" ng-show="myForm.userPassword.$error.pattern">please enter 8 letter and one capital and one numaric with special symbol</span>
+                        <span class="error" ng-show="myForm.userPassword.$error.pattern">please enter 8 letter and one capital and one numaric with special symbol</span>
+                        <span style="color:red" ng-show="myForm.userPassword.$dirty && myForm.userPassword.$invalid">
+                        <span ng-show="myForm.userPassword.$error.required">Password is required.</span>
+                        </span>
                             
                     </div>
                 </div>
