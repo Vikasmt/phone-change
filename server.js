@@ -816,6 +816,9 @@ router.post('/insertCase', function(req, res) {
 
         if (jsonData.AdverseEventAssociatedWitchOne !== undefined && jsonData.AdverseEventAssociatedWitchOne !== null && jsonData.AdverseEventAssociatedWitchOne !== "null" && jsonData.AdverseEventAssociatedWitchOne.length > 0)
         { insertQueryData += 'FMA_Adverseeventassociatedwhichone__c,'; valuesData += '\'' + jsonData.AdverseEventAssociatedWitchOne + '\'' + ','; }
+	    
+	if (jsonData.ProductName !== undefined && jsonData.ProductName !== null && jsonData.ProductName !== "null" && jsonData.ProductName.length > 0)
+        { insertQueryData += 'FMA_ProductName__c,'; valuesData += '\'' + jsonData.ProductName + '\'' + ','; }    
 		
       	if (jsonData.Subject !== undefined && jsonData.Subject !== null && jsonData.Subject !== "null" && jsonData.Subject.length > 0)
         { insertQueryData += 'Subject,'; valuesData += '\'' + jsonData.Subject + '\'' + ','; }
