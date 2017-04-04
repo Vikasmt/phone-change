@@ -121,7 +121,7 @@
                         <label for="lastName">Last Name</label>
                         <input type="text" class="form-control" name="lastname" id="lastName" ng-model="user.lastname" placeholder="Enter lastname" required  ng-maxlength="80" >
                         <span class="error" ng-show="myForm.lastname.$error.maxlength">Phone no not more than 80 char.</span>
-                        <span style="color:red" ng-show="myForm.firstname.$invalid">
+                        <span style="color:red" ng-show="myForm.lastname.$invalid">
                         <span ng-show="myForm.lastname.$error.required">lastname is required.</span>
                         </span>
                     </div>
@@ -187,7 +187,7 @@
                         <span id="errorMessage"></span>
                     </div>
                     <div class="btn-div">
-                    <button class="btn btn-raised btn-success btn-primary ctuser" ng-click="createUser(user)">{{mode==='E' ? 'Update User' : 'Create User'}}</button>
+                    <button class="btn btn-raised btn-success btn-primary ctuser" ng-disabled="myForm.firstname.$invalid || myForm.lastname.$invalid || myForm.email.$invalid || myForm.phone.$invalid || myForm.phone.$error.minlength || myForm.userPassword.$invalid || myForm.userPassword.$error.pattern" ng-click="createUser(user)">{{mode==='E' ? 'Update User' : 'Create User'}}</button>
                     </div>
                 </div>
             </div>
