@@ -1108,12 +1108,17 @@ router.put('/forgotPassword', function(req,res){
          conn.query(
              'SELECT id, firstname, lastname, username, email, phone from UserManagement where trim(email)=\''+emailAddress+'\'',
              function(err,result){
-		console.log('.........forgotPassword........err.....'+err);
-		console.log('.........forgotPassword........result.....'+result);
-                done();
-                if(err){
-                    res.status(400).json({error: 'Email not found.'});
-                }
+		  done();
+		  if (result.rowCount == 0) {
+                             return  res.json({
+                                      msgid: -1,
+                                      message: 'Invalid Username/Email.'});
+                   }
+                
+                   if(err){
+                      res.status(400).json({error: 'Email not found.'});
+                    }
+		
                 else{
                     var resetPassword = randomstring.generate(12);
                     var queryStr = 'Update UserManagement set password=\''+resetPassword+'\' where trim(email)=\''+emailAddress+'\'';
