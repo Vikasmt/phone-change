@@ -31,8 +31,9 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+
 router.post('/insertNeedle', function(req, res) {
-    console.log('............insertDecisiontree...............');
+    console.log('............insertNeedle...............');
     var contentType = req.headers['content-type'];
     var mime = contentType.split(';')[0];
     
@@ -47,13 +48,7 @@ router.post('/insertNeedle', function(req, res) {
 	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
-         conn.query('SELECT * from salesforce.Case WHERE id='+caseid+'',
-            function(err,result){
-                 if (err != null || result.rowCount == 0) {
-                      return res.json({
-                                msgid: 3,
-                                message: 'case id not found.'});
-       }else{
+        
         console.log(req.body);
         var jsonData = req.body;
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
@@ -145,16 +140,19 @@ router.post('/insertNeedle', function(req, res) {
 	if (jsonData.PleaseProvideTheNeedleBatch !== undefined && jsonData.PleaseProvideTheNeedleBatch !== null && jsonData.PleaseProvideTheNeedleBatch !== "null" && jsonData.PleaseProvideTheNeedleBatch.length > 0)
         { insertQueryData += 'NW_PleaseProvideTheNeedleBatch__c,'; valuesData += '\'' + jsonData.PleaseProvideTheNeedleBatch + '\'' + ','; }
 	
-	if (jsonData.Case !== undefined && jsonData.Case !== null && jsonData.Case !== "null" && jsonData.Case.length > 0)
-        { insertQueryData += 'Case__c,'; valuesData += '\'' + jsonData.Case + '\'' + ','; }
-
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
 
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
         console.log(combinedQuery); 
 		
-       
+        conn.query('SELECT * from salesforce.Case WHERE id='+caseid+'',
+            function(err,result){
+                 if (err != null || result.rowCount == 0) {
+                      return res.json({
+                                msgid: 3,
+                                message: 'case id not found.'});
+       }else{
            conn.query(combinedQuery,
                  function(err, result) {
 			                done();
@@ -169,8 +167,7 @@ router.post('/insertNeedle', function(req, res) {
                                                         message: 'Success.'});
                                    }
                 });
-         });
-	
+           });
 	});
   });
 
