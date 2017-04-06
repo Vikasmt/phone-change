@@ -966,15 +966,28 @@ router.post('/insertCase', function(req, res) {
                                     message: err.message});
                         }
                         else{
-                            console.log(result);
-							
-							
-                            return res.json({
-                                    caseid:result.rows[0].id,
-				                    sfid: result.rows[0].sfid,
-                                    msgid: 1,
-                                    timestamp: timestamp,
-                                    message: 'Success.'});
+                            console.log(result);						
+                            // Updating HrkCase id Start
+			       var herokucaseid = 'fma_herokucaseid__c';
+                               conn.query('UPDATE salesforce.Case SET '+herokucaseid+' = \''+result.rows[0].id+'\' WHERE id='+result.rows[0].id+'',
+                                   function(err,result){
+				       console.log('......Updated.....'+result);
+                                       done();
+                                       if(err){
+                                           return res.json({  
+                                                   msgid: 2,
+                                                   message: err.message});
+                                       }
+                                       else{
+                                          return res.json({
+						caseid:result.rows[0].id,
+						sfid: result.rows[0].sfid,
+						msgid: 1,
+						timestamp: timestamp,
+						message: 'Success.'});
+                                       }
+                                   });								   
+			   // Updating HrkCase id End
                         } 
             });
     });
