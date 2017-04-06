@@ -221,18 +221,24 @@ router.post('/insertDataandtransfer', function(req, res) {
         console.log(req.body);
         var jsonData = req.body;
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
-        var valuesData=' VALUES (';        
-	
-	if (jsonData.DeviceDataInformationDisplayed !== undefined && jsonData.DeviceDataInformationDisplayed !== null && jsonData.DeviceDataInformationDisplayed !== "null" && jsonData.DeviceDataInformationDisplayed.length > 0)
-        { insertQueryData += 'DT_DeviceDatainformationdisplayed__c,'; valuesData += '\'' + jsonData.DeviceDataInformationDisplayed + '\'' + ','; }
+        var valuesData=' VALUES (';   
 	    
-	if (jsonData.DataTransferFromEdeviceToEasypod !== undefined && jsonData.DataTransferFromEdeviceToEasypod !== null && jsonData.DataTransferFromEdeviceToEasypod !== "null" && jsonData.DataTransferFromEdeviceToEasypod.length > 0)
+	if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0)
+        { insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ','; }
+	
+	if (jsonData.DataAndTransfer !== undefined && jsonData.DataAndTransfer !== null && jsonData.DataAndTransfer !== "null" && jsonData.DataAndTransfer.length > 0)
+        { insertQueryData += 'DT_Dataandtransfer__c,'; valuesData += '\'' + jsonData.DataAndTransfer + '\'' + ','; }
+	    
+	if (jsonData.InfoDisplayedByDeviceNotAccurate !== undefined && jsonData.InfoDisplayedByDeviceNotAccurate !== null && jsonData.InfoDisplayedByDeviceNotAccurate !== "null" && jsonData.InfoDisplayedByDeviceNotAccurate.length > 0)
+        { insertQueryData += 'DT_InfoDisplayedByDeviceNotAccurate__c,'; valuesData += '\'' + jsonData.InfoDisplayedByDeviceNotAccurate + '\'' + ','; }
+	    
+	if (jsonData.InfoDisplayedByEdeviceIfYES !== undefined && jsonData.InfoDisplayedByEdeviceIfYES !== null && jsonData.InfoDisplayedByEdeviceIfYES !== "null" && jsonData.InfoDisplayedByEdeviceIfYES.length > 0)
+        { insertQueryData += 'DT_InfodisplayedbyedeviceifYES__c,'; valuesData += '\'' + jsonData.InfoDisplayedByEdeviceIfYES + '\'' + ','; }
+	    
+        if (jsonData.DataTransferFromEdeviceToEasypod !== undefined && jsonData.DataTransferFromEdeviceToEasypod !== null && jsonData.DataTransferFromEdeviceToEasypod !== "null" && jsonData.DataTransferFromEdeviceToEasypod.length > 0)
         { insertQueryData += 'DT_DatatransferfromedevicetoEasypod__c,'; valuesData += '\'' + jsonData.DataTransferFromEdeviceToEasypod + '\'' + ','; }
 	    
-	if (jsonData.InfoDisplayedByEdeviceIfYes !== undefined && jsonData.InfoDisplayedByEdeviceIfYes !== null && jsonData.InfoDisplayedByEdeviceIfYes !== "null" && jsonData.InfoDisplayedByEdeviceIfYes.length > 0)
-        { insertQueryData += 'DT_InfodisplayedbyedeviceifYES__c,'; valuesData += '\'' + jsonData.InfoDisplayedByEdeviceIfYes + '\'' + ','; }
-	    
-        if (jsonData.ProvideSerialNumberOfTransmitter !== undefined && jsonData.ProvideSerialNumberOfTransmitter !== null && jsonData.ProvideSerialNumberOfTransmitter !== "null" && jsonData.ProvideSerialNumberOfTransmitter.length > 0)
+	if (jsonData.ProvideSerialNumberOfTransmitter !== undefined && jsonData.ProvideSerialNumberOfTransmitter !== null && jsonData.ProvideSerialNumberOfTransmitter !== "null" && jsonData.ProvideSerialNumberOfTransmitter.length > 0)
         { insertQueryData += 'DT_Provideserialnumberoftransmitter__c,'; valuesData += '\'' + jsonData.ProvideSerialNumberOfTransmitter + '\'' + ','; }
 	    
 	if (jsonData.WasUserAbleToPerformDataTransfer !== undefined && jsonData.WasUserAbleToPerformDataTransfer !== null && jsonData.WasUserAbleToPerformDataTransfer !== "null" && jsonData.WasUserAbleToPerformDataTransfer.length > 0)
@@ -241,23 +247,35 @@ router.post('/insertDataandtransfer', function(req, res) {
 	if (jsonData.WasUserAbleToSeeUploadedData !== undefined && jsonData.WasUserAbleToSeeUploadedData !== null && jsonData.WasUserAbleToSeeUploadedData !== "null" && jsonData.WasUserAbleToSeeUploadedData.length > 0)
         { insertQueryData += 'DT_Wasuserabletoseeuploadeddata__c,'; valuesData += '\'' + jsonData.WasUserAbleToSeeUploadedData + '\'' + ','; }
 	    
+	if (jsonData.AreTheUploadedDataAccurate !== undefined && jsonData.AreTheUploadedDataAccurate !== null && jsonData.AreTheUploadedDataAccurate !== "null" && jsonData.AreTheUploadedDataAccurate.length > 0)
+        { insertQueryData += 'DT_AreTheUploadedDataAccurate__c,'; valuesData += '\'' + jsonData.AreTheUploadedDataAccurate + '\'' + ','; }
+	    
 	if (jsonData.PleaseProvideDiscrepancyAndDate !== undefined && jsonData.PleaseProvideDiscrepancyAndDate !== null && jsonData.PleaseProvideDiscrepancyAndDate !== "null" && jsonData.PleaseProvideDiscrepancyAndDate.length > 0)
         { insertQueryData += 'DT_Pleaseprovidediscrepancyanddate__c,'; valuesData += '\'' + jsonData.PleaseProvideDiscrepancyAndDate + '\'' + ','; }
 	    
 	if (jsonData.DateWhenIssueOccurred !== undefined && jsonData.DateWhenIssueOccurred !== null && jsonData.DateWhenIssueOccurred !== "null" && jsonData.DateWhenIssueOccurred.length > 0)
         { insertQueryData += 'DT_Datewhenissueoccurred__c,'; valuesData += '\'' + jsonData.DateWhenIssueOccurred + '\'' + ','; }
 	    
-	if (jsonData.UserAbleToPerformDataTransferIfNo !== undefined && jsonData.UserAbleToPerformDataTransferIfNo !== null && jsonData.UserAbleToPerformDataTransferIfNo !== "null" && jsonData.UserAbleToPerformDataTransferIfNo.length > 0)
-        { insertQueryData += 'DT_userabletoperformdatatransferifno__c,'; valuesData += '\'' + jsonData.UserAbleToPerformDataTransferIfNo + '\'' + ','; }
+	if (jsonData.UserAbleToPerformDataTransferIfNO !== undefined && jsonData.UserAbleToPerformDataTransferIfNO !== null && jsonData.UserAbleToPerformDataTransferIfNO !== "null" && jsonData.UserAbleToPerformDataTransferIfNO.length > 0)
+        { insertQueryData += 'DT_userabletoperformdatatransferIfNO__c,'; valuesData += '\'' + jsonData.UserAbleToPerformDataTransferIfNO + '\'' + ','; }
 	    
-	if (jsonData.DateWhenTheIssueObserved !== undefined && jsonData.DateWhenTheIssueObserved !== null && jsonData.DateWhenTheIssueObserved !== "null" && jsonData.DateWhenTheIssueObserved.length > 0)
-        { insertQueryData += 'DT_DateWhenTheIssueObserved__c,'; valuesData += '\'' + jsonData.DateWhenTheIssueObserved + '\'' + ','; }
+	if (jsonData.DateWhenTheIssueObservedIfNO !== undefined && jsonData.DateWhenTheIssueObservedIfNO !== null && jsonData.DateWhenTheIssueObservedIfNO !== "null" && jsonData.DateWhenTheIssueObservedIfNO.length > 0)
+        { insertQueryData += 'DT_DateWhenTheIssueObservedIfNO__c,'; valuesData += '\'' + jsonData.DateWhenTheIssueObservedIfNO + '\'' + ','; }
 	    
 	if (jsonData.IsitaRecurrentFailure !== undefined && jsonData.IsitaRecurrentFailure !== null && jsonData.IsitaRecurrentFailure !== "null" && jsonData.IsitaRecurrentFailure.length > 0)
         { insertQueryData += 'DT_Isitarecurrentfailure__c,'; valuesData += '\'' + jsonData.IsitaRecurrentFailure + '\'' + ','; }
 	    
-	if (jsonData.IfYesPleaseProvideFrequency !== undefined && jsonData.IfYesPleaseProvideFrequency !== null && jsonData.IfYesPleaseProvideFrequency !== "null" && jsonData.IfYesPleaseProvideFrequency.length > 0)
-        { insertQueryData += 'DT_ifyesPleaseprovidefrequency__c,'; valuesData += '\'' + jsonData.IfYesPleaseProvideFrequency + '\'' + ','; }
+	if (jsonData.PleaseProvideFrequencyIfYES !== undefined && jsonData.PleaseProvideFrequencyIfYES !== null && jsonData.PleaseProvideFrequencyIfYES !== "null" && jsonData.PleaseProvideFrequencyIfYES.length > 0)
+        { insertQueryData += 'DT_ifyesPleaseprovidefrequency__c,'; valuesData += '\'' + jsonData.PleaseProvideFrequencyIfYES + '\'' + ','; }
+	    
+	if (jsonData.IssueLinkedToTheTransmitter !== undefined && jsonData.IssueLinkedToTheTransmitter !== null && jsonData.IssueLinkedToTheTransmitter !== "null" && jsonData.IssueLinkedToTheTransmitter.length > 0)
+        { insertQueryData += 'DT_IssueLinkedToTheTransmitter__c,'; valuesData += '\'' + jsonData.IssueLinkedToTheTransmitter + '\'' + ','; }
+	    
+	if (jsonData.AbnormalBlinkingOfTheTransmitter !== undefined && jsonData.AbnormalBlinkingOfTheTransmitter !== null && jsonData.AbnormalBlinkingOfTheTransmitter !== "null" && jsonData.AbnormalBlinkingOfTheTransmitter.length > 0)
+        { insertQueryData += 'DT_AbnormalBlinkingOfTheTransmitter__c,'; valuesData += '\'' + jsonData.AbnormalBlinkingOfTheTransmitter + '\'' + ','; }
+	    
+	if (jsonData.WarngMsgDisplaydUponDataTransfer !== undefined && jsonData.WarngMsgDisplaydUponDataTransfer !== null && jsonData.WarngMsgDisplaydUponDataTransfer !== "null" && jsonData.WarngMsgDisplaydUponDataTransfer.length > 0)
+        { insertQueryData += 'DT_WarngMsgDisplaydUponDataTransfer__c,'; valuesData += '\'' + jsonData.WarngMsgDisplaydUponDataTransfer + '\'' + ','; }
        	   
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
