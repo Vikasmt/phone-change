@@ -168,11 +168,13 @@ router.post('/insertNeedle', function(req, res) {
                                                         message: 'Success.'});
                                    }
                 });
-         });
+             });
 	
 	});
-});
-
+    });
+	
+});	
+	
 
 
 router.post('/insertNeedleIssue', function(req, res) {
