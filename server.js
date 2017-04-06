@@ -971,12 +971,31 @@ router.post('/insertCase', function(req, res) {
                         }
                         else{
                             console.log(result);
-                            return res.json({
-                                    caseid:result.rows[0].id,
-				    sfid: result.rows[0].sfid,
-                                    msgid: 1,
-                                    timestamp: timestamp,
-                                    message: 'Success.'});
+			    var herokucaseid = 'fma_herokucaseid__c';
+                            conn.query('UPDATE salesforce.Case SET '+herokucaseid+' = \''+result.rows[0].id+'\' WHERE id='+result.rows[0].id+'',
+                                   function(err,result){
+                                       done();
+                                       if(err){
+                                           /*return res.json({  
+                                                   msgid: 2,
+                                                   message: err.message});*/
+                                       }
+                                       else{
+                                          /*return res.json({
+                                                   msgid: 1,
+                                                   message: 'Success.'});*/
+					       
+					       return res.json({
+							    caseid:result.rows[0].id,
+							    sfid: result.rows[0].sfid,
+							    msgid: 1,
+							    timestamp: timestamp,
+							    message: 'Success.'});
+					       
+                                       }
+                                   });				
+				
+                            // return
                         } 
             });
     });
