@@ -147,14 +147,8 @@ router.post('/insertNeedle', function(req, res) {
 
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
         console.log(combinedQuery); 
-        conn.query('SELECT * from salesforce.Case WHERE id='+caseid+'',
-                function(err,result){
-                 if (err != null || result.rowCount == 0) {
-                      return res.json({
-                                msgid: 2,
-                                message: 'case id not found.'});
-       }else{
-           conn.query(combinedQuery,
+        
+        conn.query(combinedQuery,
                  function(err, result) {
 			                done();
                             if(err){
@@ -167,13 +161,11 @@ router.post('/insertNeedle', function(req, res) {
                                                         msgid: 1,
                                                         message: 'Success.'});
                                    }
-                });
+                  });
              });
 	
 	});
-    });
-	
-});	
+
 	
 
 
