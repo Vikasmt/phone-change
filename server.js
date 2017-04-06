@@ -193,9 +193,30 @@ router.post('/insertNeedleIssue', function(req, res) {
                                             message: err.message});
                                    }
                                             else{
-                                                return res.json({
-                                                        msgid: 1,
-                                                        message: 'Success.'});
+                                                conn.query('SELECT *from salesforce.Case WHERE id='+caseid+'',
+						function(err,result){
+						 if (err != null || result.rowCount == 0) {
+						      return res.json({
+								msgid: 2,
+								message: 'case id not found.'});
+						        }else{
+								var herokucaseid = 'fma_herokucaseid__c';
+								conn.query('UPDATE salesforce.Case SET '+herokucaseid+' = \''+caseid+'\' WHERE id='+caseid+'',
+								    function(err,result){
+									done();
+									if(err){
+									    return res.json({  
+										    msgid: 2,
+										    message: err.message});
+									}
+									else{
+									   return res.json({
+										    msgid: 1,
+										    message: 'Success.'});
+									}
+								});
+							    }
+						     });
                                    }
                 });
     });
