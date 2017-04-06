@@ -31,7 +31,6 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
-
 router.post('/insertNeedleIssue', function(req, res) {
     console.log('............insertDecisiontree...............');
     var contentType = req.headers['content-type'];
