@@ -46,6 +46,7 @@ router.post('/updateDT', function(req, res) {
     
          pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
              if (err) console.log(err);
+	     var sfid = 'sfid';
              conn.query('SELECT * from salesforce.Case WHERE id='+caseid+'',
                 function(err,result){
                  if (err != null || result.rowCount == 0) {
@@ -53,17 +54,16 @@ router.post('/updateDT', function(req, res) {
                                 msgid: 2,
                                 message: 'case id not found.'});
                  }else{
-					  var sfid = 'sfid';
-                      conn.query('UPDATE salesforce.IVOP_DecisionTree__c SET '+Case__c+' = \''+sfid+'\' WHERE HerokuCaseId__c='+caseid+'',
+		      var caseID = 'Case__c';
+                      conn.query('UPDATE salesforce.IVOP_DecisionTree__c SET '+caseID+' = \''+sfid+'\' WHERE HerokuCaseId__c='+caseid+'',
                          function(err, result) {
                          if(err){
-                                return res.json({
-                                        attachementid: -1,
-                                        msgid: 2,
+                                return res.json({                 
+                                        msgid: 1,
                                         message: err.message});
                             }
                             
-                         });
+                        });
                      }
              });
      });
