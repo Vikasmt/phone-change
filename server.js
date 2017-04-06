@@ -31,6 +31,150 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+router.post('/insertNeedle', function(req, res) {
+    console.log('............insertDecisiontree...............');
+    var contentType = req.headers['content-type'];
+    var mime = contentType.split(';')[0];
+    
+    console.log('contenttype:'+mime);
+    
+    var data=req.body.toString();
+    console.log('Body:'+data);
+    
+    var splitteddata=data.replace("{","").replace("}","").split(',');
+    
+    var caseid = splitteddata[0];
+	
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        
+        console.log(req.body);
+        var jsonData = req.body;
+        var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
+        var valuesData=' VALUES ('; 
+	    
+    if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0)
+        { insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ','; }
+	    
+    if (jsonData.NeedleIssue !== undefined && jsonData.NeedleIssue !== null && jsonData.NeedleIssue !== "null" && jsonData.NeedleIssue.length > 0)
+        { insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + jsonData.NeedleIssue + '\'' + ','; }
+	
+    if (jsonData.NeedleBatchNumber !== undefined && jsonData.NeedleBatchNumber !== null && jsonData.NeedleBatchNumber !== "null" && jsonData.NeedleBatchNumber.length > 0)
+        { insertQueryData += 'NI_NeedleBatchNumber__c,'; valuesData += '\'' + jsonData.NeedleBatchNumber + '\'' + ','; }
+	    
+    if (jsonData.NeedleAttachmentDetachment !== undefined && jsonData.NeedleAttachmentDetachment !== null && jsonData.NeedleAttachmentDetachment !== "null" && jsonData.NeedleAttachmentDetachment.length > 0)
+       { insertQueryData += 'NI_NeedleAttachmentDetachment__c,'; valuesData += '\'' + jsonData.NeedleAttachmentDetachment + '\'' + ','; }
+	    
+    if (jsonData.NeedleWarningMessage !== undefined && jsonData.NeedleWarningMessage !== null && jsonData.NeedleWarningMessage !== "null" && jsonData.NeedleWarningMessage.length > 0)
+        { insertQueryData += 'NI_Needlewarningmessage__c,'; valuesData += '\'' + jsonData.NeedleWarningMessage + '\'' + ','; }
+	    
+    if (jsonData.OtherNeedleIssue !== undefined && jsonData.OtherNeedleIssue !== null && jsonData.OtherNeedleIssue !== "null" && jsonData.OtherNeedleIssue.length > 0)
+        { insertQueryData += 'NI_OtherNeedleIssue__c,'; valuesData += '\'' + jsonData.OtherNeedleIssue + '\'' + ','; }
+	
+	// Needle warning message - Needle warning message selection
+	
+        if (jsonData.NeedleWarningMessageSelection !== undefined && jsonData.NeedleWarningMessageSelection !== null && jsonData.NeedleWarningMessageSelection !== "null" && jsonData.NeedleWarningMessageSelection.length > 0)
+        { insertQueryData += 'NW_NeedleWarningMessageSelection__c,'; valuesData += '\'' + jsonData.NeedleWarningMessageSelection + '\'' + ','; }
+	    
+	if (jsonData.IsWarningmsgDisplayedWhenNedleAttd !== undefined && jsonData.IsWarningmsgDisplayedWhenNedleAttd !== null && jsonData.IsWarningmsgDisplayedWhenNedleAttd !== "null" && jsonData.IsWarningmsgDisplayedWhenNedleAttd.length > 0)
+        { insertQueryData += 'NW_IsWarningmsgDisplayedWhenNedleAttd__c,'; valuesData += '\'' + jsonData.IsWarningmsgDisplayedWhenNedleAttd + '\'' + ','; }
+	    
+        if (jsonData.NeedleIsTheInjectionStillPossible !== undefined && jsonData.NeedleIsTheInjectionStillPossible !== null && jsonData.NeedleIsTheInjectionStillPossible !== "null" && jsonData.NeedleIsTheInjectionStillPossible.length > 0)
+        { insertQueryData += 'NW_NeedleIstheinjectionstillpossible__c,'; valuesData += '\'' + jsonData.NeedleIsTheInjectionStillPossible + '\'' + ','; }
+	   	
+	if (jsonData.MessageDisplayByInterruptingTheInje !== undefined && jsonData.MessageDisplayByInterruptingTheInje !== null && jsonData.MessageDisplayByInterruptingTheInje !== "null" && jsonData.MessageDisplayByInterruptingTheInje.length > 0)
+        { insertQueryData += 'NW_MessageDisplayByInterruptingTheInje__c,'; valuesData += '\'' + jsonData.MessageDisplayByInterruptingTheInje + '\'' + ','; }   
+		
+	if (jsonData.NeedleCapDeviceWarningMsgUponStart !== undefined && jsonData.NeedleCapDeviceWarningMsgUponStart !== null && jsonData.NeedleCapDeviceWarningMsgUponStart !== "null" && jsonData.NeedleCapDeviceWarningMsgUponStart.length > 0)
+        { insertQueryData += 'NW_NeedleCapDeviceWarningMsgUponStart__c,'; valuesData += '\'' + jsonData.NeedleCapDeviceWarningMsgUponStart + '\'' + ','; }
+	    
+	if (jsonData.NeedleCapIsInjectionStillPossible !== undefined && jsonData.NeedleCapIsInjectionStillPossible !== null && jsonData.NeedleCapIsInjectionStillPossible !== "null" && jsonData.NeedleCapIsInjectionStillPossible.length > 0)
+        { insertQueryData += 'NW_NeedleCapIsInjectionStillPossible__c,'; valuesData += '\'' + jsonData.NeedleCapIsInjectionStillPossible + '\'' + ','; }    
+	    
+        if (jsonData.DoesNeedleCavityShowResidue !== undefined && jsonData.DoesNeedleCavityShowResidue !== null && jsonData.DoesNeedleCavityShowResidue !== "null" && jsonData.DoesNeedleCavityShowResidue.length > 0)
+        { insertQueryData += 'NW_DoesNeedleCavityShowResidue__c,'; valuesData += '\'' + jsonData.DoesNeedleCavityShowResidue + '\'' + ','; }
+	    
+	if (jsonData.NeedleDetatcDeviceWarningMsguponStart !== undefined && jsonData.NeedleDetatcDeviceWarningMsguponStart !== null && jsonData.NeedleDetatcDeviceWarningMsguponStart !== "null" && jsonData.NeedleDetatcDeviceWarningMsguponStart.length > 0)
+        { insertQueryData += 'NW_NeedleDetatcDeviceWarningMsguponStart__c,'; valuesData += '\'' + jsonData.NeedleDetatcDeviceWarningMsguponStart + '\'' + ','; }
+	    
+	if (jsonData.NeedleDetatchIsInjectionStillPossible !== undefined && jsonData.NeedleDetatchIsInjectionStillPossible !== null && jsonData.NeedleDetatchIsInjectionStillPossible !== "null" && jsonData.NeedleDetatchIsInjectionStillPossible.length > 0)
+        { insertQueryData += 'NW_NeedleDetatchIsInjectionStillPossible__c,'; valuesData += '\'' + jsonData.NeedleDetatchIsInjectionStillPossible + '\'' + ','; }
+	
+	if (jsonData.IsNeedleStillAttachedtoCartridge !== undefined && jsonData.IsNeedleStillAttachedtoCartridge !== null && jsonData.IsNeedleStillAttachedtoCartridge !== "null" && jsonData.IsNeedleStillAttachedtoCartridge.length > 0)
+        { insertQueryData += 'NW_IsNeedleStillAttachedtoCartridge__c,'; valuesData += '\'' + jsonData.IsNeedleStillAttachedtoCartridge + '\'' + ','; }
+	   
+        if (jsonData.IsNeedleStillAttachedtoCartridge !== undefined && jsonData.IsNeedleStillAttachedtoCartridge !== null && jsonData.IsNeedleStillAttachedtoCartridge !== "null" && jsonData.WarningMsgAfterNeedleDetatchment.length > 0)
+        { insertQueryData += 'NW_Warningmsgafterneedledetatchment__c,'; valuesData += '\'' + jsonData.WarningMsgAfterNeedleDetatchment + '\'' + ','; }
+	    
+	 if (jsonData.NeedleButtonAfterNeedleDetatchment !== undefined && jsonData.NeedleButtonAfterNeedleDetatchment !== null && jsonData.NeedleButtonAfterNeedleDetatchment !== "null" && jsonData.NeedleButtonAfterNeedleDetatchment.length > 0)
+        { insertQueryData += 'NW_Needlebuttonafterneedledetatchment__c,'; valuesData += '\'' + jsonData.NeedleButtonAfterNeedleDetatchment + '\'' + ','; }
+	    
+        if (jsonData.NeedleDetatchedByPushing !== undefined && jsonData.NeedleDetatchedByPushing !== null && jsonData.NeedleDetatchedByPushing !== "null" && jsonData.NeedleDetatchedByPushing.length > 0)
+        { insertQueryData += 'NW_NeedleDetatchedByPushing__c,'; valuesData += '\'' + jsonData.NeedleDetatchedByPushing + '\'' + ','; }
+	    
+	if (jsonData.DoestheNeedleButtonReact !== undefined && jsonData.DoestheNeedleButtonReact !== null && jsonData.DoestheNeedleButtonReact !== "null" && jsonData.DoestheNeedleButtonReact.length > 0)
+        { insertQueryData += 'NW_DoestheNeedleButtonReact__c,'; valuesData += '\'' + jsonData.DoestheNeedleButtonReact + '\'' + ','; }
+
+	if (jsonData.OtherWarningMessage !== undefined && jsonData.OtherWarningMessage !== null && jsonData.OtherWarningMessage !== "null" && jsonData.OtherWarningMessage.length > 0)
+        { insertQueryData += 'NW_OtherWarningMessage__c,'; valuesData += '\'' + jsonData.OtherWarningMessage + '\'' + ','; }
+	    
+        if (jsonData.FrequencyoftheWMdiplay !== undefined && jsonData.FrequencyoftheWMdiplay !== null && jsonData.FrequencyoftheWMdiplay !== "null" && jsonData.FrequencyoftheWMdiplay.length > 0)
+        { insertQueryData += 'NW_FrequencyoftheWMdiplay__c,'; valuesData += '\'' + jsonData.FrequencyoftheWMdiplay + '\'' + ','; }
+
+	if (jsonData.WhenApproximatelyIssueObservedLastly !== undefined && jsonData.WhenApproximatelyIssueObservedLastly !== null && jsonData.WhenApproximatelyIssueObservedLastly !== "null" && jsonData.WhenApproximatelyIssueObservedLastly.length > 0)
+        { insertQueryData += 'NW_WhenApproximatelyIssueObservedLastly__c,'; valuesData += '\'' + jsonData.WhenApproximatelyIssueObservedLastly + '\'' + ','; }
+
+        if (jsonData.ApproximateDate !== undefined && jsonData.ApproximateDate !== null && jsonData.ApproximateDate !== "null" && jsonData.ApproximateDate.length > 0)
+        { insertQueryData += 'NW_ApproximateDate__c,'; valuesData += '\'' + jsonData.ApproximateDate + '\'' + ','; }
+
+	if (jsonData.WarngMsgDisplayedAtParticularStep !== undefined && jsonData.WarngMsgDisplayedAtParticularStep !== null && jsonData.WarngMsgDisplayedAtParticularStep !== "null" && jsonData.WarngMsgDisplayedAtParticularStep.length > 0)
+        { insertQueryData += 'NW_WarngMsgDisplayedAtParticularStep__c,'; valuesData += '\'' + jsonData.WarngMsgDisplayedAtParticularStep + '\'' + ','; }
+	    
+	if (jsonData.PleaseSelectTheInjectionStep !== undefined && jsonData.PleaseSelectTheInjectionStep !== null && jsonData.PleaseSelectTheInjectionStep !== "null" && jsonData.PleaseSelectTheInjectionStep.length > 0)
+        { insertQueryData += 'NW_PleaseSelectTheInjectionStep__c,'; valuesData += '\'' + jsonData.PleaseSelectTheInjectionStep + '\'' + ','; }
+
+	if (jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== undefined && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== null && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== "null" && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc.length > 0)
+        { insertQueryData += 'NW_IsMsgDisplayedOnUseOfNewNdleBatc__c,'; valuesData += '\'' + jsonData.IsMsgDisplayedOnUseOfNewNdleBatc + '\'' + ','; }
+
+	if (jsonData.PleaseProvideTheNeedleBatch !== undefined && jsonData.PleaseProvideTheNeedleBatch !== null && jsonData.PleaseProvideTheNeedleBatch !== "null" && jsonData.PleaseProvideTheNeedleBatch.length > 0)
+        { insertQueryData += 'NW_PleaseProvideTheNeedleBatch__c,'; valuesData += '\'' + jsonData.PleaseProvideTheNeedleBatch + '\'' + ','; }
+	
+	if (jsonData.Case !== undefined && jsonData.Case !== null && jsonData.Case !== "null" && jsonData.Case.length > 0)
+        { insertQueryData += 'Case__c,'; valuesData += '\'' + jsonData.Case + '\'' + ','; }
+
+	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
+        { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
+
+        var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
+        console.log(combinedQuery); 
+        conn.query('SELECT * from salesforce.Case WHERE id='+caseid+'',
+                function(err,result){
+                 if (err != null || result.rowCount == 0) {
+                      return res.json({
+                                msgid: 2,
+                                message: 'case id not found.'});
+       }else{
+           conn.query(combinedQuery,
+                 function(err, result) {
+			                done();
+                            if(err){
+                                    return res.json({
+                                            msgid: 2,
+                                            message: err.message});
+                                   }
+                                            else{
+                                                return res.json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                   }
+                });
+         });
+	
+	});
+});
+
+
+
 router.post('/insertNeedleIssue', function(req, res) {
     console.log('............insertDecisiontree...............');
     var contentType = req.headers['content-type'];
