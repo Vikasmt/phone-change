@@ -31,45 +31,6 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
-router.post('/updateDT', function(req, res) {
-    var contentType = req.headers['content-type'];
-    var mime = contentType.split(';')[0];
-    
-    console.log('contenttype:'+mime);
-    
-    var data=req.body.toString();
-    console.log('Body:'+data);
-    
-    var splitteddata=data.replace("{","").replace("}","").split(',');
-    
-    var caseid = splitteddata[0];
-    
-         pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-             if (err) console.log(err);
-             conn.query('SELECT * from salesforce.Case WHERE id='+caseid+'',
-                function(err,result){
-                 if (err != null || result.rowCount == 0) {
-                      return res.json({
-                                msgid: 2,
-                                message: 'case id not found.'});
-                 }else{
-	              var sfid = result.rows[0].sfid;
-		      var caseID = 'Case__c';
-                      conn.query('UPDATE salesforce.IVOP_DecisionTree__c SET '+caseID+' = \''+sfid+'\' WHERE HerokuCaseId__c='+caseid+'',
-                         function(err, result) {
-                         if(err){
-                                return res.json({                 
-                                        msgid: 1,
-                                        message: err.message});
-                            }
-                            
-                        });
-                   }
-             });
-     });
-});
-
-
 router.post('/insertNeedleIssue', function(req, res) {
     console.log('............insertDecisiontree...............');
     var contentType = req.headers['content-type'];
