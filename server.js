@@ -31,6 +31,40 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+router.post('/updateHerokuCaseID', function(req, res) {
+     var caseid = req.param('id');
+         pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+             if (err) console.log(err);
+             conn.query('SELECT *from salesforce.Case WHERE id='+caseid+'',
+                function(err,result){
+                 if (err != null || result.rowCount == 0) {
+                      return res.json({
+                                msgid: 2,
+                                message: 'case id not found.'});
+                         }else{
+			        var herokucaseid = 'fma_herokucaseid__c';
+                                conn.query('UPDATE salesforce.Case SET '+herokucaseid+' = \''+caseid+'\' WHERE id='+caseid+'',
+                                    function(err,result){
+                                        done();
+                                        if(err){
+                                            return res.json({
+                                                    msgid: 2,
+                                                    message: err.message});
+                                        }
+                                        else{
+                                           return res.json({
+                                                    msgid: 1,
+                                                    message: 'Success.'});
+                                        }
+                                   });
+                              }
+                        });
+                     
+             });
+     });
+
+
+
 router.post('/insertNeedleIssue', function(req, res) {
     console.log('............insertDecisiontree...............');
     var contentType = req.headers['content-type'];
