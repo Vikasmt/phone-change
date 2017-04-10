@@ -31,6 +31,52 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+router.post('/insertAppFeedback', function(req, res) {
+	var userid = req.param('id');
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        
+        console.log(req.body);
+        var jsonData = req.body;
+        var insertQueryData = 'INSERT INTO salesforce.IVOP_Appfeedback__c (';
+        var valuesData=' VALUES ('; 
+	    
+    if (jsonData.IssueRelatedTo !== undefined && jsonData.IssueRelatedTo !== null && jsonData.IssueRelatedTo !== "null" && jsonData.IssueRelatedTo.length > 0)
+        { insertQueryData += 'IssueRelatedTo__c,'; valuesData += '\'' + jsonData.IssueRelatedTo + '\'' + ','; }
+	    
+    if (jsonData.Comment !== undefined && jsonData.Comment !== null && jsonData.Comment !== "null" && jsonData.Comment.length > 0)
+        { insertQueryData += 'Comment__c,'; valuesData += '\'' + jsonData.Comment + '\'' + ','; }
+	
+    if (jsonData.Rating !== undefined && jsonData.Rating !== null && jsonData.Rating !== "null" && jsonData.Rating.length > 0)
+        { insertQueryData += 'Rating__c,'; valuesData += '\'' + jsonData.Rating + '\'' + ','; }
+	    
+    if (jsonData.ProvideEmail !== undefined && jsonData.ProvideEmail !== null && jsonData.ProvideEmail !== "null" && jsonData.ProvideEmail.length > 0)
+       { insertQueryData += 'ProvideEmail__c,'; valuesData += '\'' + jsonData.ProvideEmail + '\'' + ','; }
+	
+	if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.length > 0)
+        { insertQueryData += 'Contact__c'; valuesData += '\'' + jsonData.userid + '\''}
+
+        var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
+        console.log(combinedQuery); 
+        
+        conn.query(combinedQuery,
+                function(err, result) {
+			                done();
+                            if(err){
+                                    return res.json({
+                                            msgid: 2,
+                                            message: err.message});
+                                   }
+                                            else{
+                                                return res.json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                   }
+                });
+    });
+});
+
+
 router.post('/updateHerokuCaseID', function(req, res) {
 var caseid = req.param('id');
 	
