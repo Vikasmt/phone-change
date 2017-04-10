@@ -32,17 +32,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/updateHerokuCaseID', function(req, res) {
- var contentType = req.headers['content-type'];
-    var mime = contentType.split(';')[0];
-    
-    console.log('contenttype:'+mime);
-    
-    var data=req.body.toString();
-    console.log('Body:'+data);
-    
-    var splitteddata=data.replace("{","").replace("}","").split(',');
-    
-    var caseid = splitteddata[0];
+var caseid = req.param('id');
 	
          pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
              if (err) console.log(err);
