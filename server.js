@@ -56,141 +56,156 @@ router.post('/insertPowerFailure', function(req, res) {
     if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0)
         { insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ','; }
 	    
-    if (jsonData.IsTheNoPowerIssueObserved !== undefined && jsonData.IsTheNoPowerIssueObserved !== null && jsonData.IsTheNoPowerIssueObserved !== "null" && jsonData.IsTheNoPowerIssueObserved.length > 0)
-        { insertQueryData += 'PF_NP_Isthenopowerissueobserved__c,'; valuesData += '\'' + jsonData.IsTheNoPowerIssueObserved + '\'' + ','; }
+    if (jsonData.PFPowerFailure !== undefined && jsonData.PFPowerFailure !== null && jsonData.PFPowerFailure !== "null" && jsonData.PFPowerFailure.length > 0)
+        { insertQueryData += 'PF_PowerFailure__c,'; valuesData += '\'' + jsonData.PFPowerFailure + '\'' + ','; }
+	    
+    if (jsonData.NPIsthenopowerissueobserved !== undefined && jsonData.NPIsthenopowerissueobserved !== null && jsonData.NPIsthenopowerissueobserved !== "null" && jsonData.NPIsthenopowerissueobserved.length > 0)
+        { insertQueryData += 'PF_NP_Isthenopowerissueobserved__c,'; valuesData += '\'' + jsonData.NPIsthenopowerissueobserved + '\'' + ','; }
 	
-    if (jsonData.IsSomethingDisplayedOnDevice !== undefined && jsonData.IsSomethingDisplayedOnDevice !== null && jsonData.IsSomethingDisplayedOnDevice !== "null" && jsonData.IsSomethingDisplayedOnDevice.length > 0)
-        { insertQueryData += 'PF_NP_Issomethingdisplayedondevice__c,'; valuesData += '\'' + jsonData.IsSomethingDisplayedOnDevice + '\'' + ','; }
+    if (jsonData.NPIssomethingdisplayedondevice !== undefined && jsonData.NPIssomethingdisplayedondevice !== null && jsonData.NPIssomethingdisplayedondevice !== "null" && jsonData.NPIssomethingdisplayedondevice.length > 0)
+        { insertQueryData += 'PF_NP_Issomethingdisplayedondevice__c,'; valuesData += '\'' + jsonData.NPIssomethingdisplayedondevice + '\'' + ','; }
 	    
-    if (jsonData.IsSomethingDisplayedOnDeiviceIfyes !== undefined && jsonData.IsSomethingDisplayedOnDeiviceIfyes !== null && jsonData.IsSomethingDisplayedOnDeiviceIfyes !== "null" && jsonData.IsSomethingDisplayedOnDeiviceIfyes.length > 0)
-       { insertQueryData += 'PF_NP_IssomethingdisplayedondeiviceIfyes__c,'; valuesData += '\'' + jsonData.IsSomethingDisplayedOnDeiviceIfyes + '\'' + ','; }
+    if (jsonData.NPIssomethingdisplayedondeiviceIfyes !== undefined && jsonData.NPIssomethingdisplayedondeiviceIfyes !== null && jsonData.NPIssomethingdisplayedondeiviceIfyes !== "null" && jsonData.NPIssomethingdisplayedondeiviceIfyes.length > 0)
+       { insertQueryData += 'PF_NP_IssomethingdisplayedondeiviceIfyes__c,'; valuesData += '\'' + jsonData.NPIssomethingdisplayedondeiviceIfyes + '\'' + ','; }
 	    
-    if (jsonData.DoesTheInjectionButtonShowRedLight !== undefined && jsonData.DoesTheInjectionButtonShowRedLight !== null && jsonData.DoesTheInjectionButtonShowRedLight !== "null" && jsonData.DoesTheInjectionButtonShowRedLight.length > 0)
-        { insertQueryData += 'PF_NP_Doestheinjectionbuttonshowredlight__c,'; valuesData += '\'' + jsonData.DoesTheInjectionButtonShowRedLight + '\'' + ','; }
+    if (jsonData.NPDoestheinjectionbuttonshowredlight !== undefined && jsonData.NPDoestheinjectionbuttonshowredlight !== null && jsonData.NPDoestheinjectionbuttonshowredlight !== "null" && jsonData.NPDoestheinjectionbuttonshowredlight.length > 0)
+        { insertQueryData += 'PF_NP_Doestheinjectionbuttonshowredlight__c,'; valuesData += '\'' + jsonData.NPDoestheinjectionbuttonshowredlight + '\'' + ','; }
 	    
-    if (jsonData.HasTheDeviceImpactedByColdOrHumid !== undefined && jsonData.HasTheDeviceImpactedByColdOrHumid !== null && jsonData.HasTheDeviceImpactedByColdOrHumid !== "null" && jsonData.HasTheDeviceImpactedByColdOrHumid.length > 0)
-        { insertQueryData += 'PF_NP_Hasthedeviceimpactedbycoldorhumid__c,'; valuesData += '\'' + jsonData.HasTheDeviceImpactedByColdOrHumid + '\'' + ','; }
+    if (jsonData.NPHasthedeviceimpactedbycoldorhumid !== undefined && jsonData.NPHasthedeviceimpactedbycoldorhumid !== null && jsonData.NPHasthedeviceimpactedbycoldorhumid !== "null" && jsonData.NPHasthedeviceimpactedbycoldorhumid.length > 0)
+        { insertQueryData += 'PF_NP_Hasthedeviceimpactedbycoldorhumid__c,'; valuesData += '\'' + jsonData.NPHasthedeviceimpactedbycoldorhumid + '\'' + ','; }
 		
     if (jsonData.NPSpecify !== undefined && jsonData.NPSpecify !== null && jsonData.NPSpecify !== "null" && jsonData.NPSpecify.length > 0)
         { insertQueryData += 'PF_NP_Specify__c,'; valuesData += '\'' + jsonData.NPSpecify + '\'' + ','; }
 	    
-    if (jsonData.IsInsertedBatterySpecification !== undefined && jsonData.IsInsertedBatterySpecification !== null && jsonData.IsInsertedBatterySpecification !== "null" && jsonData.IsInsertedBatterySpecification.length > 0)
-        { insertQueryData += 'PF_NP_Isinsertedbatteryspecification__c,'; valuesData += '\'' + jsonData.IsInsertedBatterySpecification + '\'' + ','; }
+    if (jsonData.NPIsinsertedbatteryspecification !== undefined && jsonData.NPIsinsertedbatteryspecification !== null && jsonData.NPIsinsertedbatteryspecification !== "null" && jsonData.NPIsinsertedbatteryspecification.length > 0)
+        { insertQueryData += 'PF_NP_Isinsertedbatteryspecification__c,'; valuesData += '\'' + jsonData.NPIsinsertedbatteryspecification + '\'' + ','; }
 	
-    if (jsonData.IsTheBatteryCoverDamaged !== undefined && jsonData.IsTheBatteryCoverDamaged !== null && jsonData.IsTheBatteryCoverDamaged !== "null" && jsonData.IsTheBatteryCoverDamaged.length > 0)
-        { insertQueryData += 'PF_NP_Isthebatterycoverdamaged__c,'; valuesData += '\'' + jsonData.IsTheBatteryCoverDamaged + '\'' + ','; }
+    if (jsonData.NPIsthebatterycoverdamaged !== undefined && jsonData.NPIsthebatterycoverdamaged !== null && jsonData.NPIsthebatterycoverdamaged !== "null" && jsonData.NPIsthebatterycoverdamaged.length > 0)
+        { insertQueryData += 'PF_NP_Isthebatterycoverdamaged__c,'; valuesData += '\'' + jsonData.NPIsthebatterycoverdamaged + '\'' + ','; }
 	    
-    if (jsonData.Sometimes !== undefined && jsonData.Sometimes !== null && jsonData.Sometimes !== "null" && jsonData.Sometimes.length > 0)
-       { insertQueryData += 'PF_NP_Sometimes__c,'; valuesData += '\'' + jsonData.Sometimes + '\'' + ','; }
+    if (jsonData.NPSometimes !== undefined && jsonData.NPSometimes !== null && jsonData.NPSometimes !== "null" && jsonData.NPSometimes.length > 0)
+       { insertQueryData += 'PF_NP_Sometimes__c,'; valuesData += '\'' + jsonData.NPSometimes + '\'' + ','; }
 	    
     if (jsonData.NPFrequency !== undefined && jsonData.NPFrequency !== null && jsonData.NPFrequency !== "null" && jsonData.NPFrequency.length > 0)
         { insertQueryData += 'PF_NP_Frequency__c,'; valuesData += '\'' + jsonData.NPFrequency + '\'' + ','; }
 	    
-    if (jsonData.STWhenWasLasttimeIssueObserved !== undefined && jsonData.STWhenWasLasttimeIssueObserved !== null && jsonData.STWhenWasLasttimeIssueObserved !== "null" && jsonData.STWhenWasLasttimeIssueObserved.length > 0)
-        { insertQueryData += 'PF_NP_ST_Whenwaslasttimeissueobserved__c,'; valuesData += '\'' + jsonData.STWhenWasLasttimeIssueObserved + '\'' + ','; }
+    if (jsonData.NPSTwhenwaslasttimeissueobserved !== undefined && jsonData.NPSTwhenwaslasttimeissueobserved !== null && jsonData.NPSTwhenwaslasttimeissueobserved !== "null" && jsonData.NPSTwhenwaslasttimeissueobserved.length > 0)
+        { insertQueryData += 'PF_NP_ST_Whenwaslasttimeissueobserved__c,'; valuesData += '\'' + jsonData.NPSTwhenwaslasttimeissueobserved + '\'' + ','; }
 		
-    if (jsonData.STIsSomethingDisplayedOnDevice !== undefined && jsonData.STIsSomethingDisplayedOnDevice !== null && jsonData.STIsSomethingDisplayedOnDevice !== "null" && jsonData.STIsSomethingDisplayedOnDevice.length > 0)
-        { insertQueryData += 'PF_NP_ST_Issomethingdisplayedondevice__c,'; valuesData += '\'' + jsonData.STIsSomethingDisplayedOnDevice + '\'' + ','; }
+    if (jsonData.NPSTIssomethingdisplayedondevice !== undefined && jsonData.NPSTIssomethingdisplayedondevice !== null && jsonData.NPSTIssomethingdisplayedondevice !== "null" && jsonData.NPSTIssomethingdisplayedondevice.length > 0)
+        { insertQueryData += 'PF_NP_ST_Issomethingdisplayedondevice__c,'; valuesData += '\'' + jsonData.NPSTIssomethingdisplayedondevice + '\'' + ','; }
 	    
-    if (jsonData.STIsSomethingDisplayedOnDeiviceIfyes !== undefined && jsonData.STIsSomethingDisplayedOnDeiviceIfyes !== null && jsonData.STIsSomethingDisplayedOnDeiviceIfyes !== "null" && jsonData.STIsSomethingDisplayedOnDeiviceIfyes.length > 0)
-        { insertQueryData += 'PF_NP_ST_IssomethingdisplaydeiviceIfYes__c,'; valuesData += '\'' + jsonData.STIsSomethingDisplayedOnDeiviceIfyes + '\'' + ','; }
+    if (jsonData.NPSTIssomethingdisplayedondeiviceIfyes !== undefined && jsonData.NPSTIssomethingdisplayedondeiviceIfyes !== null && jsonData.NPSTIssomethingdisplayedondeiviceIfyes !== "null" && jsonData.NPSTIssomethingdisplayedondeiviceIfyes.length > 0)
+        { insertQueryData += 'PF_NP_ST_IssomethingdisplaydeiviceIfYes__c,'; valuesData += '\'' + jsonData.NPSTIssomethingdisplayedondeiviceIfyes + '\'' + ','; }
 	
-    if (jsonData.STHasTheDeviceImpactedByColdorHumid !== undefined && jsonData.STHasTheDeviceImpactedByColdorHumid !== null && jsonData.STHasTheDeviceImpactedByColdorHumid !== "null" && jsonData.STHasTheDeviceImpactedByColdorHumid.length > 0)
-        { insertQueryData += 'PF_NP_ST_Hasdeviceimpactedbycoldorhumid__c,'; valuesData += '\'' + jsonData.STHasTheDeviceImpactedByColdorHumid + '\'' + ','; }
+    if (jsonData.NPSTHasthedeviceimpactedbycoldorhumid !== undefined && jsonData.NPSTHasthedeviceimpactedbycoldorhumid !== null && jsonData.NPSTHasthedeviceimpactedbycoldorhumid !== "null" && jsonData.NPSTHasthedeviceimpactedbycoldorhumid.length > 0)
+        { insertQueryData += 'PF_NP_ST_Hasdeviceimpactedbycoldorhumid__c,'; valuesData += '\'' + jsonData.NPSTHasthedeviceimpactedbycoldorhumid + '\'' + ','; }
 	    
-    if (jsonData.STSpecify !== undefined && jsonData.STSpecify !== null && jsonData.STSpecify !== "null" && jsonData.STSpecify.length > 0)
-       { insertQueryData += 'PF_NP_ST_Specify__c,'; valuesData += '\'' + jsonData.STSpecify + '\'' + ','; }
+    if (jsonData.NPSTSpecify !== undefined && jsonData.NPSTSpecify !== null && jsonData.NPSTSpecify !== "null" && jsonData.NPSTSpecify.length > 0)
+       { insertQueryData += 'PF_NP_ST_Specify__c,'; valuesData += '\'' + jsonData.NPSTSpecify + '\'' + ','; }
 	    
-    if (jsonData.STIsInsertedBatterySpecification !== undefined && jsonData.STIsInsertedBatterySpecification !== null && jsonData.STIsInsertedBatterySpecification !== "null" && jsonData.STIsInsertedBatterySpecification.length > 0)
-        { insertQueryData += 'PF_NP_ST_Isinsertedbatteryspecification__c,'; valuesData += '\'' + jsonData.STIsInsertedBatterySpecification + '\'' + ','; }
+    if (jsonData.NPSTIsinsertedbatteryspecification !== undefined && jsonData.NPSTIsinsertedbatteryspecification !== null && jsonData.NPSTIsinsertedbatteryspecification !== "null" && jsonData.NPSTIsinsertedbatteryspecification.length > 0)
+        { insertQueryData += 'PF_NP_ST_Isinsertedbatteryspecification__c,'; valuesData += '\'' + jsonData.NPSTIsinsertedbatteryspecification + '\'' + ','; }
 	    
-    if (jsonData.STIsTheBatteryCoverDamaged !== undefined && jsonData.STIsTheBatteryCoverDamaged !== null && jsonData.STIsTheBatteryCoverDamaged !== "null" && jsonData.STIsTheBatteryCoverDamaged.length > 0)
-        { insertQueryData += 'PF_NP_ST_Isthebatterycoverdamaged__c,'; valuesData += '\'' + jsonData.STIsTheBatteryCoverDamaged + '\'' + ','; }
+    if (jsonData.NPSTIsthebatterycoverdamaged !== undefined && jsonData.NPSTIsthebatterycoverdamaged !== null && jsonData.NPSTIsthebatterycoverdamaged !== "null" && jsonData.NPSTIsthebatterycoverdamaged.length > 0)
+        { insertQueryData += 'PF_NP_ST_Isthebatterycoverdamaged__c,'; valuesData += '\'' + jsonData.NPSTIsthebatterycoverdamaged + '\'' + ','; }
 		
 		//Power failure - power off
 		
-    if (jsonData.PleaseSpecifyInjectionProcess !== undefined && jsonData.PleaseSpecifyInjectionProcess !== null && jsonData.PleaseSpecifyInjectionProcess !== "null" && jsonData.PleaseSpecifyInjectionProcess.length > 0)
-        { insertQueryData += 'PF_PO_Pleasespecifyinjectionprocess__c,'; valuesData += '\'' + jsonData.PleaseSpecifyInjectionProcess + '\'' + ','; }
+    if (jsonData.POPleasespecifyinjectionprocess !== undefined && jsonData.POPleasespecifyinjectionprocess !== null && jsonData.POPleasespecifyinjectionprocess !== "null" && jsonData.POPleasespecifyinjectionprocess.length > 0)
+        { insertQueryData += 'PF_PO_Pleasespecifyinjectionprocess__c,'; valuesData += '\'' + jsonData.POPleasespecifyinjectionprocess + '\'' + ','; }
 	
-    if (jsonData.DoesTheDeviceStillTurnOn !== undefined && jsonData.DoesTheDeviceStillTurnOn !== null && jsonData.DoesTheDeviceStillTurnOn !== "null" && jsonData.DoesTheDeviceStillTurnOn.length > 0)
-        { insertQueryData += 'PF_PO_Doesthedevicestillturnon__c,'; valuesData += '\'' + jsonData.DoesTheDeviceStillTurnOn + '\'' + ','; }
+    if (jsonData.PODoesthedevicestillturnon !== undefined && jsonData.PODoesthedevicestillturnon !== null && jsonData.PODoesthedevicestillturnon !== "null" && jsonData.PODoesthedevicestillturnon.length > 0)
+        { insertQueryData += 'PF_PO_Doesthedevicestillturnon__c,'; valuesData += '\'' + jsonData.PODoesthedevicestillturnon + '\'' + ','; }
 	    
-    if (jsonData.HasaWarningMessageBeenDisplayed !== undefined && jsonData.HasaWarningMessageBeenDisplayed !== null && jsonData.HasaWarningMessageBeenDisplayed !== "null" && jsonData.HasaWarningMessageBeenDisplayed.length > 0)
-       { insertQueryData += 'PF_PO_Hasawarningmessagebeendisplayed__c,'; valuesData += '\'' + jsonData.HasaWarningMessageBeenDisplayed + '\'' + ','; }
+    if (jsonData.POHasawarningmessagebeendisplayed !== undefined && jsonData.POHasawarningmessagebeendisplayed !== null && jsonData.POHasawarningmessagebeendisplayed !== "null" && jsonData.POHasawarningmessagebeendisplayed.length > 0)
+       { insertQueryData += 'PF_PO_Hasawarningmessagebeendisplayed__c,'; valuesData += '\'' + jsonData.POHasawarningmessagebeendisplayed + '\'' + ','; }
 	    
-    if (jsonData.PleaseSpecify !== undefined && jsonData.PleaseSpecify !== null && jsonData.PleaseSpecify !== "null" && jsonData.PleaseSpecify.length > 0)
-        { insertQueryData += 'PF_PO_Pleasespecify__c,'; valuesData += '\'' + jsonData.PleaseSpecify + '\'' + ','; }
+    if (jsonData.POPleasespecify !== undefined && jsonData.POPleasespecify !== null && jsonData.POPleasespecify !== "null" && jsonData.POPleasespecify.length > 0)
+        { insertQueryData += 'PF_PO_Pleasespecify__c,'; valuesData += '\'' + jsonData.POPleasespecify + '\'' + ','; }
 	    
-    if (jsonData.PowerOffisAreCurrentFailureObserved !== undefined && jsonData.PowerOffisAreCurrentFailureObserved !== null && jsonData.PowerOffisAreCurrentFailureObserved !== "null" && jsonData.HasTheDeviceImpactedByColdOrHumid.length > 0)
-        { insertQueryData += 'PF_PO_Poweroffisarecurrentfailureobserve__c,'; valuesData += '\'' + jsonData.PowerOffisAreCurrentFailureObserved + '\'' + ','; }
+    if (jsonData.POPoweroffisarecurrentfailureobserved !== undefined && jsonData.POPoweroffisarecurrentfailureobserved !== null && jsonData.POPoweroffisarecurrentfailureobserved !== "null" && jsonData.POPoweroffisarecurrentfailureobserved.length > 0)
+        { insertQueryData += 'PF_PO_Poweroffisarecurrentfailureobserve__c,'; valuesData += '\'' + jsonData.POPoweroffisarecurrentfailureobserved + '\'' + ','; }
 		
-    if (jsonData.ProvideFrequency !== undefined && jsonData.ProvideFrequency !== null && jsonData.ProvideFrequency !== "null" && jsonData.ProvideFrequency.length > 0)
-        { insertQueryData += 'PF_PO_Providefrequency__c,'; valuesData += '\'' + jsonData.ProvideFrequency + '\'' + ','; }
+    if (jsonData.POProvidefrequency !== undefined && jsonData.POProvidefrequency !== null && jsonData.POProvidefrequency !== "null" && jsonData.POProvidefrequency.length > 0)
+        { insertQueryData += 'PF_PO_Providefrequency__c,'; valuesData += '\'' + jsonData.POProvidefrequency + '\'' + ','; }
 	    
-    if (jsonData.DoesDevicePowersoffWithSmallShocks !== undefined && jsonData.DoesDevicePowersoffWithSmallShocks !== null && jsonData.DoesDevicePowersoffWithSmallShocks !== "null" && jsonData.DoesDevicePowersoffWithSmallShocks.length > 0)
-        { insertQueryData += 'PF_PO_Doesdevicepowersoffwithsmallshocks__c,'; valuesData += '\'' + jsonData.DoesDevicePowersoffWithSmallShocks + '\'' + ','; }
+    if (jsonData.PODoesdevicepowersoffwithsmallshocks !== undefined && jsonData.PODoesdevicepowersoffwithsmallshocks !== null && jsonData.PODoesdevicepowersoffwithsmallshocks !== "null" && jsonData.PODoesdevicepowersoffwithsmallshocks.length > 0)
+        { insertQueryData += 'PF_PO_Doesdevicepowersoffwithsmallshocks__c,'; valuesData += '\'' + jsonData.PODoesdevicepowersoffwithsmallshocks + '\'' + ','; }
 	
-    if (jsonData.HasUserTrytoRemoveandReinsertBattery !== undefined && jsonData.HasUserTrytoRemoveandReinsertBattery !== null && jsonData.HasUserTrytoRemoveandReinsertBattery !== "null" && jsonData.HasUserTrytoRemoveandReinsertBattery.length > 0)
-        { insertQueryData += 'PF_PO_Hasusertrytoremoveandreinsertbatte__c,'; valuesData += '\'' + jsonData.IsTheBatteryCoverDamaged + '\'' + ','; }
+    if (jsonData.POHasusertrytoremoveandreinsertbattery !== undefined && jsonData.POHasusertrytoremoveandreinsertbattery !== null && jsonData.POHasusertrytoremoveandreinsertbattery !== "null" && jsonData.POHasusertrytoremoveandreinsertbattery.length > 0)
+        { insertQueryData += 'PF_PO_Hasusertrytoremoveandreinsertbatte__c,'; valuesData += '\'' + jsonData.POHasusertrytoremoveandreinsertbattery + '\'' + ','; }
 	    
-    if (jsonData.NoPower !== undefined && jsonData.NoPower !== null && jsonData.NoPower !== "null" && jsonData.NoPower.length > 0)
-       { insertQueryData += 'PF_PO_Nopower__c,'; valuesData += '\'' + jsonData.NoPower + '\'' + ','; }
+    if (jsonData.PONopower !== undefined && jsonData.PONopower !== null && jsonData.PONopower !== "null" && jsonData.PONopower.length > 0)
+       { insertQueryData += 'PF_PO_Nopower__c,'; valuesData += '\'' + jsonData.PONopower + '\'' + ','; }
 	    
 		
 	// power failure - No power off
 	
-    if (jsonData.DeviceBlckedPreventingToBeTurnoff !== undefined && jsonData.DeviceBlckedPreventingToBeTurnoff !== null && jsonData.DeviceBlckedPreventingToBeTurnoff !== "null" && jsonData.DeviceBlckedPreventingToBeTurnoff.length > 0)
-        { insertQueryData += 'PF_NPO_DeviceBlckedPreventingToBeTurnoff__c,'; valuesData += '\'' + jsonData.DeviceBlckedPreventingToBeTurnoff + '\'' + ','; }
+    if (jsonData.NPODeviceBlckedPreventingToBeTurnoff !== undefined && jsonData.NPODeviceBlckedPreventingToBeTurnoff !== null && jsonData.NPODeviceBlckedPreventingToBeTurnoff !== "null" && jsonData.NPODeviceBlckedPreventingToBeTurnoff.length > 0)
+        { insertQueryData += 'PF_NPO_DeviceBlckedPreventingToBeTurnoff__c,'; valuesData += '\'' + jsonData.NPODeviceBlckedPreventingToBeTurnoff + '\'' + ','; }
 	
-    if (jsonData.WarningMessage !== undefined && jsonData.WarningMessage !== null && jsonData.WarningMessage !== "null" && jsonData.WarningMessage.length > 0)
-        { insertQueryData += 'PF_NPO_WarningMessage__c,'; valuesData += '\'' + jsonData.WarningMessage + '\'' + ','; }
+    if (jsonData.NPOWarningMessage !== undefined && jsonData.NPOWarningMessage !== null && jsonData.NPOWarningMessage !== "null" && jsonData.NPOWarningMessage.length > 0)
+        { insertQueryData += 'PF_NPO_WarningMessage__c,'; valuesData += '\'' + jsonData.NPOWarningMessage + '\'' + ','; }
 	    
-    if (jsonData.NopoweroffIssueDisplydAtWhatStep !== undefined && jsonData.NopoweroffIssueDisplydAtWhatStep !== null && jsonData.NopoweroffIssueDisplydAtWhatStep !== "null" && jsonData.NopoweroffIssueDisplydAtWhatStep.length > 0)
-       { insertQueryData += 'PF_NPO_NopoweroffIssueDisplydAtWhatStep__c,'; valuesData += '\'' + jsonData.NopoweroffIssueDisplydAtWhatStep + '\'' + ','; }
+    if (jsonData.NPONopoweroffIssueDisplydAtWhatStep !== undefined && jsonData.NPONopoweroffIssueDisplydAtWhatStep !== null && jsonData.NPONopoweroffIssueDisplydAtWhatStep !== "null" && jsonData.NPONopoweroffIssueDisplydAtWhatStep.length > 0)
+       { insertQueryData += 'PF_NPO_NopoweroffIssueDisplydAtWhatStep__c,'; valuesData += '\'' + jsonData.NPONopoweroffIssueDisplydAtWhatStep + '\'' + ','; }
 	    
-    if (jsonData.PleaseSpecifyInjectionStep !== undefined && jsonData.PleaseSpecifyInjectionStep !== null && jsonData.PleaseSpecifyInjectionStep !== "null" && jsonData.PleaseSpecifyInjectionStep.length > 0)
-        { insertQueryData += 'PF_NPO_PleaseSpecifyInjectionStep__c,'; valuesData += '\'' + jsonData.PleaseSpecifyInjectionStep + '\'' + ','; }
+    if (jsonData.NPOPleaseSpecifyInjectionStep !== undefined && jsonData.NPOPleaseSpecifyInjectionStep !== null && jsonData.NPOPleaseSpecifyInjectionStep !== "null" && jsonData.NPOPleaseSpecifyInjectionStep.length > 0)
+        { insertQueryData += 'PF_NPO_PleaseSpecifyInjectionStep__c,'; valuesData += '\'' + jsonData.NPOPleaseSpecifyInjectionStep + '\'' + ','; }
 	    
-    if (jsonData.NeedToRemoveBateryToTurnoffDevice !== undefined && jsonData.NeedToRemoveBateryToTurnoffDevice !== null && jsonData.NeedToRemoveBateryToTurnoffDevice !== "null" && jsonData.NeedToRemoveBateryToTurnoffDevice.length > 0)
-        { insertQueryData += 'PF_NPO_NeedToRemoveBateryToTurnoffDevice__c,'; valuesData += '\'' + jsonData.NeedToRemoveBateryToTurnoffDevice + '\'' + ','; }
+    if (jsonData.NPONeedToRemoveBateryToTurnoffDevice !== undefined && jsonData.NPONeedToRemoveBateryToTurnoffDevice !== null && jsonData.NPONeedToRemoveBateryToTurnoffDevice !== "null" && jsonData.NPONeedToRemoveBateryToTurnoffDevice.length > 0)
+        { insertQueryData += 'PF_NPO_NeedToRemoveBateryToTurnoffDevice__c,'; valuesData += '\'' + jsonData.NPONeedToRemoveBateryToTurnoffDevice + '\'' + ','; }
 		
-     if (jsonData.IsSomethingStuckInsideTheDevice !== undefined && jsonData.IsSomethingStuckInsideTheDevice !== null && jsonData.IsSomethingStuckInsideTheDevice !== "null" && jsonData.IsSomethingStuckInsideTheDevice.length > 0)
-        { insertQueryData += 'PF_NPO_IsSomethingStuckInsideTheDevice__c,'; valuesData += '\'' + jsonData.IsSomethingStuckInsideTheDevice + '\'' + ','; }
+     if (jsonData.NPOIsSomethingStuckInsideTheDevice !== undefined && jsonData.NPOIsSomethingStuckInsideTheDevice !== null && jsonData.NPOIsSomethingStuckInsideTheDevice !== "null" && jsonData.NPOIsSomethingStuckInsideTheDevice.length > 0)
+        { insertQueryData += 'PF_NPO_IsSomethingStuckInsideTheDevice__c,'; valuesData += '\'' + jsonData.NPOIsSomethingStuckInsideTheDevice + '\'' + ','; }
 	    
-    if (jsonData.NPOSpecify !== undefined && jsonData.Specify !== null && jsonData.NPOSpecify !== "null" && jsonData.NPOSpecify.length > 0)
+    if (jsonData.NPOSpecify !== undefined && jsonData.NPOSpecify !== null && jsonData.NPOSpecify !== "null" && jsonData.NPOSpecify.length > 0)
         { insertQueryData += 'PF_NPO_Specify__c,'; valuesData += '\'' + jsonData.NPOSpecify + '\'' + ','; }
 	
-    if (jsonData.IsItARecurrentFailure !== undefined && jsonData.IsItARecurrentFailure !== null && jsonData.IsItARecurrentFailure !== "null" && jsonData.IsItARecurrentFailure.length > 0)
-        { insertQueryData += 'PF_NPO_IsItARecurrentFailure__c,'; valuesData += '\'' + jsonData.IsItARecurrentFailure + '\'' + ','; }
+    if (jsonData.NPOIsItARecurrentFailure !== undefined && jsonData.NPOIsItARecurrentFailure !== null && jsonData.NPOIsItARecurrentFailure !== "null" && jsonData.NPOIsItARecurrentFailure.length > 0)
+        { insertQueryData += 'PF_NPO_IsItARecurrentFailure__c,'; valuesData += '\'' + jsonData.NPOIsItARecurrentFailure + '\'' + ','; }
 	    
     if (jsonData.NPOFrequency !== undefined && jsonData.NPOFrequency !== null && jsonData.NPOFrequency !== "null" && jsonData.NPOFrequency.length > 0)
        { insertQueryData += 'PF_NPO_Frequency__c,'; valuesData += '\'' + jsonData.NPOFrequency + '\'' + ','; }
 	   
-	if (jsonData.TheLastNoPowerOffIssueObserved !== undefined && jsonData.TheLastNoPowerOffIssueObserved !== null && jsonData.TheLastNoPowerOffIssueObserved !== "null" && jsonData.TheLastNoPowerOffIssueObserved.length > 0)
-       { insertQueryData += 'PF_NPO_TheLastNoPowerOffIssueObserved__c,'; valuesData += '\'' + jsonData.TheLastNoPowerOffIssueObserved + '\'' + ','; }
+	if (jsonData.NPOTheLastNoPowerOffIssueObserved !== undefined && jsonData.NPOTheLastNoPowerOffIssueObserved !== null && jsonData.NPOTheLastNoPowerOffIssueObserved !== "null" && jsonData.NPOTheLastNoPowerOffIssueObserved.length > 0)
+       { insertQueryData += 'PF_NPO_TheLastNoPowerOffIssueObserved__c,'; valuesData += '\'' + jsonData.NPOTheLastNoPowerOffIssueObserved + '\'' + ','; }
 	   
      // power failure - Battery consumption   
 	
     if (jsonData.BatteryConsumption !== undefined && jsonData.BatteryConsumption !== null && jsonData.BatteryConsumption !== "null" && jsonData.BatteryConsumption.length > 0)
         { insertQueryData += 'PF_BatteryConsumption__c,'; valuesData += '\'' + jsonData.BatteryConsumption + '\'' + ','; }
 	
-    if (jsonData.WhenWasTheBatteryInserted !== undefined && jsonData.WhenWasTheBatteryInserted !== null && jsonData.WhenWasTheBatteryInserted !== "null" && jsonData.WhenWasTheBatteryInserted.length > 0)
-        { insertQueryData += 'PF_BC_WhenWasTheBatteryInserted__c,'; valuesData += '\'' + jsonData.WhenWasTheBatteryInserted + '\'' + ','; }
+    if (jsonData.BCWhenWasTheBatteryInserted !== undefined && jsonData.BCWhenWasTheBatteryInserted !== null && jsonData.BCWhenWasTheBatteryInserted !== "null" && jsonData.BCWhenWasTheBatteryInserted.length > 0)
+        { insertQueryData += 'PF_BC_WhenWasTheBatteryInserted__c,'; valuesData += '\'' + jsonData.BCWhenWasTheBatteryInserted + '\'' + ','; }
 	    
-    if (jsonData.WhenWasTheBatteryDischarged !== undefined && jsonData.WhenWasTheBatteryDischarged !== null && jsonData.WhenWasTheBatteryDischarged !== "null" && jsonData.WhenWasTheBatteryDischarged.length > 0)
-       { insertQueryData += 'PF_BC_WhenWasTheBatteryDischarged__c,'; valuesData += '\'' + jsonData.WhenWasTheBatteryDischarged + '\'' + ','; }
+    if (jsonData.BCWhenWasTheBatteryDischarged !== undefined && jsonData.BCWhenWasTheBatteryDischarged !== null && jsonData.BCWhenWasTheBatteryDischarged !== "null" && jsonData.BCWhenWasTheBatteryDischarged.length > 0)
+       { insertQueryData += 'PF_BC_WhenWasTheBatteryDischarged__c,'; valuesData += '\'' + jsonData.BCWhenWasTheBatteryDischarged + '\'' + ','; }
 	    
-    if (jsonData.IsAWarningMessageDisplayed !== undefined && jsonData.IsAWarningMessageDisplayed !== null && jsonData.IsAWarningMessageDisplayed !== "null" && jsonData.IsAWarningMessageDisplayed.length > 0)
-        { insertQueryData += 'PF_BC_IsAWarningMessageDisplayed__c,'; valuesData += '\'' + jsonData.IsAWarningMessageDisplayed + '\'' + ','; }
+    if (jsonData.BCIsAWarningMessageDisplayed !== undefined && jsonData.BCIsAWarningMessageDisplayed !== null && jsonData.BCIsAWarningMessageDisplayed !== "null" && jsonData.BCIsAWarningMessageDisplayed.length > 0)
+        { insertQueryData += 'PF_BC_IsAWarningMessageDisplayed__c,'; valuesData += '\'' + jsonData.BCIsAWarningMessageDisplayed + '\'' + ','; }
 	    
     if (jsonData.BCWarningMessage !== undefined && jsonData.BCWarningMessage !== null && jsonData.BCWarningMessage !== "null" && jsonData.BCWarningMessage.length > 0)
         { insertQueryData += 'PF_BC_WarningMessage__c,'; valuesData += '\'' + jsonData.BCWarningMessage + '\'' + ','; }
 		
-     if (jsonData.HasTheFailureBeenFrequentlyObservd !== undefined && jsonData.HasTheFailureBeenFrequentlyObservd !== null && jsonData.HasTheFailureBeenFrequentlyObservd !== "null" && jsonData.HasTheFailureBeenFrequentlyObservd.length > 0)
-        { insertQueryData += 'PF_BC_HasTheFailureBeenFrequentlyObservd__c,'; valuesData += '\'' + jsonData.HasTheFailureBeenFrequentlyObservd + '\'' + ','; }
+    if (jsonData.BCHasTheFailureBeenFrequentlyObservd !== undefined && jsonData.BCHasTheFailureBeenFrequentlyObservd !== null && jsonData.BCHasTheFailureBeenFrequentlyObservd !== "null" && jsonData.BCHasTheFailureBeenFrequentlyObservd.length > 0)
+        { insertQueryData += 'PF_BC_HasTheFailureBeenFrequentlyObservd__c,'; valuesData += '\'' + jsonData.BCHasTheFailureBeenFrequentlyObservd + '\'' + ','; }
 	    
-    if (jsonData.PleaseProvideFrequency !== undefined && jsonData.PleaseProvideFrequency !== null && jsonData.PleaseProvideFrequency !== "null" && jsonData.PleaseProvideFrequency.length > 0)
-        { insertQueryData += 'PF_BC_PleaseProvideFrequency__c,'; valuesData += '\'' + jsonData.PleaseProvideFrequency + '\'' + ','; }
+    if (jsonData.BCPleaseProvideFrequency !== undefined && jsonData.BCPleaseProvideFrequency !== null && jsonData.BCPleaseProvideFrequency !== "null" && jsonData.BCPleaseProvideFrequency.length > 0)
+        { insertQueryData += 'PF_BC_PleaseProvideFrequency__c,'; valuesData += '\'' + jsonData.BCPleaseProvideFrequency + '\'' + ','; }
+		
+    if (jsonData.BCBatteryWithinSpecifications !== undefined && jsonData.BCBatteryWithinSpecifications !== null && jsonData.BCBatteryWithinSpecifications !== "null" && jsonData.BCBatteryWithinSpecifications.length > 0)
+        { insertQueryData += 'PF_BC_BatteryWithinSpecifications__c,'; valuesData += '\'' + jsonData.BCBatteryWithinSpecifications + '\'' + ','; }
+		
+    if (jsonData.BCBatteryProperlyPlaced !== undefined && jsonData.BCBatteryProperlyPlaced !== null && jsonData.BCBatteryProperlyPlaced !== "null" && jsonData.BCBatteryProperlyPlaced.length > 0)
+        { insertQueryData += 'PF_BC_BatteryProperlyPlaced__c,'; valuesData += '\'' + jsonData.BCBatteryProperlyPlaced + '\'' + ','; }
+		
+    if (jsonData.BCBatteryCoverClosed !== undefined && jsonData.BCBatteryCoverClosed !== null && jsonData.BCBatteryCoverClosed !== "null" && jsonData.BCBatteryCoverClosed.length > 0)
+        { insertQueryData += 'PF_BC_BatteryCoverClosed__c,'; valuesData += '\'' + jsonData.BCBatteryCoverClosed + '\'' + ','; }
+		
+    if (jsonData.BCHasTheDeviceBeenImpactedByHumidity !== undefined && jsonData.BCHasTheDeviceBeenImpactedByHumidity !== null && jsonData.BCHasTheDeviceBeenImpactedByHumidity !== "null" && jsonData.BCHasTheDeviceBeenImpactedByHumidity.length > 0)
+        { insertQueryData += 'PF_BC_HasTheDeviceBeenImpactedByHumidity__c,'; valuesData += '\'' + jsonData.BCHasTheDeviceBeenImpactedByHumidity + '\'' + ','; }
 	
     // caseid insertion
     if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
