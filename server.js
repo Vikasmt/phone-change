@@ -134,7 +134,7 @@ router.post('/insertPowerFailure', function(req, res) {
         { insertQueryData += 'PF_PO_Hasusertrytoremoveandreinsertbatte__c,'; valuesData += '\'' + jsonData.IsTheBatteryCoverDamaged + '\'' + ','; }
 	    
     if (jsonData.NoPower !== undefined && jsonData.NoPower !== null && jsonData.NoPower !== "null" && jsonData.NoPower.length > 0)
-       { insertQueryData += 'PF_PO_Nopower,'; valuesData += '\'' + jsonData.NoPower + '\'' + ','; }
+       { insertQueryData += 'PF_PO_Nopower__c,'; valuesData += '\'' + jsonData.NoPower + '\'' + ','; }
 	    
 		
 	// power failure - No power off
