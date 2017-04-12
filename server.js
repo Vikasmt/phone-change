@@ -71,8 +71,8 @@ router.post('/insertPowerFailure', function(req, res) {
     if (jsonData.HasTheDeviceImpactedByColdOrHumid !== undefined && jsonData.HasTheDeviceImpactedByColdOrHumid !== null && jsonData.HasTheDeviceImpactedByColdOrHumid !== "null" && jsonData.HasTheDeviceImpactedByColdOrHumid.length > 0)
         { insertQueryData += 'PF_NP_Hasthedeviceimpactedbycoldorhumid__c,'; valuesData += '\'' + jsonData.HasTheDeviceImpactedByColdOrHumid + '\'' + ','; }
 		
-    if (jsonData.NPSpecify !== undefined && jsonData.Specify !== null && jsonData.Specify !== "null" && jsonData.Specify.length > 0)
-        { insertQueryData += 'PF_NP_Specify__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ','; }
+    if (jsonData.NPSpecify !== undefined && jsonData.NPSpecify !== null && jsonData.NPSpecify !== "null" && jsonData.NPSpecify.length > 0)
+        { insertQueryData += 'PF_NP_Specify__c,'; valuesData += '\'' + jsonData.NPSpecify + '\'' + ','; }
 	    
     if (jsonData.IsInsertedBatterySpecification !== undefined && jsonData.IsInsertedBatterySpecification !== null && jsonData.IsInsertedBatterySpecification !== "null" && jsonData.IsInsertedBatterySpecification.length > 0)
         { insertQueryData += 'PF_NP_Isinsertedbatteryspecification__c,'; valuesData += '\'' + jsonData.IsInsertedBatterySpecification + '\'' + ','; }
@@ -83,8 +83,8 @@ router.post('/insertPowerFailure', function(req, res) {
     if (jsonData.Sometimes !== undefined && jsonData.Sometimes !== null && jsonData.Sometimes !== "null" && jsonData.Sometimes.length > 0)
        { insertQueryData += 'PF_NP_Sometimes__c,'; valuesData += '\'' + jsonData.Sometimes + '\'' + ','; }
 	    
-    if (jsonData.NPFrequency !== undefined && jsonData.Frequency !== null && jsonData.Frequency !== "null" && jsonData.Frequency.length > 0)
-        { insertQueryData += 'PF_NP_Frequency__c,'; valuesData += '\'' + jsonData.Frequency + '\'' + ','; }
+    if (jsonData.NPFrequency !== undefined && jsonData.NPFrequency !== null && jsonData.NPFrequency !== "null" && jsonData.NPFrequency.length > 0)
+        { insertQueryData += 'PF_NP_Frequency__c,'; valuesData += '\'' + jsonData.NPFrequency + '\'' + ','; }
 	    
     if (jsonData.STWhenWasLasttimeIssueObserved !== undefined && jsonData.STWhenWasLasttimeIssueObserved !== null && jsonData.STWhenWasLasttimeIssueObserved !== "null" && jsonData.STWhenWasLasttimeIssueObserved.length > 0)
         { insertQueryData += 'PF_NP_ST_Whenwaslasttimeissueobserved__c,'; valuesData += '\'' + jsonData.STWhenWasLasttimeIssueObserved + '\'' + ','; }
@@ -157,14 +157,14 @@ router.post('/insertPowerFailure', function(req, res) {
      if (jsonData.IsSomethingStuckInsideTheDevice !== undefined && jsonData.IsSomethingStuckInsideTheDevice !== null && jsonData.IsSomethingStuckInsideTheDevice !== "null" && jsonData.IsSomethingStuckInsideTheDevice.length > 0)
         { insertQueryData += 'PF_NPO_IsSomethingStuckInsideTheDevice__c,'; valuesData += '\'' + jsonData.IsSomethingStuckInsideTheDevice + '\'' + ','; }
 	    
-    if (jsonData.NPOSpecify !== undefined && jsonData.Specify !== null && jsonData.Specify !== "null" && jsonData.Specify.length > 0)
-        { insertQueryData += 'PF_NPO_Specify__c,'; valuesData += '\'' + jsonData.Specify + '\'' + ','; }
+    if (jsonData.NPOSpecify !== undefined && jsonData.Specify !== null && jsonData.NPOSpecify !== "null" && jsonData.NPOSpecify.length > 0)
+        { insertQueryData += 'PF_NPO_Specify__c,'; valuesData += '\'' + jsonData.NPOSpecify + '\'' + ','; }
 	
     if (jsonData.IsItARecurrentFailure !== undefined && jsonData.IsItARecurrentFailure !== null && jsonData.IsItARecurrentFailure !== "null" && jsonData.IsItARecurrentFailure.length > 0)
         { insertQueryData += 'PF_NPO_IsItARecurrentFailure__c,'; valuesData += '\'' + jsonData.IsItARecurrentFailure + '\'' + ','; }
 	    
-    if (jsonData.NPOFrequency !== undefined && jsonData.Frequency !== null && jsonData.Frequency !== "null" && jsonData.Frequency.length > 0)
-       { insertQueryData += 'PF_NPO_Frequency__c,'; valuesData += '\'' + jsonData.Frequency + '\'' + ','; }
+    if (jsonData.NPOFrequency !== undefined && jsonData.NPOFrequency !== null && jsonData.NPOFrequency !== "null" && jsonData.Frequency.length > 0)
+       { insertQueryData += 'PF_NPO_Frequency__c,'; valuesData += '\'' + jsonData.NPOFrequency + '\'' + ','; }
 	   
 	if (jsonData.TheLastNoPowerOffIssueObserved !== undefined && jsonData.TheLastNoPowerOffIssueObserved !== null && jsonData.TheLastNoPowerOffIssueObserved !== "null" && jsonData.TheLastNoPowerOffIssueObserved.length > 0)
        { insertQueryData += 'PF_NPO_TheLastNoPowerOffIssueObserved__c,'; valuesData += '\'' + jsonData.TheLastNoPowerOffIssueObserved + '\'' + ','; }
