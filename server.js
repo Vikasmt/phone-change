@@ -163,7 +163,7 @@ router.post('/insertPowerFailure', function(req, res) {
     if (jsonData.IsItARecurrentFailure !== undefined && jsonData.IsItARecurrentFailure !== null && jsonData.IsItARecurrentFailure !== "null" && jsonData.IsItARecurrentFailure.length > 0)
         { insertQueryData += 'PF_NPO_IsItARecurrentFailure__c,'; valuesData += '\'' + jsonData.IsItARecurrentFailure + '\'' + ','; }
 	    
-    if (jsonData.NPOFrequency !== undefined && jsonData.NPOFrequency !== null && jsonData.NPOFrequency !== "null" && jsonData.Frequency.length > 0)
+    if (jsonData.NPOFrequency !== undefined && jsonData.NPOFrequency !== null && jsonData.NPOFrequency !== "null" && jsonData.NPOFrequency.length > 0)
        { insertQueryData += 'PF_NPO_Frequency__c,'; valuesData += '\'' + jsonData.NPOFrequency + '\'' + ','; }
 	   
 	if (jsonData.TheLastNoPowerOffIssueObserved !== undefined && jsonData.TheLastNoPowerOffIssueObserved !== null && jsonData.TheLastNoPowerOffIssueObserved !== "null" && jsonData.TheLastNoPowerOffIssueObserved.length > 0)
