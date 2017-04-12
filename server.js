@@ -71,7 +71,7 @@ router.post('/insertPowerFailure', function(req, res) {
     if (jsonData.HasTheDeviceImpactedByColdOrHumid !== undefined && jsonData.HasTheDeviceImpactedByColdOrHumid !== null && jsonData.HasTheDeviceImpactedByColdOrHumid !== "null" && jsonData.HasTheDeviceImpactedByColdOrHumid.length > 0)
         { insertQueryData += 'PF_NP_Hasthedeviceimpactedbycoldorhumid__c,'; valuesData += '\'' + jsonData.HasTheDeviceImpactedByColdOrHumid + '\'' + ','; }
 		
-    if (jsonData.Specify !== undefined && jsonData.Specify !== null && jsonData.Specify !== "null" && jsonData.Specify.length > 0)
+    if (jsonData.NPSpecify !== undefined && jsonData.Specify !== null && jsonData.Specify !== "null" && jsonData.Specify.length > 0)
         { insertQueryData += 'PF_NP_Specify__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ','; }
 	    
     if (jsonData.IsInsertedBatterySpecification !== undefined && jsonData.IsInsertedBatterySpecification !== null && jsonData.IsInsertedBatterySpecification !== "null" && jsonData.IsInsertedBatterySpecification.length > 0)
@@ -83,7 +83,7 @@ router.post('/insertPowerFailure', function(req, res) {
     if (jsonData.Sometimes !== undefined && jsonData.Sometimes !== null && jsonData.Sometimes !== "null" && jsonData.Sometimes.length > 0)
        { insertQueryData += 'PF_NP_Sometimes__c,'; valuesData += '\'' + jsonData.Sometimes + '\'' + ','; }
 	    
-    if (jsonData.Frequency !== undefined && jsonData.Frequency !== null && jsonData.Frequency !== "null" && jsonData.Frequency.length > 0)
+    if (jsonData.NPFrequency !== undefined && jsonData.Frequency !== null && jsonData.Frequency !== "null" && jsonData.Frequency.length > 0)
         { insertQueryData += 'PF_NP_Frequency__c,'; valuesData += '\'' + jsonData.Frequency + '\'' + ','; }
 	    
     if (jsonData.STWhenWasLasttimeIssueObserved !== undefined && jsonData.STWhenWasLasttimeIssueObserved !== null && jsonData.STWhenWasLasttimeIssueObserved !== "null" && jsonData.STWhenWasLasttimeIssueObserved.length > 0)
@@ -157,13 +157,13 @@ router.post('/insertPowerFailure', function(req, res) {
      if (jsonData.IsSomethingStuckInsideTheDevice !== undefined && jsonData.IsSomethingStuckInsideTheDevice !== null && jsonData.IsSomethingStuckInsideTheDevice !== "null" && jsonData.IsSomethingStuckInsideTheDevice.length > 0)
         { insertQueryData += 'PF_NPO_IsSomethingStuckInsideTheDevice__c,'; valuesData += '\'' + jsonData.IsSomethingStuckInsideTheDevice + '\'' + ','; }
 	    
-    if (jsonData.Specify !== undefined && jsonData.Specify !== null && jsonData.Specify !== "null" && jsonData.Specify.length > 0)
+    if (jsonData.NPOSpecify !== undefined && jsonData.Specify !== null && jsonData.Specify !== "null" && jsonData.Specify.length > 0)
         { insertQueryData += 'PF_NPO_Specify__c,'; valuesData += '\'' + jsonData.Specify + '\'' + ','; }
 	
     if (jsonData.IsItARecurrentFailure !== undefined && jsonData.IsItARecurrentFailure !== null && jsonData.IsItARecurrentFailure !== "null" && jsonData.IsItARecurrentFailure.length > 0)
         { insertQueryData += 'PF_NPO_IsItARecurrentFailure__c,'; valuesData += '\'' + jsonData.IsItARecurrentFailure + '\'' + ','; }
 	    
-    if (jsonData.Frequency !== undefined && jsonData.Frequency !== null && jsonData.Frequency !== "null" && jsonData.Frequency.length > 0)
+    if (jsonData.NPOFrequency !== undefined && jsonData.Frequency !== null && jsonData.Frequency !== "null" && jsonData.Frequency.length > 0)
        { insertQueryData += 'PF_NPO_Frequency__c,'; valuesData += '\'' + jsonData.Frequency + '\'' + ','; }
 	   
 	if (jsonData.TheLastNoPowerOffIssueObserved !== undefined && jsonData.TheLastNoPowerOffIssueObserved !== null && jsonData.TheLastNoPowerOffIssueObserved !== "null" && jsonData.TheLastNoPowerOffIssueObserved.length > 0)
