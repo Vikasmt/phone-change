@@ -93,7 +93,7 @@ router.post('/insertPowerFailure', function(req, res) {
         { insertQueryData += 'PF_NP_ST_Issomethingdisplayedondevice__c,'; valuesData += '\'' + jsonData.STIsSomethingDisplayedOnDevice + '\'' + ','; }
 	    
     if (jsonData.STIsSomethingDisplayedOnDeiviceIfyes !== undefined && jsonData.STIsSomethingDisplayedOnDeiviceIfyes !== null && jsonData.STIsSomethingDisplayedOnDeiviceIfyes !== "null" && jsonData.STIsSomethingDisplayedOnDeiviceIfyes.length > 0)
-        { insertQueryData += 'PF_NP_ST_IssomethingdisplayondeiviceIfY__c,'; valuesData += '\'' + jsonData.STIsSomethingDisplayedOnDeiviceIfyes + '\'' + ','; }
+        { insertQueryData += 'PF_NP_ST_IssomethingdisplaydeiviceIfYes__c,'; valuesData += '\'' + jsonData.STIsSomethingDisplayedOnDeiviceIfyes + '\'' + ','; }
 	
     if (jsonData.STHasTheDeviceImpactedByColdorHumid !== undefined && jsonData.STHasTheDeviceImpactedByColdorHumid !== null && jsonData.STHasTheDeviceImpactedByColdorHumid !== "null" && jsonData.STHasTheDeviceImpactedByColdorHumid.length > 0)
         { insertQueryData += 'PF_NP_ST_Hasdeviceimpactedbycoldorhumid__c,'; valuesData += '\'' + jsonData.STHasTheDeviceImpactedByColdorHumid + '\'' + ','; }
