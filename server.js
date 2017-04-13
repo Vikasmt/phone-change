@@ -109,11 +109,13 @@ router.post('/insertCatridgeIssue', function(req, res) {
 		
     if (jsonData.CDCartridgeDetectionIssueWitOneOrAll !== undefined && jsonData.CDCartridgeDetectionIssueWitOneOrAll !== null && jsonData.CDCartridgeDetectionIssueWitOneOrAll !== "null" && jsonData.CDCartridgeDetectionIssueWitOneOrAll.length > 0)
         { insertQueryData += 'CI_CD_CartridgeDetectionIssueWitOneOrAll__c,'; valuesData += '\'' + jsonData.CDCartridgeDetectionIssueWitOneOrAll + '\'' + ','; }
-    //
+		
+    //Cartridge warning message
     if (jsonData.CWMCartridgeWarningMessage !== undefined && jsonData.CWMCartridgeWarningMessage !== null && jsonData.CWMCartridgeWarningMessage !== "null" && jsonData.CWMCartridgeWarningMessage.length > 0)
         { insertQueryData += 'CI_CWM_CartridgeWarningMessage__c,'; valuesData += '\'' + jsonData.CWMCartridgeWarningMessage + '\'' + ','; }
-    //
-	if (jsonData.BCIsBrokenCartridgeInsideTheDevice !== undefined && jsonData.BCIsBrokenCartridgeInsideTheDevice !== null && jsonData.BCIsBrokenCartridgeInsideTheDevice !== "null" && jsonData.BCIsBrokenCartridgeInsideTheDevice.length > 0)
+		
+    //Broken cartridge
+     if (jsonData.BCIsBrokenCartridgeInsideTheDevice !== undefined && jsonData.BCIsBrokenCartridgeInsideTheDevice !== null && jsonData.BCIsBrokenCartridgeInsideTheDevice !== "null" && jsonData.BCIsBrokenCartridgeInsideTheDevice.length > 0)
         { insertQueryData += 'CI_BC_IsBrokenCartridgeInsideTheDevice__c,'; valuesData += '\'' + jsonData.BCIsBrokenCartridgeInsideTheDevice + '\'' + ','; }   
 		
     if (jsonData.BCHasTheDeviceBeenDropped !== undefined && jsonData.BCHasTheDeviceBeenDropped !== null && jsonData.BCHasTheDeviceBeenDropped !== "null" && jsonData.BCHasTheDeviceBeenDropped.length > 0)
@@ -131,6 +133,143 @@ router.post('/insertCatridgeIssue', function(req, res) {
 	    
     if (jsonData.BCShowCartridgeSubCategory !== undefined && jsonData.BCShowCartridgeSubCategory !== null && jsonData.BCShowCartridgeSubCategory !== "null" && jsonData.BCShowCartridgeSubCategory.length > 0)
        { insertQueryData += 'CI_BC_ShowCartridgeSubCategory__c,'; valuesData += '\'' + jsonData.BCShowCartridgeSubCategory + '\'' + ','; }
+	   
+	//Cartridge Consumption
+	
+    if (jsonData.CartridgeConsumption !== undefined && jsonData.CartridgeConsumption !== null && jsonData.CartridgeConsumption !== "null" && jsonData.CartridgeConsumption.length > 0)
+        { insertQueryData += 'CI_CartridgeConsumption__c,'; valuesData += '\'' + jsonData.CartridgeConsumption + '\'' + ','; }
+	    
+    if (jsonData.CCMoreInjectionsCouldHavPerformed !== undefined && jsonData.CCMoreInjectionsCouldHavPerformed !== null && jsonData.CCMoreInjectionsCouldHavPerformed !== "null" && jsonData.CCMoreInjectionsCouldHavPerformed.length > 0)
+        { insertQueryData += 'CI_CC_MoreInjectionsCouldHavPerformed__c,'; valuesData += '\'' + jsonData.CCMoreInjectionsCouldHavPerformed + '\'' + ','; }
+	
+    if (jsonData.CCIssueLinkedToTheDoseCountDisplay !== undefined && jsonData.CCIssueLinkedToTheDoseCountDisplay !== null && jsonData.CCIssueLinkedToTheDoseCountDisplay !== "null" && jsonData.CCIssueLinkedToTheDoseCountDisplay.length > 0)
+        { insertQueryData += 'CI_CC_IssueLinkedToTheDoseCountDisplay__c,'; valuesData += '\'' + jsonData.CCIssueLinkedToTheDoseCountDisplay + '\'' + ','; }
+	    
+    if (jsonData.CCFrequency !== undefined && jsonData.CCFrequency !== null && jsonData.CCFrequency !== "null" && jsonData.CCFrequency.length > 0)
+       { insertQueryData += 'CI_CC_Frequency__c,'; valuesData += '\'' + jsonData.CCFrequency + '\'' + ','; }
+	    
+    if (jsonData.CCHasSettingOfDeviceChangedRecently !== undefined && jsonData.CCHasSettingOfDeviceChangedRecently !== null && jsonData.CCHasSettingOfDeviceChangedRecently !== "null" && jsonData.CCHasSettingOfDeviceChangedRecently.length > 0)
+        { insertQueryData += 'CI_CC_HasSettingOfDeviceChangedRecently__c,'; valuesData += '\'' + jsonData.CCHasSettingOfDeviceChangedRecently + '\'' + ','; }
+	    
+    if (jsonData.CCSpecify !== undefined && jsonData.CCSpecify !== null && jsonData.CCSpecify !== "null" && jsonData.CCSpecify.length > 0)
+        { insertQueryData += 'CI_CC_Specify__c,'; valuesData += '\'' + jsonData.CCSpecify + '\'' + ','; }
+		
+    if (jsonData.CCLesInjectnsThanExpectedHavPerformd !== undefined && jsonData.CCLesInjectnsThanExpectedHavPerformd !== null && jsonData.CCLesInjectnsThanExpectedHavPerformd !== "null" && jsonData.CCLesInjectnsThanExpectedHavPerformd.length > 0)
+        { insertQueryData += 'CI_CC_LesInjectnsThanExpectedHavPerformd__c,'; valuesData += '\'' + jsonData.CCLesInjectnsThanExpectedHavPerformd + '\'' + ','; }
+	    
+    if (jsonData.CCHowManyInjectionShouldHavePerformd !== undefined && jsonData.CCHowManyInjectionShouldHavePerformd !== null && jsonData.CCHowManyInjectionShouldHavePerformd !== "null" && jsonData.CCHowManyInjectionShouldHavePerformd.length > 0)
+        { insertQueryData += 'CI_CC_HowManyInjectionShouldHavePerformd__c,'; valuesData += '\'' + jsonData.CCHowManyInjectionShouldHavePerformd + '\'' + ','; }
+	
+    if (jsonData.CCHowManyInjectionCouldHavPerformd !== undefined && jsonData.CCHowManyInjectionCouldHavPerformd !== null && jsonData.CCHowManyInjectionCouldHavPerformd !== "null" && jsonData.CCHowManyInjectionCouldHavPerformd.length > 0)
+        { insertQueryData += 'CI_CC_HowManyInjectionCouldHavPerformd__c,'; valuesData += '\'' + jsonData.CCHowManyInjectionCouldHavPerformd + '\'' + ','; }
+	    
+    if (jsonData.CCProvideDoseSetAndDoseAdjustment !== undefined && jsonData.CCProvideDoseSetAndDoseAdjustment !== null && jsonData.CCProvideDoseSetAndDoseAdjustment !== "null" && jsonData.CCProvideDoseSetAndDoseAdjustment.length > 0)
+       { insertQueryData += 'CI_CC_ProvideDoseSetAndDoseAdjustment__c,'; valuesData += '\'' + jsonData.CCProvideDoseSetAndDoseAdjustment + '\'' + ','; }
+	    
+    if (jsonData.CCWhenTheCartridgeBeenInserted !== undefined && jsonData.CCWhenTheCartridgeBeenInserted !== null && jsonData.CCWhenTheCartridgeBeenInserted !== "null" && jsonData.CCWhenTheCartridgeBeenInserted.length > 0)
+        { insertQueryData += 'CI_CC_WhenTheCartridgeBeenInserted__c,'; valuesData += '\'' + jsonData.CCWhenTheCartridgeBeenInserted + '\'' + ','; }
+	    
+    if (jsonData.CCHasTheCartridgeBeenRejectedByDevic !== undefined && jsonData.CCHasTheCartridgeBeenRejectedByDevic !== null && jsonData.CCHasTheCartridgeBeenRejectedByDevic !== "null" && jsonData.CCHasTheCartridgeBeenRejectedByDevic.length > 0)
+        { insertQueryData += 'CI_CC_HasTheCartridgeBeenRejectedByDevic__c,'; valuesData += '\'' + jsonData.CCHasTheCartridgeBeenRejectedByDevic + '\'' + ','; }
+		
+    if (jsonData.CCIsAWarningMessageBeenDisplayed !== undefined && jsonData.CCIsAWarningMessageBeenDisplayed !== null && jsonData.CCIsAWarningMessageBeenDisplayed !== "null" && jsonData.CCIsAWarningMessageBeenDisplayed.length > 0)
+        { insertQueryData += 'CI_CC_IsAWarningMessageBeenDisplayed__c,'; valuesData += '\'' + jsonData.CCIsAWarningMessageBeenDisplayed + '\'' + ','; }
+	    
+    if (jsonData.CCWarningMessage !== undefined && jsonData.CCWarningMessage !== null && jsonData.CCWarningMessage !== "null" && jsonData.CCWarningMessage.length > 0)
+        { insertQueryData += 'CI_CC_WarningMessage__c,'; valuesData += '\'' + jsonData.CCWarningMessage + '\'' + ','; }
+	
+    if (jsonData.CCCartridgeBeenLetInPlaceInsideDevic !== undefined && jsonData.CCCartridgeBeenLetInPlaceInsideDevic !== null && jsonData.CCCartridgeBeenLetInPlaceInsideDevic !== "null" && jsonData.CCCartridgeBeenLetInPlaceInsideDevic.length > 0)
+        { insertQueryData += 'CI_CC_CartridgeBeenLetInPlaceInsideDevic__c,'; valuesData += '\'' + jsonData.CCCartridgeBeenLetInPlaceInsideDevic + '\'' + ','; }
+	    
+    if (jsonData.CCUserPerfrmMorNedleAttchmntDtachmnt !== undefined && jsonData.CCUserPerfrmMorNedleAttchmntDtachmnt !== null && jsonData.CCUserPerfrmMorNedleAttchmntDtachmnt !== "null" && jsonData.CCUserPerfrmMorNedleAttchmntDtachmnt.length > 0)
+       { insertQueryData += 'CI_CC_UserPerfrmMorNedleAttchmntDtachmnt__c,'; valuesData += '\'' + jsonData.CCUserPerfrmMorNedleAttchmntDtachmnt + '\'' + ','; }
+	    
+    if (jsonData.CCIsIssueLinkedToDoseCountDisplay !== undefined && jsonData.CCIsIssueLinkedToDoseCountDisplay !== null && jsonData.CCIsIssueLinkedToDoseCountDisplay !== "null" && jsonData.CCIsIssueLinkedToDoseCountDisplay.length > 0)
+        { insertQueryData += 'CI_CC_IsIssueLinkedToDoseCountDisplay__c,'; valuesData += '\'' + jsonData.CCIsIssueLinkedToDoseCountDisplay + '\'' + ','; }
+		
+    if (jsonData.CCDoesAnAmountOfMedicationRemain !== undefined && jsonData.CCDoesAnAmountOfMedicationRemain !== null && jsonData.CCDoesAnAmountOfMedicationRemain !== "null" && jsonData.CCDoesAnAmountOfMedicationRemain.length > 0)
+        { insertQueryData += 'CI_CC_DoesAnAmountOfMedicationRemain__c,'; valuesData += '\'' + jsonData.CCDoesAnAmountOfMedicationRemain + '\'' + ','; }
+		
+	if (jsonData.CCIssueBeenObservdOnceOrSeveralTimes !== undefined && jsonData.CCIssueBeenObservdOnceOrSeveralTimes !== null && jsonData.CCIssueBeenObservdOnceOrSeveralTimes !== "null" && jsonData.CCIssueBeenObservdOnceOrSeveralTimes.length > 0)
+        { insertQueryData += 'CI_CC_IssueBeenObservdOnceOrSeveralTimes__c,'; valuesData += '\'' + jsonData.CCIssueBeenObservdOnceOrSeveralTimes + '\'' + ','; }
+		
+    //Cartridge Insertion / Removal
+	
+	if (jsonData.CartridgeInsertionRemoval !== undefined && jsonData.CartridgeInsertionRemoval !== null && jsonData.CartridgeInsertionRemoval !== "null" && jsonData.CartridgeInsertionRemoval.length > 0)
+        { insertQueryData += 'CI_CartridgeInsertionRemoval__c,'; valuesData += '\'' + jsonData.CartridgeInsertionRemoval + '\'' + ','; }
+	    
+    if (jsonData.CICanTheCartridgeDoorBeOpened !== undefined && jsonData.CICanTheCartridgeDoorBeOpened !== null && jsonData.CICanTheCartridgeDoorBeOpened !== "null" && jsonData.CICanTheCartridgeDoorBeOpened.length > 0)
+        { insertQueryData += 'CI_CI_CanTheCartridgeDoorBeOpened__c,'; valuesData += '\'' + jsonData.CICanTheCartridgeDoorBeOpened + '\'' + ','; }
+		
+    if (jsonData.CICartridgeHoldrReleasedWhenSlidngUp !== undefined && jsonData.CICartridgeHoldrReleasedWhenSlidngUp !== null && jsonData.CICartridgeHoldrReleasedWhenSlidngUp !== "null" && jsonData.CICartridgeHoldrReleasedWhenSlidngUp.length > 0)
+        { insertQueryData += 'CI_CI_CartridgeHoldrReleasedWhenSlidngUp__c,'; valuesData += '\'' + jsonData.CICartridgeHoldrReleasedWhenSlidngUp + '\'' + ','; }
+	
+    if (jsonData.CIDoesDeviceStartCartridgeLoading !== undefined && jsonData.CIDoesDeviceStartCartridgeLoading !== null && jsonData.CIDoesDeviceStartCartridgeLoading !== "null" && jsonData.CIDoesDeviceStartCartridgeLoading.length > 0)
+        { insertQueryData += 'CI_CI_DoesDeviceStartCartridgeLoading__c,'; valuesData += '\'' + jsonData.CIDoesDeviceStartCartridgeLoading + '\'' + ','; }
+	    
+    if (jsonData.CIIsAWarningMessageDisplayed !== undefined && jsonData.CIIsAWarningMessageDisplayed !== null && jsonData.CIIsAWarningMessageDisplayed !== "null" && jsonData.CIIsAWarningMessageDisplayed.length > 0)
+       { insertQueryData += 'CI_CI_IsAWarningMessageDisplayed__c,'; valuesData += '\'' + jsonData.CIIsAWarningMessageDisplayed + '\'' + ','; }
+	    
+    if (jsonData.CIIsTheCartridgeDoorDamaged !== undefined && jsonData.CIIsTheCartridgeDoorDamaged !== null && jsonData.CIIsTheCartridgeDoorDamaged !== "null" && jsonData.CIIsTheCartridgeDoorDamaged.length > 0)
+        { insertQueryData += 'CI_CI_IsTheCartridgeDoorDamaged__c,'; valuesData += '\'' + jsonData.CIIsTheCartridgeDoorDamaged + '\'' + ','; }
+		
+    if (jsonData.CIHasTheDeviceBeenDropped !== undefined && jsonData.CIHasTheDeviceBeenDropped !== null && jsonData.CIHasTheDeviceBeenDropped !== "null" && jsonData.CIHasTheDeviceBeenDropped.length > 0)
+       { insertQueryData += 'CI_CI_HasTheDeviceBeenDropped__c,'; valuesData += '\'' + jsonData.CIHasTheDeviceBeenDropped + '\'' + ','; }
+	    
+    if (jsonData.CIIsSomthngPreventCartridgeDoorOpeng !== undefined && jsonData.CIIsSomthngPreventCartridgeDoorOpeng !== null && jsonData.CIIsSomthngPreventCartridgeDoorOpeng !== "null" && jsonData.CIIsSomthngPreventCartridgeDoorOpeng.length > 0)
+        { insertQueryData += 'CI_CI_IsSomthngPreventCartridgeDoorOpeng__c,'; valuesData += '\'' + jsonData.CIIsSomthngPreventCartridgeDoorOpeng + '\'' + ','; }
+		
+    if (jsonData.CIPleaseSpecify !== undefined && jsonData.CIPleaseSpecify !== null && jsonData.CIPleaseSpecify !== "null" && jsonData.CIPleaseSpecify.length > 0)
+        { insertQueryData += 'CI_CC_PleaseSpecify__c,'; valuesData += '\'' + jsonData.CIPleaseSpecify + '\'' + ','; }
+	    
+    if (jsonData.CRCartridgeCurrentlyStuckInsideDevic !== undefined && jsonData.CRCartridgeCurrentlyStuckInsideDevic !== null && jsonData.CRCartridgeCurrentlyStuckInsideDevic !== "null" && jsonData.CRCartridgeCurrentlyStuckInsideDevic.length > 0)
+        { insertQueryData += 'CI_CR_CartridgeCurrentlyStuckInsideDevic__c,'; valuesData += '\'' + jsonData.CRCartridgeCurrentlyStuckInsideDevic + '\'' + ','; }
+	
+    if (jsonData.CRCartridgeStuckDeviceDoesNotTurnon !== undefined && jsonData.CRCartridgeStuckDeviceDoesNotTurnon !== null && jsonData.CRCartridgeStuckDeviceDoesNotTurnon !== "null" && jsonData.CRCartridgeStuckDeviceDoesNotTurnon.length > 0)
+        { insertQueryData += 'CI_CR_CartridgeStuckDeviceDoesNotTurnon__c,'; valuesData += '\'' + jsonData.CRCartridgeStuckDeviceDoesNotTurnon + '\'' + ','; }
+	    
+    if (jsonData.CRCartridgeStuckAndDevicBlockedByMsg !== undefined && jsonData.CRCartridgeStuckAndDevicBlockedByMsg !== null && jsonData.CRCartridgeStuckAndDevicBlockedByMsg !== "null" && jsonData.CRCartridgeStuckAndDevicBlockedByMsg.length > 0)
+       { insertQueryData += 'CI_CR_CartridgeStuckAndDevicBlockedByMsg__c,'; valuesData += '\'' + jsonData.CRCartridgeStuckAndDevicBlockedByMsg + '\'' + ','; }
+	    
+    if (jsonData.CRWarningMessage !== undefined && jsonData.CRWarningMessage !== null && jsonData.CRWarningMessage !== "null" && jsonData.CRWarningMessage.length > 0)
+        { insertQueryData += 'CI_CR_WarningMessage__c,'; valuesData += '\'' + jsonData.CRWarningMessage + '\'' + ','; }
+	    
+    if (jsonData.CRStartRemoveCartridgeMenuOption !== undefined && jsonData.CRStartRemoveCartridgeMenuOption !== null && jsonData.CRStartRemoveCartridgeMenuOption !== "null" && jsonData.CRStartRemoveCartridgeMenuOption.length > 0)
+        { insertQueryData += 'CI_CR_StartRemoveCartridgeMenuOption__c,'; valuesData += '\'' + jsonData.CRStartRemoveCartridgeMenuOption + '\'' + ','; }
+		
+    if (jsonData.CRDevicePromptToOpenTheCartridgeDoor !== undefined && jsonData.CRDevicePromptToOpenTheCartridgeDoor !== null && jsonData.CRDevicePromptToOpenTheCartridgeDoor !== "null" && jsonData.CRDevicePromptToOpenTheCartridgeDoor.length > 0)
+        { insertQueryData += 'CI_CR_DevicePromptToOpenTheCartridgeDoor__c,'; valuesData += '\'' + jsonData.CRDevicePromptToOpenTheCartridgeDoor + '\'' + ','; }
+	    
+    if (jsonData.CRCanCartridgeDoorOfDeviceBeOpened !== undefined && jsonData.CRCanCartridgeDoorOfDeviceBeOpened !== null && jsonData.CRCanCartridgeDoorOfDeviceBeOpened !== "null" && jsonData.CRCanCartridgeDoorOfDeviceBeOpened.length > 0)
+        { insertQueryData += 'CI_CR_CanCartridgeDoorOfDeviceBeOpened__c,'; valuesData += '\'' + jsonData.CRCanCartridgeDoorOfDeviceBeOpened + '\'' + ','; }
+	
+    if (jsonData.CRIsTheCartridgeDoorDamaged !== undefined && jsonData.CRIsTheCartridgeDoorDamaged !== null && jsonData.CRIsTheCartridgeDoorDamaged !== "null" && jsonData.CRIsTheCartridgeDoorDamaged.length > 0)
+        { insertQueryData += 'CI_CR_IsTheCartridgeDoorDamaged__c,'; valuesData += '\'' + jsonData.CRIsTheCartridgeDoorDamaged + '\'' + ','; }
+	    
+    if (jsonData.CRCartridgeHolderReleasedOnSliding !== undefined && jsonData.CRCartridgeHolderReleasedOnSliding !== null && jsonData.CRCartridgeHolderReleasedOnSliding !== "null" && jsonData.CRCartridgeHolderReleasedOnSliding.length > 0)
+       { insertQueryData += 'CI_CR_CartridgeHolderReleasedOnSliding__c,'; valuesData += '\'' + jsonData.CRCartridgeHolderReleasedOnSliding + '\'' + ','; }
+	    
+    if (jsonData.CRWarningMessageOrPowerOff !== undefined && jsonData.CRWarningMessageOrPowerOff !== null && jsonData.CRWarningMessageOrPowerOff !== "null" && jsonData.CRWarningMessageOrPowerOff.length > 0)
+        { insertQueryData += 'CI_CR_WarningMessageOrPowerOff__c,'; valuesData += '\'' + jsonData.CRWarningMessageOrPowerOff + '\'' + ','; }
+		
+    if (jsonData.CRComplaintAboutCatridgeCanotRemoved !== undefined && jsonData.CRComplaintAboutCatridgeCanotRemoved !== null && jsonData.CRComplaintAboutCatridgeCanotRemoved !== "null" && jsonData.CRComplaintAboutCatridgeCanotRemoved.length > 0)
+        { insertQueryData += 'CI_CR_ComplaintAboutCatridgeCanotRemoved__c,'; valuesData += '\'' + jsonData.CRComplaintAboutCatridgeCanotRemoved + '\'' + ','; }
+		
+    if (jsonData.CRProvideFrequencyDateOfLastOccuranc !== undefined && jsonData.CRProvideFrequencyDateOfLastOccuranc !== null && jsonData.CRProvideFrequencyDateOfLastOccuranc !== "null" && jsonData.CRProvideFrequencyDateOfLastOccuranc.length > 0)
+        { insertQueryData += 'CI_CR_ProvideFrequencyDateOfLastOccuranc__c,'; valuesData += '\'' + jsonData.CRProvideFrequencyDateOfLastOccuranc + '\'' + ','; }
+		
+	if (jsonData.CRCartridgeRemovalIssueLinkedToPF !== undefined && jsonData.CRCartridgeRemovalIssueLinkedToPF !== null && jsonData.CRCartridgeRemovalIssueLinkedToPF !== "null" && jsonData.CRCartridgeRemovalIssueLinkedToPF.length > 0)
+        { insertQueryData += 'CI_CR_CartridgeRemovalIssueLinkedToPF__c,'; valuesData += '\'' + jsonData.CRCartridgeRemovalIssueLinkedToPF + '\'' + ','; }
+		
+	if (jsonData.CRIsThisLinkedToWarningMessage !== undefined && jsonData.CRIsThisLinkedToWarningMessage !== null && jsonData.CRIsThisLinkedToWarningMessage !== "null" && jsonData.CRIsThisLinkedToWarningMessage.length > 0)
+        { insertQueryData += 'CI_CR_IsThisLinkedToWarningMessage__c,'; valuesData += '\'' + jsonData.CRIsThisLinkedToWarningMessage + '\'' + ','; }
+	
+	if (jsonData.CRChoosingRemoveCartridgeMenuOption !== undefined && jsonData.CRChoosingRemoveCartridgeMenuOption !== null && jsonData.CRChoosingRemoveCartridgeMenuOption !== "null" && jsonData.CRChoosingRemoveCartridgeMenuOption.length > 0)
+        { insertQueryData += 'CI_CR_ChoosingRemoveCartridgeMenuOption__c,'; valuesData += '\'' + jsonData.CRChoosingRemoveCartridgeMenuOption + '\'' + ','; }
+		
+	if (jsonData.CRDevicPromptToOpenTheCartridgeDoor !== undefined && jsonData.CRDevicPromptToOpenTheCartridgeDoor !== null && jsonData.CRDevicPromptToOpenTheCartridgeDoor !== "null" && jsonData.CRDevicPromptToOpenTheCartridgeDoor.length > 0)
+        { insertQueryData += 'CI_CR_DevicPromptToOpenTheCartridgeDoor__c,'; valuesData += '\'' + jsonData.CRDevicPromptToOpenTheCartridgeDoor + '\'' + ','; }
+	
 	
     // caseid insertion
     if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
@@ -155,7 +294,6 @@ router.post('/insertCatridgeIssue', function(req, res) {
                 });
     });
 });
-
 
 
 router.post('/insertPowerFailure', function(req, res) {
