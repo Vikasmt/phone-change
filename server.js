@@ -58,8 +58,10 @@ router.post('/insertCatridgeIssue', function(req, res) {
     if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0)
         { insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ','; }
 	    
+	//Cartridgeissue    
+	    
     if (jsonData.CDCartridgeDetection !== undefined && jsonData.CDCartridgeDetection !== null && jsonData.CDCartridgeDetection !== "null" && jsonData.CDCartridgeDetection.length > 0)
-        { insertQueryData += 'CI_CartridgeDetection__c,'; valuesData += '\'' + jsonData.CDCartridgeDetection + '\'' + ','; }
+        { insertQueryData += 'CI_Cartridgeissue__c,'; valuesData += '\'' + jsonData.CDCartridgeDetection + '\'' + ','; }
 	    
     if (jsonData.CDTypeOfCartridgeSelectedInSetting !== undefined && jsonData.CDTypeOfCartridgeSelectedInSetting !== null && jsonData.CDTypeOfCartridgeSelectedInSetting !== "null" && jsonData.CDTypeOfCartridgeSelectedInSetting.length > 0)
         { insertQueryData += 'CI_CD_TypeOfCartridgeSelectedInSetting__c,'; valuesData += '\'' + jsonData.CDTypeOfCartridgeSelectedInSetting + '\'' + ','; }
