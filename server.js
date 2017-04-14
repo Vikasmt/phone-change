@@ -44,7 +44,6 @@ router.post('/insertCatridgeIssue', function(req, res) {
     var splitteddata=data.replace("{","").replace("}","").split(',');
     
     var caseid = splitteddata[0];
-    var RecordTypeId = '012e00000009MkUAAU';
 	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
