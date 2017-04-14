@@ -270,7 +270,8 @@ router.post('/insertCatridgeIssue', function(req, res) {
 	if (jsonData.CRDevicPromptToOpenTheCartridgeDoor !== undefined && jsonData.CRDevicPromptToOpenTheCartridgeDoor !== null && jsonData.CRDevicPromptToOpenTheCartridgeDoor !== "null" && jsonData.CRDevicPromptToOpenTheCartridgeDoor.length > 0)
         { insertQueryData += 'CI_CR_DevicPromptToOpenTheCartridgeDoor__c,'; valuesData += '\'' + jsonData.CRDevicPromptToOpenTheCartridgeDoor + '\'' + ','; }
 	
-	
+	if (jsonData.recordtypeid !== undefined && jsonData.recordtypeid !== null && jsonData.recordtypeid !== "null" && jsonData.recordtypeid.length > 0)
+        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.recordtypeid + '\'' + ','; }
     // caseid insertion
     if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
