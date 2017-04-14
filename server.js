@@ -336,6 +336,9 @@ router.post('/insertPowerFailure', function(req, res) {
     if (jsonData.NPDoestheinjectionbuttonshowredlight !== undefined && jsonData.NPDoestheinjectionbuttonshowredlight !== null && jsonData.NPDoestheinjectionbuttonshowredlight !== "null" && jsonData.NPDoestheinjectionbuttonshowredlight.length > 0)
         { insertQueryData += 'PF_NP_Doestheinjectionbuttonshowredlight__c,'; valuesData += '\'' + jsonData.NPDoestheinjectionbuttonshowredlight + '\'' + ','; }
 	    
+    if (jsonData.NPHasthedevicebeendropped !== undefined && jsonData.NPHasthedevicebeendropped !== null && jsonData.NPHasthedevicebeendropped !== "null" && jsonData.NPHasthedevicebeendropped.length > 0)
+        { insertQueryData += 'PF_NP_Hasthedevicebeendropped__c,'; valuesData += '\'' + jsonData.NPHasthedevicebeendropped + '\'' + ','; }
+	    
     if (jsonData.NPHasthedeviceimpactedbycoldorhumid !== undefined && jsonData.NPHasthedeviceimpactedbycoldorhumid !== null && jsonData.NPHasthedeviceimpactedbycoldorhumid !== "null" && jsonData.NPHasthedeviceimpactedbycoldorhumid.length > 0)
         { insertQueryData += 'PF_NP_Hasthedeviceimpactedbycoldorhumid__c,'; valuesData += '\'' + jsonData.NPHasthedeviceimpactedbycoldorhumid + '\'' + ','; }
 		
@@ -356,12 +359,14 @@ router.post('/insertPowerFailure', function(req, res) {
 	    
     if (jsonData.NPSTwhenwaslasttimeissueobserved !== undefined && jsonData.NPSTwhenwaslasttimeissueobserved !== null && jsonData.NPSTwhenwaslasttimeissueobserved !== "null" && jsonData.NPSTwhenwaslasttimeissueobserved.length > 0)
         { insertQueryData += 'PF_NP_ST_Whenwaslasttimeissueobserved__c,'; valuesData += '\'' + jsonData.NPSTwhenwaslasttimeissueobserved + '\'' + ','; }
-		
+    
+    /* Repeated Questions	    
+	    
     if (jsonData.NPSTIssomethingdisplayedondevice !== undefined && jsonData.NPSTIssomethingdisplayedondevice !== null && jsonData.NPSTIssomethingdisplayedondevice !== "null" && jsonData.NPSTIssomethingdisplayedondevice.length > 0)
         { insertQueryData += 'PF_NP_ST_Issomethingdisplayedondevice__c,'; valuesData += '\'' + jsonData.NPSTIssomethingdisplayedondevice + '\'' + ','; }
 	    
     if (jsonData.NPSTIssomethingdisplayedondeiviceIfyes !== undefined && jsonData.NPSTIssomethingdisplayedondeiviceIfyes !== null && jsonData.NPSTIssomethingdisplayedondeiviceIfyes !== "null" && jsonData.NPSTIssomethingdisplayedondeiviceIfyes.length > 0)
-        { insertQueryData += 'PF_NP_ST_IssomethingdisplaydeiviceIfYes__c,'; valuesData += '\'' + jsonData.NPSTIssomethingdisplayedondeiviceIfyes + '\'' + ','; }
+        { insertQueryData += 'PF_NP_ST_IssomethingdisplaydeiviceIfYes__c,'; valuesData += '\'' + jsonData.NPSTIssomethingdisplayedondeiviceIfyes + '\'' + ','; }   
 	
     if (jsonData.NPSTHasthedeviceimpactedbycoldorhumid !== undefined && jsonData.NPSTHasthedeviceimpactedbycoldorhumid !== null && jsonData.NPSTHasthedeviceimpactedbycoldorhumid !== "null" && jsonData.NPSTHasthedeviceimpactedbycoldorhumid.length > 0)
         { insertQueryData += 'PF_NP_ST_Hasdeviceimpactedbycoldorhumid__c,'; valuesData += '\'' + jsonData.NPSTHasthedeviceimpactedbycoldorhumid + '\'' + ','; }
@@ -374,14 +379,21 @@ router.post('/insertPowerFailure', function(req, res) {
 	    
     if (jsonData.NPSTIsthebatterycoverdamaged !== undefined && jsonData.NPSTIsthebatterycoverdamaged !== null && jsonData.NPSTIsthebatterycoverdamaged !== "null" && jsonData.NPSTIsthebatterycoverdamaged.length > 0)
         { insertQueryData += 'PF_NP_ST_Isthebatterycoverdamaged__c,'; valuesData += '\'' + jsonData.NPSTIsthebatterycoverdamaged + '\'' + ','; }
-		
-		//Power failure - power off
-		
+     
+     */
+    
+    //Power failure - power off
+    if (jsonData.PODoesthedeviceturnoffsuddenly !== undefined && jsonData.PODoesthedeviceturnoffsuddenly !== null && jsonData.PODoesthedeviceturnoffsuddenly !== "null" && jsonData.PODoesthedeviceturnoffsuddenly.length > 0)
+        { insertQueryData += 'PF_PO_Doesthedeviceturnoffsuddenly__c,'; valuesData += '\'' + jsonData.PODoesthedeviceturnoffsuddenly + '\'' + ','; }
+	    
     if (jsonData.POPleasespecifyinjectionprocess !== undefined && jsonData.POPleasespecifyinjectionprocess !== null && jsonData.POPleasespecifyinjectionprocess !== "null" && jsonData.POPleasespecifyinjectionprocess.length > 0)
         { insertQueryData += 'PF_PO_Pleasespecifyinjectionprocess__c,'; valuesData += '\'' + jsonData.POPleasespecifyinjectionprocess + '\'' + ','; }
 	
     if (jsonData.PODoesthedevicestillturnon !== undefined && jsonData.PODoesthedevicestillturnon !== null && jsonData.PODoesthedevicestillturnon !== "null" && jsonData.PODoesthedevicestillturnon.length > 0)
         { insertQueryData += 'PF_PO_Doesthedevicestillturnon__c,'; valuesData += '\'' + jsonData.PODoesthedevicestillturnon + '\'' + ','; }
+    
+    if (jsonData.PODoesthedevicestillturnonIfYes !== undefined && jsonData.PODoesthedevicestillturnonIfYes !== null && jsonData.PODoesthedevicestillturnonIfYes !== "null" && jsonData.PODoesthedevicestillturnonIfYes.length > 0)
+        { insertQueryData += 'PF_PO_DoesthedevicestillturnonIfYes__c,'; valuesData += '\'' + jsonData.PODoesthedevicestillturnonIfYes + '\'' + ','; }
 	    
     if (jsonData.POHasawarningmessagebeendisplayed !== undefined && jsonData.POHasawarningmessagebeendisplayed !== null && jsonData.POHasawarningmessagebeendisplayed !== "null" && jsonData.POHasawarningmessagebeendisplayed.length > 0)
        { insertQueryData += 'PF_PO_Hasawarningmessagebeendisplayed__c,'; valuesData += '\'' + jsonData.POHasawarningmessagebeendisplayed + '\'' + ','; }
@@ -399,11 +411,7 @@ router.post('/insertPowerFailure', function(req, res) {
         { insertQueryData += 'PF_PO_Doesdevicepowersoffwithsmallshocks__c,'; valuesData += '\'' + jsonData.PODoesdevicepowersoffwithsmallshocks + '\'' + ','; }
 	
     if (jsonData.POHasusertrytoremoveandreinsertbattery !== undefined && jsonData.POHasusertrytoremoveandreinsertbattery !== null && jsonData.POHasusertrytoremoveandreinsertbattery !== "null" && jsonData.POHasusertrytoremoveandreinsertbattery.length > 0)
-        { insertQueryData += 'PF_PO_Hasusertrytoremoveandreinsertbatte__c,'; valuesData += '\'' + jsonData.POHasusertrytoremoveandreinsertbattery + '\'' + ','; }
-	    
-    if (jsonData.PONopower !== undefined && jsonData.PONopower !== null && jsonData.PONopower !== "null" && jsonData.PONopower.length > 0)
-       { insertQueryData += 'PF_PO_Nopower__c,'; valuesData += '\'' + jsonData.PONopower + '\'' + ','; }
-	    
+        { insertQueryData += 'PF_PO_Hasusertrytoremoveandreinsertbatte__c,'; valuesData += '\'' + jsonData.POHasusertrytoremoveandreinsertbattery + '\'' + ','; 	    
 		
 	// power failure - No power off
 	
@@ -434,7 +442,7 @@ router.post('/insertPowerFailure', function(req, res) {
     if (jsonData.NPOFrequency !== undefined && jsonData.NPOFrequency !== null && jsonData.NPOFrequency !== "null" && jsonData.NPOFrequency.length > 0)
        { insertQueryData += 'PF_NPO_Frequency__c,'; valuesData += '\'' + jsonData.NPOFrequency + '\'' + ','; }
 	   
-	if (jsonData.NPOTheLastNoPowerOffIssueObserved !== undefined && jsonData.NPOTheLastNoPowerOffIssueObserved !== null && jsonData.NPOTheLastNoPowerOffIssueObserved !== "null" && jsonData.NPOTheLastNoPowerOffIssueObserved.length > 0)
+    if (jsonData.NPOTheLastNoPowerOffIssueObserved !== undefined && jsonData.NPOTheLastNoPowerOffIssueObserved !== null && jsonData.NPOTheLastNoPowerOffIssueObserved !== "null" && jsonData.NPOTheLastNoPowerOffIssueObserved.length > 0)
        { insertQueryData += 'PF_NPO_TheLastNoPowerOffIssueObserved__c,'; valuesData += '\'' + jsonData.NPOTheLastNoPowerOffIssueObserved + '\'' + ','; }
 	   
      // power failure - Battery consumption   
