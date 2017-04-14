@@ -82,7 +82,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
         { insertQueryData += 'CI_CD_CartridgeStillContainingMedication__c,'; valuesData += '\'' + jsonData.CDCartridgeStillContainingMedication + '\'' + ','; }
 	
 	if (jsonData.CDCartridgeexpired !== undefined && jsonData.CDCartridgeexpired !== null && jsonData.CDCartridgeexpired !== "null" && jsonData.CDCartridgeexpired.length > 0)
-        { insertQueryData += 'CI_CD_Cartridgeexpired,'; valuesData += '\'' + jsonData.CDCartridgeexpired + '\'' + ','; }
+        { insertQueryData += 'CI_CD_Cartridgeexpired__c,'; valuesData += '\'' + jsonData.CDCartridgeexpired + '\'' + ','; }
 		
     if (jsonData.CDWhenCartridgeWasInsertedInDevice !== undefined && jsonData.CDWhenCartridgeWasInsertedInDevice !== null && jsonData.CDWhenCartridgeWasInsertedInDevice !== "null" && jsonData.CDWhenCartridgeWasInsertedInDevice.length > 0)
         { insertQueryData += 'CI_CD_WhenCartridgeWasInsertedInDevice__c,'; valuesData += '\'' + jsonData.CDWhenCartridgeWasInsertedInDevice + '\'' + ','; }
