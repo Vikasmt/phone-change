@@ -272,7 +272,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
         { insertQueryData += 'CI_CR_DevicPromptToOpenTheCartridgeDoor__c,'; valuesData += '\'' + jsonData.CRDevicPromptToOpenTheCartridgeDoor + '\'' + ','; }
 	
 	if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
-        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.recordtypeid + '\'' + ','; }
+        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.RecordTypeId + '\'' + ','; }
     // caseid insertion
     if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
@@ -484,7 +484,7 @@ router.post('/insertPowerFailure', function(req, res) {
         { insertQueryData += 'PF_BC_HasTheDeviceBeenImpactedByHumidity__c,'; valuesData += '\'' + jsonData.BCHasTheDeviceBeenImpactedByHumidity + '\'' + ','; }
 	
     if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
-        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.recordtypeid + '\'' + ','; }
+        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.RecordTypeId + '\'' + ','; }
 	    
     // caseid insertion
     if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
@@ -704,7 +704,7 @@ router.post('/insertNeedleIssue', function(req, res) {
         { insertQueryData += 'NW_PleaseProvideTheNeedleBatch__c,'; valuesData += '\'' + jsonData.PleaseProvideTheNeedleBatch + '\'' + ','; }
  
 	if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
-        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.recordtypeid + '\'' + ','; }   
+        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.RecordTypeId + '\'' + ','; }   
 	    
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
@@ -807,7 +807,7 @@ router.post('/insertDataandtransfer', function(req, res) {
         { insertQueryData += 'DT_WarngMsgDisplaydUponDataTransfer__c,'; valuesData += '\'' + jsonData.WarngMsgDisplaydUponDataTransfer + '\'' + ','; }
        	  
 	if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
-        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.recordtypeid + '\'' + ','; }
+        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.RecordTypeId + '\'' + ','; }
 	    
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
@@ -884,7 +884,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
         { insertQueryData += 'DF_Whenithasbeenobservedforthefirsttime__c,'; valuesData += '\'' + jsonData.WhenItHasBeenObservedForTheFirstTime + '\'' + ','; }
        	 
 	if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
-        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.recordtypeid + '\'' + ','; }
+        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.RecordTypeId + '\'' + ','; }
 	    
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
