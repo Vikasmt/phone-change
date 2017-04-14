@@ -411,7 +411,7 @@ router.post('/insertPowerFailure', function(req, res) {
         { insertQueryData += 'PF_PO_Doesdevicepowersoffwithsmallshocks__c,'; valuesData += '\'' + jsonData.PODoesdevicepowersoffwithsmallshocks + '\'' + ','; }
 	
     if (jsonData.POHasusertrytoremoveandreinsertbattery !== undefined && jsonData.POHasusertrytoremoveandreinsertbattery !== null && jsonData.POHasusertrytoremoveandreinsertbattery !== "null" && jsonData.POHasusertrytoremoveandreinsertbattery.length > 0)
-        { insertQueryData += 'PF_PO_Hasusertrytoremoveandreinsertbatte__c,'; valuesData += '\'' + jsonData.POHasusertrytoremoveandreinsertbattery + '\'' + ','; 	    
+        { insertQueryData += 'PF_PO_Hasusertrytoremoveandreinsertbatte__c,'; valuesData += '\'' + jsonData.POHasusertrytoremoveandreinsertbattery + '\'' + ','; }	    
 		
 	// power failure - No power off
 	
