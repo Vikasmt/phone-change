@@ -44,6 +44,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
     var splitteddata=data.replace("{","").replace("}","").split(',');
     
     var caseid = splitteddata[0];
+    var RecordTypeId = '012e00000009MkUAAU';
 	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
@@ -270,7 +271,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
 	if (jsonData.CRDevicPromptToOpenTheCartridgeDoor !== undefined && jsonData.CRDevicPromptToOpenTheCartridgeDoor !== null && jsonData.CRDevicPromptToOpenTheCartridgeDoor !== "null" && jsonData.CRDevicPromptToOpenTheCartridgeDoor.length > 0)
         { insertQueryData += 'CI_CR_DevicPromptToOpenTheCartridgeDoor__c,'; valuesData += '\'' + jsonData.CRDevicPromptToOpenTheCartridgeDoor + '\'' + ','; }
 	
-	if (jsonData.recordtypeid !== undefined && jsonData.recordtypeid !== null && jsonData.recordtypeid !== "null" && jsonData.recordtypeid.length > 0)
+	if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
         { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.recordtypeid + '\'' + ','; }
     // caseid insertion
     if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
@@ -310,6 +311,7 @@ router.post('/insertPowerFailure', function(req, res) {
     var splitteddata=data.replace("{","").replace("}","").split(',');
     
     var caseid = splitteddata[0];
+    var RecordTypeId = '012e00000009MkoAAE';
 	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
@@ -481,6 +483,9 @@ router.post('/insertPowerFailure', function(req, res) {
     if (jsonData.BCHasTheDeviceBeenImpactedByHumidity !== undefined && jsonData.BCHasTheDeviceBeenImpactedByHumidity !== null && jsonData.BCHasTheDeviceBeenImpactedByHumidity !== "null" && jsonData.BCHasTheDeviceBeenImpactedByHumidity.length > 0)
         { insertQueryData += 'PF_BC_HasTheDeviceBeenImpactedByHumidity__c,'; valuesData += '\'' + jsonData.BCHasTheDeviceBeenImpactedByHumidity + '\'' + ','; }
 	
+    if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
+        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.recordtypeid + '\'' + ','; }
+	    
     // caseid insertion
     if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
@@ -602,6 +607,7 @@ router.post('/insertNeedleIssue', function(req, res) {
     var splitteddata=data.replace("{","").replace("}","").split(',');
     
     var caseid = splitteddata[0];
+    var RecordTypeId = '012e00000009MkPAAU';
 	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
@@ -696,7 +702,10 @@ router.post('/insertNeedleIssue', function(req, res) {
 
 	if (jsonData.PleaseProvideTheNeedleBatch !== undefined && jsonData.PleaseProvideTheNeedleBatch !== null && jsonData.PleaseProvideTheNeedleBatch !== "null" && jsonData.PleaseProvideTheNeedleBatch.length > 0)
         { insertQueryData += 'NW_PleaseProvideTheNeedleBatch__c,'; valuesData += '\'' + jsonData.PleaseProvideTheNeedleBatch + '\'' + ','; }
-
+ 
+	if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
+        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.recordtypeid + '\'' + ','; }   
+	    
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
 
@@ -733,6 +742,7 @@ router.post('/insertDataandtransfer', function(req, res) {
     var splitteddata=data.replace("{","").replace("}","").split(',');
     
     var caseid = splitteddata[0];
+    var RecordTypeId = '012e00000009MkeAAE';
 	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
@@ -795,7 +805,10 @@ router.post('/insertDataandtransfer', function(req, res) {
 	    
 	if (jsonData.WarngMsgDisplaydUponDataTransfer !== undefined && jsonData.WarngMsgDisplaydUponDataTransfer !== null && jsonData.WarngMsgDisplaydUponDataTransfer !== "null" && jsonData.WarngMsgDisplaydUponDataTransfer.length > 0)
         { insertQueryData += 'DT_WarngMsgDisplaydUponDataTransfer__c,'; valuesData += '\'' + jsonData.WarngMsgDisplaydUponDataTransfer + '\'' + ','; }
-       	   
+       	  
+	if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
+        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.recordtypeid + '\'' + ','; }
+	    
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
 
@@ -833,6 +846,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
     var splitteddata=data.replace("{","").replace("}","").split(',');
     
     var caseid = splitteddata[0];
+    var RecordTypeId = '012e00000009MkjAAE';
 	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
@@ -868,7 +882,10 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
 	    
 	if (jsonData.WhenItHasBeenObservedForTheFirstTime !== undefined && jsonData.WhenItHasBeenObservedForTheFirstTime !== null && jsonData.WhenItHasBeenObservedForTheFirstTime !== "null" && jsonData.WhenItHasBeenObservedForTheFirstTime.length > 0)
         { insertQueryData += 'DF_Whenithasbeenobservedforthefirsttime__c,'; valuesData += '\'' + jsonData.WhenItHasBeenObservedForTheFirstTime + '\'' + ','; }
-       	   
+       	 
+	if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
+        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.recordtypeid + '\'' + ','; }
+	    
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
 
