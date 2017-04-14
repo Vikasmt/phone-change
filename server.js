@@ -760,6 +760,21 @@ router.post('/insertDataandtransfer', function(req, res) {
 	if (jsonData.InfoDisplayedByDeviceNotAccurate !== undefined && jsonData.InfoDisplayedByDeviceNotAccurate !== null && jsonData.InfoDisplayedByDeviceNotAccurate !== "null" && jsonData.InfoDisplayedByDeviceNotAccurate.length > 0)
         { insertQueryData += 'DT_InfoDisplayedByDeviceNotAccurate__c,'; valuesData += '\'' + jsonData.InfoDisplayedByDeviceNotAccurate + '\'' + ','; }
 	    
+	if (jsonData.DateandTime !== undefined && jsonData.DateandTime !== null && jsonData.DateandTime !== "null" && jsonData.DateandTime.length > 0)
+        { insertQueryData += 'DT_Dateandtime__c,'; valuesData += '\'' + jsonData.DateandTime + '\'' + ','; }
+	    
+	if (jsonData.LastInjectionInformation !== undefined && jsonData.LastInjectionInformation !== null && jsonData.LastInjectionInformation !== "null" && jsonData.LastInjectionInformation.length > 0)
+        { insertQueryData += 'DT_Lastinjectioninformation__c,'; valuesData += '\'' + jsonData.LastInjectionInformation + '\'' + ','; }
+	    
+	if (jsonData.InformationFromTheDevicesHistory !== undefined && jsonData.InformationFromTheDevicesHistory !== null && jsonData.InformationFromTheDevicesHistory !== "null" && jsonData.InformationFromTheDevicesHistory.length > 0)
+        { insertQueryData += 'DT_Informationfromthedeviceshistory__c,'; valuesData += '\'' + jsonData.InformationFromTheDevicesHistory + '\'' + ','; }
+	    
+	if (jsonData.More !== undefined && jsonData.More !== null && jsonData.More !== "null" && jsonData.More.length > 0)
+        { insertQueryData += 'DT_More__c,'; valuesData += '\'' + jsonData.More + '\'' + ','; }
+	    
+	if (jsonData.DidTheDataTransferPerformedByHCP !== undefined && jsonData.DidTheDataTransferPerformedByHCP !== null && jsonData.DidTheDataTransferPerformedByHCP !== "null" && jsonData.DidTheDataTransferPerformedByHCP.length > 0)
+        { insertQueryData += 'DT_DidthedatatransferperformedbyHCP__c,'; valuesData += '\'' + jsonData.DidTheDataTransferPerformedByHCP + '\'' + ','; }
+	    
 	if (jsonData.InfoDisplayedByEdeviceIfYES !== undefined && jsonData.InfoDisplayedByEdeviceIfYES !== null && jsonData.InfoDisplayedByEdeviceIfYES !== "null" && jsonData.InfoDisplayedByEdeviceIfYES.length > 0)
         { insertQueryData += 'DT_InfodisplayedbyedeviceifYES__c,'; valuesData += '\'' + jsonData.InfoDisplayedByEdeviceIfYES + '\'' + ','; }
 	    
