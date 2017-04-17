@@ -640,15 +640,28 @@ router.post('/insertNeedleIssue', function(req, res) {
     if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0)        
         { 
 	       if(jsonData.DecisionTreeIssueType == "Problema ago"){
-		   var Engval = "Needle Issue";
-		   insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + Engval + '\'' + ',';
+		   var DecisionTreeIssueTypeEngval = "Needle Issue";
+		   insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + DecisionTreeIssueTypeEngval + '\'' + ',';
 		}else{
 		  insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ','; 
 		}
 	}
 
     if (jsonData.NeedleIssue !== undefined && jsonData.NeedleIssue !== null && jsonData.NeedleIssue !== "null" && jsonData.NeedleIssue.length > 0)
-        { insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + jsonData.NeedleIssue + '\'' + ','; }
+        { 
+	    if(jsonData.NeedleIssue == "Dell'ago di aggancio / sgancio - rilevamento dell'ago"){
+		var NeedleIssueEngval = "Needle attachment/detachment - Needle detection";
+		insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + NeedleIssueEngval + '\'' + ',';
+		   }if(jsonData.NeedleIssue == "messaggio di avviso ago"){
+		       var NeedleIssueEngval = "Needle warning message";
+		       insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + NeedleIssueEngval + '\'' + ',';
+		         }if(jsonData.NeedleIssue == "Altro problema ago"){
+		             var NeedleIssueEngval = "Other needle issue";
+		             insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + NeedleIssueEngval + '\'' + ',';
+		         }else{
+		             insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + jsonData.NeedleIssue + '\'' + ',';  
+		}
+	}
 	
     if (jsonData.NeedleBatchNumber !== undefined && jsonData.NeedleBatchNumber !== null && jsonData.NeedleBatchNumber !== "null" && jsonData.NeedleBatchNumber.length > 0)
         { insertQueryData += 'NI_NeedleBatchNumber__c,'; valuesData += '\'' + jsonData.NeedleBatchNumber + '\'' + ','; }
