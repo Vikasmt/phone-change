@@ -637,8 +637,15 @@ router.post('/insertNeedleIssue', function(req, res) {
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES ('; 
 	    
-    if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0 && jsonData.DecisionTreeIssueType == 'Problema ago')
-        { insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType == 'Needle Issue' + '\'' + ','; }
+    if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0)        
+        { 
+	       if(jsonData.DecisionTreeIssueType == "Problema ago"){
+		   var Engval = "Needle Issue";
+		   insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + Engval + '\'' + ',';
+		}else{
+		  insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ','; 
+		}
+	}
 
     if (jsonData.NeedleIssue !== undefined && jsonData.NeedleIssue !== null && jsonData.NeedleIssue !== "null" && jsonData.NeedleIssue.length > 0)
         { insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + jsonData.NeedleIssue + '\'' + ','; }
