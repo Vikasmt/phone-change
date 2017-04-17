@@ -652,22 +652,35 @@ router.post('/insertNeedleIssue', function(req, res) {
 	    if(jsonData.NeedleIssue == "Dell'ago di aggancio / sgancio - rilevamento dell'ago"){
 		var NeedleIssueEngval = "Needle attachment/detachment - Needle detection";
 		insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + NeedleIssueEngval + '\'' + ',';
-		   }if(jsonData.NeedleIssue == "messaggio di avviso ago"){
-		       var NeedleIssueEngval = "Needle warning message";
-		       insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + NeedleIssueEngval + '\'' + ',';
-		         }if(jsonData.NeedleIssue == "Altro problema ago"){
-		             var NeedleIssueEngval = "Other needle issue";
-		             insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + NeedleIssueEngval + '\'' + ',';
-		         }else{
-		             insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + jsonData.NeedleIssue + '\'' + ',';  
-		}
+            }if(jsonData.NeedleIssue == "messaggio di avviso ago"){
+		var NeedleIssueEngval = "Needle warning message";
+		insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + NeedleIssueEngval + '\'' + ',';
+            }if(jsonData.NeedleIssue == "Altro problema ago"){
+		var NeedleIssueEngval = "Other needle issue";
+		insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + NeedleIssueEngval + '\'' + ',';
+            }else{
+		insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + jsonData.NeedleIssue + '\'' + ',';  
+	    }
 	}
 	
     if (jsonData.NeedleBatchNumber !== undefined && jsonData.NeedleBatchNumber !== null && jsonData.NeedleBatchNumber !== "null" && jsonData.NeedleBatchNumber.length > 0)
         { insertQueryData += 'NI_NeedleBatchNumber__c,'; valuesData += '\'' + jsonData.NeedleBatchNumber + '\'' + ','; }
 	    
     if (jsonData.NeedleAttachmentDetachment !== undefined && jsonData.NeedleAttachmentDetachment !== null && jsonData.NeedleAttachmentDetachment !== "null" && jsonData.NeedleAttachmentDetachment.length > 0)
-       { insertQueryData += 'NI_NeedleAttachmentDetachment__c,'; valuesData += '\'' + jsonData.NeedleAttachmentDetachment + '\'' + ','; }
+       { 
+	    if(jsonData.NeedleAttachmentDetachment == "attaccamento ago"){
+		var NeedleAttachmentDetachmentEngval = "Needle attachment";
+		insertQueryData += 'NI_NeedleAttachmentDetachment__c,'; valuesData += '\'' + NeedleAttachmentDetachmentEngval + '\'' + ',';
+            }if(jsonData.NeedleAttachmentDetachment == "ago distacco"){
+		var NeedleAttachmentDetachmentEngval = "Needle detachment";
+		insertQueryData += 'NI_NeedleAttachmentDetachment__c,'; valuesData += '\'' + NeedleAttachmentDetachmentEngval + '\'' + ',';
+            }if(jsonData.NeedleAttachmentDetachment == "attacco e distacco dell'ago"){
+		var NeedleAttachmentDetachmentEngval = "Needle attachment and detachment";
+		insertQueryData += 'NI_NeedleAttachmentDetachment__c,'; valuesData += '\'' + NeedleAttachmentDetachmentEngval + '\'' + ',';
+            }else{
+		insertQueryData += 'NI_NeedleAttachmentDetachment__c,'; valuesData += '\'' + jsonData.NeedleAttachmentDetachment + '\'' + ','; 
+	    }
+       }
 	    
     if (jsonData.NeedleWarningMessage !== undefined && jsonData.NeedleWarningMessage !== null && jsonData.NeedleWarningMessage !== "null" && jsonData.NeedleWarningMessage.length > 0)
         { insertQueryData += 'NI_Needlewarningmessage__c,'; valuesData += '\'' + jsonData.NeedleWarningMessage + '\'' + ','; }
