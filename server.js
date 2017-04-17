@@ -332,7 +332,7 @@ router.post('/insertPowerFailure', function(req, res) {
     var splitteddata=data.replace("{","").replace("}","").split(',');
     
     var caseid = splitteddata[0];
-    var RecordTypeId = '012e00000009MkoAAE';
+    var RecordTypeId = "012e00000009MkoAAE";
 	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
@@ -627,7 +627,7 @@ router.post('/insertNeedleIssue', function(req, res) {
     var splitteddata=data.replace("{","").replace("}","").split(',');
     
     var caseid = splitteddata[0];
-    var RecordTypeId = '012e00000009MkPAAU';
+    var RecordTypeId = "012e00000009MkPAAU";
 	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
@@ -769,7 +769,7 @@ router.post('/insertDataandtransfer', function(req, res) {
     var splitteddata=data.replace("{","").replace("}","").split(',');
     
     var caseid = splitteddata[0];
-    var RecordTypeId = '012e00000009MkeAAE';
+    var RecordTypeId = "012e00000009MkeAAE";
 	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
