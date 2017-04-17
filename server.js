@@ -683,15 +683,54 @@ router.post('/insertNeedleIssue', function(req, res) {
        }
 	    
     if (jsonData.NeedleWarningMessage !== undefined && jsonData.NeedleWarningMessage !== null && jsonData.NeedleWarningMessage !== "null" && jsonData.NeedleWarningMessage.length > 0)
-        { insertQueryData += 'NI_Needlewarningmessage__c,'; valuesData += '\'' + jsonData.NeedleWarningMessage + '\'' + ','; }
+    { 
+	    if(jsonData.NeedleWarningMessage == "Frequenza del diplay WM? È il messaggio di avviso visualizzato puntualmente o su base regolare"){
+		var NeedleWarningMessageEngval = "Frequency of the WM diplay? Is the warning message displayed punctually or on regular basis";
+		insertQueryData += 'NI_Needlewarningmessage__c,'; valuesData += '\'' + NeedleWarningMessageEngval + '\'' + ',';
+            }if(jsonData.NeedleWarningMessage == "Quando è stato di circa l'ultima volta che il problema è stato osservato?"){
+		var NeedleWarningMessageEngval = "When was approximately the last time the issue has been observed?";
+		insertQueryData += 'NI_Needlewarningmessage__c,'; valuesData += '\'' + NeedleWarningMessageEngval + '\'' + ',';
+            }if(jsonData.NeedleWarningMessage == "È il messaggio di avviso visualizzato in una particolare fase del processo di iniezione?"){
+		var NeedleWarningMessageEngval = "Is the warning message displayed at a particular step of the injection process?";
+		insertQueryData += 'NI_Needlewarningmessage__c,'; valuesData += '\'' + NeedleWarningMessageEngval + '\'' + ',';
+            }else{
+		insertQueryData += 'NI_Needlewarningmessage__c,'; valuesData += '\'' + jsonData.NeedleWarningMessage + '\'' + ','; 
+	    }
+     }    
 	    
     if (jsonData.OtherNeedleIssue !== undefined && jsonData.OtherNeedleIssue !== null && jsonData.OtherNeedleIssue !== "null" && jsonData.OtherNeedleIssue.length > 0)
-        { insertQueryData += 'NI_OtherNeedleIssue__c,'; valuesData += '\'' + jsonData.OtherNeedleIssue + '\'' + ','; }
+        { 
+	    if(jsonData.OtherNeedleIssue == "ago piegato"){
+		var OtherNeedleIssueEngval = "Bent needle";
+		insertQueryData += 'NI_OtherNeedleIssue__c,'; valuesData += '\'' + OtherNeedleIssueEngval + '\'' + ',';
+            }if(jsonData.OtherNeedleIssue == "bloccato ago"){
+		var OtherNeedleIssueEngval = "Stuck needle";
+		insertQueryData += 'NI_OtherNeedleIssue__c,'; valuesData += '\'' + OtherNeedleIssueEngval + '\'' + ',';
+            }if(jsonData.OtherNeedleIssue == "retrazione ago"){
+		var OtherNeedleIssueEngval = "Needle retraction";
+		insertQueryData += 'NI_OtherNeedleIssue__c,'; valuesData += '\'' + OtherNeedleIssueEngval + '\'' + ',';
+            }else{
+		insertQueryData += 'NI_OtherNeedleIssue__c,'; valuesData += '\'' + jsonData.OtherNeedleIssue + '\'' + ','; 
+	    }
+       }
 	
 	// Needle warning message - Needle warning message selection
 	
         if (jsonData.NeedleWarningMessageSelection !== undefined && jsonData.NeedleWarningMessageSelection !== null && jsonData.NeedleWarningMessageSelection !== "null" && jsonData.NeedleWarningMessageSelection.length > 0)
-        { insertQueryData += 'NW_NeedleWarningMessageSelection__c,'; valuesData += '\'' + jsonData.NeedleWarningMessageSelection + '\'' + ','; }
+         { 
+	    if(jsonData.NeedleWarningMessageSelection == "Controllare l'ago"){
+		var NeedleWarningMessageSelectionEngval = "Check needle";
+		insertQueryData += 'NW_NeedleWarningMessageSelection__c,'; valuesData += '\'' + NeedleWarningMessageSelectionEngval + '\'' + ',';
+            }if(jsonData.NeedleWarningMessageSelection == "Controllare cappuccio"){
+		var NeedleWarningMessageSelectionEngval = "Check needle cap";
+		insertQueryData += 'NW_NeedleWarningMessageSelection__c,'; valuesData += '\'' + NeedleWarningMessageSelectionEngval + '\'' + ',';
+            }if(jsonData.NeedleWarningMessageSelection == "Controllare l'ago si stacca"){
+		var NeedleWarningMessageSelectionEngval = "Check needle is detached";
+		insertQueryData += 'NW_NeedleWarningMessageSelection__c,'; valuesData += '\'' + NeedleWarningMessageSelectionEngval + '\'' + ',';
+            }else{
+		insertQueryData += 'NW_NeedleWarningMessageSelection__c,'; valuesData += '\'' + jsonData.NeedleWarningMessageSelection + '\'' + ',';
+	    }
+       }
 	    
 	if (jsonData.IsWarningmsgDisplayedWhenNedleAttd !== undefined && jsonData.IsWarningmsgDisplayedWhenNedleAttd !== null && jsonData.IsWarningmsgDisplayedWhenNedleAttd !== "null" && jsonData.IsWarningmsgDisplayedWhenNedleAttd.length > 0)
         { insertQueryData += 'NW_IsWarningmsgDisplayedWhenNedleAttd__c,'; valuesData += '\'' + jsonData.IsWarningmsgDisplayedWhenNedleAttd + '\'' + ','; }
@@ -736,10 +775,32 @@ router.post('/insertNeedleIssue', function(req, res) {
         { insertQueryData += 'NW_OtherWarningMessage__c,'; valuesData += '\'' + jsonData.OtherWarningMessage + '\'' + ','; }
 	    
         if (jsonData.FrequencyoftheWMdiplay !== undefined && jsonData.FrequencyoftheWMdiplay !== null && jsonData.FrequencyoftheWMdiplay !== "null" && jsonData.FrequencyoftheWMdiplay.length > 0)
-        { insertQueryData += 'NW_FrequencyoftheWMdiplay__c,'; valuesData += '\'' + jsonData.FrequencyoftheWMdiplay + '\'' + ','; }
-
+        { 
+	    if(jsonData.FrequencyoftheWMdiplay == "pochi occorrenze"){
+		var FrequencyoftheWMdiplayEngval = "Few occurrences";
+		insertQueryData += 'NW_FrequencyoftheWMdiplay__c,'; valuesData += '\'' + FrequencyoftheWMdiplayEngval + '\'' + ',';
+            }if(jsonData.FrequencyoftheWMdiplay == "Regolarmente"){
+		var FrequencyoftheWMdiplayEngval = "Regularly";
+		insertQueryData += 'NW_FrequencyoftheWMdiplay__c,'; valuesData += '\'' + FrequencyoftheWMdiplayEngval + '\'' + ',';
+            }if(jsonData.FrequencyoftheWMdiplay == "Ogni volta"){
+		var FrequencyoftheWMdiplayEngval = "Everytime";
+		insertQueryData += 'NW_FrequencyoftheWMdiplay__c,'; valuesData += '\'' + FrequencyoftheWMdiplayEngval + '\'' + ',';
+            }else{
+		insertQueryData += 'NW_FrequencyoftheWMdiplay__c,'; valuesData += '\'' + jsonData.FrequencyoftheWMdiplay + '\'' + ','; 
+	    }
+       }
 	if (jsonData.WhenApproximatelyIssueObservedLastly !== undefined && jsonData.WhenApproximatelyIssueObservedLastly !== null && jsonData.WhenApproximatelyIssueObservedLastly !== "null" && jsonData.WhenApproximatelyIssueObservedLastly.length > 0)
-        { insertQueryData += 'NW_WhenApproximatelyIssueObservedLastly__c,'; valuesData += '\'' + jsonData.WhenApproximatelyIssueObservedLastly + '\'' + ','; }
+        { 
+	    if(jsonData.WhenApproximatelyIssueObservedLastly == "Data"){
+		var WhenApproximatelyIssueObservedLastlyEngval = "Date";
+		insertQueryData += 'NW_WhenApproximatelyIssueObservedLastly__c,'; valuesData += '\'' + WhenApproximatelyIssueObservedLastlyEngval + '\'' + ',';
+            }if(jsonData.WhenApproximatelyIssueObservedLastly == "Non mi ricordo"){
+		var WhenApproximatelyIssueObservedLastlyEngval = "I don't remember";
+		insertQueryData += 'NW_WhenApproximatelyIssueObservedLastly__c,'; valuesData += '\'' + WhenApproximatelyIssueObservedLastlyEngval + '\'' + ',';
+            }else{
+		insertQueryData += 'NW_WhenApproximatelyIssueObservedLastly__c,'; valuesData += '\'' + jsonData.WhenApproximatelyIssueObservedLastly + '\'' + ',';  
+	    }
+       }
 
         if (jsonData.ApproximateDate !== undefined && jsonData.ApproximateDate !== null && jsonData.ApproximateDate !== "null" && jsonData.ApproximateDate.length > 0)
         { insertQueryData += 'NW_ApproximateDate__c,'; valuesData += '\'' + jsonData.ApproximateDate + '\'' + ','; }
@@ -748,7 +809,17 @@ router.post('/insertNeedleIssue', function(req, res) {
         { insertQueryData += 'NW_WarngMsgDisplayedAtParticularStep__c,'; valuesData += '\'' + jsonData.WarngMsgDisplayedAtParticularStep + '\'' + ','; }
 	    
 	if (jsonData.PleaseSelectTheInjectionStep !== undefined && jsonData.PleaseSelectTheInjectionStep !== null && jsonData.PleaseSelectTheInjectionStep !== "null" && jsonData.PleaseSelectTheInjectionStep.length > 0)
-        { insertQueryData += 'NW_PleaseSelectTheInjectionStep__c,'; valuesData += '\'' + jsonData.PleaseSelectTheInjectionStep + '\'' + ','; }
+       { 
+	    if(jsonData.PleaseSelectTheInjectionStep == "Passo 1"){
+		var PleaseSelectTheInjectionStepEngval = "Step 1";
+		insertQueryData += 'NW_PleaseSelectTheInjectionStep__c,'; valuesData += '\'' + PleaseSelectTheInjectionStepEngval + '\'' + ',';
+            }if(jsonData.PleaseSelectTheInjectionStep == "Passo 2"){
+		var PleaseSelectTheInjectionStepEngval = "Step 2";
+		insertQueryData += 'NW_PleaseSelectTheInjectionStep__c,'; valuesData += '\'' + PleaseSelectTheInjectionStepEngval + '\'' + ',';
+            }else{
+		insertQueryData += 'NW_PleaseSelectTheInjectionStep__c,'; valuesData += '\'' + jsonData.PleaseSelectTheInjectionStep + '\'' + ',';
+	    }
+       }
 
 	if (jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== undefined && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== null && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== "null" && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc.length > 0)
         { insertQueryData += 'NW_IsMsgDisplayedOnUseOfNewNdleBatc__c,'; valuesData += '\'' + jsonData.IsMsgDisplayedOnUseOfNewNdleBatc + '\'' + ','; }
