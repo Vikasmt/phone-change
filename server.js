@@ -32,8 +32,8 @@ router.get('/', function(req, res) {
 });
 
 router.post('/updateDefectDescription', function(req, res) {
-var caseid = req.param('id');
-var Description = req.param('Description'); 	
+var caseid = req.param('caseid');
+var Description = req.param('DefectDescription'); 	
          pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
              if (err) console.log(err);
              conn.query('SELECT *from salesforce.Case WHERE id='+caseid+'',
