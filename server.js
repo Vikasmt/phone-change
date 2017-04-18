@@ -31,7 +31,7 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
-router.post('/updateOtherDefectDes', function(req, res) {
+router.post('/updateDefectDescription', function(req, res) {
 var caseid = req.param('id');
 var Description = req.param('Description'); 	
          pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
