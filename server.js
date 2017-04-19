@@ -537,9 +537,6 @@ router.post('/insertPowerFailure', function(req, res) {
 		
     if (jsonData.BCHasTheDeviceBeenImpactedByHumidity !== undefined && jsonData.BCHasTheDeviceBeenImpactedByHumidity !== null && jsonData.BCHasTheDeviceBeenImpactedByHumidity !== "null" && jsonData.BCHasTheDeviceBeenImpactedByHumidity.length > 0)
         { insertQueryData += 'PF_BC_HasTheDeviceBeenImpactedByHumidity__c,'; valuesData += '\'' + jsonData.BCHasTheDeviceBeenImpactedByHumidity + '\'' + ','; }
-	
-    if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
-        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.RecordTypeId + '\'' + ','; }
 	    
     // caseid insertion
     if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
@@ -672,14 +669,7 @@ router.post('/insertNeedleIssue', function(req, res) {
         var valuesData=' VALUES ('; 
 	    
     if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0)        
-        { 
-	       if(jsonData.DecisionTreeIssueType == "Problema ago"){
-		   var Engval = "Needle Issue";
-		   insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + Engval + '\'' + ',';
-		}else{
-		  insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ','; 
-		}
-	}
+        { insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ','; 	}	  
 
     if (jsonData.NeedleIssue !== undefined && jsonData.NeedleIssue !== null && jsonData.NeedleIssue !== "null" && jsonData.NeedleIssue.length > 0)
         { insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + jsonData.NeedleIssue + '\'' + ','; }
@@ -763,9 +753,6 @@ router.post('/insertNeedleIssue', function(req, res) {
 
 	if (jsonData.PleaseProvideTheNeedleBatch !== undefined && jsonData.PleaseProvideTheNeedleBatch !== null && jsonData.PleaseProvideTheNeedleBatch !== "null" && jsonData.PleaseProvideTheNeedleBatch.length > 0)
         { insertQueryData += 'NW_PleaseProvideTheNeedleBatch__c,'; valuesData += '\'' + jsonData.PleaseProvideTheNeedleBatch + '\'' + ','; }
- 
-	if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
-        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.RecordTypeId + '\'' + ','; }   
 	    
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
@@ -881,9 +868,6 @@ router.post('/insertDataandtransfer', function(req, res) {
 	    
 	if (jsonData.WarngMsgDisplaydUponDataTransfer !== undefined && jsonData.WarngMsgDisplaydUponDataTransfer !== null && jsonData.WarngMsgDisplaydUponDataTransfer !== "null" && jsonData.WarngMsgDisplaydUponDataTransfer.length > 0)
         { insertQueryData += 'DT_WarngMsgDisplaydUponDataTransfer__c,'; valuesData += '\'' + jsonData.WarngMsgDisplaydUponDataTransfer + '\'' + ','; }
-       	  
-	if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
-        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.RecordTypeId + '\'' + ','; }
 	    
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
@@ -930,10 +914,16 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
         console.log(req.body);
         var jsonData = req.body;
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
-        var valuesData=' VALUES (';        
+        var valuesData=' VALUES (';
+	    
+	if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0)
+        { insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ','; }
 	
-	if (jsonData.AccessToTheMainMenu !== undefined && jsonData.AccessToTheMainMenu !== null && jsonData.AccessToTheMainMenu !== "null" && jsonData.AccessToTheMainMenu.length > 0)
-        { insertQueryData += 'DF_Accesstothemainmenu__c,'; valuesData += '\'' + jsonData.AccessToTheMainMenu + '\'' + ','; }
+	if (jsonData.Devicefunctioningoptions !== undefined && jsonData.Devicefunctioningoptions !== null && jsonData.Devicefunctioningoptions !== "null" && jsonData.Devicefunctioningoptions.length > 0)
+        { insertQueryData += 'DF_Devicefunctioningoptions__c,'; valuesData += '\'' + jsonData.Devicefunctioningoptions + '\'' + ','; }
+	    
+	if (jsonData.CanTheDeviceBeTurnedOn !== undefined && jsonData.CanTheDeviceBeTurnedOn !== null && jsonData.CanTheDeviceBeTurnedOn !== "null" && jsonData.CanTheDeviceBeTurnedOn.length > 0)
+        { insertQueryData += 'DF_CanTheDeviceBeTurnedOn__c,'; valuesData += '\'' + jsonData.CanTheDeviceBeTurnedOn + '\'' + ','; }
 	    
 	if (jsonData.SomeThingDisplayedPreventingAcess !== undefined && jsonData.SomeThingDisplayedPreventingAcess !== null && jsonData.SomeThingDisplayedPreventingAcess !== "null" && jsonData.SomeThingDisplayedPreventingAcess.length > 0)
         { insertQueryData += 'DF_somethingdisplayedpreventingacess__c,'; valuesData += '\'' + jsonData.SomeThingDisplayedPreventingAcess + '\'' + ','; }
@@ -943,6 +933,9 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
 	    
 	if (jsonData.CommentIfNo !== undefined && jsonData.CommentIfNo !== null && jsonData.CommentIfNo !== "null" && jsonData.CommentIfNo.length > 0)
         { insertQueryData += 'DF_Commentifno__c,'; valuesData += '\'' + jsonData.CommentIfNo + '\'' + ','; }
+	    
+	if (jsonData.ListOfOptions !== undefined && jsonData.ListOfOptions !== null && jsonData.ListOfOptions !== "null" && jsonData.ListOfOptions.length > 0)
+        { insertQueryData += 'DF_ListOfOptions__c,'; valuesData += '\'' + jsonData.ListOfOptions + '\'' + ','; }
 	    
 	if (jsonData.ChangeIndevicesBehaviour !== undefined && jsonData.ChangeIndevicesBehaviour !== null && jsonData.ChangeIndevicesBehaviour !== "null" && jsonData.ChangeIndevicesBehaviour.length > 0)
         { insertQueryData += 'DF_Changeindevicesbehaviour__c,'; valuesData += '\'' + jsonData.ChangeIndevicesBehaviour + '\'' + ','; }
@@ -958,9 +951,6 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
 	    
 	if (jsonData.WhenItHasBeenObservedForTheFirstTime !== undefined && jsonData.WhenItHasBeenObservedForTheFirstTime !== null && jsonData.WhenItHasBeenObservedForTheFirstTime !== "null" && jsonData.WhenItHasBeenObservedForTheFirstTime.length > 0)
         { insertQueryData += 'DF_Whenithasbeenobservedforthefirsttime__c,'; valuesData += '\'' + jsonData.WhenItHasBeenObservedForTheFirstTime + '\'' + ','; }
-       	 
-	if (jsonData.RecordTypeId !== undefined && jsonData.RecordTypeId !== null && jsonData.RecordTypeId !== "null" && jsonData.RecordTypeId.length > 0)
-        { insertQueryData += 'recordtypeid,'; valuesData += '\'' + jsonData.RecordTypeId + '\'' + ','; }
 	    
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
