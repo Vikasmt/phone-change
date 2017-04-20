@@ -108,7 +108,7 @@ router.get('/ValidateAdmin', function(req, res) {
                                     token.country = result.rows[0].country;
                                    
                                    var rawtoken = jwt.sign(token, app.get('secretKey'), {
-					                       expiresIn: 10 // expires in 24 hours
+					                       expiresIn: 86400 // expires in 24 hours
                                     });
                                    
                                   return res.json({
