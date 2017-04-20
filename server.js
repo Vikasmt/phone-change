@@ -34,6 +34,98 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+router.get('/ValidateAdmin', function(req, res) {
+    var emailaddress = req.headers.email.toLowerCase().trim();
+    var password = req.headers.password;
+    console.log(emailaddress);
+    console.log(password);
+     pg.connect(process.env.DATABASE_URL, function (err, conn, done){
+          if (err) console.log(err);
+         conn.query(
+             'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\'',
+             function(err,result){
+              if (err != null || result.rowCount == 0) {
+                   return  res.json({
+                            userid: -1,
+                            firstname:'',
+                            lastname:'',
+                            username:'',
+			                 uhrkid:'',
+			                 language:'',
+			                 country:'',
+                            msgid: 2,
+                            message: 'Invalid email.'});
+                }
+                 else{
+                       conn.query(
+                            'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.active, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\' and um.password=\''+password+'\' and um.contactid=sc.id',
+                           function(err,result){
+                               done();
+                               if(err != null || result.rowCount == 0){
+                                   return  res.json({
+                                           userid: -1,
+                                           firstname:'',
+                                           lastname:'',
+                                           username:'',
+					   uhrkid:'',
+					   language:'',
+			                   country:'',
+                                           msgid: 3,
+                                           message: 'Invalid password.'});
+                               }
+                               else if(result.rows[0].active == false){
+                                  return  res.json({
+                                           userid: -1,
+                                           firstname:'',
+                                           lastname:'',
+                                           username:'',
+					   uhrkid:'',
+					   language:'',
+			                   country:'',
+                                           msgid: 4,
+                                           message: 'User is inactive.'}); 
+                               }
+                               else if(result.rows[0].sfid == null || result.rows[0].sfid.length == 0){
+                                  return  res.json({
+                                           userid: -1,
+                                           firstname:'',
+                                           lastname:'',
+                                           username:'',
+					                       uhrkid:'',
+					                       language:'',
+			                             country:'',
+                                           msgid: 4,
+                                           message: 'User is not synced. Please wait...'}); 
+                               }
+                               else{
+                                    var token = {};
+                                    token.userid = result.rows[0].sfid;
+                                    token.firstname = result.rows[0].firstname;
+                                    token.lastname = result.rows[0].lastname;
+                                    token.username = result.rows[0].email;
+                                    token.uhrkid = result.rows[0].id;
+                                    token.language = result.rows[0].language;
+                                    token.country = result.rows[0].country;
+                                   
+                                   console.log('token real data ' + token);
+                                   var rawtoken = jwt.sign(token, app.get('secretKey'), {
+					                       expiresIn: 86400 // expires in 24 hours
+                                    });
+                                   console.log('token raw data ' + rawtoken);
+                                   
+                                  return res.json({
+                                            token: rawtoken,
+                                            uhrkid:result.rows[0].sfid,
+                                            userid: result.rows[0].id,
+                                            msgid: 1,
+                                            message: 'Success.'});
+                               }
+                            });
+                 }
+             });
+     });
+});
+
 router.post('/updateDefectDescription', function(req, res) {
 var caseid = req.param('caseid');
 var Description = req.param('DefectDescription'); 	
@@ -1309,96 +1401,6 @@ router.get('/getContact', function(req, res) {
                     res.json(result.rows);
                 }
             });
-     });
-});
-
-router.get('/ValidateAdmin', function(req, res) {
-    var emailaddress = req.headers.email.toLowerCase().trim();
-    var password = req.headers.password;
-    console.log(emailaddress);
-    console.log(password);
-     pg.connect(process.env.DATABASE_URL, function (err, conn, done){
-          if (err) console.log(err);
-         conn.query(
-             'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\'',
-             function(err,result){
-              if (err != null || result.rowCount == 0) {
-                   return  res.json({
-                            userid: -1,
-                            firstname:'',
-                            lastname:'',
-                            username:'',
-			                 uhrkid:'',
-			                 language:'',
-			                 country:'',
-                            msgid: 2,
-                            message: 'Invalid email.'});
-                }
-                 else{
-                       conn.query(
-                            'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.active, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\' and um.password=\''+password+'\' and um.contactid=sc.id',
-                           function(err,result){
-                               done();
-                               if(err != null || result.rowCount == 0){
-                                   return  res.json({
-                                           userid: -1,
-                                           firstname:'',
-                                           lastname:'',
-                                           username:'',
-					   uhrkid:'',
-					   language:'',
-			                   country:'',
-                                           msgid: 3,
-                                           message: 'Invalid password.'});
-                               }
-                               else if(result.rows[0].active == false){
-                                  return  res.json({
-                                           userid: -1,
-                                           firstname:'',
-                                           lastname:'',
-                                           username:'',
-					   uhrkid:'',
-					   language:'',
-			                   country:'',
-                                           msgid: 4,
-                                           message: 'User is inactive.'}); 
-                               }
-                               else if(result.rows[0].sfid == null || result.rows[0].sfid.length == 0){
-                                  return  res.json({
-                                           userid: -1,
-                                           firstname:'',
-                                           lastname:'',
-                                           username:'',
-					                       uhrkid:'',
-					                       language:'',
-			                             country:'',
-                                           msgid: 4,
-                                           message: 'User is not synced. Please wait...'}); 
-                               }
-                               else{
-                                    var token = {};
-                                    token.userid = result.rows[0].sfid;
-                                    token.firstname = result.rows[0].firstname;
-                                    token.lastname = result.rows[0].lastname;
-                                    token.username = result.rows[0].email;
-                                    token.uhrkid = result.rows[0].id;
-                                    token.language = result.rows[0].language;
-                                    token.country = result.rows[0].country;
-                                   
-                                   console.log('token real data ' + token);
-                                   var rawtoken = jwt.sign(token, app.get('secretKey'), {
-					                       expiresIn: 86400 // expires in 24 hours
-                                    });
-                                   console.log('token raw data ' + rawtoken);
-                                   
-                                  return res.json({
-                                           token: rawtoken,
-                                           msgid: 1,
-                                           message: 'Success.'});
-                               }
-                            });
-                 }
-             });
      });
 });
 
