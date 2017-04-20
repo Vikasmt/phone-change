@@ -930,9 +930,12 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
 	    
 	if (jsonData.LinkedToaDeviceOption !== undefined && jsonData.LinkedToaDeviceOption !== null && jsonData.LinkedToaDeviceOption !== "null" && jsonData.LinkedToaDeviceOption.length > 0)
         { insertQueryData += 'DF_Linkedtoadeviceoption__c,'; valuesData += '\'' + jsonData.LinkedToaDeviceOption + '\'' + ','; }
+	
+	 if (jsonData.CommentIfNo !== undefined && jsonData.CommentIfNo !== null && jsonData.CommentIfNo !== "null" && jsonData.CommentIfNo.length > 0)
+        { insertQueryData += 'DF_CommentDeviceFunction__c,'; valuesData += '\'' + jsonData.CommentIfNo + '\'' + ','; }
 	    
-	if (jsonData.CommentIfNo !== undefined && jsonData.CommentIfNo !== null && jsonData.CommentIfNo !== "null" && jsonData.CommentIfNo.length > 0)
-        { insertQueryData += 'DF_Commentifno__c,'; valuesData += '\'' + jsonData.CommentIfNo + '\'' + ','; }
+	//if (jsonData.CommentIfNo !== undefined && jsonData.CommentIfNo !== null && jsonData.CommentIfNo !== "null" && jsonData.CommentIfNo.length > 0)
+       // { insertQueryData += 'DF_Commentifno__c,'; valuesData += '\'' + jsonData.CommentIfNo + '\'' + ','; }
 	    
 	if (jsonData.ListOfOptions !== undefined && jsonData.ListOfOptions !== null && jsonData.ListOfOptions !== "null" && jsonData.ListOfOptions.length > 0)
         { insertQueryData += 'DF_ListOfOptions__c,'; valuesData += '\'' + jsonData.ListOfOptions + '\'' + ','; }
