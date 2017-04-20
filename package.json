@@ -11,6 +11,7 @@
     "body-parser": "^1.13.2",
     "nodemailer": "^2.6.0",
     "randomstring": "^1.1.5",
+    "jsonwebtoken": "^5.7.0",
     "pg": "^4.4.0"
   },
   "engines": {

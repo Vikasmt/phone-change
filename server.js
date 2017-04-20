@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer');
 var randomstring = require("randomstring");
+var jwt = require('jsonwebtoken');
+var config = require('./config');
 var pg = require('pg');
 
 /******************EMAIL Variables*************************/
@@ -22,10 +24,11 @@ app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500
 app.use(bodyParser.raw({limit: "50mb", type: '*/*' }));
 
 app.set('port', process.env.PORT || 5000);
+app.set('secretKey', config.secret);
 
 var router = express.Router();  
 
-var baseUrl='https://phone-change-con.herokuapp.com/';
+var baseUrl='https://feedback-mgmt-app.herokuapp.com/';
 
 router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
@@ -1364,21 +1367,30 @@ router.get('/ValidateAdmin', function(req, res) {
                                            firstname:'',
                                            lastname:'',
                                            username:'',
-					   uhrkid:'',
-					   language:'',
-			                   country:'',
+					                       uhrkid:'',
+					                       language:'',
+			                             country:'',
                                            msgid: 4,
                                            message: 'User is not synced. Please wait...'}); 
                                }
                                else{
+                                    var token = {};
+                                    token.userid = result.rows[0].sfid;
+                                    token.firstname = result.rows[0].firstname;
+                                    token.lastname = result.rows[0].lastname;
+                                    token.username = result.rows[0].email;
+                                    token.uhrkid = result.rows[0].id;
+                                    token.language = result.rows[0].language;
+                                    token.country = result.rows[0].country;
+                                   
+                                   console.log('token real data ' + token);
+                                   var rawtoken = jwt.sign(token, app.get('secretKey'), {
+					                       expiresIn: 86400 // expires in 24 hours
+                                    });
+                                   console.log('token raw data ' + rawtoken);
+                                   
                                   return res.json({
-                                           userid:result.rows[0].sfid,
-                                           firstname:result.rows[0].firstname,
-					   lastname:result.rows[0].lastname,
-					   username:result.rows[0].email,
-					   uhrkid:result.rows[0].id,
-					   language:result.rows[0].language,
-			                   country:result.rows[0].country,
+                                           token: rawtoken,
                                            msgid: 1,
                                            message: 'Success.'});
                                }
