@@ -107,11 +107,9 @@ router.get('/ValidateAdmin', function(req, res) {
                                     token.language = result.rows[0].language;
                                     token.country = result.rows[0].country;
                                    
-                                   console.log('token real data ' + token);
                                    var rawtoken = jwt.sign(token, app.get('secretKey'), {
-					                       expiresIn: 86400 // expires in 24 hours
+					                       expiresIn: 10 // expires in 24 hours
                                     });
-                                   console.log('token raw data ' + rawtoken);
                                    
                                   return res.json({
                                             token: rawtoken,
@@ -129,8 +127,6 @@ router.get('/ValidateAdmin', function(req, res) {
 router.use(function(req, res, next) {
 	// check header or url parameters or post parameters for token
 	var token = req.body.token || req.param('token') || req.headers['token'];
-    
-    console.log(token);
 	
     // decode token
 	if (token) {
