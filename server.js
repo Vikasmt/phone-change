@@ -124,6 +124,213 @@ router.get('/ValidateAdmin', function(req, res) {
      });
 });
 
+router.get('/getProducts', function(req, res) {
+	var type;
+    if(req.param('producttype') === 'Medical') type = 'Medical Device';
+	if(req.param('producttype') === 'Combination') type = 'Combination Product';
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        conn.query(
+            'SELECT sfid, Name, Productcode__c, Product_Type__c, Type__c, Product_Description__c, Product_Italy_Description__c, Serial_Batch_code__c, Serial_Batch_code_format__c, Serial_Batch_code_contains__c, BrandingColor__c, Formulation_Dosage__c FROM salesforce.FMA_Product__c WHERE Type__c=\''+type+'\'',
+            function(err,result){
+                done();
+                if(err){
+                   return res.status(400).json({error: err.message});
+                }
+                else{                    
+                    for(var i=0; i<result.rows.length; i++){
+                        result.rows[i].imageUrl = baseUrl + 'api/showImage?imageid='+result.rows[i].sfid+'&fromloc=Product';
+                    }
+                    return res.json(result.rows);
+                }
+            });
+     });
+});
+
+router.put('/forgotPassword', function(req,res){
+    var emailAddress = req.param('email').trim();
+    console.log(emailAddress);
+     pg.connect(process.env.DATABASE_URL, function (err, conn, done){
+          if (err) console.log(err);
+         conn.query(
+             'SELECT id, firstname, lastname, username, email, phone from UserManagement where trim(email)=\''+emailAddress+'\'',
+             function(err,result){
+		  done();
+		  if (result.rowCount == 0) {
+                             return  res.json({
+                                      msgid: -1,
+                                      message: 'Invalid Username/Email.'});
+                   }
+                
+                   if(err){
+                      res.status(400).json({error: 'Email not found.'});
+                    }
+		
+                else{
+                    var resetPassword = randomstring.generate(12);
+                    var queryStr = 'Update UserManagement set password=\''+resetPassword+'\' where trim(email)=\''+emailAddress+'\'';
+                    console.log(queryStr);
+                    
+                    conn.query(queryStr, 
+                        function(err,result){
+                        done();
+                        if(err){
+                            return res.status(400).json({error: err.message});
+                        }
+                        else{
+                            var subject = 'FMA - Finished Reset Password';
+                            var text = 'Merck Feedback Managemant App recently received a request to reset the password.\n\nUsername/Email: '+emailAddress+' \n\ncurrent password :  '+resetPassword+' \n\n Thanks';
+                            var resultStr = sendEmail(emailAddress, subject, text);
+                            return res.json({
+                                            msgid: 1,
+                                            message: 'Success.'});
+                        }
+                    });
+                }
+            });
+     });
+});
+
+router.get('/showImage', function(req, res) {
+    var imageid = req.param('imageid');
+    var fromLoc = req.param('fromloc');
+    console.log('ImageId:'+imageid);
+    
+    var query = '';
+        if(fromLoc == "Product"){
+            query = 'SELECT *FROM productattachment WHERE sfdcproductid = \''+imageid+'\'';
+        }else{
+            query = 'SELECT *FROM caseattachment WHERE id = '+imageid+'';
+        }
+    
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        conn.query(query,
+            function(err,result){
+                done();
+                if (err != null || result.rowCount == 0) {
+                   return res.json({
+                            userid: -1,
+                            msgid: 2,
+                            message: 'Invalid id.'});
+                }
+                else{
+                    var contenttype = result.rows[0].contenttype;
+                    contenttype = contenttype.replace('"','').replace('"','');
+                    //contenttype = contenttype.replace('"','');
+                    console.log(contenttype);
+                    var img = new Buffer(result.rows[0].body, 'base64');
+                    res.writeHead(200, {
+                     'Content-Type': contenttype,
+                     'Content-Length': img.length
+                   });
+                    res.end(img);
+                }
+            });
+    });
+});
+
+router.get('/getDisclaimercontent', function(req, res) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        conn.query(
+            'SELECT id, country, language, content from disclaimercontent',
+            function(err,result){
+                done();
+                if(err){
+                    return res.status(400).json({error: err.message});
+                }
+                else{
+                    return res.json(result.rows);
+                }
+            });
+    });
+});
+
+router.get('/getHelpcontent', function(req, res) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        conn.query(
+            'SELECT id, eng_question, eng_answer, ita_question, ita_answer, email, helpcontactnum from Helpcontent',
+            function(err,result){
+                done();
+                if(err){
+                    return res.status(400).json({error: err.message});
+                }
+                else{
+                    return res.json(result.rows);
+                }
+            });
+    });
+});
+
+router.post('/productImageSync', function(req, res) {
+    var contentType = req.headers['content-type'];
+    var mime = contentType.split(';')[0];
+    console.log('contenttype:'+mime);
+    
+    var data=req.body.toString();
+    console.log('Body:'+data);
+    var splitteddata=data.replace("{","").replace("}","").split(',');
+    var filename = splitteddata[0];
+    var sfdcproductid = splitteddata[1];
+    var contenttype = splitteddata[2];
+    var imagedata = splitteddata[3];
+    
+    console.log(filename);
+    console.log(sfdcproductid);
+    console.log(contenttype);
+    
+    var getPoductIDQuery = 'SELECT id from salesforce.FMA_Product__c WHERE sfid='+sfdcproductid+'';
+    console.log('getPoductIDQuery:'+getPoductIDQuery);
+    
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+       if (err) console.log(err);
+        conn.query('SELECT id from salesforce.FMA_Product__c WHERE sfid='+sfdcproductid+'',
+           function(err,result){
+            if (err != null || result.rowCount == 0) {
+                return res.json({
+                        msgid: 2,
+                        message: 'product id not found.'});
+            }else{
+                var productId = result.rows[0].id;
+                console.log(productId);
+                
+                conn.query('SELECT id, sfdcproductid from productattachment WHERE sfdcproductid='+sfdcproductid+'',
+                        function(err,result){
+                            if (err != null || result.rowCount == 0){
+                                conn.query('INSERT INTO productattachment (name, contenttype, sfdcproductid, herokuproductid, body) VALUES ('+filename+', '+contenttype+', '+sfdcproductid+', '+productId+', '+imagedata+')',
+                                    function(err,result){
+                                        if(err){
+                                            return res.json({
+                                                msgid: 2,
+                                                message: err});
+                                            }else {
+                                                return res.json({
+                                                    msgid: 1,
+                                                    message: 'Success.'});
+                                            }
+                                    });
+                            }else{
+                                conn.query('UPDATE productattachment SET body='+imagedata+', name='+filename+', contenttype='+contenttype+' WHERE sfdcproductid='+sfdcproductid+'',
+                                    function(err,result){
+                                     if(err){
+                                            return res.json({
+                                                msgid: 2,
+                                                message: err});
+                                        }else {
+                                            return res.json({
+                                                msgid: 1,
+                                                message: 'Success.'});
+                                        }
+                                });
+                            }
+                    });
+            }
+        });
+    });
+});
+
 router.use(function(req, res, next) {
 	// check header or url parameters or post parameters for token
 	var token = req.body.token || req.param('token') || req.headers['token'];
@@ -1141,40 +1348,6 @@ router.get('/getCaseAttachments', function(req, res) {
     });
 });
 
-router.get('/getDisclaimercontent', function(req, res) {
-    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-        if (err) console.log(err);
-        conn.query(
-            'SELECT id, country, language, content from disclaimercontent',
-            function(err,result){
-                done();
-                if(err){
-                    return res.status(400).json({error: err.message});
-                }
-                else{
-                    return res.json(result.rows);
-                }
-            });
-    });
-});
-
-router.get('/getHelpcontent', function(req, res) {
-    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-        if (err) console.log(err);
-        conn.query(
-            'SELECT id, eng_question, eng_answer, ita_question, ita_answer, email, helpcontactnum from Helpcontent',
-            function(err,result){
-                done();
-                if(err){
-                    return res.status(400).json({error: err.message});
-                }
-                else{
-                    return res.json(result.rows);
-                }
-            });
-    });
-});
-
 router.post('/CreateHelp', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
@@ -1280,73 +1453,6 @@ router.post('/updateDisclaimerInfo', function(req, res) {
                                     });
              });
      });
-
-router.post('/productImageSync', function(req, res) {
-    var contentType = req.headers['content-type'];
-    var mime = contentType.split(';')[0];
-    console.log('contenttype:'+mime);
-    
-    var data=req.body.toString();
-    console.log('Body:'+data);
-    var splitteddata=data.replace("{","").replace("}","").split(',');
-    var filename = splitteddata[0];
-    var sfdcproductid = splitteddata[1];
-    var contenttype = splitteddata[2];
-    var imagedata = splitteddata[3];
-    
-    console.log(filename);
-    console.log(sfdcproductid);
-    console.log(contenttype);
-    
-    var getPoductIDQuery = 'SELECT id from salesforce.FMA_Product__c WHERE sfid='+sfdcproductid+'';
-    console.log('getPoductIDQuery:'+getPoductIDQuery);
-    
-    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-       if (err) console.log(err);
-        conn.query('SELECT id from salesforce.FMA_Product__c WHERE sfid='+sfdcproductid+'',
-           function(err,result){
-            if (err != null || result.rowCount == 0) {
-                return res.json({
-                        msgid: 2,
-                        message: 'product id not found.'});
-            }else{
-                var productId = result.rows[0].id;
-                console.log(productId);
-                
-                conn.query('SELECT id, sfdcproductid from productattachment WHERE sfdcproductid='+sfdcproductid+'',
-                        function(err,result){
-                            if (err != null || result.rowCount == 0){
-                                conn.query('INSERT INTO productattachment (name, contenttype, sfdcproductid, herokuproductid, body) VALUES ('+filename+', '+contenttype+', '+sfdcproductid+', '+productId+', '+imagedata+')',
-                                    function(err,result){
-                                        if(err){
-                                            return res.json({
-                                                msgid: 2,
-                                                message: err});
-                                            }else {
-                                                return res.json({
-                                                    msgid: 1,
-                                                    message: 'Success.'});
-                                            }
-                                    });
-                            }else{
-                                conn.query('UPDATE productattachment SET body='+imagedata+', name='+filename+', contenttype='+contenttype+' WHERE sfdcproductid='+sfdcproductid+'',
-                                    function(err,result){
-                                     if(err){
-                                            return res.json({
-                                                msgid: 2,
-                                                message: err});
-                                        }else {
-                                            return res.json({
-                                                msgid: 1,
-                                                message: 'Success.'});
-                                        }
-                                });
-                            }
-                    });
-            }
-        });
-    });
-});
 
 router.post('/uploadfile', function(req, res) {
     var contentType = req.headers['content-type'];
@@ -1631,29 +1737,6 @@ router.post('/insertCase', function(req, res) {
     });
 });
 
-router.get('/getProducts', function(req, res) {
-	var type;
-    if(req.param('producttype') === 'Medical') type = 'Medical Device';
-	if(req.param('producttype') === 'Combination') type = 'Combination Product';
-    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-        if (err) console.log(err);
-        conn.query(
-            'SELECT sfid, Name, Productcode__c, Product_Type__c, Type__c, Product_Description__c, Product_Italy_Description__c, Serial_Batch_code__c, Serial_Batch_code_format__c, Serial_Batch_code_contains__c, BrandingColor__c, Formulation_Dosage__c FROM salesforce.FMA_Product__c WHERE Type__c=\''+type+'\'',
-            function(err,result){
-                done();
-                if(err){
-                   return res.status(400).json({error: err.message});
-                }
-                else{                    
-                    for(var i=0; i<result.rows.length; i++){
-                        result.rows[i].imageUrl = baseUrl + 'api/showImage?imageid='+result.rows[i].sfid+'&fromloc=Product';
-                    }
-                    return res.json(result.rows);
-                }
-            });
-     });
-});
-
 router.get('/getProductsCount', function(req, res) {
 	var type;
 	if(req.param('producttype') === 'Medical') type = 'Medical Device';
@@ -1748,45 +1831,6 @@ router.post('/CreateUser', function(req, res) {
      });
 });
 
-router.get('/showImage', function(req, res) {
-    var imageid = req.param('imageid');
-    var fromLoc = req.param('fromloc');
-    console.log('ImageId:'+imageid);
-    
-    var query = '';
-        if(fromLoc == "Product"){
-            query = 'SELECT *FROM productattachment WHERE sfdcproductid = \''+imageid+'\'';
-        }else{
-            query = 'SELECT *FROM caseattachment WHERE id = '+imageid+'';
-        }
-    
-    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-        if (err) console.log(err);
-        conn.query(query,
-            function(err,result){
-                done();
-                if (err != null || result.rowCount == 0) {
-                   return res.json({
-                            userid: -1,
-                            msgid: 2,
-                            message: 'Invalid id.'});
-                }
-                else{
-                    var contenttype = result.rows[0].contenttype;
-                    contenttype = contenttype.replace('"','').replace('"','');
-                    //contenttype = contenttype.replace('"','');
-                    console.log(contenttype);
-                    var img = new Buffer(result.rows[0].body, 'base64');
-                    res.writeHead(200, {
-                     'Content-Type': contenttype,
-                     'Content-Length': img.length
-                   });
-                    res.end(img);
-                }
-            });
-    });
-});
-
 router.get('/getUsers', function(req, res) {
  pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
      if (err) console.log(err);
@@ -1833,50 +1877,6 @@ router.put('/updateStatus', function(req, res){
                         }
                         else{
                             return res.json(true);
-                        }
-                    });
-                }
-            });
-     });
-});
-
-router.put('/forgotPassword', function(req,res){
-    var emailAddress = req.param('email').trim();
-    console.log(emailAddress);
-     pg.connect(process.env.DATABASE_URL, function (err, conn, done){
-          if (err) console.log(err);
-         conn.query(
-             'SELECT id, firstname, lastname, username, email, phone from UserManagement where trim(email)=\''+emailAddress+'\'',
-             function(err,result){
-		  done();
-		  if (result.rowCount == 0) {
-                             return  res.json({
-                                      msgid: -1,
-                                      message: 'Invalid Username/Email.'});
-                   }
-                
-                   if(err){
-                      res.status(400).json({error: 'Email not found.'});
-                    }
-		
-                else{
-                    var resetPassword = randomstring.generate(12);
-                    var queryStr = 'Update UserManagement set password=\''+resetPassword+'\' where trim(email)=\''+emailAddress+'\'';
-                    console.log(queryStr);
-                    
-                    conn.query(queryStr, 
-                        function(err,result){
-                        done();
-                        if(err){
-                            return res.status(400).json({error: err.message});
-                        }
-                        else{
-                            var subject = 'FMA - Finished Reset Password';
-                            var text = 'Merck Feedback Managemant App recently received a request to reset the password.\n\nUsername/Email: '+emailAddress+' \n\ncurrent password :  '+resetPassword+' \n\n Thanks';
-                            var resultStr = sendEmail(emailAddress, subject, text);
-                            return res.json({
-                                            msgid: 1,
-                                            message: 'Success.'});
                         }
                     });
                 }
