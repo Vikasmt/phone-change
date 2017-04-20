@@ -1315,6 +1315,8 @@ router.get('/getContact', function(req, res) {
 router.get('/ValidateAdmin', function(req, res) {
     var emailaddress = req.headers.email.toLowerCase().trim();
     var password = req.headers.password;
+    console.log(emailaddress);
+    console.log(password);
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
@@ -1326,9 +1328,9 @@ router.get('/ValidateAdmin', function(req, res) {
                             firstname:'',
                             lastname:'',
                             username:'',
-			    uhrkid:'',
-			    language:'',
-			    country:'',
+			                 uhrkid:'',
+			                 language:'',
+			                 country:'',
                             msgid: 2,
                             message: 'Invalid email.'});
                 }
