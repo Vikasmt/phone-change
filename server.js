@@ -113,8 +113,8 @@ router.get('/ValidateAdmin', function(req, res) {
                                    
                                   return res.json({
                                             token: rawtoken,
-                                            uhrkid:result.rows[0].sfid,
-                                            userid: result.rows[0].id,
+                                            uhrkid: result.rows[0].id,
+                                            userid: result.rows[0].sfid,
                                             msgid: 1,
                                             message: 'Success.'});
                                }
