@@ -128,7 +128,7 @@
                         })
                         .catch(function (data, status, config) {
                             var userinfo = angular.fromJson(angular.toJson(data));
-                            console.log(userinfo);
+                            alert(userinfo);
                             alert('failed to authenticate');
                         });
             }
