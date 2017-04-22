@@ -42,7 +42,7 @@ router.get('/ValidateAdminPortal', function(req, res) {
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
           if (err) console.log(err);
          conn.query(
-             'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\' and um.role=''A''',
+             'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\' and um.role=\'A\'',
              function(err,result){
               if (err != null || result.rowCount == 0) {
                    return  res.json({
@@ -58,7 +58,7 @@ router.get('/ValidateAdminPortal', function(req, res) {
                 }
                  else{
                        conn.query(
-                            'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.active, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\' and um.password=\''+password+'\' and um.role=''A'' and um.contactid=sc.id',
+                            'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.active, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\' and um.password=\''+password+'\' and um.role=\'A\' and um.contactid=sc.id',
                            function(err,result){
                                done();
                                if(err != null || result.rowCount == 0){
