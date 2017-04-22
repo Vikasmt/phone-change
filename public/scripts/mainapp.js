@@ -43,8 +43,8 @@
                 controller: 'loginCtrl',
                 controllerAs: 'vm'
             })
-            .state('index', {
-                url: '/index',
+            .state('listscreen', {
+                url: '/list',
                 templateUrl: 'login.html',
                 controller: 'mainCtrl',
                 controllerAs: 'vm',
@@ -122,7 +122,7 @@
                         .then(function (data, status, config) {
                             var userinfo = angular.fromJson(angular.toJson(data));
                             $cookieStore.put('AccessToken', response.token);
-                            $state.go('index');
+                            $state.go('listscreen');
                         })
                         .catch(function (data, status, config) {
                             console.log(data);
