@@ -106,6 +106,8 @@
     myapp.controller("loginCtrl", function($scope, $http, $state, $cookieStore, apiUrl) {
         
         $scope.validateLogin = function(){
+            alert($scope.username);
+            alert($scope.password);
             if($scope.username!=undefined && $scope.username.length>0
               && $scope.password!=undefined && $scope.password.length>0){
                 var validateuserurl = apiUrl + 'ValidateAdminPortal';
