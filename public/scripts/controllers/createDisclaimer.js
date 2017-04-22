@@ -3,7 +3,7 @@ var app = angular.module("mainApp");
       
 
 
-app.controller("createDisclaimerCtrl", function($scope, $http, $state, $stateParams, apiUrl) {
+app.controller("createDisclaimerCtrl", function($scope, $http, $state, $stateParams, $cookieStore, apiUrl) {
   
         $scope.disclaimer={};
  
@@ -20,7 +20,8 @@ app.controller("createDisclaimerCtrl", function($scope, $http, $state, $statePar
             if(angular.isDefined(disclaimerInformation) && disclaimerInformation !== null) {
                 var config = {
                     headers : {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': $cookieStore.get('AccessToken')
                         }
                 }
                 

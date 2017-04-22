@@ -421,64 +421,6 @@ router.post('/productImageSync', function(req, res) {
     });
 });
 
-router.post('/CreateUser', function(req, res) {
-    console.log(req.body);
-    var jsonData = req.body;
-    
-    var formattedData='INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\')  RETURNING id';
-    console.log('formatted Salesforce.Contact Query:'+formattedData);
-    
-    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-         if (err) console.log(err);
-        
-        conn.query(
-             'SELECT count(*) from UserManagement where trim(email)=\''+jsonData.email+'\'',
-             function(err, result){
-                done();
-                if(result.rows[0].count > 0){
-                    res.status(400).json({error: 'Email already exist.'});
-                }
-                 else{
-                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\')  RETURNING id',
-                         function(err, result) {
-                            if(err){
-                                    return res.json({
-                                            msgid: 2,
-                                            message: err.message});
-                                }
-                                else{
-                                    var contactid = result.rows[0].id;
-                                    var userPermission = jsonData.permission === 'Admin' ? 'A' : 'U';
-                                    console.log('contactid: '+contactid);
-                                    console.log('User Permission: '+jsonData.permission);
-                                    console.log('User Permission Mode: '+userPermission);
-
-                                    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, language, country, role, contactid) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+jsonData.language+'\', \''+jsonData.country+'\', \''+userPermission+'\', \''+contactid+'\')';
-                                    console.log('formatted UserManagement Query:'+formattedData);
-
-                                    conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, language, country, role, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+jsonData.language+'\', \''+jsonData.country+'\', \''+userPermission+'\', \''+contactid+'\',true)',
-                                     function(err, result) {
-                                        done();
-                                         if(err){
-                                                return res.json({
-                                                        msgid: 2,
-                                                        message: err.message});
-                                            }
-                                            else{
-                                                var subject = 'Welcome To Feedback Application';
-                                                var text = 'Greetings!!!\n\n Welcome '+jsonData.firstname+',\n\nPlease use below credentials to login portal.\n\E-Mail: '+jsonData.email+'\nPassword: '+jsonData.password+'\n\nThanks';
-                                                var resultStr = sendEmail(jsonData.email, subject, text);
-                                                return res.json({
-                                                        msgid: 1,
-                                                        message: 'Success.'});
-                                            }
-                                    });
-                                }
-                    });
-                 }
-             });
-     });
-});
 
 router.use(function(req, res, next) {
 	// check header or url parameters or post parameters for token
@@ -511,6 +453,7 @@ router.use(function(req, res, next) {
 	}
 	
 });
+
 
 router.post('/updateDefectDescription', function(req, res) {
 var caseid = req.param('caseid');
@@ -1922,7 +1865,64 @@ router.get('/getMyFeedbacks', function(req, res) {
      });
 });
 
+router.post('/CreateUser', function(req, res) {
+    console.log(req.body);
+    var jsonData = req.body;
+    
+    var formattedData='INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\')  RETURNING id';
+    console.log('formatted Salesforce.Contact Query:'+formattedData);
+    
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+         if (err) console.log(err);
+        
+        conn.query(
+             'SELECT count(*) from UserManagement where trim(email)=\''+jsonData.email+'\'',
+             function(err, result){
+                done();
+                if(result.rows[0].count > 0){
+                    res.status(400).json({error: 'Email already exist.'});
+                }
+                 else{
+                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\')  RETURNING id',
+                         function(err, result) {
+                            if(err){
+                                    return res.json({
+                                            msgid: 2,
+                                            message: err.message});
+                                }
+                                else{
+                                    var contactid = result.rows[0].id;
+                                    var userPermission = jsonData.permission === 'Admin' ? 'A' : 'U';
+                                    console.log('contactid: '+contactid);
+                                    console.log('User Permission: '+jsonData.permission);
+                                    console.log('User Permission Mode: '+userPermission);
 
+                                    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, language, country, role, contactid) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+jsonData.language+'\', \''+jsonData.country+'\', \''+userPermission+'\', \''+contactid+'\')';
+                                    console.log('formatted UserManagement Query:'+formattedData);
+
+                                    conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, language, country, role, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+jsonData.language+'\', \''+jsonData.country+'\', \''+userPermission+'\', \''+contactid+'\',true)',
+                                     function(err, result) {
+                                        done();
+                                         if(err){
+                                                return res.json({
+                                                        msgid: 2,
+                                                        message: err.message});
+                                            }
+                                            else{
+                                                var subject = 'Welcome To Feedback Application';
+                                                var text = 'Greetings!!!\n\n Welcome '+jsonData.firstname+',\n\nPlease use below credentials to login portal.\n\E-Mail: '+jsonData.email+'\nPassword: '+jsonData.password+'\n\nThanks';
+                                                var resultStr = sendEmail(jsonData.email, subject, text);
+                                                return res.json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                            }
+                                    });
+                                }
+                    });
+                 }
+             });
+     });
+});
 
 router.get('/getUsers', function(req, res) {
  pg.connect(process.env.DATABASE_URL, function (err, conn, done) {

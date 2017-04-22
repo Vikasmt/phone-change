@@ -3,7 +3,7 @@ var app = angular.module("mainApp");
       
 
 
-app.controller("createCtrl", function($scope, $http, $state, $stateParams, apiUrl) {
+app.controller("createCtrl", function($scope, $http, $state, $stateParams, $cookieStore, apiUrl) {
   
         $scope.user={};
  
@@ -23,7 +23,8 @@ app.controller("createCtrl", function($scope, $http, $state, $stateParams, apiUr
             if(angular.isDefined(userInformation) && userInformation !== null) {
                 var config = {
                     headers : {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': $cookieStore.get('AccessToken')
                         }
                 }
                 

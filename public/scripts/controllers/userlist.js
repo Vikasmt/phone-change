@@ -1,6 +1,6 @@
 (function(){
 var app = angular.module("mainApp");
-app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
+app.controller("userCtrl", function($scope, $http, $state, $cookieStore, apiUrl) {
         $scope.userlist = [];
         $scope.usersMainList = [];
     
@@ -9,7 +9,8 @@ app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
             var getUsersUrl = apiUrl + 'getUsers';
              var config = {
                     headers : {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': $cookieStore.get('AccessToken')
                         }
                 }
             $http.get(getUsersUrl, config)
@@ -39,7 +40,8 @@ app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
             if(angular.isDefined(userInfo) && userInfo !== null) {
                 var config = {
                     headers : {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': $cookieStore.get('AccessToken')
                         }
                 }
                 
@@ -60,7 +62,8 @@ app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
             if(angular.isDefined(userInfo) && userInfo !== null) {
                 var config = {
                     headers : {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': $cookieStore.get('AccessToken')
                         }
                 }
                 

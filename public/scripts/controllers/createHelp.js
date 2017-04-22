@@ -3,7 +3,7 @@ var app = angular.module("mainApp");
       
 
 
-app.controller("createHelpCtrl", function($scope, $http, $state, $stateParams, apiUrl) {
+app.controller("createHelpCtrl", function($scope, $http, $state, $stateParams, $cookieStore, apiUrl) {
   
         $scope.help={};
  
@@ -20,7 +20,8 @@ app.controller("createHelpCtrl", function($scope, $http, $state, $stateParams, a
             if(angular.isDefined(helpInformation) && helpInformation !== null) {
                 var config = {
                     headers : {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': $cookieStore.get('AccessToken')
                         }
                 }
                 

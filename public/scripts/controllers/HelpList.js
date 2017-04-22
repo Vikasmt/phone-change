@@ -1,6 +1,6 @@
 (function(){
 var app = angular.module("mainApp");
-app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
+app.controller("HelpCtrl", function($scope, $http, $state, $cookieStore, apiUrl) {
         $scope.helplist = [];
         $scope.helpMainList = [];
     
@@ -8,7 +8,8 @@ app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
             var getHelpUrl = apiUrl + 'getHelpcontent';
              var config = {
                     headers : {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': $cookieStore.get('AccessToken')
                         }
                 }
             $http.get(getHelpUrl, config)
@@ -40,7 +41,8 @@ app.controller("HelpCtrl", function($scope, $http, $state, apiUrl) {
             if(angular.isDefined(HelpInfo) && HelpInfo !== null) {
                 var config = {
                     headers : {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': $cookieStore.get('AccessToken')
                         }
                 }
                 
