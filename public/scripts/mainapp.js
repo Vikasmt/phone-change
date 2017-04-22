@@ -127,7 +127,8 @@
                             $state.go('listscreen');
                         })
                         .catch(function (data, status, config) {
-                            console.log(data);
+                            var userinfo = angular.fromJson(angular.toJson(data));
+                            console.log(userinfo);
                             alert('failed to authenticate');
                         });
             }
