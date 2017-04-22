@@ -7,7 +7,7 @@
             if (to.Authentication == true) {
                 if (angular.isUndefined($cookieStore.get('AccessToken')) || $cookieStore.get('AccessToken').length == 0) {
                     e.preventDefault();
-                    $state.go('index');
+                    $state.go('home');
                 }
             }
             return;
@@ -37,15 +37,15 @@
     myapp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("/");
         $stateProvider
-            .state('index', {
-                url: '/index',
-                templateUrl: 'login.html',
+            .state('home', {
+                url: '/home',
+                templateUrl: 'index.html',
                 controller: 'loginCtrl',
                 controllerAs: 'vm'
             })
             .state('home', {
-                url: '/home',
-                templateUrl: 'index.html',
+                url: '/index',
+                templateUrl: 'login.html',
                 controller: 'mainCtrl',
                 controllerAs: 'vm',
                 Authentication: true

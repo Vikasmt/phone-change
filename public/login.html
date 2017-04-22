@@ -7,27 +7,88 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 </head>
-<body  ng-controller="loginCtrl">
-<div class="box">
-  <div id="header">
-  <h1 id="logintoregister">Login</h1>
-  </div> 
-   <form novalidate>
-    <div class="group">
-      <input class="inputMaterial" type="text" ng-model="username" required>
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>Username</label>
-    </div>
-	    <div class="group">      
-      <input class="inputMaterial" type="password" ng-model="password" required>
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label>Password</label>
-    </div>
-    <button id="buttonlogintoregister" ng-click="validateLogin()">Login</button>
-  </form>
+<body>
+<div ng-controller="mainCtrl" ng-init="load()">
+<!--index page-->
+<div ng-hide="isclicked===true">
   
+    <div class="row state-overview" style="width: 60%;margin: 65px auto;">
+            <div class="col-md-6" style="">
+                <section class="panel" on ng-click="navigatecreateuser()">
+                    <div class="symbol yellow" style="float: left;">
+                        <i class="material-icons">person_add</i>
+                    </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">
+                        <a ng-click="navigatecreateuser()"> <p style="padding: 1em 0;font-size: 1.2em;">Create Users</p></a>
+                    </div>
+                </section>
+                </div>
+                    <div class=" col-md-6">
+                        <section class="panel" onclick="" ng-click="navigateuserslist()">
+                            <div class="symbol purple" style="float: left;">
+                                <i class="material-icons">group</i>
+                            </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">                              
+                        <a ng-click="navigateuserslist()"> <p style=" padding: 1em 0;font-size: 1.2em;color: rgba(0, 0, 0, 0.87);">List Of Users</p></a>
+                    </div>
+                        </section>
+                    </div>
+    </div>
+</div>
+<div ng-app="mainApp" ng-controller="mainCtrl" ng-init="load()">
+<!--index page-->
+<div ng-hide="isclickedhelp===true">
+  
+    <div class="row state-overview" style="width: 60%;margin: 65px auto;">
+            <div class="col-md-6" style="">
+                <section class="panel" on ng-click="navigatecreatehelp()">
+                    <div class="symbol yellow" style="float: left;">
+                        <i class="material-icons">help</i>
+                    </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">
+                        <a ng-click="navigatecreatehelp()"> <p style="padding: 1em 0;font-size: 1.2em;">Create Help</p></a>
+                    </div>
+                </section>
+                </div>
+                    <div class=" col-md-6">
+                        <section class="panel" onclick="" ng-click="navigatehelplist()">
+                            <div class="symbol purple" style="float: left;">
+                                <i class="material-icons">help_outline</i>
+                            </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">                              
+                        <a ng-click="navigatehelplist()"> <p style=" padding: 1em 0;font-size: 1.2em;color: rgba(0, 0, 0, 0.87);">List Of Help</p></a>
+                    </div>
+                        </section>
+                    </div>
+    </div>
+</div>
+    
+<div ng-app="mainApp" ng-controller="mainCtrl" ng-init="load()">
+<!--index page-->
+<div ng-hide="isclickeddisclaimer===true">
+  
+    <div class="row state-overview" style="width: 60%;margin: 65px auto;">
+            <div class="col-md-6" style="">
+                <section class="panel" on ng-click="navigatecreatedisclaimer()">
+                    <div class="symbol yellow" style="float: left;">
+                        <i class="material-icons">warning</i>
+                    </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">
+                        <a ng-click="navigatecreatedisclaimer()"> <p style="padding: 1em 0;font-size: 1.2em;">Create Disclaimer</p></a>
+                    </div>
+                </section>
+                </div>
+                    <div class=" col-md-6">
+                        <section class="panel" onclick="" ng-click="navigatedisclaimerlist()">
+                            <div class="symbol purple" style="float: left;">
+                                <i class="material-icons">warning_outline</i>
+                            </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">                              
+                        <a ng-click="navigatedisclaimerlist()"> <p style=" padding: 1em 0;font-size: 1.2em;color: rgba(0, 0, 0, 0.87);">List Of Disclaimer</p></a>
+                    </div>
+                        </section>
+                    </div>
+    </div>
 </div>
 </body>
 </html>
