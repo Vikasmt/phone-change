@@ -142,18 +142,15 @@
                         <span class="error" ng-show="myForm.phone.$invalid">
                         <span ng-show="myForm.phone.$error.required">phone is required.</span>
                         </span>
-                      
-     
                     </div>
                     <div class="form-group">
                         <label for="language">Language</label>
                        <select class="form-control" id="language" ng-model="user.language" name="language" ng-pattern="language" ng-model="selectedLanguage" ng-options="x for x in language" placeholder="Select language" required>
-                        <span class="error" ng-show="myForm.language.$invalid">
-                        <span ng-show="myForm.language.$error.required">language is required.</span>
-                        </span>   
-                   </select>
-
-                  </div>
+                            <span class="error" ng-show="myForm.language.$invalid">
+                                <span ng-show="myForm.language.$error.required">language is required.</span>
+                            </span>   
+                        </select>
+                    </div>
                     
                     <div class="form-group">
                         <label for="country">Country</label>
@@ -161,9 +158,17 @@
                         <span class="error" ng-show="myForm.country.$invalid">
                         <span ng-show="myForm.country.$error.required">country is required.</span>
                         </span>    
-                   </select>
-
+                    </select>
                   </div>
+                    
+                    <div class="form-group">
+                        <label for="language">Permission</label>
+                       <select class="form-control" id="userPermission" ng-model="user.permission" name="userPermission" ng-pattern="userPermission" ng-model="User" ng-options="x for x in userPermissions" placeholder="Select Permission" required>
+                            <span class="error" ng-show="myForm.userPermission.$invalid">
+                                <span ng-show="myForm.userPermission.$error.required">Permission is required.</span>
+                            </span>   
+                        </select>
+                    </div>
                     
                     <div class="form-group" ng-hide="mode==='E'">
                         <label for="password">Password</label>
