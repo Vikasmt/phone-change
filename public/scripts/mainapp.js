@@ -43,7 +43,7 @@
                 controller: 'loginCtrl',
                 controllerAs: 'vm'
             })
-            .state('home', {
+            .state('index', {
                 url: '/index',
                 templateUrl: 'login.html',
                 controller: 'mainCtrl',
