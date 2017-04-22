@@ -123,13 +123,12 @@
                 $http.get(validateuserurl, config)
                         .then(function (data, status, config) {
                             alert('success');
-                            var userinfo = angular.fromJson(angular.toJson(data));
+                            var userinfo = data;
+                            alert(data.token);
                             $cookieStore.put('AccessToken', response.token);
                             $state.go('listscreen');
                         })
                         .catch(function (data, status, config) {
-                            var userinfo = angular.fromJson(angular.toJson(data));
-                            alert(userinfo);
                             alert('failed to authenticate');
                         });
             }
