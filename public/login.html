@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>Moldtek list</title>
     <!-- Material Design fonts -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
@@ -87,7 +87,10 @@
    cursor:pointer;
   }
     </style>
+
+
     
+</head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-resource.min.js"></script>
@@ -104,14 +107,36 @@
     <script src="scripts/controllers/createHelp.js"></script>
     <script src="scripts/controllers/disclaimerlist.js"></script>
     <script src="scripts/controllers/createDisclaimer.js"></script>
-<meta charset="UTF-8">
-<title>Sign In form</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-</head>
 <body>
+  <div style="width: 100%;    background: #8460aa;">
+     
+    <img src="https://www.merck-cap.com/resource/1478119071000/Images/images/layer_15.png" style="width: 77px;height: 42px;margin: 10px 14px;" />
+    <a href="https://phone-change-con.herokuapp.com" class="material-icons" style="color: #fafafa;font-size: 1.9em;padding: 0.1em 0em 0 0.5em;line-height: 1em;vertical-align: middle;">home</a>
+    </div>
+
+<!--<div ng-app="mainApp" class="box" ng-controller="loginCtrl">
+  <div id="header">
+  <h1 id="logintoregister">Login</h1>
+  </div> 
+   <form novalidate>
+    <div class="group">
+      <input class="inputMaterial" type="text" ng-model="username" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Username</label>
+    </div>
+	    <div class="group">      
+      <input class="inputMaterial" type="password" ng-model="password" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Password</label>
+    </div>
+    <button id="buttonlogintoregister" ng-click="validateLogin()">Login</button>
+  </form>
+  
+</div>-->
+    
 <div ng-app="mainApp" ng-controller="mainCtrl" ng-init="load()">
-<!--index page-->
 <div ng-hide="isclicked===true">
   
     <div class="row state-overview" style="width: 60%;margin: 65px auto;">
@@ -138,7 +163,6 @@
     </div>
 </div>
 <div ng-app="mainApp" ng-controller="mainCtrl" ng-init="load()">
-<!--index page-->
 <div ng-hide="isclickedhelp===true">
   
     <div class="row state-overview" style="width: 60%;margin: 65px auto;">
@@ -166,7 +190,6 @@
 </div>
     
 <div ng-app="mainApp" ng-controller="mainCtrl" ng-init="load()">
-<!--index page-->
 <div ng-hide="isclickeddisclaimer===true">
   
     <div class="row state-overview" style="width: 60%;margin: 65px auto;">
@@ -191,6 +214,9 @@
                         </section>
                     </div>
     </div>
+</div>
+    
+    <div ui-view></div>
 </div>
 </body>
 </html>
