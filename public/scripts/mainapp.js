@@ -39,7 +39,7 @@
         $stateProvider
             .state('home', {
                 url: '/home',
-                templateUrl: 'index.html',
+                templateUrl: 'login.html',
                 controller: 'loginCtrl',
                 controllerAs: 'vm'
             })
