@@ -7,7 +7,7 @@
             if (to.Authentication == true) {
                 if (angular.isUndefined($cookieStore.get('AccessToken')) || $cookieStore.get('AccessToken').length == 0) {
                     e.preventDefault();
-                    $state.go('listscreen');
+                    $state.go('home');
                 }
             }
             return;
@@ -39,7 +39,7 @@
         $stateProvider
             .state('home', {
                 url: '/home',
-                templateUrl: 'login.html',
+                templateUrl: 'index.html',
                 controller: 'loginCtrl',
                 controllerAs: 'vm'
             })
