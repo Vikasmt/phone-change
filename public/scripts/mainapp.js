@@ -122,9 +122,8 @@
         
                 $http.get(validateuserurl, config)
                         .then(function (data, status, config) {
-                         alert(data);
                             var userinfo = angular.fromJson(angular.toJson(data));
-                            alert(userinfo);
+                            alert(userinfo.userid);
                             $cookieStore.put('AccessToken', userinfo.token);
                             $state.go('listscreen');
                         })
