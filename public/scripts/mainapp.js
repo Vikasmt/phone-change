@@ -124,7 +124,7 @@
                         .then(function (data, status, config) {
                             var userinfo = angular.fromJson(angular.toJson(data));
                             alert(userinfo.data.userid);
-                            $cookieStore.put('AccessToken', userinfo.token);
+                            $cookieStore.put('AccessToken', userinfo.data.token);
                             $state.go('listscreen');
                         })
                         .catch(function (data, status, config) {
