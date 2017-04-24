@@ -122,6 +122,7 @@
         
                 $http.get(validateuserurl, config)
                         .then(function (data, status, config) {
+                         alert(data);
                             var userinfo = angular.fromJson(angular.toJson(data));
                             alert(userinfo);
                             $cookieStore.put('AccessToken', userinfo.token);
