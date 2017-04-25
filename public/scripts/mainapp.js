@@ -105,6 +105,7 @@
     
     myapp.controller("loginCtrl", function($scope, $http, $state, $cookieStore, apiUrl) {
         $scope.isVisible = true;
+        $scope.isVisible = false;
         $scope.validateLogin = function(){
             alert($scope.username);
             alert($scope.password);
@@ -136,7 +137,6 @@
     });
     
     myapp.controller("mainCtrl", function($scope, $http, $state, apiUrl) {
-        alert('mainCtrl');
         $scope.load = function(){
             $scope.isclicked = false;
             $scope.isclickedhelp = false;
