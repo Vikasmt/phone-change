@@ -808,6 +808,9 @@ router.post('/insertPowerFailure', function(req, res) {
     if (jsonData.NPODeviceBlckedPreventingToBeTurnoff !== undefined && jsonData.NPODeviceBlckedPreventingToBeTurnoff !== null && jsonData.NPODeviceBlckedPreventingToBeTurnoff !== "null" && jsonData.NPODeviceBlckedPreventingToBeTurnoff.length > 0)
         { insertQueryData += 'PF_NPO_DeviceBlckedPreventingToBeTurnoff__c,'; valuesData += '\'' + jsonData.NPODeviceBlckedPreventingToBeTurnoff + '\'' + ','; }
 	
+    if (jsonData.NPODeviceBlckedPreventingToBeTurnoffIfNo !== undefined && jsonData.NPODeviceBlckedPreventingToBeTurnoffIfNo !== null && jsonData.NPODeviceBlckedPreventingToBeTurnoffIfNo !== "null" && jsonData.NPODeviceBlckedPreventingToBeTurnoffIfNo.length > 0)
+        { insertQueryData += 'PF_NPO_DeviceBlckdPreventingToTurnofIfNo__c,'; valuesData += '\'' + jsonData.NPODeviceBlckedPreventingToBeTurnoffIfNo + '\'' + ','; }   
+	    
     if (jsonData.NPOWarningMessage !== undefined && jsonData.NPOWarningMessage !== null && jsonData.NPOWarningMessage !== "null" && jsonData.NPOWarningMessage.length > 0)
         { insertQueryData += 'PF_NPO_WarningMessage__c,'; valuesData += '\'' + jsonData.NPOWarningMessage + '\'' + ','; }
 	    
