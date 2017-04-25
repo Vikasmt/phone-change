@@ -114,7 +114,8 @@
     <a href="https://phone-change-con.herokuapp.com" class="material-icons" style="color: #fafafa;font-size: 1.9em;padding: 0.1em 0em 0 0.5em;line-height: 1em;vertical-align: middle;">home</a>
     </div>
 
-<div ng-app="mainApp" class="box" ng-controller="loginCtrl">
+<div ng-app="mainApp" class="box">
+<div ng-controller="loginCtrl">	
   <div id="header">
   <h1 id="logintoregister">Login</h1>
   </div> 
@@ -133,6 +134,7 @@
     </div>
     <button id="buttonlogintoregister" ng-click="validateLogin()">Login</button>
   </form>
+	</div>	
  <div ui-view>
 	</div> 
 </div>
