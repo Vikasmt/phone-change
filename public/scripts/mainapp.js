@@ -127,7 +127,7 @@
                             alert(userinfo.data.userid);
                             $cookieStore.put('AccessToken', userinfo.data.token);
                             $scope.isVisible = false;
-                            $scope.HomeVisible = false;
+                            
                             $state.go('listscreen');
                         })
                         .catch(function (data, status, config) {
@@ -138,6 +138,7 @@
     });
     
     myapp.controller("mainCtrl", function($scope, $http, $state, apiUrl) {
+        $scope.HomeVisible = false;
         $scope.load = function(){
             $scope.isclicked = false;
             $scope.isclickedhelp = false;
