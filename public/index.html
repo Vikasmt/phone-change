@@ -115,7 +115,8 @@
     </div>
 
 <div ng-app="mainApp" class="box">
-<div ng-controller="loginCtrl" ng-if="isVisible">	
+<div ng-controller="loginCtrl">	
+<div ng-if="isVisible">	
   <div id="header">
   <h1 id="logintoregister">Login</h1>
   </div> 
@@ -135,6 +136,7 @@
     <button id="buttonlogintoregister" ng-click="validateLogin()">Login</button>
   </form>
 	</div>	
+	</div>
  <div ui-view>
 	</div> 
 </div>
