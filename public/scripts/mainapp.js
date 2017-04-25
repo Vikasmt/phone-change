@@ -104,7 +104,7 @@
     }]);
     
     myapp.controller("loginCtrl", function($scope, $http, $state, $cookieStore, apiUrl) {
-        $scope.isVisible = false;
+        $scope.isVisible = true;
         $scope.validateLogin = function(){
             alert($scope.username);
             alert($scope.password);
@@ -125,7 +125,7 @@
                             var userinfo = angular.fromJson(angular.toJson(data));
                             alert(userinfo.data.userid);
                             $cookieStore.put('AccessToken', userinfo.data.token);
-                            $scope.isVisible = true;
+                            $scope.isVisible = false;
                             $state.go('listscreen');
                         })
                         .catch(function (data, status, config) {
