@@ -115,7 +115,9 @@
     </div>
 
 <div ng-app="mainApp" class="box" ng-controller="loginCtrl">
-  <div id="header">
+ 
+ <div ui-view>
+ <div id="header">
   <h1 id="logintoregister">Login</h1>
   </div> 
    <form novalidate>
@@ -133,7 +135,7 @@
     </div>
     <button id="buttonlogintoregister" ng-click="validateLogin()">Login</button>
   </form>
- <div ui-view></div> 
+	</div> 
 </div>
     
 <!--<div ng-app="mainApp" ng-controller="mainCtrl" ng-init="load()">
