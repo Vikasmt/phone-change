@@ -111,36 +111,39 @@
 	
 <body>
  
-<div ng-app="mainApp" class="box"> 
-<div style="width: 100%;    background: #8460aa;">
-<img src="https://www.merck-cap.com/resource/1478119071000/Images/images/layer_15.png" style="width: 77px;height: 42px;margin: 10px 14px;" />
- <a href="https://phone-change-con.herokuapp.com/#!/list" ng-show="link" class="material-icons" style="color: #fafafa;font-size: 1.9em;padding: 0.1em 0em 0 0.5em;line-height: 1em;vertical-align: middle;">home</a> </div>
-   <div ng-controller="loginCtrl" ng-show="isVisible" class="container">	
-     <div class="panel-heading">
-                
-                    <h3 class="panel-title"><i class="material-icons">&#xE853</i><span>Login</span></h3>
-                </div> 
-     <form novalidate>
-      <div class="group">
-	<label>Username</label>
-       <input class="inputMaterial" type="text" ng-model="username" required>
-        <span class="highlight"></span>
-        <span class="bar"></span>
-       
-       </div>
-	    <div class="group">   
-      <label>Password</label>
-      <input class="inputMaterial" type="password" ng-model="password" required>
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      
-    </div>
-    <button class="btn btn-raised btn-success btn-primary ctuser" id="buttonlogintoregister" ng-click="validateLogin()">Login</button>
-  </form>
+<div ng-app="mainApp" class="box">
+	<div style="width: 100%;    background: #8460aa;">
+		<img src="https://www.merck-cap.com/resource/1478119071000/Images/images/layer_15.png" style="width: 77px;height: 42px;margin: 10px 14px;" />
+		<a href="https://phone-change-con.herokuapp.com/#!/list" ng-show="link" class="material-icons" style="color: #fafafa;font-size: 1.9em;padding: 0.1em 0em 0 0.5em;line-height: 1em;vertical-align: middle;">home</a>
 	</div>
- <div ui-view>
-	</div> 
-</div>
+	<div ng-controller="loginCtrl" ng-show="isVisible" class="container">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<i class="material-icons">&#xE853</i>
+				<span>Login</span>
+			</h3>
+		</div>
+		<form novalidate>
+			<div class="panel-body">
+				<div class="form-group">
+				<label>Username</label>
+				<input class="inputMaterial" type="text" ng-model="username" required>
+					<span class="highlight"></span>
+					<span class="bar"></span>
+				</div>	
+				<div class="form-group">
+				
+					<label>Password</label>
+					<input class="inputMaterial" type="password" ng-model="password" required>
+						<span class="highlight"></span>
+						<span class="bar"></span>
+					</div>
+					<button class="btn btn-raised btn-success btn-primary ctuser" id="buttonlogintoregister" ng-click="validateLogin()">Login</button>
+				</div>
+			   </form>
+			</div>
+			<div ui-view></div>
+		</div>
 
 	
 	
