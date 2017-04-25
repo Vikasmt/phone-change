@@ -121,18 +121,20 @@
      </div> 
      <form novalidate>
       <div class="group">
+	<label>Username</label>
        <input class="inputMaterial" type="text" ng-model="username" required>
         <span class="highlight"></span>
         <span class="bar"></span>
-        <label>Username</label>
+       
        </div>
-	    <div class="group">      
+	    <div class="group">   
+      <label>Password</label>
       <input class="inputMaterial" type="password" ng-model="password" required>
       <span class="highlight"></span>
       <span class="bar"></span>
-      <label>Password</label>
+      
     </div>
-    <button id="buttonlogintoregister" ng-click="validateLogin()">Login</button>
+    <button class="btn btn-raised btn-success btn-primary ctuser" id="buttonlogintoregister" ng-click="validateLogin()">Login</button>
   </form>
 	</div>
  <div ui-view>
@@ -140,33 +142,7 @@
 </div>
 
 	
-	<div ng-app="mainApp" class="box"> 
-
-   <div ng-controller="loginCtrl" ng-show="isVisible" class="container" style="width: 450px">	
-      <div class="form-horizontal">
-        <div class="panel panel-default">
-                <div class="panel-heading">
-                
-                    <h3 class="panel-title"><i class="material-icons">&#xE853</i><span>Login</span></h3>
-                </div>
-     <div class="panel-body">
-	   <div class="form-group">
-	   <label for="Username">Username</label>
-        <input class="inputMaterial" type="text" ng-model="username" required>
-       </div>
-	    <div class="form-group">
-       <label>Password</label>		
-       <input class="inputMaterial" type="password" ng-model="password" required>
-      
-    </div>
-    <button class="btn btn-raised btn-success btn-primary ctuser" id="buttonlogintoregister" ng-click="validateLogin()">Login</button>
- </div>
-  </div>
-      </div>
-	</div>
- <div ui-view>
-	</div> 
-</div>
+	
 
 </body>
 </html>
