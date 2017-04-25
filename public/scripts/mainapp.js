@@ -135,6 +135,7 @@
     });
     
     myapp.controller("mainCtrl", function($scope, $http, $state, apiUrl) {
+        alert('mainCtrl');
         $scope.load = function(){
             $scope.isclicked = false;
             $scope.isclickedhelp = false;
