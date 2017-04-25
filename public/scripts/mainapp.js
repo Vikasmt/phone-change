@@ -39,8 +39,8 @@
         $stateProvider
             .state('home', {
                 url: '/home',
-                templateUrl: 'login.html',
-                controller: 'mainCtrl',
+                templateUrl: 'index.html',
+                controller: 'loginCtrl',
                 controllerAs: 'vm'
             })
             .state('listscreen', {
