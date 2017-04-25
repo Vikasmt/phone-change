@@ -43,7 +43,7 @@
                 controller: 'loginCtrl',
                 controllerAs: 'vm'
             })
-            .state('list', {
+            .state('listscreen', {
                 url: '/list',
                 templateUrl: 'login.html',
                 controller: 'mainCtrl',
@@ -125,7 +125,7 @@
                             var userinfo = angular.fromJson(angular.toJson(data));
                             alert(userinfo.data.userid);
                             $cookieStore.put('AccessToken', userinfo.data.token);
-                            $state.go('list');
+                            $state.go('listscreen');
                         })
                         .catch(function (data, status, config) {
                             alert('failed to authenticate');
