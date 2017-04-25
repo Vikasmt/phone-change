@@ -105,7 +105,7 @@
     
     myapp.controller("loginCtrl", function($scope, $http, $state, $cookieStore, apiUrl) {
         $scope.isVisible = true;
-        $scope.isVisible = false;
+        $scope.HomeVisible = false;
         $scope.validateLogin = function(){
             alert($scope.username);
             alert($scope.password);
