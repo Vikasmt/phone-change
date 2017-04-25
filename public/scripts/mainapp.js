@@ -39,8 +39,8 @@
         $stateProvider
             .state('home', {
                 url: '/home',
-                templateUrl: 'login.html',
-                controller: 'mainCtrl',
+                templateUrl: 'index.html',
+                controller: 'loginCtrl',
                 controllerAs: 'vm'
             })
             .state('listscreen', {
@@ -48,7 +48,7 @@
                 templateUrl: 'login.html',
                 controller: 'mainCtrl',
                 controllerAs: 'vm',
-                //Authentication: true
+                Authentication: true
             })
             .state('createuser', {
                 url: '/userAction',
@@ -59,7 +59,7 @@
                     'userdata': undefined,
                     'mode': undefined
                 },
-                //Authentication: true
+                Authentication: true
             })
             .state('userlist', {
                 url: '/users',
@@ -82,7 +82,7 @@
                     'helpdata': undefined,
                     'mode': undefined
                 },
-                //Authentication: true
+                Authentication: true
             })
            .state('disclaimerlist', {
                 url: '/Disclaimerlist',
@@ -99,7 +99,7 @@
                     'disclaimerdata': undefined,
                     'mode': undefined
                 },
-                //Authentication: true
+                Authentication: true
             });
     }]);
     
