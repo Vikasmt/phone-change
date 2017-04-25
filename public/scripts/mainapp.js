@@ -40,8 +40,8 @@
             .state('home', {
                 url: '/home',
                 templateUrl: 'index.html',
-                //controller: 'loginCtrl',
-                //controllerAs: 'vm'
+                controller: 'loginCtrl',
+                controllerAs: 'vm'
             })
             .state('listscreen', {
                 url: '/list',
