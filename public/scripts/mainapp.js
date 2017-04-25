@@ -138,7 +138,6 @@
     });
     
     myapp.controller("mainCtrl", function($scope, $http, $state, apiUrl) {
-        $scope.HomeVisible = false;
         $scope.load = function(){
             $scope.isclicked = false;
             $scope.isclickedhelp = false;
