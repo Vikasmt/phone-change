@@ -144,28 +144,20 @@
         <div class="panel panel-default">
                 <div class="panel-heading">
                 
-                    <h3 class="panel-title"><i class="material-icons">&#xE853</i><span>{{Login}}</span></h3>
+                    <h3 class="panel-title"><i class="material-icons">&#xE853</i><span>Login</span></h3>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
                         <label for="Username">Username</label>
                         <input type="text" class="form-control" ng-model="user.Username" id="Username" name="Username" placeholder="Enter Username" required>
-                        <span class="error" ng-show="myForm.Username.$error.maxlength">Phone no not more than 80 char.</span>
-                        <span class="error" ng-show="myForm.Username.$invalid">
-                        <span ng-show="myForm.Username.$error.required">Username is required.</span>
-                        </span>
                     </div>
                     <div class="form-group">
                         <label for="Password">Password</label>
                         <input type="text" class="form-control" name="Password" id="Password" ng-model="user.Password" placeholder="Enter Password" required>
-                        <span class="error" ng-show="myForm.Password.$error.maxlength">Phone no not more than 80 char.</span>
-                        <span class="error" ng-show="myForm.Password.$invalid">
-                        <span ng-show="myForm.Password.$error.required">Password is required.</span>
-                        </span>
                     </div>
                     
                 </div>
-                
+                <button class="btn btn-raised btn-success btn-primary ctuser" id="buttonlogintoregister" ng-click="validateLogin()">Login</button>
             </div>
             </div>
     </div>
