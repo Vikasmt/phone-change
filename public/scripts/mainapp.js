@@ -103,9 +103,9 @@
             });
     }]);
     
-    myapp.controller("loginCtrl", function($scope,$rootscope, $http, $state, $cookieStore, apiUrl) {
+    myapp.controller("loginCtrl", function($scope,$rootScope, $http, $state, $cookieStore, apiUrl) {
         $scope.isVisible = true;
-        $rootscope.link = false;
+        $rootScope.link = false;
         $scope.validateLogin = function(){
             alert($scope.username);
             alert($scope.password);
@@ -127,7 +127,7 @@
                             alert(userinfo.data.userid);
                             $cookieStore.put('AccessToken', userinfo.data.token);
                             $scope.isVisible = false;
-                            $rootscope.link =  true;
+                            $rootScope.link =  true;
                             $state.go('listscreen');
                         })
                         .catch(function (data, status, config) {
