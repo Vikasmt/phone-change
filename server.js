@@ -341,7 +341,7 @@ router.use(function(req, res, next) {
 		// verifies secret and checks exp
 		jwt.verify(token, app.get('secretKey'), function(err, decoded) {			
 			if (err) {
-				return res.json({ msgid: 0, success: false, message: 'Failed to authenticate token.' });		
+				return res.json({ msgid: 5, success: false, message: 'Failed to authenticate token.' });		
 			} else {
 				// if everything is good, save to request for use in other routes
 				req.decoded = decoded;	
