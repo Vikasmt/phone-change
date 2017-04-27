@@ -57,7 +57,8 @@
                 url: '/users',
                 templateUrl: 'UsersList.html',
                 controller: 'userCtrl',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                Authentication: true
             })
            .state('helplist', {
                 url: '/Helplist',
