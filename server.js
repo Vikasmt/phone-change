@@ -1464,7 +1464,7 @@ router.post('/uploadfile', function(req, res) {
     console.log('contenttype:'+mime);
     
     var data=req.body.toString();
-    console.log('Body:'+data);
+    
     
     var splitteddata=data.replace("{","").replace("}","").split(',');
     
@@ -1473,6 +1473,7 @@ router.post('/uploadfile', function(req, res) {
     var filename = splitteddata[2];
     var contenttype = splitteddata[3];
     var imagedata = splitteddata[4];
+    console.log('.....loopid.....'+loopid+'.....filename........'+filename+'........contenttype...........'+contenttype);
     
     var formattedData='INSERT INTO caseattachment (name, contenttype, herokucaseid) VALUES ('+filename +',  \''+contenttype+'\', '+caseid+') RETURNING id';
     console.log('formattedQuery:'+formattedData);
