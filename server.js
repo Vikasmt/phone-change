@@ -415,9 +415,9 @@ router.post('/insertCatridgeIssue', function(req, res) {
 	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
-        
-        console.log('........req.body.........'+req.body);
+
         var jsonData = req.body;
+	console.log('.....req..body......'+jsonData);
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES ('; 
 	    
@@ -701,10 +701,10 @@ router.post('/insertPowerFailure', function(req, res) {
     var RecordTypeId = "012e00000009MkoAAE";
 	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-        if (err) console.log(err);
+        if (err) console.log(err);        
         
-        console.log('........req.body.........'+req.body);
         var jsonData = req.body;
+	console.log('.....req..body......'+jsonData);
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES ('; 
 	    
@@ -996,10 +996,10 @@ router.post('/insertNeedleIssue', function(req, res) {
     var RecordTypeId = '012e00000009MkPAAU';
 	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
-        if (err) console.log(err);
-        
-        console.log('.....req..body......'+req.body);
+        if (err) console.log(err);       
+       
         var jsonData = req.body;
+        console.log('.....req..body......'+jsonData);
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES ('; 
 	    
@@ -1130,8 +1130,8 @@ router.post('/insertDataandtransfer', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         
-        console.log('.....req....body........'+req.body);
         var jsonData = req.body;
+	console.log('.....req..body......'+jsonData);
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES (';   
 	    
@@ -1246,8 +1246,8 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         
-        console.log('...req...body......'+req.body);
         var jsonData = req.body;
+	console.log('.....req..body......'+jsonData);
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES (';
 	    
