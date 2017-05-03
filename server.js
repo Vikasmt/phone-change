@@ -416,7 +416,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         
-        console.log(req.body);
+        console.log('........req.body.........'+req.body);
         var jsonData = req.body;
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES ('; 
@@ -664,7 +664,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
 
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
-        console.log(combinedQuery); 
+        console.log('.......combinedQuery........'+combinedQuery); 
         
         conn.query(combinedQuery,
                 function(err, result) {
@@ -703,7 +703,7 @@ router.post('/insertPowerFailure', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         
-        console.log(req.body);
+        console.log('........req.body.........'+req.body);
         var jsonData = req.body;
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES ('; 
@@ -878,7 +878,7 @@ router.post('/insertPowerFailure', function(req, res) {
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
 
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
-        console.log(combinedQuery); 
+        console.log('............combinedQuery.............'+combinedQuery); 
         
         conn.query(combinedQuery,
                 function(err, result) {
@@ -998,7 +998,7 @@ router.post('/insertNeedleIssue', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         
-        console.log(req.body);
+        console.log('.....req..body......'+req.body);
         var jsonData = req.body;
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES ('; 
@@ -1093,7 +1093,7 @@ router.post('/insertNeedleIssue', function(req, res) {
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
 
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
-        console.log(combinedQuery); 
+        console.log('............combinedQuery.............'+combinedQuery); 
         
         conn.query(combinedQuery,
                 function(err, result) {
@@ -1130,7 +1130,7 @@ router.post('/insertDataandtransfer', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         
-        console.log(req.body);
+        console.log('.....req....body........'+req.body);
         var jsonData = req.body;
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES (';   
@@ -1208,7 +1208,7 @@ router.post('/insertDataandtransfer', function(req, res) {
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
 
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
-        console.log(combinedQuery); 
+        console.log('............combinedQuery.............'+combinedQuery);  
         
         conn.query(combinedQuery,
                 function(err, result) {
@@ -1246,7 +1246,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);
         
-        console.log(req.body);
+        console.log('...req...body......'+req.body);
         var jsonData = req.body;
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES (';
@@ -1294,7 +1294,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
 
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
-        console.log(combinedQuery); 
+        console.log('............combinedQuery.............'+combinedQuery); 
         
         conn.query(combinedQuery,
                 function(err, result) {
