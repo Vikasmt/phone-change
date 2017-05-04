@@ -1024,7 +1024,7 @@ router.post('/insertNeedleIssue', function(req, res) {
 	// Needle warning message - Needle warning message selection
 	
         if (jsonData.NeedleWarningMessageSelection !== undefined && jsonData.NeedleWarningMessageSelection !== null && jsonData.NeedleWarningMessageSelection !== "null" && jsonData.NeedleWarningMessageSelection.length > 0)
-        { insertQueryData += 'NW_NeedleWarningMessageSelection__c,'; valuesData += '\'' + unescape(jsonData.NeedleWarningMessageSelection) + '\'' + ','; }
+        { insertQueryData += 'NW_NeedleWarningMessageSelection__c,'; unescape(valuesData) += '\'' + jsonData.NeedleWarningMessageSelection + '\'' + ','; }
 	    
 	if (jsonData.IsWarningmsgDisplayedWhenNedleAttd !== undefined && jsonData.IsWarningmsgDisplayedWhenNedleAttd !== null && jsonData.IsWarningmsgDisplayedWhenNedleAttd !== "null" && jsonData.IsWarningmsgDisplayedWhenNedleAttd.length > 0)
         { insertQueryData += 'NW_IsWarningmsgDisplayedWhenNedleAttd__c,'; valuesData += '\'' + jsonData.IsWarningmsgDisplayedWhenNedleAttd + '\'' + ','; }
