@@ -1096,7 +1096,8 @@ router.post('/insertNeedleIssue', function(req, res) {
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
         console.log('............combinedQuery.............'+combinedQuery); 
         var temp = combinedQuery.replace(/'/g,'"');    
-	console.log('............temp.............'+temp);
+	combinedQuery = temp.replace("%2527","'");    
+	
         conn.query(combinedQuery,
                 function(err, result) {
 			                done();
