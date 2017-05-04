@@ -1092,9 +1092,9 @@ router.post('/insertNeedleIssue', function(req, res) {
 	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
         { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
 
-	var temp = valuesData.replace("%2527","'");    
+	var temp = valuesData.replace("%2527","\'");    
 	console.log('............temp.............'+temp); 
-        var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
+        var combinedQuery = insertQueryData + ')' + temp + ') RETURNING id';
         console.log('............combinedQuery.............'+combinedQuery); 
         
         conn.query(combinedQuery,
