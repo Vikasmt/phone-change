@@ -1565,7 +1565,7 @@ router.post('/insertCase', function(req, res) {
         { insertQueryData += 'FMA_DeviceName__c,'; valuesData += '\'' + jsonData.DeviceName + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'Please select device name.'});}
 		
-	    if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
+	if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
         { insertQueryData += 'ContactId,'; valuesData += '\'' + jsonData.userid + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'Userid should not be empty.'});}
         
@@ -1573,14 +1573,14 @@ router.post('/insertCase', function(req, res) {
         { insertQueryData += 'FMA_Product__c,'; valuesData += '\'' + jsonData.ProductId + '\'' + ','; }
         else { return res.json({caseid: -1,msgid: 2,message: 'ProductId should not be empty.'});}
 		
-	    if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
+	if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
         { insertQueryData += 'FMA_Gender__c,'; valuesData += '\'' + jsonData.Gender + '\'' + ','; }
         //else { return res.json({caseid: -1,msgid: 2,message: 'Please select gender.'});}
 	
-	    if (jsonData.FormulationDosage !== undefined && jsonData.FormulationDosage !== null && jsonData.FormulationDosage !== "null" && jsonData.FormulationDosage.length > 1)
+	if (jsonData.FormulationDosage !== undefined && jsonData.FormulationDosage !== null && jsonData.FormulationDosage !== "null" && jsonData.FormulationDosage.length > 1)
         { insertQueryData += 'FMA_Dosage__c,'; valuesData += '\'' + jsonData.FormulationDosage + '\'' + ','; }
 	
-	    if (jsonData.TrainingDate !== undefined && jsonData.TrainingDate !== null && jsonData.TrainingDate !== "null" && jsonData.TrainingDate.length > 1)
+	if (jsonData.TrainingDate !== undefined && jsonData.TrainingDate !== null && jsonData.TrainingDate !== "null" && jsonData.TrainingDate.length > 1)
         { insertQueryData += 'FMA_Whenthepatientgottrained__c,'; valuesData += '\'' + jsonData.TrainingDate + '\'' + ','; }
 	    
         if (jsonData.ComplainantCategory !== undefined && jsonData.ComplainantCategory !== null && jsonData.ComplainantCategory !== "null" && jsonData.ComplainantCategory.length > 1)
@@ -1619,7 +1619,7 @@ router.post('/insertCase', function(req, res) {
       	if (jsonData.Whomadethetraining !== undefined && jsonData.Whomadethetraining !== null && jsonData.Whomadethetraining !== "null" && jsonData.Whomadethetraining.length > 0)
         { insertQueryData += 'FMA_Whomadethetraining__c,'; valuesData += '\'' + jsonData.Whomadethetraining + '\'' + ','; }
 	    
-	    if (jsonData.WhomadetheTrainingOther !== undefined && jsonData.WhomadetheTrainingOther !== null && jsonData.WhomadetheTrainingOther !== "null" && jsonData.WhomadetheTrainingOther.length > 0)
+	if (jsonData.WhomadetheTrainingOther !== undefined && jsonData.WhomadetheTrainingOther !== null && jsonData.WhomadetheTrainingOther !== "null" && jsonData.WhomadetheTrainingOther.length > 0)
         { insertQueryData += 'Who_made_the_training_Other__c,'; valuesData += '\'' + jsonData.WhomadetheTrainingOther + '\'' + ','; }
 
         if (jsonData.NameOfCompliant !== undefined && jsonData.NameOfCompliant !== null && jsonData.NameOfCompliant !== "null" && jsonData.NameOfCompliant.length > 1)
@@ -1658,7 +1658,7 @@ router.post('/insertCase', function(req, res) {
         if (jsonData.AdverseEventAssociatedWitchOne !== undefined && jsonData.AdverseEventAssociatedWitchOne !== null && jsonData.AdverseEventAssociatedWitchOne !== "null" && jsonData.AdverseEventAssociatedWitchOne.length > 0)
         { insertQueryData += 'FMA_Adverseeventassociatedwhichone__c,'; valuesData += '\'' + jsonData.AdverseEventAssociatedWitchOne + '\'' + ','; }
 	    
-	    if (jsonData.ProductName !== undefined && jsonData.ProductName !== null && jsonData.ProductName !== "null" && jsonData.ProductName.length > 0)
+	if (jsonData.ProductName !== undefined && jsonData.ProductName !== null && jsonData.ProductName !== "null" && jsonData.ProductName.length > 0)
         { insertQueryData += 'FMA_ProductName__c,'; valuesData += '\'' + jsonData.ProductName + '\'' + ','; }    
 		
       	if (jsonData.Subject !== undefined && jsonData.Subject !== null && jsonData.Subject !== "null" && jsonData.Subject.length > 0)
@@ -1670,17 +1670,53 @@ router.post('/insertCase', function(req, res) {
 	        insertQueryData += 'Priority,'; valuesData += '\'' + 'Medium' + '\'' + ',';
 		
 	        insertQueryData += 'Status'; valuesData += '\'' + 'New' + '\'';	
-	    console.log('............insertCase...1............');
+	 console.log('............insertCase...1............');
 		
+	/*
+	*****************************Additional Fields. Not using after final feedback from Ingrid
+		
+	if (jsonData.QtyOfProductsConcerned !== undefined && jsonData.QtyOfProductsConcerned !== null && jsonData.QtyOfProductsConcerned !== "null" && jsonData.QtyOfProductsConcerned.length > 0)
+        { insertQueryData += 'FMA_Quantityofproductsconcerned__c,'; valuesData += jsonData.QtyOfProductsConcerned + ','; }
+		
+        if (jsonData.ExpectedDateOfSampleReceived !== undefined && jsonData.ExpectedDateOfSampleReceived !== null && jsonData.ExpectedDateOfSampleReceived !== "null" && jsonData.ExpectedDateOfSampleReceived.length > 7)
+        { insertQueryData += 'FMA_Expecteddateofsamplereceived__c,'; valuesData += '\'' + jsonData.ExpectedDateOfSampleReceived + '\'' + ','; }
+        if (jsonData.Where !== undefined && jsonData.Where !== null && jsonData.Where !== "null" && jsonData.Where.length > 0)
+        { insertQueryData += 'FMA_where__c,'; valuesData += '\'' + jsonData.Where + '\'' + ','; }
+        if (jsonData.FromWhichHeightOccuredtheFall !== undefined && jsonData.FromWhichHeightOccuredtheFall !== null && jsonData.FromWhichHeightOccuredtheFall !== "null" && jsonData.FromWhichHeightOccuredtheFall.length > 0)
+        { insertQueryData += 'FMA_Fromwhichheightisoccurredhefall__c,'; valuesData += '\'' + jsonData.FromWhichHeightOccuredtheFall + '\'' + ','; }
+        if (jsonData.Whichkindofmisuse !== undefined && jsonData.Whichkindofmisuse !== null && jsonData.Whichkindofmisuse !== "null" && jsonData.Whichkindofmisuse.length > 0)
+        { insertQueryData += 'FMA_whichkindofmisuse__c,'; valuesData += '\'' + jsonData.Whichkindofmisuse + '\'' + ','; }
+        if (jsonData.IsSomethingstuckinsidedevice !== undefined && jsonData.IsSomethingstuckinsidedevice !== null && jsonData.IsSomethingstuckinsidedevice !== "null" && jsonData.IsSomethingstuckinsidedevice.length > 0)
+        { insertQueryData += 'FMA_Issomethingstuckinsidethedevice__c,'; valuesData += jsonData.IsSomethingstuckinsidedevice + ','; }
+        if (jsonData.OtherInformation !== undefined && jsonData.OtherInformation !== null && jsonData.OtherInformation !== "null" && jsonData.OtherInformation.length > 0)
+        { insertQueryData += 'FMA_OtherInformation__c,'; valuesData += '\'' + jsonData.OtherInformation + '\'' + ','; }
+		
+	if (jsonData.username !== undefined && jsonData.username !== null && jsonData.username !== "null" && jsonData.username.length > 0)
+        { insertQueryData += 'fma_feedbackcreator__c'; valuesData += '\'' + jsonData.username + '\''; }
+        else { return res.json({caseid: -1,msgid: 2,message: 'username should not be empty.'});}
 	
+	if (jsonData.Whoobservedthedefect !== undefined && jsonData.Whoobservedthedefect !== null && jsonData.Whoobservedthedefect !== "null" && jsonData.Whoobservedthedefect.length > 0)
+        { insertQueryData += 'FMA_Whoobservedthedefect__c,'; valuesData += '\'' + jsonData.Whoobservedthedefect + '\'' + ','; }
+	
+	if (jsonData.HastheNurseHCPconfirmedthedefect !== undefined && jsonData.HastheNurseHCPconfirmedthedefect !== null && jsonData.HastheNurseHCPconfirmedthedefect !== "null" && jsonData.HastheNurseHCPconfirmedthedefect.length > 0)
+        { insertQueryData += 'FMA_HastheNurseHCPconfirmedthedefect__c,'; valuesData += jsonData.HastheNurseHCPconfirmedthedefect + ','; }
+	
+        if (jsonData.Isproductcartridgestuckedindevice !== undefined && jsonData.Isproductcartridgestuckedindevice !== null && jsonData.Isproductcartridgestuckedindevice !== "null" && jsonData.Isproductcartridgestuckedindevice.length > 0)
+        { insertQueryData += 'FMA_Isproductcartridgestuckedindevice__c,'; valuesData += jsonData.Isproductcartridgestuckedindevice + ','; }
+        if (jsonData.Isreplacementofproductrequested !== undefined && jsonData.Isreplacementofproductrequested !== null && jsonData.Isreplacementofproductrequested !== "null" && jsonData.Isreplacementofproductrequested.length > 0)
+        { insertQueryData += 'FMA_Isreplacementofproductrequested__c,'; valuesData += jsonData.Isreplacementofproductrequested + ','; }
+	
+        *****************************		
+	*/        
+        //-------------------------------------------End Framing Query-------------------------------------------
+        
         //timestamp
         if (jsonData.timestamp !== undefined && jsonData.timestamp !== null && jsonData.timestamp !== "null" && jsonData.timestamp.length > 0)
         { timestamp = jsonData.timestamp; }
         
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
         console.log(combinedQuery); 
-
-		
+        console.log('............insertCase...2............');
         conn.query(combinedQuery,
                 function(err, result) {
                     done();
@@ -1694,39 +1730,15 @@ router.post('/insertCase', function(req, res) {
                                     message: err.message});
                         }
                         else{
-							
-                            var caseid = result.rows[0].id;
-							var QueryData = 'UPDATE salesforce.Case SET ';
-							var value = updateQueryData+' ';
-							var columns = insertQueryData.split(',');
-							var values = valuesData.split(',');
-							var updateQuerydata ='';
-
-							for(var i=0;i<columns.length;i++){
-							 updateQuerydata += columns[i]+"="+values[i]+",";
-							}
-						    var updateQuery = QueryData + updateQuerydata + WHERE id='+caseid+'';
-                                                    console.log(updateQuery); 
-													 conn.query(updateQuery,
-														function(err,result){
-															done();
-															if(err){
-																return res.json({
-																		caseid: -2,
-																		sfid: 2,
-																		msgid: 3,
-																		timestamp: timestamp,
-																		message: err.message});
-															}
-															else{
-															   return res.json({
-																		caseid:result.rows[0].id,
-																		sfid: result.rows[0].sfid,
-																		msgid: 1,
-																		timestamp: timestamp,
-																		message: 'Success.'});	
-															}
-													});
+                            console.log(result);						
+                            // Updating HrkCase id Start
+			       return res.json({
+						caseid:result.rows[0].id,
+						sfid: result.rows[0].sfid,
+						msgid: 1,
+						timestamp: timestamp,
+						message: 'Success.'});							   
+			   // Updating HrkCase id End
                         } 
             });
     });
