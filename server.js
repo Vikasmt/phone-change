@@ -47,9 +47,9 @@ router.post('/updateCase', function(req, res) {
                                 msgid: -1,
                                 message: 'case id not found.'});
                 }else{
-			        var valueData = 'if(jsonData.DeviceName !== undefined && jsonData.DeviceName !== null && jsonData.DeviceName !== "null" && jsonData.DeviceName.length > 0) FMA_DeviceName__c = \''+jsonData.DeviceName+'\','+
-                                                'if(jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0) ContactId = \''+jsonData.userid+'\','+
-						'if(jsonData.Description !== undefined && jsonData.Description !== null && jsonData.Description !== "null" && jsonData.Description.length > 1) Description = \''+jsonData.Description+'\'';
+			        var valueData = 'FMA_DeviceName__c = \''+jsonData.DeviceName+'\','+
+                                                'ContactId = \''+jsonData.userid+'\','+
+						'Description = \''+jsonData.Description+'\'';
                     conn.query('UPDATE salesforce.case SET '+valueData+' where id='+caseid+'',
                          function(err, result) {
 			              done();
