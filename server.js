@@ -47,39 +47,9 @@ router.post('/updateCase', function(req, res) {
                                 msgid: -1,
                                 message: 'case id not found.'});
                 }else{
-			        var valueData = 'FMA_DeviceName__c = \''+jsonData.DeviceName+'\','+
-                                    'ContactId = \''+jsonData.userid+'\','+
-									'FMA_Product__c = \''+jsonData.ProductId+'\','+
-									//'FMA_Gender__c = \''+jsonData.Gender+'\','+
-									'FMA_Dosage__c = \''+jsonData.FormulationDosage+'\','+
-									'FMA_Whenthepatientgottrained__c = \''+jsonData.TrainingDate+'\','+
-									'FMA_ComplainantCategory__c = \''+jsonData.ComplainantCategory+'\','+
-									//'FMA_AffiliateIfStillNeeded__c = \''+jsonData.AffiliateIfStillNeeded+'\','+
-									'FMA_BatchSerialnumber__c = \''+jsonData.BatchSerialNbr+'\','+
-									'FMA_Dateoffirstuse__c = \''+jsonData.DateOfFirstUse+'\','+
-									'FMA_Expirydate__c = \''+jsonData.ExpiryDate+'\','+
-									'FMA_Initialpatientname__c = \''+jsonData.InitialPatientName+'\','+
-									'FMA_Initialpatientsurname__c = \''+jsonData.InitialPatientSurName+'\','+
-									'FMA_Age__c = \''+jsonData.Age+'\','+
-									'FMA_Phoneno__c = \''+jsonData.Phoneno+'\','+
-									'FMA_Email__c = \''+jsonData.Email+'\','+
-									//'FMA_Hasthepatientbeentrained__c = \''+jsonData.Hasthepatientbeentrained+'\','+
-									'FMA_Whomadethetraining__c = \''+jsonData.Whomadethetraining+'\','+
-									'Who_made_the_training_Other__c = \''+jsonData.WhomadetheTrainingOther+'\','+
-									'FMA_NameofComplainant__c = \''+jsonData.NameOfCompliant+'\','+
-									'FMA_Defectdescription__c = \''+jsonData.DefectDescription+'\','+
-									//'FMA_Isthecomplaintsampleavailable__c = \''+jsonData.IsComplaintSampleAvailable+'\','+
-									//'FMA_Hasresponsebeenrequested__c = \''+jsonData.HasResponseBeenRequested+'\','+
-									//'FMA_Ispatientfamiliarwithdeviceusage__c = \''+jsonData.IsPatientFamiliarWithDeviceUsage+'\','+
-									'FMA_Sincewhendoespatientusethiskind__c = \''+jsonData.SinceWhenPatientUseThisDevice+'\','+
-									'FMA_Isthedevicephysicallydamaged__c = \''+jsonData.IsDevicePhysicallyDamaged+'\','+
-									'FMA_Thedamageisduetoanaccidentalfall__c = \''+jsonData.DamageDuetoAccidentalFall+'\','+
-									'FMA_Isthedefectduetoamisusebypatient__c = \''+jsonData.IsDefectedDuetomisusebypatient+'\','+
-									'FMA_whatstuckinside__c = \''+jsonData.WhatStuckinside+'\','+
-									//'FMA_Adverseeventassociatedtodefect__c = \''+jsonData.Adverseeventassociatedtodefect+'\','+
-									'FMA_ProductName__c = \''+jsonData.ProductName+'\','+
-									'Subject = \''+jsonData.Subject+'\','+
-									'Description = \''+jsonData.Description+'\'';
+			        var valueData = 'if(jsonData.DeviceName !== undefined && jsonData.DeviceName !== null && jsonData.DeviceName !== "null" && jsonData.DeviceName.length > 0) FMA_DeviceName__c = \''+jsonData.DeviceName+'\','+
+                                                'if(jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0) ContactId = \''+jsonData.userid+'\','+
+						'if(jsonData.Description !== undefined && jsonData.Description !== null && jsonData.Description !== "null" && jsonData.Description.length > 1) Description = \''+jsonData.Description+'\'';
                     conn.query('UPDATE salesforce.case SET '+valueData+' where id='+caseid+'',
                          function(err, result) {
 			              done();
