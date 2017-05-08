@@ -365,6 +365,183 @@ router.use(function(req, res, next) {
 	
 });
 
+router.post('/updateCase', function(req, res) {
+    console.log(req.body);
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+         if (err) console.log(err);
+         var jsonData = req.body;
+         var caseid = jsonData.id;
+         conn.query('SELECT *from salesforce.Case WHERE id='+caseid+'',
+                function(err,result){
+                 if (err != null || result.rowCount == 0) {
+                      return res.json({
+						        caseid: -1,
+                                msgid: 2,
+                                message: 'case id not found.'});
+                 }else{									
+				    var valueData = '';
+									
+				    if (jsonData.DeviceName !== undefined && jsonData.DeviceName !== null && jsonData.DeviceName !== "null" && jsonData.DeviceName.length > 0)
+					{ valueData += 'FMA_DeviceName__c = \''+jsonData.DeviceName+'\','; }
+					else 
+					{ return res.json({caseid: -1,msgid: 2,message: 'Please select device name.'});}
+					
+					if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
+					{ valueData += 'ContactId = \''+jsonData.userid+'\','; }
+					else 
+					{ return res.json({caseid: -1,msgid: 2,message: 'Userid should not be empty.'});}
+					
+					if (jsonData.ProductId !== undefined && jsonData.ProductId !== null && jsonData.ProductId !== "null" && jsonData.ProductId.toString().length > 0)
+					{ valueData += 'FMA_Product__c = \''+jsonData.ProductId+'\','; }
+					else 
+					{ return res.json({caseid: -1,msgid: 2,message: 'ProductId should not be empty.'});}
+					
+					if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
+					{ valueData += 'FMA_Gender__c = \''+jsonData.Gender+'\','; }
+					else { return res.json({caseid: -1,msgid: 2,message: 'Please select gender.'});}
+				
+					if (jsonData.FormulationDosage !== undefined && jsonData.FormulationDosage !== null && jsonData.FormulationDosage !== "null" && jsonData.FormulationDosage.length > 1)
+					{ valueData += 'FMA_Dosage__c = \''+jsonData.FormulationDosage+'\','; }
+				    else{valueData += 'FMA_Dosage__c = \'\',';}
+				
+					if (jsonData.TrainingDate !== undefined && jsonData.TrainingDate !== null && jsonData.TrainingDate !== "null" && jsonData.TrainingDate.length > 1)
+					{ valueData += 'FMA_Whenthepatientgottrained__c = \''+jsonData.TrainingDate+'\','; }
+				    else{valueData += 'FMA_Whenthepatientgottrained__c = \'\',';}
+					
+					if (jsonData.ComplainantCategory !== undefined && jsonData.ComplainantCategory !== null && jsonData.ComplainantCategory !== "null" && jsonData.ComplainantCategory.length > 1)
+					{ valueData += 'FMA_ComplainantCategory__c = \''+jsonData.ComplainantCategory+'\','; }
+				    else{valueData += 'FMA_ComplainantCategory__c = \'\',';}
+					
+					if (jsonData.AffiliateIfStillNeeded !== undefined && jsonData.AffiliateIfStillNeeded !== null && jsonData.AffiliateIfStillNeeded !== "null" && jsonData.AffiliateIfStillNeeded.length > 1)
+					{ valueData += 'FMA_AffiliateIfStillNeeded__c = \''+jsonData.AffiliateIfStillNeeded+'\','; }
+				    else{valueData += 'FMA_AffiliateIfStillNeeded__c = \'\',';}
+
+					if (jsonData.BatchSerialNbr !== undefined && jsonData.BatchSerialNbr !== null && jsonData.BatchSerialNbr !== "null" && jsonData.BatchSerialNbr.length > 1)
+					{ valueData += 'FMA_BatchSerialnumber__c = \''+jsonData.BatchSerialNbr+'\','; }
+				    else{valueData += 'FMA_BatchSerialnumber__c = \'\',';}
+
+					if (jsonData.DateOfFirstUse !== undefined && jsonData.DateOfFirstUse !== null && jsonData.DateOfFirstUse !== "null" && jsonData.DateOfFirstUse.length > 7)
+					{ valueData += 'FMA_Dateoffirstuse__c = \''+jsonData.DateOfFirstUse+'\','; }
+				    else{valueData += 'FMA_Dateoffirstuse__c = \'\',';}
+
+					if (jsonData.ExpiryDate !== undefined && jsonData.ExpiryDate !== null && jsonData.ExpiryDate !== "null" && jsonData.ExpiryDate.length > 7)
+					{ valueData += 'FMA_Expirydate__c = \''+jsonData.ExpiryDate+'\','; }
+				    else{valueData += 'FMA_Expirydate__c = \'\',';}
+
+					if (jsonData.InitialPatientName !== undefined && jsonData.InitialPatientName !== null && jsonData.InitialPatientName !== "null" && jsonData.InitialPatientName.length > 1)
+					{ valueData += 'FMA_Initialpatientname__c = \''+jsonData.InitialPatientName+'\','; }
+				    else{valueData += 'FMA_Initialpatientname__c = \'\',';}
+
+					if (jsonData.InitialPatientSurName !== undefined && jsonData.InitialPatientSurName !== null && jsonData.InitialPatientSurName !== "null" && jsonData.InitialPatientSurName.length > 0)
+					{ valueData += 'FMA_Initialpatientsurname__c = \''+jsonData.InitialPatientSurName+'\','; }
+				    else{valueData += 'FMA_Initialpatientsurname__c = \'\',';}
+
+					if (jsonData.Age !== undefined && jsonData.Age !== null && jsonData.Age !== "null" && jsonData.Age.length > 0)
+					{ valueData += 'FMA_Age__c = \''+jsonData.Age+'\','; }
+				    else{valueData += 'FMA_Age__c = \'\',';}
+					
+					if (jsonData.Phoneno !== undefined && jsonData.Phoneno !== null && jsonData.Phoneno !== "null" && jsonData.Phoneno.length > 0)
+					{ valueData += 'FMA_Phoneno__c = \''+jsonData.Phoneno+'\','; }
+				    else{valueData += 'FMA_Phoneno__c = \'\',';}
+						
+					if (jsonData.Email !== undefined && jsonData.Email !== null && jsonData.Email !== "null" && jsonData.Email.length > 0)
+					{ valueData += 'FMA_Email__c = \''+jsonData.Email+'\','; }
+				    else{valueData += 'FMA_Email__c = \'\',';}
+						
+					if (jsonData.Hasthepatientbeentrained !== undefined && jsonData.Hasthepatientbeentrained !== null && jsonData.Hasthepatientbeentrained !== "null" && jsonData.Hasthepatientbeentrained.length > 0)
+					{ valueData += 'FMA_Hasthepatientbeentrained__c = \''+jsonData.Hasthepatientbeentrained+'\','; }
+				    else{valueData += 'FMA_Hasthepatientbeentrained__c = \'\',';}
+						
+					if (jsonData.Whomadethetraining !== undefined && jsonData.Whomadethetraining !== null && jsonData.Whomadethetraining !== "null" && jsonData.Whomadethetraining.length > 0)
+					{ valueData += 'FMA_Whomadethetraining__c = \''+jsonData.Whomadethetraining+'\','; }
+				    else{valueData += 'FMA_Whomadethetraining__c = \'\',';}
+					
+					if (jsonData.WhomadetheTrainingOther !== undefined && jsonData.WhomadetheTrainingOther !== null && jsonData.WhomadetheTrainingOther !== "null" && jsonData.WhomadetheTrainingOther.length > 0)
+					{ valueData += 'Who_made_the_training_Other__c = \''+jsonData.WhomadetheTrainingOther+'\','; }
+				    else{valueData += 'Who_made_the_training_Other__c = \'\',';}
+
+					if (jsonData.NameOfCompliant !== undefined && jsonData.NameOfCompliant !== null && jsonData.NameOfCompliant !== "null" && jsonData.NameOfCompliant.length > 1)
+					{ valueData += 'FMA_NameofComplainant__c = \''+jsonData.NameOfCompliant+'\','; }
+				    else{valueData += 'FMA_NameofComplainant__c = \'\',';}
+
+					if (jsonData.DefectDescription !== undefined && jsonData.DefectDescription !== null && jsonData.DefectDescription !== "null" && jsonData.DefectDescription.length > 1)
+					{ valueData += 'FMA_Defectdescription__c = \''+jsonData.DefectDescription+'\','; }
+				    else{valueData += 'FMA_Defectdescription__c = \'\',';}
+
+					if (jsonData.IsComplaintSampleAvailable !== undefined && jsonData.IsComplaintSampleAvailable !== null && jsonData.IsComplaintSampleAvailable !== "null" && jsonData.IsComplaintSampleAvailable.length > 0)
+					{ valueData += 'FMA_Isthecomplaintsampleavailable__c = \''+jsonData.IsComplaintSampleAvailable+'\','; }
+				    else{valueData += 'FMA_Isthecomplaintsampleavailable__c = \'\',';}
+
+					if (jsonData.HasResponseBeenRequested !== undefined && jsonData.HasResponseBeenRequested !== null && jsonData.HasResponseBeenRequested !== "null" && jsonData.HasResponseBeenRequested.length > 0)
+					{ valueData += 'FMA_Hasresponsebeenrequested__c = \''+jsonData.HasResponseBeenRequested+'\','; }
+				    else{valueData += 'FMA_Hasresponsebeenrequested__c = \'\',';}
+
+					if (jsonData.IsPatientFamiliarWithDeviceUsage !== undefined && jsonData.IsPatientFamiliarWithDeviceUsage !== null && jsonData.IsPatientFamiliarWithDeviceUsage !== "null" && jsonData.IsPatientFamiliarWithDeviceUsage.length > 0)
+					{ valueData += 'FMA_Ispatientfamiliarwithdeviceusage__c = \''+jsonData.IsPatientFamiliarWithDeviceUsage+'\','; }
+				    else{valueData += 'FMA_Ispatientfamiliarwithdeviceusage__c = \'\',';}
+
+					if (jsonData.SinceWhenPatientUseThisDevice !== undefined && jsonData.SinceWhenPatientUseThisDevice !== null && jsonData.SinceWhenPatientUseThisDevice !== "null" && jsonData.SinceWhenPatientUseThisDevice.length > 1)
+					{ valueData += 'FMA_Sincewhendoespatientusethiskind__c = \''+jsonData.SinceWhenPatientUseThisDevice+'\','; }
+				    else{valueData += 'FMA_Sincewhendoespatientusethiskind__c = \'\',';}
+
+					if (jsonData.IsDevicePhysicallyDamaged !== undefined && jsonData.IsDevicePhysicallyDamaged !== null && jsonData.IsDevicePhysicallyDamaged !== "null" && jsonData.IsDevicePhysicallyDamaged.length > 0)
+					{ valueData += 'FMA_Isthedevicephysicallydamaged__c = \''+jsonData.IsDevicePhysicallyDamaged+'\','; }
+				    else{valueData += 'FMA_Isthedevicephysicallydamaged__c = \'\',';}
+
+					if (jsonData.DamageDuetoAccidentalFall !== undefined && jsonData.DamageDuetoAccidentalFall !== null && jsonData.DamageDuetoAccidentalFall !== "null" && jsonData.DamageDuetoAccidentalFall.length > 0)
+					{ valueData += 'FMA_Thedamageisduetoanaccidentalfall__c = \''+jsonData.DamageDuetoAccidentalFall+'\','; }
+				    else{valueData += 'FMA_Thedamageisduetoanaccidentalfall__c = \'\',';}
+
+					if (jsonData.IsDefectedDuetomisusebypatient !== undefined && jsonData.IsDefectedDuetomisusebypatient !== null && jsonData.IsDefectedDuetomisusebypatient !== "null" && jsonData.IsDefectedDuetomisusebypatient.length > 0)
+					{ valueData += 'FMA_Isthedefectduetoamisusebypatient__c = \''+jsonData.IsDefectedDuetomisusebypatient+'\',' }
+				    else{valueData += 'FMA_Isthedefectduetoamisusebypatient__c = \'\',';}
+
+					if (jsonData.WhatStuckinside !== undefined && jsonData.WhatStuckinside !== null && jsonData.WhatStuckinside !== "null" && jsonData.WhatStuckinside.length > 0)
+					{ valueData += 'FMA_whatstuckinside__c = \''+jsonData.WhatStuckinside+'\','; }
+				    else{valueData += 'FMA_whatstuckinside__c = \'\',';}
+
+					if (jsonData.Adverseeventassociatedtodefect !== undefined && jsonData.Adverseeventassociatedtodefect !== null && jsonData.Adverseeventassociatedtodefect !== "null" && jsonData.Adverseeventassociatedtodefect.length > 0)
+					{ valueData += 'FMA_Adverseeventassociatedtodefect__c = \''+jsonData.Adverseeventassociatedtodefect+'\','; }
+				    else{valueData += 'FMA_Adverseeventassociatedtodefect__c = \'\',';}
+
+					if (jsonData.AdverseEventAssociatedWitchOne !== undefined && jsonData.AdverseEventAssociatedWitchOne !== null && jsonData.AdverseEventAssociatedWitchOne !== "null" && jsonData.AdverseEventAssociatedWitchOne.length > 0)
+					{ valueData += 'FMA_Adverseeventassociatedwhichone__c = \''+jsonData.DeviceName+'\','; }
+				    else{valueData += 'FMA_Adverseeventassociatedwhichone__c = \'\',';}
+					
+					if (jsonData.ProductName !== undefined && jsonData.ProductName !== null && jsonData.ProductName !== "null" && jsonData.ProductName.length > 0)
+					{ valueData += 'FMA_ProductName__c = \''+jsonData.ProductName+'\','; }
+                    else{valueData += 'FMA_ProductName__c = \'\',';}				
+					
+					if (jsonData.ProductName !== undefined && jsonData.ProductName !== null && jsonData.ProductName !== "null" && jsonData.ProductName.length > 0)
+					{ valueData += 'Subject = \''+jsonData.ProductName+' Feedback\','; }
+						
+					if (jsonData.Description !== undefined && jsonData.Description !== null && jsonData.Description !== "null" && jsonData.Description.length > 1)
+					{ valueData += 'Description = \''+jsonData.Description+'\','; }
+				    else{valueData += 'Description = \'\',';}
+
+				    console.log('............update Case...1............');					
+									
+                    conn.query('UPDATE salesforce.case SET '+valueData+' where id='+caseid+'',
+                         function(err, result) {
+                          done();
+                            if(err){
+                                    return res.json({
+                                         msgid: 2,
+                                            message: err.message});
+                                }
+                                else{
+                                    return res.json({
+                                         msgid: 1,
+                                         message: 'Success.'});
+                                }
+                         });
+                    }
+             });
+     });
+ });
+
+
+
 router.post('/updateDefectDescription', function(req, res) {
 var caseid = req.param('caseid');
 var Description = req.param('DefectDescription'); 	
