@@ -412,13 +412,13 @@ router.post('/updateCase', function(req, res) {
 					{ valueData += 'FMA_ComplainantCategory__c = \''+jsonData.ComplainantCategory+'\','; }
 				    else{valueData += 'FMA_ComplainantCategory__c = \'\',';}
 					
-					if (jsonData.AffiliateIfStillNeeded !== undefined && jsonData.AffiliateIfStillNeeded == ""  && jsonData.AffiliateIfStillNeeded !== null && jsonData.AffiliateIfStillNeeded !== "null" && jsonData.AffiliateIfStillNeeded.length > 1)
+					if (jsonData.AffiliateIfStillNeeded !== undefined && jsonData.AffiliateIfStillNeeded !== null && jsonData.AffiliateIfStillNeeded !== "null" && jsonData.AffiliateIfStillNeeded.length > 1)
 					{ valueData += 'FMA_AffiliateIfStillNeeded__c = \''+jsonData.AffiliateIfStillNeeded+'\','; }
 				    else{valueData += 'FMA_AffiliateIfStillNeeded__c = \'\',';}
 
 					if (jsonData.BatchSerialNbr !== undefined && jsonData.BatchSerialNbr !== null && jsonData.BatchSerialNbr !== "null" && jsonData.BatchSerialNbr.length > 1)
 					{ valueData += 'FMA_BatchSerialnumber__c = \''+jsonData.BatchSerialNbr+'\','; }
-				    else{valueData += 'FMA_BatchSerialnumber__c = \'\',';}
+				    //else{valueData += 'FMA_BatchSerialnumber__c = \'\',';}
 
 					if (jsonData.DateOfFirstUse !== undefined && jsonData.DateOfFirstUse !== null && jsonData.DateOfFirstUse !== "null" && jsonData.DateOfFirstUse.length > 7)
 					{ valueData += 'FMA_Dateoffirstuse__c = \''+jsonData.DateOfFirstUse+'\','; }
