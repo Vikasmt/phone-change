@@ -502,15 +502,15 @@ router.post('/updateCase', function(req, res) {
 
 					if (jsonData.Adverseeventassociatedtodefect !== undefined && jsonData.Adverseeventassociatedtodefect !== null && jsonData.Adverseeventassociatedtodefect !== "null" && jsonData.Adverseeventassociatedtodefect.length > 0)
 					{ valueData += 'FMA_Adverseeventassociatedtodefect__c = \''+jsonData.Adverseeventassociatedtodefect+'\','; }
-				    else{valueData += 'FMA_Adverseeventassociatedtodefect__c = \'\',';}
+				        else{valueData += 'FMA_Adverseeventassociatedtodefect__c = \'\',';}
 
 					if (jsonData.AdverseEventAssociatedWitchOne !== undefined && jsonData.AdverseEventAssociatedWitchOne !== null && jsonData.AdverseEventAssociatedWitchOne !== "null" && jsonData.AdverseEventAssociatedWitchOne.length > 0)
 					{ valueData += 'FMA_Adverseeventassociatedwhichone__c = \''+jsonData.DeviceName+'\','; }
-				    else{valueData += 'FMA_Adverseeventassociatedwhichone__c = \'\',';}
+				        else{valueData += 'FMA_Adverseeventassociatedwhichone__c = \'\',';}
 					
 					if (jsonData.ProductName !== undefined && jsonData.ProductName !== null && jsonData.ProductName !== "null" && jsonData.ProductName.length > 0)
 					{ valueData += 'FMA_ProductName__c = \''+jsonData.ProductName+'\','; }
-                    else{valueData += 'FMA_ProductName__c = \'\',';}				
+                                        else{valueData += 'FMA_ProductName__c = \'\',';}				
 					
 					if (jsonData.ProductName !== undefined && jsonData.ProductName !== null && jsonData.ProductName !== "null" && jsonData.ProductName.length > 0)
 					{ valueData += 'Subject = \''+jsonData.ProductName+' Feedback\','; }
@@ -521,7 +521,7 @@ router.post('/updateCase', function(req, res) {
 
 				    console.log('............update Case...1............');					
 									
-                    conn.query('UPDATE salesforce.case SET valueData WHERE id='+caseid+'',
+                    conn.query('UPDATE salesforce.case SET '+valueData+' WHERE id='+caseid+'',
                          function(err, result) {
                           done();
                             if(err){
