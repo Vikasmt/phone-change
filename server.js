@@ -98,7 +98,7 @@ router.post('/updateCase', function(req, res) {
 							    }
              });
      });
-
+});
 
 
 router.get('/ValidateAdmin', function(req, res) {
