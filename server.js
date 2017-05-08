@@ -512,13 +512,13 @@ router.post('/updateCase', function(req, res) {
 					{ valueData += 'FMA_ProductName__c = \''+jsonData.ProductName+'\','; }
                                         else{valueData += 'FMA_ProductName__c = \'\',';}				
 					
-					if (jsonData.Subject !== undefined && jsonData.Subject !== null && jsonData.Subject !== "null" && jsonData.Subject.length > 0)
-					{ valueData += 'Subject = \''+jsonData.Subject+'\','; }
+					//if (jsonData.Subject !== undefined && jsonData.Subject !== null && jsonData.Subject !== "null" && jsonData.Subject.length > 0)
+					//{ valueData += 'Subject = \''+jsonData.Subject+'\','; }
 					
 			 
 					if (jsonData.Description !== undefined && jsonData.Description !== null && jsonData.Description !== "null" && jsonData.Description.length > 1)
-					{ valueData += 'Description = \''+jsonData.Description+'\'; }
-				    else{valueData += 'Description = \'\';}
+					{ valueData += 'Description = \''+jsonData.Description+'\','; }
+				    else{valueData += 'Description = \'\',';}
 
 				    console.log('............update Case...1............');					
 									
