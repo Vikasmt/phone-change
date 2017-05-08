@@ -484,11 +484,11 @@ router.post('/updateCase', function(req, res) {
 					{ valueData += 'FMA_Sincewhendoespatientusethiskind__c = \''+jsonData.SinceWhenPatientUseThisDevice+'\','; }
 				    else{valueData += 'FMA_Sincewhendoespatientusethiskind__c = \'\',';}
 
-					/*if (jsonData.IsDevicePhysicallyDamaged !== undefined && jsonData.IsDevicePhysicallyDamaged !== null && jsonData.IsDevicePhysicallyDamaged !== "null" && jsonData.IsDevicePhysicallyDamaged.length > 0)
+					if (jsonData.IsDevicePhysicallyDamaged !== undefined && jsonData.IsDevicePhysicallyDamaged !== null && jsonData.IsDevicePhysicallyDamaged !== "null" && jsonData.IsDevicePhysicallyDamaged.length > 0)
 					{ valueData += 'FMA_Isthedevicephysicallydamaged__c = \''+jsonData.IsDevicePhysicallyDamaged+'\','; }
 				    else{valueData += 'FMA_Isthedevicephysicallydamaged__c = \'\',';}
 
-					if (jsonData.DamageDuetoAccidentalFall !== undefined && jsonData.DamageDuetoAccidentalFall !== null && jsonData.DamageDuetoAccidentalFall !== "null" && jsonData.DamageDuetoAccidentalFall.length > 0)
+					/*if (jsonData.DamageDuetoAccidentalFall !== undefined && jsonData.DamageDuetoAccidentalFall !== null && jsonData.DamageDuetoAccidentalFall !== "null" && jsonData.DamageDuetoAccidentalFall.length > 0)
 					{ valueData += 'FMA_Thedamageisduetoanaccidentalfall__c = \''+jsonData.DamageDuetoAccidentalFall+'\','; }
 				    else{valueData += 'FMA_Thedamageisduetoanaccidentalfall__c = \'\',';}
 
