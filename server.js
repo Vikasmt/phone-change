@@ -484,7 +484,7 @@ router.post('/updateCase', function(req, res) {
 					{ valueData += 'FMA_Sincewhendoespatientusethiskind__c = \''+jsonData.SinceWhenPatientUseThisDevice+'\','; }
 				    else{valueData += 'FMA_Sincewhendoespatientusethiskind__c = \'\',';}
 
-					if (jsonData.IsDevicePhysicallyDamaged !== undefined && jsonData.IsDevicePhysicallyDamaged !== null && jsonData.IsDevicePhysicallyDamaged !== "null" && jsonData.IsDevicePhysicallyDamaged.length > 0)
+					/*if (jsonData.IsDevicePhysicallyDamaged !== undefined && jsonData.IsDevicePhysicallyDamaged !== null && jsonData.IsDevicePhysicallyDamaged !== "null" && jsonData.IsDevicePhysicallyDamaged.length > 0)
 					{ valueData += 'FMA_Isthedevicephysicallydamaged__c = \''+jsonData.IsDevicePhysicallyDamaged+'\','; }
 				    else{valueData += 'FMA_Isthedevicephysicallydamaged__c = \'\',';}
 
@@ -512,8 +512,8 @@ router.post('/updateCase', function(req, res) {
 					{ valueData += 'FMA_ProductName__c = \''+jsonData.ProductName+'\','; }
                                         else{valueData += 'FMA_ProductName__c = \'\',';}				
 					
-					//if (jsonData.Subject !== undefined && jsonData.Subject !== null && jsonData.Subject !== "null" && jsonData.Subject.length > 0)
-					//{ valueData += 'Subject = \''+jsonData.Subject+'\','; }
+					if (jsonData.Subject !== undefined && jsonData.Subject !== null && jsonData.Subject !== "null" && jsonData.Subject.length > 0)
+					{ valueData += 'Subject = \''+jsonData.Subject+'\','; }*/
 					
 			 
 					if (jsonData.Description !== undefined && jsonData.Description !== null && jsonData.Description !== "null" && jsonData.Description.length > 1)
