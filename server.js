@@ -521,7 +521,7 @@ router.post('/updateCase', function(req, res) {
 
 				    console.log('............update Case...1............');					
 									
-                    conn.query('UPDATE salesforce.case SET '+valueData+' where id='+caseid+'',
+                    conn.query('UPDATE salesforce.case SET +valueData+ WHERE id='+caseid+'',
                          function(err, result) {
                           done();
                             if(err){
