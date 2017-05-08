@@ -517,8 +517,8 @@ router.post('/updateCase', function(req, res) {
 					
 			 
 					if (jsonData.Description !== undefined && jsonData.Description !== null && jsonData.Description !== "null" && jsonData.Description.length > 1)
-					{ valueData += 'Description = \''+jsonData.Description+'\','; }
-				    else{valueData += 'Description = \'\',';}
+					{ valueData += 'Description = \''+jsonData.Description+'\''; }
+				    else{valueData += 'Description = \'\'';}
 
 				    console.log('............update Case...1............');					
 									
