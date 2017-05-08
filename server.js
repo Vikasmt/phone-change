@@ -50,7 +50,7 @@ router.post('/updateCase', function(req, res) {
 			        var valueData = 'FMA_DeviceName__c = \''+jsonData.DeviceName+'\','+
                                     'ContactId = \''+jsonData.userid+'\','+
 									'FMA_Product__c = \''+jsonData.ProductId+'\','+
-									'FMA_Gender__c = \''+jsonData.Gender+'\','+
+									//'FMA_Gender__c = \''+jsonData.Gender+'\','+
 									'FMA_Dosage__c = \''+jsonData.FormulationDosage+'\','+
 									'FMA_Whenthepatientgottrained__c = \''+jsonData.TrainingDate+'\','+
 									'FMA_ComplainantCategory__c = \''+jsonData.ComplainantCategory+'\','+
