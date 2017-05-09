@@ -2150,7 +2150,7 @@ router.post('/updateUserInfo', function(req, res) {
 });
 
 
-/*router.put('/changePassword', function(req, res) {
+router.put('/changePassword', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         var user_id = req.param('id');
         var oldPassword = req.param('oldPassword');
@@ -2186,9 +2186,9 @@ router.post('/updateUserInfo', function(req, res) {
             });
     });
     
-});*/
+});
 
-router.put('/changePassword', function(req, res) {
+/*router.put('/changePassword', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         var user_id = req.param('id');
         var oldPassword = req.param('oldPassword');
@@ -2233,7 +2233,7 @@ router.put('/changePassword', function(req, res) {
                 }
            });
     });
-});
+});*/
 
 function sendEmail(toemail, subject, text){
     var smtpConfig = {
