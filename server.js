@@ -2197,6 +2197,43 @@ router.put('/changePassword', function(req, res) {
    });
 });
 
+router.put('/changePassword', function(req, res) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        var user_id = req.param('id');
+        var oldPassword = req.param('oldPassword');
+        var newPassword = req.param('newPassword');
+        console.log(user_id);
+        console.log(oldPassword);
+        console.log(newPassword);
+        
+        var userManagementQueryStr = 'Update UserManagement set password=\''+newPassword+'\' where id='+user_id+' and password=\''+oldPassword+'\'';
+        console.log(userManagementQueryStr);
+        
+        conn.query('SELECT *from UserManagement where id='+user_id+'',
+            function(err,result){
+                if(err){
+                    return res.status(400).json({error: err.message});
+                }
+                else{
+                    var contactId = result.rows[0].contactid;
+                    console.log('contactId:'+contactId);
+                    
+                    conn.query(userManagementQueryStr, 
+                        function(err,result){
+                            if(err){
+                                return res.status(400).json({error: err.message});
+                            }
+                            else{
+                                return res.status(200).json({
+                                            msgid: 1,
+                                            message: 'Success.'});
+                            }
+                    });
+                }
+            });
+    });
+});
+
 
 function sendEmail(toemail, subject, text){
     var smtpConfig = {
