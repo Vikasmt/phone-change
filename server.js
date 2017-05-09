@@ -2160,9 +2160,6 @@ router.put('/changePassword', function(req, res) {
         
         var userManagementQueryStr = 'Update UserManagement set password=\''+newPassword+'\' where id='+user_id+' and password=\''+oldPassword+'\'';
         console.log(userManagementQueryStr);
-	    
-	var contactQueryStr = 'Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where id='+contactId+' and IVOPPassword__c=\''+oldPassword+'\'';
-        console.log(userManagementQueryStr);
         
         conn.query('SELECT *from UserManagement where id='+user_id+'',
             function(err,result){
@@ -2179,12 +2176,22 @@ router.put('/changePassword', function(req, res) {
                                 return res.status(400).json({error: err.message});
                             }
                             else{
-                                return res.status(200).json({
-                                            msgid: 1,
-                                            message: 'Success.'});
+                                var contactId = result.rows[0].contactid;
+				console.log('contactId:'+contactId);
+								
+				conn.query('Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where id='+contactId+' and IVOPPassword__c=\''+oldPassword+'\'', 
+				function(err,result){
+				if(err){
+					return res.status(400).json({error: err.message});
+				}
+				else{
+				     return res.status(200).json({
+				                                  msgid: 1,
+								  message: 'Success.'});
+				}
                             }
                     });
-                }
+		}
             });
     });
 });
