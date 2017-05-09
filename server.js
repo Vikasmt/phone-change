@@ -2213,23 +2213,23 @@ router.put('/changePassword', function(req, res) {
                             }
                             else{
                                 var contactId = result.rows[0].contactid;
-								console.log('contactId:'+contactId);
-								var queryStr = 'Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where id='+contactId+' and IVOPPassword__c=\''+oldPassword+'\'';
-								conn.query(queryStr, 
-									function(err,result){
-										if(err){
-											return res.status(400).json({error: err.message});
-										}
-										else{
-											return res.status(200).json({
-														msgid: 1,
-														message: 'Success.'});
-										}
-								});
+				console.log('contactId:'+contactId);
+				var queryStr = 'Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where id='+contactId+' and IVOPPassword__c=\''+oldPassword+'\'';
+				conn.query(queryStr, 
+				     function(err,result){
+					if(err){
+					    return res.status(400).json({error: err.message});
+					}
+					else{
+					    return res.status(200).json({
+							msgid: 1,
+							message: 'Success.'});
+					}
+				});
                             }
                     });
                 }
-            });
+           });
     });
 });
 
