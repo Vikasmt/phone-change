@@ -2206,15 +2206,17 @@ router.put('/changePassword', function(req, res) {
                     return res.status(400).json({error: err.message});
                 }
                 else{
+		     var contactId = result.rows[0].contactid;
+		     console.log('contactId:'+contactId);
                     conn.query(userManagementQueryStr, 
                         function(err,result){
                             if(err){
                                 return res.status(400).json({error: err.message});
                             }
                             else{
-                                var contactId = result.rows[0].contactid;
+                                var conId = result.rows[0].contactid;
 				console.log('contactId:'+contactId);
-				var queryStr = 'Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where id='+contactId+' and IVOPPassword__c=\''+oldPassword+'\'';
+				var queryStr = 'Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where id='+conId+' and IVOPPassword__c=\''+oldPassword+'\'';
 				conn.query(queryStr, 
 				     function(err,result){
 					if(err){
