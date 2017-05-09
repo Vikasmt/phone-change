@@ -422,7 +422,7 @@ router.post('/updateCase', function(req, res) {
 
 					if (jsonData.DateOfFirstUse !== undefined && jsonData.DateOfFirstUse !== null && jsonData.DateOfFirstUse !== "null" && jsonData.DateOfFirstUse.length > 7)
 					{ valueData += 'FMA_Dateoffirstuse__c = \''+jsonData.DateOfFirstUse+'\','; }
-				    else{valueData += 'FMA_Dateoffirstuse__c = \''+' '+'\',';}
+				    else{valueData += 'FMA_Dateoffirstuse__c = \''+''+'\',';}
 
 					if (jsonData.ExpiryDate !== undefined && jsonData.ExpiryDate !== null && jsonData.ExpiryDate !== "null" && jsonData.ExpiryDate.length > 7)
 					{ valueData += 'FMA_Expirydate__c = \''+jsonData.ExpiryDate+'\','; }
