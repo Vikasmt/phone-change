@@ -1968,7 +1968,7 @@ router.post('/CreateUser', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
     
-    var formattedData='INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\')  RETURNING id';
+    var formattedData='INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, IVOPPassword__c) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\')  RETURNING id';
     console.log('formatted Salesforce.Contact Query:'+formattedData);
     
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
@@ -1982,7 +1982,7 @@ router.post('/CreateUser', function(req, res) {
                     res.status(400).json({error: 'Email already exist.'});
                 }
                  else{
-                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\')  RETURNING id',
+                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, IVOPPassword__c) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\')  RETURNING id',
                          function(err, result) {
                             if(err){
                                     return res.json({
@@ -2149,7 +2149,8 @@ router.post('/updateUserInfo', function(req, res) {
     });
 });
 
-router.put('/changePassword', function(req, res) {
+
+/*router.put('/changePassword', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         var user_id = req.param('id');
         var oldPassword = req.param('oldPassword');
@@ -2184,6 +2185,51 @@ router.put('/changePassword', function(req, res) {
                 }
             });
     });
+});*/
+
+router.put('/changePassword', function(req, res) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        var user_id = req.param('id');
+        var oldPassword = req.param('oldPassword');
+        var newPassword = req.param('newPassword');
+        console.log(user_id);
+        console.log(oldPassword);
+        console.log(newPassword);
+        
+        var userManagementQueryStr = 'Update UserManagement set password=\''+newPassword+'\' where id='+user_id+' and password=\''+oldPassword+'\'';
+        console.log(userManagementQueryStr);
+        
+        conn.query('SELECT *from UserManagement where id='+user_id+'',
+            function(err,result){
+                if(err){
+                    return res.status(400).json({error: err.message});
+                }
+                else{
+                    conn.query(userManagementQueryStr, 
+                        function(err,result){
+                            if(err){
+                                return res.status(400).json({error: err.message});
+                            }
+                            else{
+                                var contactId = result.rows[0].contactid;
+                                console.log('contactId:'+contactId);
+								
+								conn.query('Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where id='+contactId+' and IVOPPassword__c=\''+oldPassword+'\'', 
+									function(err,result){
+										if(err){
+											return res.status(400).json({error: err.message});
+										}
+										else{
+											return res.status(200).json({
+														msgid: 1,
+														message: 'Success.'});
+									    }
+                            }
+                    });
+				}
+            });
+      });
+   });
 });
 
 function sendEmail(toemail, subject, text){
