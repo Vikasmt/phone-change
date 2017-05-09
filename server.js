@@ -511,12 +511,12 @@ router.post('/updateCase', function(req, res) {
 					 else{valueData += 'Subject = \'\',';}
 			 
 					if (jsonData.Description !== undefined && jsonData.Description !== null && jsonData.Description !== "null" && jsonData.Description.length > 1)
-					{ valueData += 'Description = \''+jsonData.Description+'\''; }
-				        else{valueData += 'Description = \'\'';}
+					{ valueData += 'Description = \''+jsonData.Description+'\','; }
+				        else{valueData += 'Description = \'\',';}
 			                
 			                if (jsonData.patientId !== undefined && jsonData.patientId !== null && jsonData.patientId !== "null" && jsonData.patientId.length > 0)
-					{ valueData += 'FMA_patientId__c = \''+jsonData.patientId+'\''; }
-				        else{valueData += 'FMA_patientId__c = \'\'';}
+					{ valueData += 'FMA_PatientId__c = \''+jsonData.patientId+'\''; }
+				        else{valueData += 'FMA_PatientId__c = \'\'';}
 
 				    console.log('............update Case...1............');					
 									
