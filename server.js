@@ -1982,7 +1982,7 @@ router.post('/CreateUser', function(req, res) {
                     res.status(400).json({error: 'Email already exist.'});
                 }
                  else{
-                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\')  RETURNING id',
+                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, IVOPPassword__c) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\')  RETURNING id',
                          function(err, result) {
                             if(err){
                                     return res.json({
@@ -2159,6 +2159,9 @@ router.put('/changePassword', function(req, res) {
         console.log(newPassword);
         
         var userManagementQueryStr = 'Update UserManagement set password=\''+newPassword+'\' where id='+user_id+' and password=\''+oldPassword+'\'';
+        console.log(userManagementQueryStr);
+	    
+	var contactQueryStr = 'Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where id='+contactId+' and IVOPPassword__c=\''+oldPassword+'\'';
         console.log(userManagementQueryStr);
         
         conn.query('SELECT *from UserManagement where id='+user_id+'',
