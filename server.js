@@ -2191,7 +2191,7 @@ router.post('/updateUserInfo', function(req, res) {
 router.put('/changePassword', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         var user_id = req.param('id');
-	var conId = req.param('conid');
+	var conId = req.param('contactid');
         var oldPassword = req.param('oldPassword');
         var newPassword = req.param('newPassword');
         console.log(user_id);
