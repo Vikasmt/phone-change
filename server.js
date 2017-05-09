@@ -414,15 +414,15 @@ router.post('/updateCase', function(req, res) {
 					
 					if (jsonData.AffiliateIfStillNeeded !== undefined && jsonData.AffiliateIfStillNeeded !== null && jsonData.AffiliateIfStillNeeded !== "null" && jsonData.AffiliateIfStillNeeded.length > 1)
 					{ valueData += 'FMA_AffiliateIfStillNeeded__c = \''+jsonData.AffiliateIfStillNeeded+'\','; }
-				    else{valueData += 'FMA_AffiliateIfStillNeeded__c = \'\',';}
+				    else{valueData += 'FMA_AffiliateIfStillNeeded__c = \''+'False'+'\',';}
 
 					if (jsonData.BatchSerialNbr !== undefined && jsonData.BatchSerialNbr !== null && jsonData.BatchSerialNbr !== "null" && jsonData.BatchSerialNbr.length > 1)
 					{ valueData += 'FMA_BatchSerialnumber__c = \''+jsonData.BatchSerialNbr+'\','; }
-				    //else{valueData += 'FMA_BatchSerialnumber__c = \'\',';}
+				    else{valueData += 'FMA_BatchSerialnumber__c = \'\',';}
 
 					if (jsonData.DateOfFirstUse !== undefined && jsonData.DateOfFirstUse !== null && jsonData.DateOfFirstUse !== "null" && jsonData.DateOfFirstUse.length > 7)
 					{ valueData += 'FMA_Dateoffirstuse__c = \''+jsonData.DateOfFirstUse+'\','; }
-				    else{valueData += 'FMA_Dateoffirstuse__c = \'\',';}
+				    else{valueData += 'FMA_Dateoffirstuse__c = \''+' '+'\',';}
 
 					if (jsonData.ExpiryDate !== undefined && jsonData.ExpiryDate !== null && jsonData.ExpiryDate !== "null" && jsonData.ExpiryDate.length > 7)
 					{ valueData += 'FMA_Expirydate__c = \''+jsonData.ExpiryDate+'\','; }
@@ -450,7 +450,7 @@ router.post('/updateCase', function(req, res) {
 						
 					if (jsonData.Hasthepatientbeentrained !== undefined && jsonData.Hasthepatientbeentrained !== null && jsonData.Hasthepatientbeentrained !== "null" && jsonData.Hasthepatientbeentrained.length > 0)
 					{ valueData += 'FMA_Hasthepatientbeentrained__c = \''+jsonData.Hasthepatientbeentrained+'\','; }
-				    else{valueData += 'FMA_Hasthepatientbeentrained__c = \'\',';}
+				    else{valueData += 'FMA_Hasthepatientbeentrained__c = \''+'False'+'\',';}
 						
 					if (jsonData.Whomadethetraining !== undefined && jsonData.Whomadethetraining !== null && jsonData.Whomadethetraining !== "null" && jsonData.Whomadethetraining.length > 0)
 					{ valueData += 'FMA_Whomadethetraining__c = \''+jsonData.Whomadethetraining+'\','; }
@@ -470,15 +470,15 @@ router.post('/updateCase', function(req, res) {
 
 					if (jsonData.IsComplaintSampleAvailable !== undefined && jsonData.IsComplaintSampleAvailable !== null && jsonData.IsComplaintSampleAvailable !== "null" && jsonData.IsComplaintSampleAvailable.length > 0)
 					{ valueData += 'FMA_Isthecomplaintsampleavailable__c = \''+jsonData.IsComplaintSampleAvailable+'\','; }
-				    else{valueData += 'FMA_Isthecomplaintsampleavailable__c = \'\',';}
+				    else{valueData += 'FMA_Isthecomplaintsampleavailable__c = \''+'False'+'\',';}
 
 					if (jsonData.HasResponseBeenRequested !== undefined && jsonData.HasResponseBeenRequested !== null && jsonData.HasResponseBeenRequested !== "null" && jsonData.HasResponseBeenRequested.length > 0)
 					{ valueData += 'FMA_Hasresponsebeenrequested__c = \''+jsonData.HasResponseBeenRequested+'\','; }
-				    else{valueData += 'FMA_Hasresponsebeenrequested__c = \'\',';}
+				    else{valueData += 'FMA_Hasresponsebeenrequested__c = \''+'False'+'\',';}
 
 					if (jsonData.IsPatientFamiliarWithDeviceUsage !== undefined && jsonData.IsPatientFamiliarWithDeviceUsage !== null && jsonData.IsPatientFamiliarWithDeviceUsage !== "null" && jsonData.IsPatientFamiliarWithDeviceUsage.length > 0)
 					{ valueData += 'FMA_Ispatientfamiliarwithdeviceusage__c = \''+jsonData.IsPatientFamiliarWithDeviceUsage+'\','; }
-				    else{valueData += 'FMA_Ispatientfamiliarwithdeviceusage__c = \'\',';}
+				    else{valueData += 'FMA_Ispatientfamiliarwithdeviceusage__c = \''+'False'+'\',';}
 
 					if (jsonData.SinceWhenPatientUseThisDevice !== undefined && jsonData.SinceWhenPatientUseThisDevice !== null && jsonData.SinceWhenPatientUseThisDevice !== "null" && jsonData.SinceWhenPatientUseThisDevice.length > 1)
 					{ valueData += 'FMA_Sincewhendoespatientusethiskind__c = \''+jsonData.SinceWhenPatientUseThisDevice+'\','; }
@@ -492,9 +492,9 @@ router.post('/updateCase', function(req, res) {
 					{ valueData += 'FMA_Thedamageisduetoanaccidentalfall__c = \''+jsonData.DamageDuetoAccidentalFall+'\','; }
 				    else{valueData += 'FMA_Thedamageisduetoanaccidentalfall__c = \''+'False'+'\',';}
 
-					/*if (jsonData.IsDefectedDuetomisusebypatient !== undefined && jsonData.IsDefectedDuetomisusebypatient !== null && jsonData.IsDefectedDuetomisusebypatient !== "null" && jsonData.IsDefectedDuetomisusebypatient.length > 0)
+					if (jsonData.IsDefectedDuetomisusebypatient !== undefined && jsonData.IsDefectedDuetomisusebypatient !== null && jsonData.IsDefectedDuetomisusebypatient !== "null" && jsonData.IsDefectedDuetomisusebypatient.length > 0)
 					{ valueData += 'FMA_Isthedefectduetoamisusebypatient__c = \''+jsonData.IsDefectedDuetomisusebypatient+'\',' }
-				    else{valueData += 'FMA_Isthedefectduetoamisusebypatient__c = \'\',';}
+				    else{valueData += 'FMA_Isthedefectduetoamisusebypatient__c = \''+'False'+'\',';}
 
 					if (jsonData.WhatStuckinside !== undefined && jsonData.WhatStuckinside !== null && jsonData.WhatStuckinside !== "null" && jsonData.WhatStuckinside.length > 0)
 					{ valueData += 'FMA_whatstuckinside__c = \''+jsonData.WhatStuckinside+'\','; }
@@ -502,23 +502,19 @@ router.post('/updateCase', function(req, res) {
 
 					if (jsonData.Adverseeventassociatedtodefect !== undefined && jsonData.Adverseeventassociatedtodefect !== null && jsonData.Adverseeventassociatedtodefect !== "null" && jsonData.Adverseeventassociatedtodefect.length > 0)
 					{ valueData += 'FMA_Adverseeventassociatedtodefect__c = \''+jsonData.Adverseeventassociatedtodefect+'\','; }
-				        else{valueData += 'FMA_Adverseeventassociatedtodefect__c = \'\',';}
+				        else{valueData += 'FMA_Adverseeventassociatedtodefect__c = \''+'False'+'\',';}
 
 					if (jsonData.AdverseEventAssociatedWitchOne !== undefined && jsonData.AdverseEventAssociatedWitchOne !== null && jsonData.AdverseEventAssociatedWitchOne !== "null" && jsonData.AdverseEventAssociatedWitchOne.length > 0)
 					{ valueData += 'FMA_Adverseeventassociatedwhichone__c = \''+jsonData.DeviceName+'\','; }
-				        else{valueData += 'FMA_Adverseeventassociatedwhichone__c = \'\',';}
-					
-					if (jsonData.ProductName !== undefined && jsonData.ProductName !== null && jsonData.ProductName !== "null" && jsonData.ProductName.length > 0)
-					{ valueData += 'FMA_ProductName__c = \''+jsonData.ProductName+'\','; }
-                                        else{valueData += 'FMA_ProductName__c = \'\',';}				
+				        else{valueData += 'FMA_Adverseeventassociatedwhichone__c = \'\',';}				
 					
 					if (jsonData.Subject !== undefined && jsonData.Subject !== null && jsonData.Subject !== "null" && jsonData.Subject.length > 0)
-					{ valueData += 'Subject = \''+jsonData.Subject+'\','; }*/
-					
+					{ valueData += 'Subject = \''+jsonData.Subject+'\','; }
+					 else{valueData += 'Subject = \'\',';}
 			 
 					if (jsonData.Description !== undefined && jsonData.Description !== null && jsonData.Description !== "null" && jsonData.Description.length > 1)
 					{ valueData += 'Description = \''+jsonData.Description+'\''; }
-				    else{valueData += 'Description = \'\'';}
+				        else{valueData += 'Description = \'\'';}
 
 				    console.log('............update Case...1............');					
 									
