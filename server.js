@@ -511,7 +511,10 @@ router.post('/updateCase', function(req, res) {
 					if (jsonData.Description !== undefined && jsonData.Description !== null && jsonData.Description !== "null" && jsonData.Description.length > 1)
 					{ valueData += 'Description = \''+jsonData.Description+'\','; }
 				        else{valueData += 'Description = \'\',';}
-			                
+			 
+			                if (jsonData.recordStatus !== undefined && jsonData.recordStatus !== null && jsonData.recordStatus !== "null" && jsonData.recordStatus.length > 1)
+					{ valueData += 'FMA_Recordstatus__c = \''+jsonData.recordStatus+'\','; }
+				       
 			                if (jsonData.patientId !== undefined && jsonData.patientId !== null && jsonData.patientId !== "null" && jsonData.patientId.length > 0)
 					{ valueData += 'FMA_PatientId__c = \''+jsonData.patientId+'\''; }
 				        else{valueData += 'FMA_PatientId__c = \'\'';}
@@ -1842,7 +1845,10 @@ router.post('/insertCase', function(req, res) {
       		
       	if (jsonData.Description !== undefined && jsonData.Description !== null && jsonData.Description !== "null" && jsonData.Description.length > 1)
         { insertQueryData += 'Description,'; valuesData += '\'' + jsonData.Description + '\'' + ','; }
-		
+	
+	if (jsonData.recordStatus !== undefined && jsonData.recordStatus !== null && jsonData.recordStatus !== "null" && jsonData.recordStatus.length > 1)
+        { insertQueryData += 'FMA_Recordstatus__c,'; valuesData += '\'' + jsonData.recordStatus + '\'' + ','; }
+	    
 	        insertQueryData += 'Priority,'; valuesData += '\'' + 'Medium' + '\'' + ',';
 		
 	        insertQueryData += 'Status'; valuesData += '\'' + 'New' + '\'';	
