@@ -2191,7 +2191,7 @@ router.post('/updateUserInfo', function(req, res) {
 router.put('/changePassword', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         var user_id = req.param('id');
-	var conId = req.param('contactid');
+	var conId = req.param('userid');
         var oldPassword = req.param('oldPassword');
         var newPassword = req.param('newPassword');
         console.log(user_id);
@@ -2215,7 +2215,7 @@ router.put('/changePassword', function(req, res) {
                                 return res.status(400).json({error: err.message});
                             }
                             else{
-				var queryStr = 'Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where id='+conId+' and IVOPPassword__c=\''+oldPassword+'\'';
+				var queryStr = 'Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where sfid='+conId+' and IVOPPassword__c=\''+oldPassword+'\'';
 				conn.query(queryStr, 
 				     function(err,result){
 					if(err){
