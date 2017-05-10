@@ -1968,7 +1968,7 @@ router.post('/CreateUser', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
     
-    var formattedData='INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, IVOPPassword__c) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\')  RETURNING id';
+    var formattedData='INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, IVOPPassword__c, IVOPMobileappuser__c) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+'True'+'\')  RETURNING id';
     console.log('formatted Salesforce.Contact Query:'+formattedData);
     
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
@@ -1982,7 +1982,7 @@ router.post('/CreateUser', function(req, res) {
                     res.status(400).json({error: 'Email already exist.'});
                 }
                  else{
-                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, IVOPPassword__c) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\')  RETURNING id',
+                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, IVOPPassword__c, IVOPMobileappuser__c) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+'True'+'\')  RETURNING id',
                          function(err, result) {
                             if(err){
                                     return res.json({
