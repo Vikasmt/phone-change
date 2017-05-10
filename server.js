@@ -1385,6 +1385,8 @@ router.post('/insertNeedleIssue', function(req, res) {
 		});
     });
 });
+});
+	
 
 router.post('/insertDataandtransfer', function(req, res) {
     console.log('............insertDataandtransfer...............');
