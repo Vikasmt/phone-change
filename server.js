@@ -1483,18 +1483,86 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
 			                done();
                             if(err){
                                     return res.json({
-                                            msgid: 2,
+                                            msgid: 4,
                                             message: err.message});
                                    }
                                             else{
-                                                return res.json({
-                                                        msgid: 1,
-                                                        message: 'Success.'});
-                                   }
+												 var jsonData = req.body;
+												 var treeid = jsonData.id;
+												 conn.query('SELECT *from salesforce.IVOP_DecisionTree__c WHERE id='+treeid+'',
+														function(err,result){
+														 if (err != null || result.rowCount == 0) {
+															  return res.json({
+																		caseid: -1,
+																		msgid: 3,
+																		message: 'DecisionTree id not found.'});
+														 }else{									
+															var valueData = '';
+																			
+															if (jsonData.DeviceName !== undefined && jsonData.DeviceName !== null && jsonData.DeviceName !== "null" && jsonData.DeviceName.length > 0)
+															{ valueData += 'FMA_DeviceName__c = \''+jsonData.DeviceName+'\','; }
+															
+															if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0)
+																{ valueData += 'DT_DecisionTreeIssueType__c = \''+jsonData.DecisionTreeIssueType+'\',';}
+															
+															if (jsonData.Devicefunctioningoptions !== undefined && jsonData.Devicefunctioningoptions !== null && jsonData.Devicefunctioningoptions !== "null" && jsonData.Devicefunctioningoptions.length > 0)
+																{ valueData += 'DF_Devicefunctioningoptions__c = \''+jsonData.Devicefunctioningoptions+'\',';}
+																
+															if (jsonData.CanTheDeviceBeTurnedOn !== undefined && jsonData.CanTheDeviceBeTurnedOn !== null && jsonData.CanTheDeviceBeTurnedOn !== "null" && jsonData.CanTheDeviceBeTurnedOn.length > 0)
+																{ valueData += 'DF_CanTheDeviceBeTurnedOn__c = \''+jsonData.CanTheDeviceBeTurnedOn+'\',';}
+																
+															if (jsonData.SomeThingDisplayedPreventingAcess !== undefined && jsonData.SomeThingDisplayedPreventingAcess !== null && jsonData.SomeThingDisplayedPreventingAcess !== "null" && jsonData.SomeThingDisplayedPreventingAcess.length > 0)
+																{ valueData += 'DF_somethingdisplayedpreventingacess__c = \''+jsonData.SomeThingDisplayedPreventingAcess+'\',';}
+																
+															if (jsonData.LinkedToaDeviceOption !== undefined && jsonData.LinkedToaDeviceOption !== null && jsonData.LinkedToaDeviceOption !== "null" && jsonData.LinkedToaDeviceOption.length > 0)
+																{ valueData += 'DF_Linkedtoadeviceoption__c = \''+jsonData.LinkedToaDeviceOption+'\',';}
+															
+															if (jsonData.CommentIfNo !== undefined && jsonData.CommentIfNo !== null && jsonData.CommentIfNo !== "null" && jsonData.CommentIfNo.length > 0)
+																{ valueData += 'DF_CommentDeviceFunction__c = \''+jsonData.CommentIfNo+'\',';}
+																	
+															if (jsonData.ListOfOptions !== undefined && jsonData.ListOfOptions !== null && jsonData.ListOfOptions !== "null" && jsonData.ListOfOptions.length > 0)
+																{ valueData += 'DF_ListOfOptions__c = \''+jsonData.ListOfOptions+'\',';}
+																
+															if (jsonData.ChangeIndevicesBehaviour !== undefined && jsonData.ChangeIndevicesBehaviour !== null && jsonData.ChangeIndevicesBehaviour !== "null" && jsonData.ChangeIndevicesBehaviour.length > 0)
+																{ valueData += 'DF_Changeindevicesbehaviour__c = \''+jsonData.ChangeIndevicesBehaviour+'\',';}
+																
+															if (jsonData.IsDeviceFunctioningSlowerThanUsual !== undefined && jsonData.IsDeviceFunctioningSlowerThanUsual !== null && jsonData.IsDeviceFunctioningSlowerThanUsual !== "null" && jsonData.IsDeviceFunctioningSlowerThanUsual.length > 0)
+																{ valueData += 'DF_Isdevicefunctioningslowerthanusual__c = \''+jsonData.IsDeviceFunctioningSlowerThanUsual+'\',';}
+																
+															if (jsonData.WhenItHasObservedForTheFirstTime !== undefined && jsonData.WhenItHasObservedForTheFirstTime !== null && jsonData.WhenItHasObservedForTheFirstTime !== "null" && jsonData.WhenItHasObservedForTheFirstTime.length > 0)
+																{ valueData += 'DF_Whenithasobservedforthefirsttime__c = \''+jsonData.WhenItHasObservedForTheFirstTime+'\',';}
+																
+															if (jsonData.IsTheDeviceLouderThanUsually !== undefined && jsonData.IsTheDeviceLouderThanUsually !== null && jsonData.IsTheDeviceLouderThanUsually !== "null" && jsonData.IsTheDeviceLouderThanUsually.length > 0)
+																{ valueData += 'DF_Isthedevicelouderthanusually__c = \''+jsonData.IsTheDeviceLouderThanUsually+'\',';}
+																
+															if (jsonData.WhenItHasBeenObservedForTheFirstTime !== undefined && jsonData.WhenItHasBeenObservedForTheFirstTime !== null && jsonData.WhenItHasBeenObservedForTheFirstTime !== "null" && jsonData.WhenItHasBeenObservedForTheFirstTime.length > 0)
+																{  valueData += 'DF_Whenithasbeenobservedforthefirsttime__c = \''+jsonData.WhenItHasBeenObservedForTheFirstTime+'\',';}
+																
+															if (jsonData.CommentDeviceFunctioning !== undefined && jsonData.CommentDeviceFunctioning !== null && jsonData.CommentDeviceFunctioning !== "null" && jsonData.CommentDeviceFunctioning.length > 0)
+																{ valueData += 'DF_CommentDeviceFunctioning__c = \''+jsonData.CommentDeviceFunctioning+'\''; }
+
+															console.log('............update Case...1............');					
+																			
+															conn.query('UPDATE salesforce.IVOP_DecisionTree__c SET '+valueData+' WHERE id='+treeid+'',
+																 function(err, result) {
+																  done();
+																	if(err){
+																			return res.json({
+																				 msgid: 2,
+																					message: err.message});
+																		}
+																		else{
+																			return res.json({
+																				 msgid: 1,
+																				 message: 'Success.'});
+																		}
+																 });
+															}
+													 });
+								}
                 });
     });
 });
-
 
 
 
