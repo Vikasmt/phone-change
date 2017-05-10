@@ -1539,7 +1539,10 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
 																{  valueData += 'DF_Whenithasbeenobservedforthefirsttime__c = \''+jsonData.WhenItHasBeenObservedForTheFirstTime+'\',';}
 																
 															if (jsonData.CommentDeviceFunctioning !== undefined && jsonData.CommentDeviceFunctioning !== null && jsonData.CommentDeviceFunctioning !== "null" && jsonData.CommentDeviceFunctioning.length > 0)
-																{ valueData += 'DF_CommentDeviceFunctioning__c = \''+jsonData.CommentDeviceFunctioning+'\''; }
+																{ valueData += 'DF_CommentDeviceFunctioning__c = \''+jsonData.CommentDeviceFunctioning+'\','; }
+															 
+															if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
+                                                                                                                                { valueData += 'HerokuCaseId__c = \''+jsonData.caseid+'\'';}
 
 															console.log('............update Case...1............');					
 																			
