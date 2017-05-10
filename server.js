@@ -383,22 +383,22 @@ router.post('/updateCase', function(req, res) {
 									
 				    if (jsonData.DeviceName !== undefined && jsonData.DeviceName !== null && jsonData.DeviceName !== "null" && jsonData.DeviceName.length > 0)
 					{ valueData += 'FMA_DeviceName__c = \''+jsonData.DeviceName+'\','; }
-					else 
-					{ return res.json({caseid: -1,msgid: 2,message: 'Please select device name.'});}
+					//else 
+					//{ return res.json({caseid: -1,msgid: 2,message: 'Please select device name.'});}
 					
 					if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
 					{ valueData += 'ContactId = \''+jsonData.userid+'\','; }
-					else 
-					{ return res.json({caseid: -1,msgid: 2,message: 'Userid should not be empty.'});}
+					//else 
+					//{ return res.json({caseid: -1,msgid: 2,message: 'Userid should not be empty.'});}
 					
 					if (jsonData.ProductId !== undefined && jsonData.ProductId !== null && jsonData.ProductId !== "null" && jsonData.ProductId.toString().length > 0)
 					{ valueData += 'FMA_Product__c = \''+jsonData.ProductId+'\','; }
-					else 
-					{ return res.json({caseid: -1,msgid: 2,message: 'ProductId should not be empty.'});}
+					//else 
+					//{ return res.json({caseid: -1,msgid: 2,message: 'ProductId should not be empty.'});}
 					
 					if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
 					{ valueData += 'FMA_Gender__c = \''+jsonData.Gender+'\','; }
-					else { return res.json({caseid: -1,msgid: 2,message: 'Please select gender.'});}
+					//else { return res.json({caseid: -1,msgid: 2,message: 'Please select gender.'});}
 				
 					if (jsonData.FormulationDosage !== undefined && jsonData.FormulationDosage !== null && jsonData.FormulationDosage !== "null" && jsonData.FormulationDosage.length > 1)
 					{ valueData += 'FMA_Dosage__c = \''+jsonData.FormulationDosage+'\','; }
