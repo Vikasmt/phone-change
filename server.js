@@ -366,10 +366,11 @@ router.use(function(req, res, next) {
 });
 
 router.post('/updateCase', function(req, res) {
-    console.log(req.body);
+   
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
          if (err) console.log(err);
          var jsonData = req.body;
+	  console.log('....updateCase...'+jsonData);
          var caseid = jsonData.id;
          conn.query('SELECT *from salesforce.Case WHERE id='+caseid+'',
                 function(err,result){
@@ -383,18 +384,18 @@ router.post('/updateCase', function(req, res) {
 									
 				    if (jsonData.DeviceName !== undefined && jsonData.DeviceName !== null && jsonData.DeviceName !== "null" && jsonData.DeviceName.length > 0)
 					{ valueData += 'FMA_DeviceName__c = \''+jsonData.DeviceName+'\','; }
-					//else 
-					//{ return res.json({caseid: -1,msgid: 2,message: 'Please select device name.'});}
+					else 
+					{ return res.json({caseid: -1,msgid: 2,message: 'Please select device name.'});}
 					
 					if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
 					{ valueData += 'ContactId = \''+jsonData.userid+'\','; }
-					//else 
-					//{ return res.json({caseid: -1,msgid: 2,message: 'Userid should not be empty.'});}
+					else 
+					{ return res.json({caseid: -1,msgid: 2,message: 'Userid should not be empty.'});}
 					
 					if (jsonData.ProductId !== undefined && jsonData.ProductId !== null && jsonData.ProductId !== "null" && jsonData.ProductId.toString().length > 0)
 					{ valueData += 'FMA_Product__c = \''+jsonData.ProductId+'\','; }
-					//else 
-					//{ return res.json({caseid: -1,msgid: 2,message: 'ProductId should not be empty.'});}
+					else 
+					{ return res.json({caseid: -1,msgid: 2,message: 'ProductId should not be empty.'});}
 					
 					if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
 					{ valueData += 'FMA_Gender__c = \''+jsonData.Gender+'\','; }
@@ -402,22 +403,22 @@ router.post('/updateCase', function(req, res) {
 				
 					if (jsonData.FormulationDosage !== undefined && jsonData.FormulationDosage !== null && jsonData.FormulationDosage !== "null" && jsonData.FormulationDosage.length > 1)
 					{ valueData += 'FMA_Dosage__c = \''+jsonData.FormulationDosage+'\','; }
-				    else{valueData += 'FMA_Dosage__c = \'\',';}
+				        else{valueData += 'FMA_Dosage__c = \'\',';}
 				
 					if (jsonData.TrainingDate !== undefined && jsonData.TrainingDate !== null && jsonData.TrainingDate !== "null" && jsonData.TrainingDate.length > 1)
 					{ valueData += 'FMA_Whenthepatientgottrained__c = \''+jsonData.TrainingDate+'\','; }
 					
 					if (jsonData.ComplainantCategory !== undefined && jsonData.ComplainantCategory !== null && jsonData.ComplainantCategory !== "null" && jsonData.ComplainantCategory.length > 1)
 					{ valueData += 'FMA_ComplainantCategory__c = \''+jsonData.ComplainantCategory+'\','; }
-				    else{valueData += 'FMA_ComplainantCategory__c = \'\',';}
+				        else{valueData += 'FMA_ComplainantCategory__c = \'\',';}
 					
 					if (jsonData.AffiliateIfStillNeeded !== undefined && jsonData.AffiliateIfStillNeeded !== null && jsonData.AffiliateIfStillNeeded !== "null" && jsonData.AffiliateIfStillNeeded.length > 1)
 					{ valueData += 'FMA_AffiliateIfStillNeeded__c = \''+jsonData.AffiliateIfStillNeeded+'\','; }
-				    else{valueData += 'FMA_AffiliateIfStillNeeded__c = \''+'False'+'\',';}
+				        else{valueData += 'FMA_AffiliateIfStillNeeded__c = \''+'False'+'\',';}
 
 					if (jsonData.BatchSerialNbr !== undefined && jsonData.BatchSerialNbr !== null && jsonData.BatchSerialNbr !== "null" && jsonData.BatchSerialNbr.length > 1)
 					{ valueData += 'FMA_BatchSerialnumber__c = \''+jsonData.BatchSerialNbr+'\','; }
-				    else{valueData += 'FMA_BatchSerialnumber__c = \'\',';}
+				        else{valueData += 'FMA_BatchSerialnumber__c = \'\',';}
 
 					if (jsonData.DateOfFirstUse !== undefined && jsonData.DateOfFirstUse !== null && jsonData.DateOfFirstUse !== "null" && jsonData.DateOfFirstUse.length > 7)
 					{ valueData += 'FMA_Dateoffirstuse__c = \''+jsonData.DateOfFirstUse+'\','; }
@@ -427,11 +428,11 @@ router.post('/updateCase', function(req, res) {
 				    
 					if (jsonData.InitialPatientName !== undefined && jsonData.InitialPatientName !== null && jsonData.InitialPatientName !== "null" && jsonData.InitialPatientName.length > 1)
 					{ valueData += 'FMA_Initialpatientname__c = \''+jsonData.InitialPatientName+'\','; }
-				    else{valueData += 'FMA_Initialpatientname__c = \'\',';}
+				        else{valueData += 'FMA_Initialpatientname__c = \'\',';}
 
 					if (jsonData.InitialPatientSurName !== undefined && jsonData.InitialPatientSurName !== null && jsonData.InitialPatientSurName !== "null" && jsonData.InitialPatientSurName.length > 0)
 					{ valueData += 'FMA_Initialpatientsurname__c = \''+jsonData.InitialPatientSurName+'\','; }
-				    else{valueData += 'FMA_Initialpatientsurname__c = \'\',';}
+				        else{valueData += 'FMA_Initialpatientsurname__c = \'\',';}
 
 					if (jsonData.Age !== undefined && jsonData.Age !== null && jsonData.Age !== "null" && jsonData.Age.length > 0)
 					{ valueData += 'FMA_Age__c = \''+jsonData.Age+'\','; }
@@ -519,7 +520,7 @@ router.post('/updateCase', function(req, res) {
 					{ valueData += 'FMA_PatientId__c = \''+jsonData.patientId+'\''; }
 				        else{valueData += 'FMA_PatientId__c = \'\'';}
 
-				    console.log('............update Case...1............');					
+				    console.log('............update Case...1......valueData......'+valueData);					
 									
                     conn.query('UPDATE salesforce.case SET '+valueData+' WHERE id='+caseid+'',
                          function(err, result) {
