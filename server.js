@@ -1168,12 +1168,13 @@ router.post('/insertNeedleIssue', function(req, res) {
 		console.log('.....req..body......'+jsonData);
 		conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.caseid+'',
         function(err,result){
-		  if (err != null || result.rowCount == 0){
+		  //if (err != null || result.rowCount == 0){
 						  return res.json({
 									caseid: -1,
 									msgid: 2,
 									message: 'case id not found.'});
-		  }else{	
+		  //}
+			else{	
 			var DecisionTreeId = jsonData.DecisionTreeId;
 			
 			var updateValueData = '';
