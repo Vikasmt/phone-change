@@ -1839,6 +1839,7 @@ router.post('/insertDiviceGeneralFunctioning1', function(req, res) {
                                             else{
                                                 return res.json({
                                                         msgid: 1,
+							DecisionTreeId: result.rows[0].id,
                                                         message: 'Success.'});
                                    }
                 });
@@ -2010,6 +2011,7 @@ router.post('/insertDataandtransfer1', function(req, res) {
                                             else{
                                                 return res.json({
                                                         msgid: 1,
+							DecisionTreeId: result.rows[0].id,
                                                         message: 'Success.'});
                                    }
                 });
@@ -2707,6 +2709,7 @@ router.post('/insertCatridgeIssue1', function(req, res) {
                                             else{
                                                 return res.json({
                                                         msgid: 1,
+							DecisionTreeId: result.rows[0].id,
                                                         message: 'Success.'});
                                    }
                 });
