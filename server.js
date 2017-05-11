@@ -582,9 +582,10 @@ router.post('/insertNeedleIssue1', function(req, res) {
                                             message: err.message});
                                    }
                                             else{
+						console.log('----------------result-------------'+result);
                                                 return res.json({
                                                         //caseid:result.rows[0].HerokuCaseId__c,
-                                                        DecisionTreeId: result.rows[0].id,
+                                                        //DecisionTreeId: result.rows[0].id,
                                                         msgid: 1,
                                                         message: 'Success.'});
                                    }
