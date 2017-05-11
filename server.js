@@ -1765,7 +1765,7 @@ router.post('/insertDiviceGeneralFunctioning1', function(req, res) {
 				
 			if (jsonData.SomeThingDisplayedPreventingAcess !== undefined && jsonData.SomeThingDisplayedPreventingAcess !== null && jsonData.SomeThingDisplayedPreventingAcess !== "null" && jsonData.SomeThingDisplayedPreventingAcess.length > 0){
 			      insertQueryData += 'DF_somethingdisplayedpreventingacess__c,'; valuesData += '\'' + jsonData.SomeThingDisplayedPreventingAcess + '\'' + ','; 
-				  updateValueData += 'DF_CanTheDeviceBeTurnedOn__c = \''+jsonData.CanTheDeviceBeTurnedOn+'\',';
+				  updateValueData += 'DF_somethingdisplayedpreventingacess__c = \''+jsonData.SomeThingDisplayedPreventingAcess+'\',';
 				  }
 				
 			if (jsonData.LinkedToaDeviceOption !== undefined && jsonData.LinkedToaDeviceOption !== null && jsonData.LinkedToaDeviceOption !== "null" && jsonData.LinkedToaDeviceOption.length > 0)
