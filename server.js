@@ -1160,124 +1160,212 @@ var caseid = req.param('id');
 
 
 router.post('/insertNeedleIssue', function(req, res) {
-    console.log('............insertDecisiontree...............');
-    var contentType = req.headers['content-type'];
-    var mime = contentType.split(';')[0];
-    
-    console.log('contenttype:'+mime);
-    
-    var data=req.body.toString();
-    console.log('Body:'+data);
-    
-    var splitteddata=data.replace("{","").replace("}","").split(',');
-    
-    var caseid = splitteddata[0];
-    var RecordTypeId = '012e00000009MkPAAU';
-	
+    console.log('............insertDecisiontree...............');	
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);       
        
         var jsonData = req.body;
-        console.log('.....req..body......'+jsonData);
-        var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
-        var valuesData=' VALUES ('; 
-	    
-    if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0)        
-        { insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ','; 	}	  
+		console.log('.....req..body......'+jsonData);
+		conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.caseid+'',
+        function(err,result){
+		  if (err != null || result.rowCount == 0){
+						  return res.json({
+									caseid: -1,
+									msgid: 2,
+									message: 'case id not found.'});
+		  }else{	
+			var DecisionTreeId = jsonData.DecisionTreeId;
+			
+			var updateValueData = '';
+			var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
+			var valuesData=' VALUES ('; 
+				
+			if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0){
+                   insertQueryData += 'DT_DecisionTreeIssueType__c,'; valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ',';
+				   updateValueData += 'DT_DecisionTreeIssueType__c = \''+jsonData.DecisionTreeIssueType+'\',';
+				}
+            else { updateValueData += 'DT_DecisionTreeIssueType__c = = \'\','; }			
 
-    if (jsonData.NeedleIssue !== undefined && jsonData.NeedleIssue !== null && jsonData.NeedleIssue !== "null" && jsonData.NeedleIssue.length > 0)
-        { insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + jsonData.NeedleIssue + '\'' + ','; }
-	
-    if (jsonData.NeedleBatchNumber !== undefined && jsonData.NeedleBatchNumber !== null && jsonData.NeedleBatchNumber !== "null" && jsonData.NeedleBatchNumber.length > 0)
-        { insertQueryData += 'NI_NeedleBatchNumber__c,'; valuesData += '\'' + jsonData.NeedleBatchNumber + '\'' + ','; }
-	    
-    if (jsonData.NeedleAttachmentDetachment !== undefined && jsonData.NeedleAttachmentDetachment !== null && jsonData.NeedleAttachmentDetachment !== "null" && jsonData.NeedleAttachmentDetachment.length > 0)
-       { insertQueryData += 'NI_NeedleAttachmentDetachment__c,'; valuesData += '\'' + jsonData.NeedleAttachmentDetachment + '\'' + ','; }
-	    
-    if (jsonData.NeedleWarningMessage !== undefined && jsonData.NeedleWarningMessage !== null && jsonData.NeedleWarningMessage !== "null" && jsonData.NeedleWarningMessage.length > 0)
-        { insertQueryData += 'NI_Needlewarningmessage__c,'; valuesData += '\'' + jsonData.NeedleWarningMessage + '\'' + ','; }
-	    
-    if (jsonData.OtherNeedleIssue !== undefined && jsonData.OtherNeedleIssue !== null && jsonData.OtherNeedleIssue !== "null" && jsonData.OtherNeedleIssue.length > 0)
-        { insertQueryData += 'NI_OtherNeedleIssue__c,'; valuesData += '\'' + jsonData.OtherNeedleIssue + '\'' + ','; }
-	
-	// Needle warning message - Needle warning message selection
-	
-        if (jsonData.NeedleWarningMessageSelection !== undefined && jsonData.NeedleWarningMessageSelection !== null && jsonData.NeedleWarningMessageSelection !== "null" && jsonData.NeedleWarningMessageSelection.length > 0)
-        { insertQueryData += 'NW_NeedleWarningMessageSelection__c,'; valuesData += '\'' + jsonData.NeedleWarningMessageSelection + '\'' + ','; }
-	    
-	if (jsonData.IsWarningmsgDisplayedWhenNedleAttd !== undefined && jsonData.IsWarningmsgDisplayedWhenNedleAttd !== null && jsonData.IsWarningmsgDisplayedWhenNedleAttd !== "null" && jsonData.IsWarningmsgDisplayedWhenNedleAttd.length > 0)
-        { insertQueryData += 'NW_IsWarningmsgDisplayedWhenNedleAttd__c,'; valuesData += '\'' + jsonData.IsWarningmsgDisplayedWhenNedleAttd + '\'' + ','; }
-	    
-        if (jsonData.NeedleIsTheInjectionStillPossible !== undefined && jsonData.NeedleIsTheInjectionStillPossible !== null && jsonData.NeedleIsTheInjectionStillPossible !== "null" && jsonData.NeedleIsTheInjectionStillPossible.length > 0)
-        { insertQueryData += 'NW_NeedleIstheinjectionstillpossible__c,'; valuesData += '\'' + jsonData.NeedleIsTheInjectionStillPossible + '\'' + ','; }
-	   	
-	if (jsonData.MessageDisplayByInterruptingTheInje !== undefined && jsonData.MessageDisplayByInterruptingTheInje !== null && jsonData.MessageDisplayByInterruptingTheInje !== "null" && jsonData.MessageDisplayByInterruptingTheInje.length > 0)
-        { insertQueryData += 'NW_MessageDisplayByInterruptingTheInje__c,'; valuesData += '\'' + jsonData.MessageDisplayByInterruptingTheInje + '\'' + ','; }   
-		
-	if (jsonData.NeedleCapDeviceWarningMsgUponStart !== undefined && jsonData.NeedleCapDeviceWarningMsgUponStart !== null && jsonData.NeedleCapDeviceWarningMsgUponStart !== "null" && jsonData.NeedleCapDeviceWarningMsgUponStart.length > 0)
-        { insertQueryData += 'NW_NeedleCapDeviceWarningMsgUponStart__c,'; valuesData += '\'' + jsonData.NeedleCapDeviceWarningMsgUponStart + '\'' + ','; }
-	    
-	if (jsonData.NeedleCapIsInjectionStillPossible !== undefined && jsonData.NeedleCapIsInjectionStillPossible !== null && jsonData.NeedleCapIsInjectionStillPossible !== "null" && jsonData.NeedleCapIsInjectionStillPossible.length > 0)
-        { insertQueryData += 'NW_NeedleCapIsInjectionStillPossible__c,'; valuesData += '\'' + jsonData.NeedleCapIsInjectionStillPossible + '\'' + ','; }    
-	    
-        if (jsonData.DoesNeedleCavityShowResidue !== undefined && jsonData.DoesNeedleCavityShowResidue !== null && jsonData.DoesNeedleCavityShowResidue !== "null" && jsonData.DoesNeedleCavityShowResidue.length > 0)
-        { insertQueryData += 'NW_DoesNeedleCavityShowResidue__c,'; valuesData += '\'' + jsonData.DoesNeedleCavityShowResidue + '\'' + ','; }
-	    
-	if (jsonData.NeedleDetatcDeviceWarningMsguponStart !== undefined && jsonData.NeedleDetatcDeviceWarningMsguponStart !== null && jsonData.NeedleDetatcDeviceWarningMsguponStart !== "null" && jsonData.NeedleDetatcDeviceWarningMsguponStart.length > 0)
-        { insertQueryData += 'NW_NeedleDetatcDeviceWarningMsguponStart__c,'; valuesData += '\'' + jsonData.NeedleDetatcDeviceWarningMsguponStart + '\'' + ','; }
-	    
-	if (jsonData.NeedleDetatchIsInjectionStillPossible !== undefined && jsonData.NeedleDetatchIsInjectionStillPossible !== null && jsonData.NeedleDetatchIsInjectionStillPossible !== "null" && jsonData.NeedleDetatchIsInjectionStillPossible.length > 0)
-        { insertQueryData += 'NW_NeedleDetatchIsInjectionStillPossible__c,'; valuesData += '\'' + jsonData.NeedleDetatchIsInjectionStillPossible + '\'' + ','; }
-	
-	if (jsonData.IsNeedleStillAttachedtoCartridge !== undefined && jsonData.IsNeedleStillAttachedtoCartridge !== null && jsonData.IsNeedleStillAttachedtoCartridge !== "null" && jsonData.IsNeedleStillAttachedtoCartridge.length > 0)
-        { insertQueryData += 'NW_IsNeedleStillAttachedtoCartridge__c,'; valuesData += '\'' + jsonData.IsNeedleStillAttachedtoCartridge + '\'' + ','; }
-	   
-        if (jsonData.IsNeedleStillAttachedtoCartridge !== undefined && jsonData.IsNeedleStillAttachedtoCartridge !== null && jsonData.IsNeedleStillAttachedtoCartridge !== "null" && jsonData.WarningMsgAfterNeedleDetatchment.length > 0)
-        { insertQueryData += 'NW_Warningmsgafterneedledetatchment__c,'; valuesData += '\'' + jsonData.WarningMsgAfterNeedleDetatchment + '\'' + ','; }
-	    
-	 if (jsonData.NeedleButtonAfterNeedleDetatchment !== undefined && jsonData.NeedleButtonAfterNeedleDetatchment !== null && jsonData.NeedleButtonAfterNeedleDetatchment !== "null" && jsonData.NeedleButtonAfterNeedleDetatchment.length > 0)
-        { insertQueryData += 'NW_Needlebuttonafterneedledetatchment__c,'; valuesData += '\'' + jsonData.NeedleButtonAfterNeedleDetatchment + '\'' + ','; }
-	    
-        if (jsonData.NeedleDetatchedByPushing !== undefined && jsonData.NeedleDetatchedByPushing !== null && jsonData.NeedleDetatchedByPushing !== "null" && jsonData.NeedleDetatchedByPushing.length > 0)
-        { insertQueryData += 'NW_NeedleDetatchedByPushing__c,'; valuesData += '\'' + jsonData.NeedleDetatchedByPushing + '\'' + ','; }
-	    
-	if (jsonData.DoestheNeedleButtonReact !== undefined && jsonData.DoestheNeedleButtonReact !== null && jsonData.DoestheNeedleButtonReact !== "null" && jsonData.DoestheNeedleButtonReact.length > 0)
-        { insertQueryData += 'NW_DoestheNeedleButtonReact__c,'; valuesData += '\'' + jsonData.DoestheNeedleButtonReact + '\'' + ','; }
+			if (jsonData.NeedleIssue !== undefined && jsonData.NeedleIssue !== null && jsonData.NeedleIssue !== "null" && jsonData.NeedleIssue.length > 0){
+			       insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + jsonData.NeedleIssue + '\'' + ','; 
+			       updateValueData += 'NI_NeedleIssue__c = \''+jsonData.NeedleIssue+'\',';
+			    }
+			else { updateValueData += 'NI_NeedleIssue__c = = \'\','; }			
+			
+			if (jsonData.NeedleBatchNumber !== undefined && jsonData.NeedleBatchNumber !== null && jsonData.NeedleBatchNumber !== "null" && jsonData.NeedleBatchNumber.length > 0){
+				   insertQueryData += 'NI_NeedleBatchNumber__c,'; valuesData += '\'' + jsonData.NeedleBatchNumber + '\'' + ',';
+				   updateValueData += 'NI_NeedleBatchNumber__c = \''+jsonData.NeedleBatchNumber+'\',';
+				}
+			else { updateValueData += 'NI_NeedleBatchNumber__c = = \'\','; }	
+				
+			if (jsonData.NeedleAttachmentDetachment !== undefined && jsonData.NeedleAttachmentDetachment !== null && jsonData.NeedleAttachmentDetachment !== "null" && jsonData.NeedleAttachmentDetachment.length > 0){
+				   insertQueryData += 'NI_NeedleAttachmentDetachment__c,'; valuesData += '\'' + jsonData.NeedleAttachmentDetachment + '\'' + ',';
+				   updateValueData += 'NI_NeedleAttachmentDetachment__c = \''+jsonData.NeedleAttachmentDetachment+'\',';
+				}
+			else { updateValueData += 'NI_NeedleAttachmentDetachment__c = = \'\','; }	
+				
+			if (jsonData.NeedleWarningMessage !== undefined && jsonData.NeedleWarningMessage !== null && jsonData.NeedleWarningMessage !== "null" && jsonData.NeedleWarningMessage.length > 0){
+			       insertQueryData += 'NI_Needlewarningmessage__c,'; valuesData += '\'' + jsonData.NeedleWarningMessage + '\'' + ',';
+				   updateValueData += 'NI_Needlewarningmessage__c = \''+jsonData.NeedleWarningMessage+'\',';
+				}
+			else { updateValueData += 'NI_Needlewarningmessage__c = = \'\','; }	
+				
+			if (jsonData.OtherNeedleIssue !== undefined && jsonData.OtherNeedleIssue !== null && jsonData.OtherNeedleIssue !== "null" && jsonData.OtherNeedleIssue.length > 0){
+				   insertQueryData += 'NI_OtherNeedleIssue__c,'; valuesData += '\'' + jsonData.OtherNeedleIssue + '\'' + ',';
+				   updateValueData += 'NI_OtherNeedleIssue__c = \''+jsonData.OtherNeedleIssue+'\',';
+				}
+			else { updateValueData += 'NI_OtherNeedleIssue__c = = \'\','; }	
+			
+			// Needle warning message - Needle warning message selection
+			
+			if (jsonData.NeedleWarningMessageSelection !== undefined && jsonData.NeedleWarningMessageSelection !== null && jsonData.NeedleWarningMessageSelection !== "null" && jsonData.NeedleWarningMessageSelection.length > 0){
+				   insertQueryData += 'NW_NeedleWarningMessageSelection__c,'; valuesData += '\'' + jsonData.NeedleWarningMessageSelection + '\'' + ',';
+				   updateValueData += 'NW_NeedleWarningMessageSelection__c = \''+jsonData.NeedleWarningMessageSelection+'\',';
+				}
+			//else { updateValueData += 'NW_NeedleWarningMessageSelection__c = = \'\','; }
+				
+			if (jsonData.IsWarningmsgDisplayedWhenNedleAttd !== undefined && jsonData.IsWarningmsgDisplayedWhenNedleAttd !== null && jsonData.IsWarningmsgDisplayedWhenNedleAttd !== "null" && jsonData.IsWarningmsgDisplayedWhenNedleAttd.length > 0){
+				{  insertQueryData += 'NW_IsWarningmsgDisplayedWhenNedleAttd__c,'; valuesData += '\'' + jsonData.IsWarningmsgDisplayedWhenNedleAttd + '\'' + ',';
+				   updateValueData += 'NW_IsWarningmsgDisplayedWhenNedleAttd__c = \''+jsonData.IsWarningmsgDisplayedWhenNedleAttd+'\',';
+				}
+			//else { updateValueData += 'NW_IsWarningmsgDisplayedWhenNedleAttd__c = = \'\','; }
+				
+			if (jsonData.NeedleIsTheInjectionStillPossible !== undefined && jsonData.NeedleIsTheInjectionStillPossible !== null && jsonData.NeedleIsTheInjectionStillPossible !== "null" && jsonData.NeedleIsTheInjectionStillPossible.length > 0){
+				   insertQueryData += 'NW_NeedleIstheinjectionstillpossible__c,'; valuesData += '\'' + jsonData.NeedleIsTheInjectionStillPossible + '\'' + ',';
+				   updateValueData += 'NW_NeedleIstheinjectionstillpossible__c = \''+jsonData.NeedleIsTheInjectionStillPossible+'\',';
+				}
+			//else { updateValueData += 'NW_NeedleIstheinjectionstillpossible__c = = \'\','; }
+				
+			if (jsonData.MessageDisplayByInterruptingTheInje !== undefined && jsonData.MessageDisplayByInterruptingTheInje !== null && jsonData.MessageDisplayByInterruptingTheInje !== "null" && jsonData.MessageDisplayByInterruptingTheInje.length > 0){
+				  insertQueryData += 'NW_MessageDisplayByInterruptingTheInje__c,'; valuesData += '\'' + jsonData.MessageDisplayByInterruptingTheInje + '\'' + ',';
+				  updateValueData += 'NW_MessageDisplayByInterruptingTheInje__c = \''+jsonData.MessageDisplayByInterruptingTheInje+'\',';
+				}
+			//else { updateValueData += 'NW_MessageDisplayByInterruptingTheInje__c = = \'\','; }				
+				
+			if (jsonData.NeedleCapDeviceWarningMsgUponStart !== undefined && jsonData.NeedleCapDeviceWarningMsgUponStart !== null && jsonData.NeedleCapDeviceWarningMsgUponStart !== "null" && jsonData.NeedleCapDeviceWarningMsgUponStart.length > 0){
+				  insertQueryData += 'NW_NeedleCapDeviceWarningMsgUponStart__c,'; valuesData += '\'' + jsonData.NeedleCapDeviceWarningMsgUponStart + '\'' + ',';
+				  updateValueData += 'NW_NeedleCapDeviceWarningMsgUponStart__c = \''+jsonData.NeedleCapDeviceWarningMsgUponStart+'\',';
+				}
+			//else { updateValueData += 'NW_NeedleCapDeviceWarningMsgUponStart__c = = \'\','; }
+				
+			if (jsonData.NeedleCapIsInjectionStillPossible !== undefined && jsonData.NeedleCapIsInjectionStillPossible !== null && jsonData.NeedleCapIsInjectionStillPossible !== "null" && jsonData.NeedleCapIsInjectionStillPossible.length > 0){
+				  insertQueryData += 'NW_NeedleCapIsInjectionStillPossible__c,'; valuesData += '\'' + jsonData.NeedleCapIsInjectionStillPossible + '\'' + ',';
+                  updateValueData += 'NW_NeedleCapIsInjectionStillPossible__c = \''+jsonData.NeedleCapIsInjectionStillPossible+'\',';
+				}
+			//else { updateValueData += 'NW_NeedleCapIsInjectionStillPossible__c = = \'\','; }				
+				
+			if (jsonData.DoesNeedleCavityShowResidue !== undefined && jsonData.DoesNeedleCavityShowResidue !== null && jsonData.DoesNeedleCavityShowResidue !== "null" && jsonData.DoesNeedleCavityShowResidue.length > 0){
+				  insertQueryData += 'NW_DoesNeedleCavityShowResidue__c,'; valuesData += '\'' + jsonData.DoesNeedleCavityShowResidue + '\'' + ',';
+				  updateValueData += 'NW_DoesNeedleCavityShowResidue__c = \''+jsonData.DoesNeedleCavityShowResidue+'\',';
+				}
+			//else { updateValueData += 'NW_DoesNeedleCavityShowResidue__c = = \'\','; }
+				
+			if (jsonData.NeedleDetatcDeviceWarningMsguponStart !== undefined && jsonData.NeedleDetatcDeviceWarningMsguponStart !== null && jsonData.NeedleDetatcDeviceWarningMsguponStart !== "null" && jsonData.NeedleDetatcDeviceWarningMsguponStart.length > 0){
+				  insertQueryData += 'NW_NeedleDetatcDeviceWarningMsguponStart__c,'; valuesData += '\'' + jsonData.NeedleDetatcDeviceWarningMsguponStart + '\'' + ',';
+				  updateValueData += 'NW_NeedleDetatcDeviceWarningMsguponStart__c = \''+jsonData.NeedleDetatcDeviceWarningMsguponStart+'\',';
+				}
+			//else { updateValueData += 'NW_NeedleDetatcDeviceWarningMsguponStart__c = = \'\','; }
+				
+			if (jsonData.NeedleDetatchIsInjectionStillPossible !== undefined && jsonData.NeedleDetatchIsInjectionStillPossible !== null && jsonData.NeedleDetatchIsInjectionStillPossible !== "null" && jsonData.NeedleDetatchIsInjectionStillPossible.length > 0){
+				  insertQueryData += 'NW_NeedleDetatchIsInjectionStillPossible__c,'; valuesData += '\'' + jsonData.NeedleDetatchIsInjectionStillPossible + '\'' + ',';
+				  updateValueData += 'NW_NeedleDetatchIsInjectionStillPossible__c = \''+jsonData.NeedleDetatchIsInjectionStillPossible+'\',';
+				}
+			//else { updateValueData += 'NW_NeedleDetatchIsInjectionStillPossible__c = = \'\','; }
+			
+			if (jsonData.IsNeedleStillAttachedtoCartridge !== undefined && jsonData.IsNeedleStillAttachedtoCartridge !== null && jsonData.IsNeedleStillAttachedtoCartridge !== "null" && jsonData.IsNeedleStillAttachedtoCartridge.length > 0){
+				   insertQueryData += 'NW_IsNeedleStillAttachedtoCartridge__c,'; valuesData += '\'' + jsonData.IsNeedleStillAttachedtoCartridge + '\'' + ',';
+				   updateValueData += 'NW_IsNeedleStillAttachedtoCartridge__c = \''+jsonData.IsNeedleStillAttachedtoCartridge+'\',';
+				}
+			//else { updateValueData += 'NW_IsNeedleStillAttachedtoCartridge__c = = \'\','; }
+			   
+			if (jsonData.WarningMsgAfterNeedleDetatchment !== undefined && jsonData.WarningMsgAfterNeedleDetatchment !== null && jsonData.WarningMsgAfterNeedleDetatchment !== "null" && jsonData.WarningMsgAfterNeedleDetatchment.length > 0){
+				   insertQueryData += 'NW_Warningmsgafterneedledetatchment__c,'; valuesData += '\'' + jsonData.WarningMsgAfterNeedleDetatchment + '\'' + ',';
+				   updateValueData += 'NW_Warningmsgafterneedledetatchment__c = \''+jsonData.WarningMsgAfterNeedleDetatchment+'\',';
+				}
+			//else { updateValueData += 'NW_Warningmsgafterneedledetatchment__c = = \'\','; }
+				
+			 if (jsonData.NeedleButtonAfterNeedleDetatchment !== undefined && jsonData.NeedleButtonAfterNeedleDetatchment !== null && jsonData.NeedleButtonAfterNeedleDetatchment !== "null" && jsonData.NeedleButtonAfterNeedleDetatchment.length > 0){
+				   insertQueryData += 'NW_Needlebuttonafterneedledetatchment__c,'; valuesData += '\'' + jsonData.NeedleButtonAfterNeedleDetatchment + '\'' + ',';
+				   updateValueData += 'NW_Needlebuttonafterneedledetatchment__c = \''+jsonData.NeedleButtonAfterNeedleDetatchment+'\',';
+				}
+			//else { updateValueData += 'NW_Needlebuttonafterneedledetatchment__c = = \'\','; }
+				
+			if (jsonData.NeedleDetatchedByPushing !== undefined && jsonData.NeedleDetatchedByPushing !== null && jsonData.NeedleDetatchedByPushing !== "null" && jsonData.NeedleDetatchedByPushing.length > 0){
+				   insertQueryData += 'NW_NeedleDetatchedByPushing__c,'; valuesData += '\'' + jsonData.NeedleDetatchedByPushing + '\'' + ',';
+				   updateValueData += 'NW_NeedleDetatchedByPushing__c = \''+jsonData.NeedleDetatchedByPushing+'\',';
+				}
+			///else { updateValueData += 'NW_NeedleDetatchedByPushing__c = = \'\','; }
+				
+			if (jsonData.DoestheNeedleButtonReact !== undefined && jsonData.DoestheNeedleButtonReact !== null && jsonData.DoestheNeedleButtonReact !== "null" && jsonData.DoestheNeedleButtonReact.length > 0){
+				   insertQueryData += 'NW_DoestheNeedleButtonReact__c,'; valuesData += '\'' + jsonData.DoestheNeedleButtonReact + '\'' + ',';
+				   updateValueData += 'NW_DoestheNeedleButtonReact__c = \''+jsonData.DoestheNeedleButtonReact+'\',';
+				}
+			//else { updateValueData += 'NW_DoestheNeedleButtonReact__c = = \'\','; }
 
-	if (jsonData.OtherWarningMessage !== undefined && jsonData.OtherWarningMessage !== null && jsonData.OtherWarningMessage !== "null" && jsonData.OtherWarningMessage.length > 0)
-        { insertQueryData += 'NW_OtherWarningMessage__c,'; valuesData += '\'' + jsonData.OtherWarningMessage + '\'' + ','; }
-	    
-        if (jsonData.FrequencyoftheWMdiplay !== undefined && jsonData.FrequencyoftheWMdiplay !== null && jsonData.FrequencyoftheWMdiplay !== "null" && jsonData.FrequencyoftheWMdiplay.length > 0)
-        { insertQueryData += 'NW_FrequencyoftheWMdiplay__c,'; valuesData += '\'' + jsonData.FrequencyoftheWMdiplay + '\'' + ','; }
+			if (jsonData.OtherWarningMessage !== undefined && jsonData.OtherWarningMessage !== null && jsonData.OtherWarningMessage !== "null" && jsonData.OtherWarningMessage.length > 0){
+				   insertQueryData += 'NW_OtherWarningMessage__c,'; valuesData += '\'' + jsonData.OtherWarningMessage + '\'' + ',';
+				   updateValueData += 'NW_OtherWarningMessage__c = \''+jsonData.OtherWarningMessage+'\',';
+				}
+			//else { updateValueData += 'NW_OtherWarningMessage__c = = \'\','; }
+				
+			if (jsonData.FrequencyoftheWMdiplay !== undefined && jsonData.FrequencyoftheWMdiplay !== null && jsonData.FrequencyoftheWMdiplay !== "null" && jsonData.FrequencyoftheWMdiplay.length > 0){
+				   insertQueryData += 'NW_FrequencyoftheWMdiplay__c,'; valuesData += '\'' + jsonData.FrequencyoftheWMdiplay + '\'' + ',';
+				   updateValueData += 'NW_FrequencyoftheWMdiplay__c = \''+jsonData.FrequencyoftheWMdiplay+'\',';
+				}
+			//else { updateValueData += 'NW_FrequencyoftheWMdiplay__c = = \'\','; }
 
-	if (jsonData.WhenApproximatelyIssueObservedLastly !== undefined && jsonData.WhenApproximatelyIssueObservedLastly !== null && jsonData.WhenApproximatelyIssueObservedLastly !== "null" && jsonData.WhenApproximatelyIssueObservedLastly.length > 0)
-        { insertQueryData += 'NW_WhenApproximatelyIssueObservedLastly__c,'; valuesData += '\'' + jsonData.WhenApproximatelyIssueObservedLastly + '\'' + ','; }
+			if (jsonData.WhenApproximatelyIssueObservedLastly !== undefined && jsonData.WhenApproximatelyIssueObservedLastly !== null && jsonData.WhenApproximatelyIssueObservedLastly !== "null" && jsonData.WhenApproximatelyIssueObservedLastly.length > 0){
+				   insertQueryData += 'NW_WhenApproximatelyIssueObservedLastly__c,'; valuesData += '\'' + jsonData.WhenApproximatelyIssueObservedLastly + '\'' + ',';
+				   updateValueData += 'NW_WhenApproximatelyIssueObservedLastly__c = \''+jsonData.WhenApproximatelyIssueObservedLastly+'\',';
+				}
+			//else { updateValueData += 'NW_WhenApproximatelyIssueObservedLastly__c = = \'\','; }
 
-        if (jsonData.ApproximateDate !== undefined && jsonData.ApproximateDate !== null && jsonData.ApproximateDate !== "null" && jsonData.ApproximateDate.length > 0)
-        { insertQueryData += 'NW_ApproximateDate__c,'; valuesData += '\'' + jsonData.ApproximateDate + '\'' + ','; }
+			if (jsonData.ApproximateDate !== undefined && jsonData.ApproximateDate !== null && jsonData.ApproximateDate !== "null" && jsonData.ApproximateDate.length > 0){
+				   insertQueryData += 'NW_ApproximateDate__c,'; valuesData += '\'' + jsonData.ApproximateDate + '\'' + ',';
+				   updateValueData += 'NW_ApproximateDate__c = \''+jsonData.ApproximateDate+'\',';
+				}
+            //else { updateValueData += 'NW_ApproximateDate__c = = \'\','; }
 
-	if (jsonData.WarngMsgDisplayedAtParticularStep !== undefined && jsonData.WarngMsgDisplayedAtParticularStep !== null && jsonData.WarngMsgDisplayedAtParticularStep !== "null" && jsonData.WarngMsgDisplayedAtParticularStep.length > 0)
-        { insertQueryData += 'NW_WarngMsgDisplayedAtParticularStep__c,'; valuesData += '\'' + jsonData.WarngMsgDisplayedAtParticularStep + '\'' + ','; }
-	    
-	if (jsonData.PleaseSelectTheInjectionStep !== undefined && jsonData.PleaseSelectTheInjectionStep !== null && jsonData.PleaseSelectTheInjectionStep !== "null" && jsonData.PleaseSelectTheInjectionStep.length > 0)
-        { insertQueryData += 'NW_PleaseSelectTheInjectionStep__c,'; valuesData += '\'' + jsonData.PleaseSelectTheInjectionStep + '\'' + ','; }
+			if (jsonData.WarngMsgDisplayedAtParticularStep !== undefined && jsonData.WarngMsgDisplayedAtParticularStep !== null && jsonData.WarngMsgDisplayedAtParticularStep !== "null" && jsonData.WarngMsgDisplayedAtParticularStep.length > 0){
+				   insertQueryData += 'NW_WarngMsgDisplayedAtParticularStep__c,'; valuesData += '\'' + jsonData.WarngMsgDisplayedAtParticularStep + '\'' + ',';
+				   updateValueData += 'NW_WarngMsgDisplayedAtParticularStep__c = \''+jsonData.WarngMsgDisplayedAtParticularStep+'\',';
+				}
+			//else { updateValueData += 'NW_WarngMsgDisplayedAtParticularStep__c = = \'\','; }
+				
+			if (jsonData.PleaseSelectTheInjectionStep !== undefined && jsonData.PleaseSelectTheInjectionStep !== null && jsonData.PleaseSelectTheInjectionStep !== "null" && jsonData.PleaseSelectTheInjectionStep.length > 0){
+				   insertQueryData += 'NW_PleaseSelectTheInjectionStep__c,'; valuesData += '\'' + jsonData.PleaseSelectTheInjectionStep + '\'' + ',';
+				   updateValueData += 'NW_PleaseSelectTheInjectionStep__c = \''+jsonData.PleaseSelectTheInjectionStep+'\',';
+				}
+			//else { updateValueData += 'NW_PleaseSelectTheInjectionStep__c = \'\','; }
 
-	if (jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== undefined && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== null && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== "null" && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc.length > 0)
-        { insertQueryData += 'NW_IsMsgDisplayedOnUseOfNewNdleBatc__c,'; valuesData += '\'' + jsonData.IsMsgDisplayedOnUseOfNewNdleBatc + '\'' + ','; }
+			if (jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== undefined && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== null && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc !== "null" && jsonData.IsMsgDisplayedOnUseOfNewNdleBatc.length > 0){
+				   insertQueryData += 'NW_IsMsgDisplayedOnUseOfNewNdleBatc__c,'; valuesData += '\'' + jsonData.IsMsgDisplayedOnUseOfNewNdleBatc + '\'' + ',';
+				   updateValueData += 'NW_IsMsgDisplayedOnUseOfNewNdleBatc__c = \''+jsonData.IsMsgDisplayedOnUseOfNewNdleBatc+'\',';
+				}
+			//else { updateValueData += 'NW_IsMsgDisplayedOnUseOfNewNdleBatc__c = \'\','; }
 
-	if (jsonData.PleaseProvideTheNeedleBatch !== undefined && jsonData.PleaseProvideTheNeedleBatch !== null && jsonData.PleaseProvideTheNeedleBatch !== "null" && jsonData.PleaseProvideTheNeedleBatch.length > 0)
-        { insertQueryData += 'NW_PleaseProvideTheNeedleBatch__c,'; valuesData += '\'' + jsonData.PleaseProvideTheNeedleBatch + '\'' + ','; }
-	    
-	if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
-        { insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
-        //issue
-	 
-        var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
-        console.log('............combinedQuery.............'+combinedQuery); 
-        //var temp = combinedQuery;    
-	//combinedQuery = temp.replace("%2527","\\'");    
-	//console.log('--------------------------------temp-------------------------------'+combinedQuery);
-        conn.query(combinedQuery,
+			if (jsonData.PleaseProvideTheNeedleBatch !== undefined && jsonData.PleaseProvideTheNeedleBatch !== null && jsonData.PleaseProvideTheNeedleBatch !== "null" && jsonData.PleaseProvideTheNeedleBatch.length > 0){
+				  insertQueryData += 'NW_PleaseProvideTheNeedleBatch__c,'; valuesData += '\'' + jsonData.PleaseProvideTheNeedleBatch + '\'' + ',';
+				  updateValueData += 'NW_PleaseProvideTheNeedleBatch__c = \''+jsonData.PleaseProvideTheNeedleBatch+'\',';
+				}
+			//else { updateValueData += 'NW_PleaseProvideTheNeedleBatch__c = \'\','; }
+				
+			if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0)
+				{ insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\''}
+
+			 
+			var combinedQuery;
+			
+			if(jsonData.DecisionTreeId !== undefined && jsonData.DecisionTreeId !== null && jsonData.DecisionTreeId !== "null" && jsonData.DecisionTreeId.length > 0)			
+			   combinedQuery = 'UPDATE salesforce.IVOP_DecisionTree__c SET '+updateValueData+' WHERE id='+jsonData.DecisionTreeId+'';
+			else
+			   combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
+			
+			console.log('............combinedQuery.............'+combinedQuery); 
+			//var temp = combinedQuery;    
+			//combinedQuery = temp.replace("%2527","\\'");    
+			//console.log('--------------------------------temp-------------------------------'+combinedQuery);
+            conn.query(combinedQuery,
                 function(err, result) {
 			                done();
                             if(err){
@@ -1287,11 +1375,16 @@ router.post('/insertNeedleIssue', function(req, res) {
                                    }
                                             else{
                                                 return res.json({
+												        caseid:result.rows[0].HerokuCaseId__c,
+												        DecisionTreeId: result.rows[0].id,
                                                         msgid: 1,
                                                         message: 'Success.'});
                                    }
                 });
+			}
+		});
     });
+});
 });
 	
 
