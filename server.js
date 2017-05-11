@@ -396,7 +396,7 @@ router.post('/insertNeedleIssue1', function(req, res) {
                    insertQueryData += 'NI_NeedleIssue__c,'; valuesData += '\'' + jsonData.NeedleIssue + '\'' + ','; 
                    updateValueData += 'NI_NeedleIssue__c = \''+jsonData.NeedleIssue+'\',';
                 }
-            else { updateValueData += 'NI_NeedleIssue__c = = \'\','; }          
+            else { updateValueData += 'NI_NeedleIssue__c = \'\','; }          
             
             if (jsonData.NeedleBatchNumber !== undefined && jsonData.NeedleBatchNumber !== null && jsonData.NeedleBatchNumber !== "null" && jsonData.NeedleBatchNumber.length > 0){
                    insertQueryData += 'NI_NeedleBatchNumber__c,'; valuesData += '\'' + jsonData.NeedleBatchNumber + '\'' + ',';
