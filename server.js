@@ -2187,7 +2187,7 @@ router.post('/insertPowerFailure1', function(req, res) {
 				{ insertQueryData += 'PF_NPO_PleaseSpecifyInjectionStep__c,'; valuesData += '\'' + jsonData.NPOPleaseSpecifyInjectionStep + '\'' + ','; 
 				  updateValueData += 'PF_NPO_PleaseSpecifyInjectionStep__c = \''+jsonData.NPOPleaseSpecifyInjectionStep+'\',';
 				}
-				
+			else { updateValueData += 'PF_NPO_PleaseSpecifyInjectionStep__c = \'\','; } 	
 			if (jsonData.NPONeedToRemoveBateryToTurnoffDevice !== undefined && jsonData.NPONeedToRemoveBateryToTurnoffDevice !== null && jsonData.NPONeedToRemoveBateryToTurnoffDevice !== "null" && jsonData.NPONeedToRemoveBateryToTurnoffDevice.length > 0)
 				{ insertQueryData += 'PF_NPO_NeedToRemoveBateryToTurnoffDevice__c,'; valuesData += '\'' + jsonData.NPONeedToRemoveBateryToTurnoffDevice + '\'' + ','; 
 				  updateValueData += 'PF_NPO_NeedToRemoveBateryToTurnoffDevice__c = \''+jsonData.NPONeedToRemoveBateryToTurnoffDevice+'\',';
