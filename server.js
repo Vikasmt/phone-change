@@ -558,7 +558,7 @@ router.post('/insertNeedleIssue1', function(req, res) {
                 
             if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0){ 
 			     insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\'';
-			     updateValueData += 'HerokuCaseId__c = \''+jsonData.caseid+'\',';
+			     updateValueData += 'HerokuCaseId__c = \''+jsonData.caseid+ '\'';
 			    }
 
              
