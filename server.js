@@ -1432,7 +1432,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
         var jsonData = req.body;
         var treeidd  = jsonData.id;
 	console.log('.....req..body......'+jsonData);
-	if(jsonData.treeidd == undefined && jsonData.treeidd == null && jsonData.treeidd == "null" && jsonData.treeidd.length < 0){
+	//if(jsonData.treeidd == undefined && jsonData.treeidd == null && jsonData.treeidd == "null" && jsonData.treeidd.length < 0){
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES (';
 	    
@@ -1480,7 +1480,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
 
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
         console.log('............combinedQuery.............'+combinedQuery); 
-	}
+	//}
         conn.query(combinedQuery,
                 function(err, result) {
 			                done();
