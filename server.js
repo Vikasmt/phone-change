@@ -1432,7 +1432,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
         var jsonData = req.body;
         var treeidd  = jsonData.id;
 	console.log('.....req..body......'+jsonData);
-	if(treeidd == null){
+	if(treeidd == ''){
         var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
         var valuesData=' VALUES (';
 	    
@@ -1490,10 +1490,10 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
                                             message: err.message});
                                    }
                                             else{
-												 var jsonData = req.body;
-												 var treeid = jsonData.id;
-						                                                 if(treeid !== null){
-												 conn.query('SELECT *from salesforce.IVOP_DecisionTree__c WHERE id='+treeid+'',
+						var jsonData = req.body;
+						var treeid = jsonData.id;
+						if(treeid !== ''){
+						conn.query('SELECT *from salesforce.IVOP_DecisionTree__c WHERE id='+treeid+'',
 														function(err,result){
 														 if (err != null || result.rowCount == 0) {
 															  return res.json({
@@ -1567,7 +1567,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
 															}
 													 });
 												 }
-								}
+								}						 
                 });
     });
 });
