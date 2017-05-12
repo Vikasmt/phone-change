@@ -765,7 +765,6 @@ router.post('/updateCase', function(req, res) {
                                 else{
                                     return res.json({ 
                                          msgid: 1,
-					 caseid:result.rows[0].id,
                                          message: 'Success.'});
                                 }
                          });
