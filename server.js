@@ -1188,10 +1188,18 @@ router.post('/insertDataandtransfer', function(req, res) {
                                             message: err.message});
                                    }
                                             else{
-                                                return res.json({
+                                                  if(jsonData.DecisionTreeId !== undefined && jsonData.DecisionTreeId !== null && jsonData.DecisionTreeId !== "null" && jsonData.DecisionTreeId.length > 0){
+						       return res.json({
                                                         msgid: 1,
-							DecisionTreeId: result.rows[0].id,
+							DecisionTreeId:jsonData.DecisionTreeId,
                                                         message: 'Success.'});
+						    }
+						    else{
+						       return res.json({
+                                                        msgid: 1,
+							DecisionTreeId:result.rows[0].id,
+                                                        message: 'Success.'});
+						    }
                                    }
                 });
             }
@@ -1480,10 +1488,18 @@ router.post('/insertPowerFailure', function(req, res) {
                                             message: err.message});
                                    }
                                             else{
-                                                return res.json({
+                                                   if(jsonData.DecisionTreeId !== undefined && jsonData.DecisionTreeId !== null && jsonData.DecisionTreeId !== "null" && jsonData.DecisionTreeId.length > 0){
+						       return res.json({
                                                         msgid: 1,
-							DecisionTreeId: result.rows[0].id,
+							DecisionTreeId:jsonData.DecisionTreeId,
                                                         message: 'Success.'});
+						    }
+						    else{
+						       return res.json({
+                                                        msgid: 1,
+							DecisionTreeId:result.rows[0].id,
+                                                        message: 'Success.'});
+						    }
                                    }
                 });
             }
@@ -1886,10 +1902,18 @@ router.post('/insertCatridgeIssue', function(req, res) {
                                             message: err.message});
                                    }
                                             else{
-                                                return res.json({
+                                                   if(jsonData.DecisionTreeId !== undefined && jsonData.DecisionTreeId !== null && jsonData.DecisionTreeId !== "null" && jsonData.DecisionTreeId.length > 0){
+						       return res.json({
                                                         msgid: 1,
-							DecisionTreeId: result.rows[0].id,
+							DecisionTreeId:jsonData.DecisionTreeId,
                                                         message: 'Success.'});
+						    }
+						    else{
+						       return res.json({
+                                                        msgid: 1,
+							DecisionTreeId:result.rows[0].id,
+                                                        message: 'Success.'});
+						    }
                                    }
                 });
             }
