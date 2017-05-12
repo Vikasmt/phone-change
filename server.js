@@ -762,9 +762,9 @@ router.post('/updateCase', function(req, res) {
                                             message: err.message});
                                 }
                                 else{
-                                    return res.json({
-					 
+                                    return res.json({ 
                                          msgid: 1,
+					 caseid:result.rows[0].id,
                                          message: 'Success.'});
                                 }
                          });
