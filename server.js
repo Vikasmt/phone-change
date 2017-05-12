@@ -667,7 +667,7 @@ router.post('/updateCase', function(req, res) {
 
 					if (jsonData.Age !== undefined && jsonData.Age !== null && jsonData.Age !== "null" && jsonData.Age.length > 0)
 					{ valueData += 'FMA_Age__c = \''+jsonData.Age+'\','; }
-				    //else{valueData += 'FMA_Age__c = \'\',';}
+				        //else{valueData += 'FMA_Age__c = \'\',';}
 					
 					if (jsonData.Phoneno !== undefined && jsonData.Phoneno !== null && jsonData.Phoneno !== "null" && jsonData.Phoneno.length > 0)
 					{ valueData += 'FMA_Phoneno__c = \''+jsonData.Phoneno+'\','; }
