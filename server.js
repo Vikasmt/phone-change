@@ -993,8 +993,8 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
              
             var combinedQuery;
             
-            if(jsonData.DecisionTreeId !== undefined && jsonData.DecisionTreeId !== null && jsonData.DecisionTreeId !== "null" && jsonData.DecisionTreeId.length > 0)           
-               combinedQuery = 'UPDATE salesforce.IVOP_DecisionTree__c SET '+updateValueData+' WHERE id='+jsonData.DecisionTreeId+'';
+            if(jsonData.id !== undefined && jsonData.id !== null && jsonData.id !== "null" && jsonData.id.length > 0)           
+               combinedQuery = 'UPDATE salesforce.IVOP_DecisionTree__c SET '+updateValueData+' WHERE id='+jsonData.id+'';
             else
                combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
             
@@ -1010,7 +1010,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
                                             else{
                                                 return res.json({
                                                         msgid: 1,
-							DecisionTreeId: result.rows[0].DecisionTreeId,
+							DecisionTreeId: result.rows[0].id,
                                                         message: 'Success.'});
                                    }
                 });
