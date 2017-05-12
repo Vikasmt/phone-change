@@ -1010,7 +1010,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
                                             else{
                                                 return res.json({
                                                         msgid: 1,
-							DecisionTreeId:jsonData.id,
+							DecisionTreeId:jsonData.DecisionTreeId,
                                                         message: 'Success.'});
                                    }
                 });
