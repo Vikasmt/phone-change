@@ -1009,6 +1009,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
                                             else{
                                                 return res.json({
                                                         msgid: 1,
+							DecisionTreeId: result.rows[0].id,
                                                         message: 'Success.'});
                                    }
                 });
