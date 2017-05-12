@@ -1007,12 +1007,20 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
                                             msgid: 2,
                                             message: err.message});
                                    }
-                                            else{
-                                                return res.json({
+                             else{
+                                                 if(jsonData.DecisionTreeId !== undefined && jsonData.DecisionTreeId !== null && jsonData.DecisionTreeId !== "null" && jsonData.DecisionTreeId.length > 0){
+						       return res.json({
+                                                        msgid: 1,
+							DecisionTreeId:jsonData.DecisionTreeId,
+                                                        message: 'Success.'});
+						    }
+						    else{
+						       return res.json({
                                                         msgid: 1,
 							DecisionTreeId:result.rows[0].id,
                                                         message: 'Success.'});
-                                   }
+						    }
+                            }
                 });
             }
         });
