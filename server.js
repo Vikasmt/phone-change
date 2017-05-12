@@ -602,8 +602,9 @@ router.post('/updateCase', function(req, res) {
          if (err) console.log(err);
          var jsonData = req.body;
 	  console.log('....updateCase...'+jsonData);
-         var caseid = jsonData.id;
-         conn.query('SELECT *from salesforce.Case WHERE id='+caseid+'',
+         //var caseid = jsonData.id;
+	 var jsonData = req.body;
+         conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.id+'',
                 function(err,result){
                  if (err != null || result.rowCount == 0) {
                       return res.json({
@@ -753,7 +754,7 @@ router.post('/updateCase', function(req, res) {
 
 				    console.log('............update Case...1......valueData......'+valueData);					
 									
-                    conn.query('UPDATE salesforce.case SET '+valueData+' WHERE id='+caseid+'',
+                    conn.query('UPDATE salesforce.case SET '+valueData+' WHERE id='+jsonData.id+'',
                          function(err, result) {
                           done();
                             if(err){
@@ -764,7 +765,7 @@ router.post('/updateCase', function(req, res) {
                                 else{
                                     return res.json({ 
                                          msgid: 1,
-					 caseid:result.rows[0].FMA_HerokuCaseid__c,
+					 caseid:result.rows[0].id,
                                          message: 'Success.'});
                                 }
                          });
