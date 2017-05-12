@@ -602,11 +602,11 @@ router.post('/updateCase', function(req, res) {
          if (err) console.log(err);
          var jsonData = req.body;
 	 console.log('....updateCase...'+jsonData);
-         conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.id+'',
+         conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.caseid+'',
                 function(err,result){
                  if (err != null || result.rowCount == 0) {
                       return res.json({
-						        caseid: -1,
+				caseid: -1,
                                 msgid: 2,
                                 message: 'case id not found.'});
                  }else{									
@@ -752,7 +752,7 @@ router.post('/updateCase', function(req, res) {
 
 				    console.log('............update Case...1......valueData......'+valueData);					
 									
-                    conn.query('UPDATE salesforce.case SET '+valueData+' WHERE id='+jsonData.id+'',
+                    conn.query('UPDATE salesforce.case SET '+valueData+' WHERE id='+jsonData.caseid+'',
                          function(err, result) {
                           done();
                             if(err){
@@ -862,7 +862,7 @@ router.post('/insertAppFeedback', function(req, res) {
 
 
 router.post('/updateHerokuCaseID', function(req, res) {
-var caseid = req.param('id');
+var caseid = req.param('caseid');
 	
          pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
              if (err) console.log(err);
@@ -2334,7 +2334,7 @@ router.post('/insertCase', function(req, res) {
                         console.log(err.message);
                             return res.json({
                                     caseid: -1,
-				                    sfid: 1,
+				    sfid: 1,
                                     msgid: 2,
                                     timestamp: timestamp,
                                     message: err.message});
