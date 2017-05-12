@@ -601,9 +601,7 @@ router.post('/updateCase', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
          if (err) console.log(err);
          var jsonData = req.body;
-	  console.log('....updateCase...'+jsonData);
-         //var caseid = jsonData.id;
-	 var jsonData = req.body;
+	 console.log('....updateCase...'+jsonData);
          conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.id+'',
                 function(err,result){
                  if (err != null || result.rowCount == 0) {
@@ -765,7 +763,6 @@ router.post('/updateCase', function(req, res) {
                                 else{
                                     return res.json({ 
                                          msgid: 1,
-					 case: result.rows[0].id,
                                          message: 'Success.'});
                                 }
                          });
