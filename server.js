@@ -2277,6 +2277,9 @@ router.post('/insertCase', function(req, res) {
 	if (jsonData.recordStatus !== undefined && jsonData.recordStatus !== null && jsonData.recordStatus !== "null" && jsonData.recordStatus.length > 1)
         { insertQueryData += 'FMA_Recordstatus__c,'; valuesData += '\'' + jsonData.recordStatus + '\'' + ','; }
 	    
+	if (jsonData.patientId !== undefined && jsonData.patientId !== null && jsonData.patientId !== "null" && jsonData.patientId.length > 0)
+	{ insertQueryData += 'FMA_PatientId__c,'; valuesData += '\'' + jsonData.patientId + '\'' + ',';}
+	    
 	        insertQueryData += 'Priority,'; valuesData += '\'' + 'Medium' + '\'' + ',';
 		
 	        insertQueryData += 'Status'; valuesData += '\'' + 'New' + '\'';	
