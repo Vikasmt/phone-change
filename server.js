@@ -582,12 +582,18 @@ router.post('/insertNeedleIssue', function(req, res) {
                                             message: err.message});
                                    }
                                             else{
-						console.log('----------------result-------------'+result);
-                                                return res.json({
-                                                        //caseid:result.rows[0].HerokuCaseId__c,
-                                                        //DecisionTreeId: result.rows[0].id,
+						  if(jsonData.DecisionTreeId !== undefined && jsonData.DecisionTreeId !== null && jsonData.DecisionTreeId !== "null" && jsonData.DecisionTreeId.length > 0){
+						       return res.json({
                                                         msgid: 1,
+							DecisionTreeId:jsonData.DecisionTreeId,
                                                         message: 'Success.'});
+						    }
+						    else{
+						       return res.json({
+                                                        msgid: 1,
+							DecisionTreeId:result.rows[0].id,
+                                                        message: 'Success.'});
+						    }
                                    }
                 });
             }
