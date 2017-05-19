@@ -2652,7 +2652,7 @@ router.put('/changePassword', function(req, res) {
                                 return res.status(400).json({error: err.message});
                             }
                             else{
-				var queryStr = 'Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where sfid='+conId+' and IVOPPassword__c=\''+oldPassword+'\'';
+				var queryStr = 'Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where id='+user_id+' and sfid='+conId+' and IVOPPassword__c=\''+oldPassword+'\'';
 				conn.query(queryStr, 
 				     function(err,result){
 					if(err){
