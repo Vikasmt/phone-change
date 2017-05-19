@@ -45,22 +45,24 @@ router.get('/ValidateAdmin', function(req, res) {
           if (err) console.log(err);
          conn.query(
              'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\'',
-             function(err,result){
+	      function(err,result){
               if (err != null || result.rowCount == 0) {
                    return  res.json({
                             userid: -1,
                             firstname:'',
                             lastname:'',
                             username:'',
-			                 uhrkid:'',
-			                 language:'',
-			                 country:'',
+			    uhrkid:'',
+			    language:'',
+			    country:'',
                             msgid: 2,
                             message: 'Invalid email.'});
                 }
                  else{
                        conn.query(
                             'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.active, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\' and um.password=\''+password+'\' and um.contactid=sc.id',
+			     console.log(emailaddress);
+                            console.log(password);
                            function(err,result){
                                done();
                                if(err != null || result.rowCount == 0){
@@ -93,9 +95,9 @@ router.get('/ValidateAdmin', function(req, res) {
                                            firstname:'',
                                            lastname:'',
                                            username:'',
-					                       uhrkid:'',
-					                       language:'',
-			                             country:'',
+					   uhrkid:'',
+					   language:'',
+			                   country:'',
                                            msgid: 4,
                                            message: 'User is not synced. Please wait...'}); 
                                }
