@@ -61,7 +61,6 @@ router.get('/ValidateAdmin', function(req, res) {
                  else{
                        conn.query(
                             'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.active, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\' and um.password=\''+password+'\' and um.contactid=sc.id',
-			     console.log(emailaddress);
                             console.log(password);
                            function(err,result){
                                done();
