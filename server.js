@@ -224,7 +224,7 @@ router.put('/forgotPassword', function(req,res){
                             return res.status(400).json({error: err.message});
                         }
                         else{
-							var queryStrCon = 'Update salesforce.contact set IVOPPassword__c=\''+resetPassword+'\' and IVOPPasswordStatus__c=\''+'Reset'+'\' where trim(email)=\''+emailAddress+'\'';
+							var queryStrCon = 'Update salesforce.contact set IVOPPassword__c=\''+resetPassword+'\' , IVOPPasswordStatus__c=\''+'Reset'+'\' where trim(email)=\''+emailAddress+'\'';
 							console.log(queryStrCon);
 							
 							conn.query(queryStrCon, 
