@@ -149,7 +149,7 @@ router.get('/getProducts', function(req, res) {
      });
 });
 
-router.put('/forgotPassword', function(req,res){
+/*router.put('/forgotPassword', function(req,res){
     var emailAddress = req.param('email').trim();
     console.log(emailAddress);
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
@@ -186,6 +186,62 @@ router.put('/forgotPassword', function(req,res){
                             return res.json({
                                             msgid: 1,
                                             message: 'Success.'});
+                        }
+                    });
+                }
+            });
+     });
+});*/
+
+router.put('/forgotPassword', function(req,res){
+    var emailAddress = req.param('email').trim();
+    console.log(emailAddress);
+     pg.connect(process.env.DATABASE_URL, function (err, conn, done){
+          if (err) console.log(err);
+         conn.query(
+             'SELECT id, firstname, lastname, username, email, phone from UserManagement where trim(email)=\''+emailAddress+'\'',
+             function(err,result){
+		  done();
+		  if (result.rowCount == 0) {
+                             return  res.json({
+                                      msgid: -1,
+                                      message: 'Invalid Username/Email.'});
+                   }
+                
+                   if(err){
+                      res.status(400).json({error: 'Email not found.'});
+                    }
+		
+                else{
+                    var resetPassword = randomstring.generate(12);
+                    var queryStr = 'Update UserManagement set password=\''+resetPassword+'\' where trim(email)=\''+emailAddress+'\'';
+                    console.log(queryStr);
+                    
+                    conn.query(queryStr, 
+                        function(err,result){
+                        done();
+                        if(err){
+                            return res.status(400).json({error: err.message});
+                        }
+                        else{
+							var queryStrCon = 'Update salesforce.contact set IVOPPassword__c=\''+resetPassword+'\' where trim(email)=\''+emailAddress+'\'';
+							console.log(queryStrCon);
+							
+							conn.query(queryStrCon, 
+								function(err,result){
+								done();
+								if(err){
+									return res.status(400).json({error: err.message});
+								}
+								else{
+									var subject = 'FMA - Finished Reset Password';
+									var text = 'Merck Feedback Managemant App recently received a request to reset the password.\n\nUsername/Email: '+emailAddress+' \n\ncurrent password :  '+resetPassword+' \n\n Thanks';
+									var resultStr = sendEmail(emailAddress, subject, text);
+									return res.json({
+													msgid: 1,
+													message: 'Success.'});
+								}
+							});
                         }
                     });
                 }
