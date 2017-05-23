@@ -234,8 +234,8 @@ router.put('/forgotPassword', function(req,res){
 									return res.status(400).json({error: err.message});
 								}
 								else{
-									var subject = 'FMA - Finished Reset Password';
-									var text = 'Merck Feedback Managemant App recently received a request to reset the password.\n\nUsername/Email: '+emailAddress+' \n\ncurrent password :  '+resetPassword+' \n\n Thanks';
+									var subject = 'IVOP - Finished Reset Password';
+									var text = 'Merck Feedback Managemant App recently received a request to reset the password.\n\nUsername/Email: '+emailAddress+' \n\nNew password :  '+resetPassword+' \n\n Thanks';
 									var resultStr = sendEmail(emailAddress, subject, text);
 									return res.json({
 													msgid: 1,
