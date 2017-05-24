@@ -235,7 +235,7 @@ router.put('/forgotPassword', function(req,res){
 								}
 								else{
 									var subject = 'IVOP - Finished Reset Password';
-									var text = 'Merck Feedback Managemant App recently received a request to reset the password.\n\nUsername/Email: '+emailAddress+' \n\nNew password :  '+resetPassword+' \n\n Thanks';
+									var text = 'Merck iVOP App recently received a request to reset the password.\n\nUsername/Email: '+emailAddress+' \n\nNew Password :  '+resetPassword+' \n\n Thanks';
 									var resultStr = sendEmail(emailAddress, subject, text);
 									return res.json({
 													msgid: 1,
