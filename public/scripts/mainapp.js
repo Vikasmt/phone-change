@@ -107,8 +107,8 @@
         $scope.isVisible = true;
         $rootScope.link = false;
         $scope.validateLogin = function(){
-            alert($scope.username);
-            alert($scope.password);
+            //alert($scope.username);
+            //alert($scope.password);
             if($scope.username!=undefined && $scope.username.length>0
               && $scope.password!=undefined && $scope.password.length>0){
                 var validateuserurl = apiUrl + 'ValidateAdminPortal';
@@ -124,7 +124,7 @@
                 $http.get(validateuserurl, config)
                         .then(function (data, status, config) {
                             var userinfo = angular.fromJson(angular.toJson(data));
-                            alert(userinfo.data.userid);
+                            alert(userinfo.data.alertmessage);
                             $cookieStore.put('AccessToken', userinfo.data.token);
                             $scope.isVisible = false;
                             $rootScope.link =  true;
