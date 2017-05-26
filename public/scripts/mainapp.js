@@ -40,8 +40,15 @@
             .state('home', {
                 url: '/home',
                 templateUrl: 'index.html',
-                controller: 'mainCtrl',
+                controller: 'loginCtrl',
                 controllerAs: 'vm'
+            })
+            .state('listscreen', {
+                url: '/list',
+                templateUrl: 'login.html',
+                controller: 'mainCtrl',
+                controllerAs: 'vm',
+                Authentication: true
             })
             .state('createuser', {
                 url: '/userAction',
@@ -51,7 +58,8 @@
                 params: {
                     'userdata': undefined,
                     'mode': undefined
-                }
+                },
+                Authentication: true
             })
             .state('userlist', {
                 url: '/users',
@@ -73,7 +81,8 @@
                 params: {
                     'helpdata': undefined,
                     'mode': undefined
-                }
+                },
+                Authentication: true
             })
            .state('disclaimerlist', {
                 url: '/Disclaimerlist',
@@ -89,9 +98,44 @@
                 params: {
                     'disclaimerdata': undefined,
                     'mode': undefined
-                }
+                },
+                Authentication: true
             });
     }]);
+    
+    myapp.controller("loginCtrl", function($scope,$rootScope, $http, $state, $cookieStore, apiUrl) {
+        $scope.isVisible = true;
+        $rootScope.link = false;
+        $scope.validateLogin = function(){
+            alert($scope.username);
+            alert($scope.password);
+            if($scope.username!=undefined && $scope.username.length>0
+              && $scope.password!=undefined && $scope.password.length>0){
+                var validateuserurl = apiUrl + 'ValidateAdminPortal';
+                console.log(validateuserurl);
+                var config = {
+                        headers : {
+                            'Content-Type': 'application/json',
+                            'email': $scope.username,
+                            'password': $scope.password
+                        }
+                    }
+        
+                $http.get(validateuserurl, config)
+                        .then(function (data, status, config) {
+                            var userinfo = angular.fromJson(angular.toJson(data));
+                            alert(userinfo.data.userid);
+                            $cookieStore.put('AccessToken', userinfo.data.token);
+                            $scope.isVisible = false;
+                            $rootScope.link =  true;
+                            $state.go('listscreen');
+                        })
+                        .catch(function (data, status, config) {
+                            alert('failed to authenticate');
+                        });
+            }
+        }
+    });
     
     myapp.controller("mainCtrl", function($scope, $http, $state, apiUrl) {
         $scope.load = function(){
