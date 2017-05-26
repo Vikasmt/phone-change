@@ -2445,8 +2445,7 @@ router.post('/insertCase', function(req, res) {
         { timestamp = jsonData.timestamp; }
         
         var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
-        console.log(combinedQuery); 
-        console.log('............insertCase...2............');
+        console.log('............insertCase...2......combinedQuery......'+combinedQuery);
         conn.query(combinedQuery,
                 function(err, result) {
                     done();
@@ -2460,11 +2459,11 @@ router.post('/insertCase', function(req, res) {
                                     message: err.message});
                         }
                         else{
-                            console.log('......Insert..Case...'result);						
+                            console.log('......Insert..Case..Result.'+result);						
                             // Updating HrkCase id Start
                                conn.query('UPDATE salesforce.Case SET fma_herokucaseid__c = \''+result.rows[0].id+'\' WHERE id='+result.rows[0].id+'',
                                    function(err,UpdateResult){
-				       console.log('......Updated..Case.for Hrk Case Id....'+UpdateResult);
+				       console.log('......Updated..Hrk CaseId...Result...'+UpdateResult);
                                        done();
                                        if(err){
                                            return res.json({  
