@@ -40,7 +40,8 @@ app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
             if(angular.isDefined(userInfo) && userInfo !== null) {
                 var config = {
                     headers : {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': $cookieStore.get('AccessToken')
                         }
                 }
                 
@@ -61,7 +62,8 @@ app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
             if(angular.isDefined(userInfo) && userInfo !== null) {
                 var config = {
                     headers : {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': $cookieStore.get('AccessToken')
                         }
                 }
                 
