@@ -7,9 +7,10 @@ app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
         $scope.getUsers = function () {
             $scope.selectedOption = "All";
             var getUsersUrl = apiUrl + 'getUsers';
-             var config = {
+              var config = {
                     headers : {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': $cookieStore.get('AccessToken')
                         }
                 }
             $http.get(getUsersUrl, config)
