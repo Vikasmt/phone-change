@@ -2460,12 +2460,11 @@ router.post('/insertCase', function(req, res) {
                                     message: err.message});
                         }
                         else{
-                            console.log(result);						
-                            // Updating HrkCase id Start			       
-
+                            console.log('......Insert..Case...'result);						
+                            // Updating HrkCase id Start
                                conn.query('UPDATE salesforce.Case SET fma_herokucaseid__c = \''+result.rows[0].id+'\' WHERE id='+result.rows[0].id+'',
-                                   function(err,result){
-				       console.log('......Updated..Case Id...'+result);
+                                   function(err,UpdateResult){
+				       console.log('......Updated..Case.for Hrk Case Id....'+UpdateResult);
                                        done();
                                        if(err){
                                            return res.json({  
@@ -2481,8 +2480,6 @@ router.post('/insertCase', function(req, res) {
 						message: 'Success.'});
                                        }
                                    });			
-				
-				
 			   // Updating HrkCase id End
                         } 
             });
