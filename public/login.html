@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <!-- Material Design fonts -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+  <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css" />
+    
+    <style>
+        
+        .form-control:invalid, .custom-file-control:invalid {
+    background-image: -webkit-linear-gradient(bottom, #9E7CC1 2px, rgba(213, 0, 0, 0) 2px), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.26) 1px, transparent 1px);
+    background-image: -o-linear-gradient(bottom, #d50000 2px, rgba(213, 0, 0, 0) 2px), -o-linear-gradient(bottom, rgba(0, 0, 0, 0.26) 1px, transparent 1px);
+    background-image: linear-gradient(to top, #9E7CC1 2px, rgba(213, 0, 0, 0) 2px), linear-gradient(to top, rgba(0, 0, 0, 0.26) 1px, transparent 1px);
+}
+    .panel-title{
+    color: #79589F;
+    text-align: center;
+    font-size: 1.75rem;
+    margin: 1em 0;
+    font-weight: 300;}
+     .panel-title i{
+        font-size: 2em;
+     }
+    .panel-title span{
+        display: block;
+    }
+    .btn-div{
+        width: 100%;
+        margin:20px auto;
+        text-align: center;
+    }
+    .btn.btn-raised.btn-success,.btn.btn-raised.btn-success:hover,.btn.btn-raised.btn-success.active{
+         background-color: #79589F;
+         border-color: #79589F; 
+    }
+    .table thead th{
+    font-weight: 400;
+    font-size: 1em;
+    background: #ffffff;
+    color: #79589f;
+    border-top:none;
+    }
+    .table td:first-child, .table th:first-child{
+        text-align: center;
+    } 
+    .table td {   
+        padding: 0.6rem;
+        vertical-align: middle;
+        border-top: 1px solid rgb(255, 255, 255);
+        font-size: 0.95em;
+        color: rgba(0, 0, 0, 0.79);
+    } 
+    .table td i{font-size: 1em;
+    color: #79589f;}
+    .table-striped tbody tr:nth-of-type(odd){
+     
+         background-color:rgb(250, 250, 250);
+    }
+      .table-striped tbody tr:nth-of-type(even){
+          background-color:#fff;
+    }
+    .state-overview .yellow {
+    background: #f1c40f;
+        float: left;
+    width: 145px;
+    height: 145px;
+}
+.state-overview .purple {
+    background: #9b59b6;
+      float: left;
+    width: 145px;
+    height: 145px;
+}
+.yellow i, .purple i{
+        padding: 0.3em;
+    color: #fff;
+    font-size: 5em;
+}
+ .panel{
+   cursor:pointer;
+  }
+    </style>
+
+
+    
+</head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-resource.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="scripts/constants/myapp.constant.js"></script>
+    <script src="scripts/ngLoader.js"></script>
+    <script src="scripts/mainapp.js"></script>
+    <script src="scripts/appHttpInterceptor.js"></script>
+    <script src="scripts/controllers/createuser.js"></script>
+    <script src="scripts/controllers/userlist.js"></script>
+    <script src="scripts/controllers/HelpList.js"></script>
+    <script src="scripts/controllers/createHelp.js"></script>
+    <script src="scripts/controllers/disclaimerlist.js"></script>
+    <script src="scripts/controllers/createDisclaimer.js"></script>
+<body>
+  <!--<div style="width: 100%;    background: #8460aa;">
+     
+    <img src="https://www.merck-cap.com/resource/1478119071000/Images/images/layer_15.png" style="width: 77px;height: 42px;margin: 10px 14px;" />
+    <a href="https://phone-change-con.herokuapp.com" class="material-icons" style="color: #fafafa;font-size: 1.9em;padding: 0.1em 0em 0 0.5em;line-height: 1em;vertical-align: middle;">home</a>
+    </div>-->
+
+    
+<div ng-app="mainApp" ng-controller="mainCtrl" ng-init="load()">
+<div ng-hide="isclicked===true">
+  
+    <div class="row state-overview" style="width: 60%;margin: 65px auto;">
+            <div class="col-md-6" style="">
+                <section class="panel" on ng-click="navigatecreateuser()">
+                    <div class="symbol yellow" style="float: left;">
+                        <i class="material-icons">person_add</i>
+                    </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">
+                        <a ng-click="navigatecreateuser()"> <p style="padding: 1em 0;font-size: 1.2em;">Create Users</p></a>
+                    </div>
+                </section>
+                </div>
+                    <div class=" col-md-6">
+                        <section class="panel" onclick="" ng-click="navigateuserslist()">
+                            <div class="symbol purple" style="float: left;">
+                                <i class="material-icons">group</i>
+                            </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">                              
+                        <a ng-click="navigateuserslist()"> <p style=" padding: 1em 0;font-size: 1.2em;color: rgba(0, 0, 0, 0.87);">List Of Users</p></a>
+                    </div>
+                        </section>
+                    </div>
+    </div>
+</div>
+<div ng-hide="isclickedhelp===true">
+  
+    <div class="row state-overview" style="width: 60%;margin: 65px auto;">
+            <div class="col-md-6" style="">
+                <section class="panel" on ng-click="navigatecreatehelp()">
+                    <div class="symbol yellow" style="float: left;">
+                        <i class="material-icons">help</i>
+                    </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">
+                        <a ng-click="navigatecreatehelp()"> <p style="padding: 1em 0;font-size: 1.2em;">Create Help</p></a>
+                    </div>
+                </section>
+                </div>
+                    <div class=" col-md-6">
+                        <section class="panel" onclick="" ng-click="navigatehelplist()">
+                            <div class="symbol purple" style="float: left;">
+                                <i class="material-icons">help_outline</i>
+                            </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">                              
+                        <a ng-click="navigatehelplist()"> <p style=" padding: 1em 0;font-size: 1.2em;color: rgba(0, 0, 0, 0.87);">List Of Help</p></a>
+                    </div>
+                        </section>
+                    </div>
+    </div>
+</div>
+<div ng-hide="isclickeddisclaimer===true">
+  
+    <div class="row state-overview" style="width: 60%;margin: 65px auto;">
+            <div class="col-md-6" style="">
+                <section class="panel" on ng-click="navigatecreatedisclaimer()">
+                    <div class="symbol yellow" style="float: left;">
+                        <i class="material-icons">warning</i>
+                    </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">
+                        <a ng-click="navigatecreatedisclaimer()"> <p style="padding: 1em 0;font-size: 1.2em;">Create Disclaimer</p></a>
+                    </div>
+                </section>
+                </div>
+                    <div class=" col-md-6">
+                        <section class="panel" onclick="" ng-click="navigatedisclaimerlist()">
+                            <div class="symbol purple" style="float: left;">
+                                <i class="material-icons">warning_outline</i>
+                            </div>
+                    <div class="value" style="float: left;background: #fff;/* width: 145px; */height: 145px;width: 60%;padding: 2em 2em;">                              
+                        <a ng-click="navigatedisclaimerlist()"> <p style=" padding: 1em 0;font-size: 1.2em;color: rgba(0, 0, 0, 0.87);">List Of Disclaimer</p></a>
+                    </div>
+                        </section>
+                    </div>
+    </div>
+</div>
+    
+    <div ui-view></div>
+</div>
+</body>
+</html>
