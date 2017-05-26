@@ -47,8 +47,8 @@
                 url: '/list',
                 templateUrl: 'login.html',
                 controller: 'mainCtrl',
-                controllerAs: 'vm'
-                //Authentication: true
+                controllerAs: 'vm',
+                Authentication: true
             })
             .state('createuser', {
                 url: '/userAction',
