@@ -7,7 +7,7 @@
             if (to.Authentication == true) {
                 if (angular.isUndefined($cookieStore.get('AccessToken')) || $cookieStore.get('AccessToken').length == 0) {
                     e.preventDefault();
-                    $state.go('https://phone-change-con.herokuapp.com/#!/');
+                    $state.go('https://phone-change-con.herokuapp.com');
                 }
             }
             return;
