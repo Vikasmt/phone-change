@@ -1,13 +1,13 @@
 (function(){
 var app = angular.module("mainApp");
-app.controller("userCtrl", function($scope, $http, $state, apiUrl) {
+app.controller("userCtrl", function($scope, $http, $state, $cookieStore, apiUrl) {
         $scope.userlist = [];
         $scope.usersMainList = [];
     
         $scope.getUsers = function () {
             $scope.selectedOption = "All";
             var getUsersUrl = apiUrl + 'getUsers';
-              var config = {
+             var config = {
                     headers : {
                         'Content-Type': 'application/json',
                         'token': $cookieStore.get('AccessToken')
