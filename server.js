@@ -116,6 +116,7 @@ router.get('/ValidateAdminPortal', function(req, res) {
                                             token: rawtoken,
                                             uhrkid: result.rows[0].id,
                                             userid: result.rows[0].sfid,
+					    alertmessage:'You have logged in successfully',
                                             msgid: 1,
                                             message: 'Success.'});
                                }
