@@ -1693,7 +1693,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_Cartridgeissue__c,'; valuesData += '\'' + jsonData.CartridgeIssue + '\'' + ',';
                   updateValueData += 'CI_Cartridgeissue__c = \''+jsonData.CartridgeIssue+'\',';
 				}
-				else { updateValueData += 'DT_DecisionTreeIssueType__c = \'\','; } 
+				else { updateValueData += 'CI_Cartridgeissue__c = \'\','; } 
 				
 			if (jsonData.CDCartridgeDetection !== undefined && jsonData.CDCartridgeDetection !== null && jsonData.CDCartridgeDetection !== "null" && jsonData.CDCartridgeDetection.length > 0)
 				{ insertQueryData += 'CI_CartridgeDetection__c,'; valuesData += '\'' + jsonData.CDCartridgeDetection + '\'' + ','; 
