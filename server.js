@@ -1833,7 +1833,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
 			   { insertQueryData += 'CI_CC_Frequency__c,'; valuesData += '\'' + jsonData.CCFrequency + '\'' + ','; 
 			   updateValueData += 'CI_CC_Frequency__c = \''+jsonData.CCFrequency+'\',';
 			   }
-				else { updateValueData += 'DT_DecisionTreeIssueType__c = \'\','; } 
+				else { updateValueData += 'CI_CC_Frequency__c = \'\','; } 
 			if (jsonData.CCHasSettingOfDeviceChangedRecently !== undefined && jsonData.CCHasSettingOfDeviceChangedRecently !== null && jsonData.CCHasSettingOfDeviceChangedRecently !== "null" && jsonData.CCHasSettingOfDeviceChangedRecently.length > 0)
 				{ insertQueryData += 'CI_CC_HasSettingOfDeviceChangedRecently__c,'; valuesData += '\'' + jsonData.CCHasSettingOfDeviceChangedRecently + '\'' + ','; 
 				updateValueData += 'CI_CC_HasSettingOfDeviceChangedRecently__c = \''+jsonData.CCHasSettingOfDeviceChangedRecently+'\',';
