@@ -1863,7 +1863,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CC_HowManyInjectionShouldHavePerformd__c,'; valuesData += '\'' + jsonData.CCHowManyInjectionShouldHavePerformd + '\'' + ','; 
 				updateValueData += 'CI_CC_HowManyInjectionShouldHavePerformd__c = \''+jsonData.CCHowManyInjectionShouldHavePerformd+'\',';
 				}
-			else { updateValueData += 'DT_DecisionTreeIssueType__c = \'\','; } 
+			else { updateValueData += 'CI_CC_HowManyInjectionShouldHavePerformd__c = \'\','; } 
 			if (jsonData.CCHowManyInjectionCouldHavPerformd !== undefined && jsonData.CCHowManyInjectionCouldHavPerformd !== null && jsonData.CCHowManyInjectionCouldHavPerformd !== "null" && jsonData.CCHowManyInjectionCouldHavPerformd.length > 0)
 				{ insertQueryData += 'CI_CC_HowManyInjectionCouldHavPerformd__c,'; valuesData += '\'' + jsonData.CCHowManyInjectionCouldHavPerformd + '\'' + ','; 
 				updateValueData += 'CI_CC_HowManyInjectionCouldHavPerformd__c = \''+jsonData.CCHowManyInjectionCouldHavPerformd+'\',';
