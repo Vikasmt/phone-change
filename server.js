@@ -2016,7 +2016,11 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CR_ComplaintAboutCatridgeCanotRemoved__c,'; valuesData += '\'' + jsonData.CRComplaintAboutCatridgeCanotRemoved + '\'' + ','; 
 				updateValueData += 'CI_CR_ComplaintAboutCatridgeCanotRemoved__c = \''+jsonData.CRComplaintAboutCatridgeCanotRemoved+'\',';
 				}
-				
+			if (jsonData.DoesPatientComplainThatSometimeRemovedIfYes !== undefined && jsonData.DoesPatientComplainThatSometimeRemovedIfYes !== null && jsonData.DoesPatientComplainThatSometimeRemovedIfYes !== "null" && jsonData.DoesPatientComplainThatSometimeRemovedIfYes.length > 0)
+				{ insertQueryData += 'CI_CR_Complaintaboutcatridgeremoveifyes__c,'; valuesData += '\'' + jsonData.DoesPatientComplainThatSometimeRemovedIfYes + '\'' + ','; 
+				updateValueData += 'CI_CR_Complaintaboutcatridgeremoveifyes__c = \''+jsonData.DoesPatientComplainThatSometimeRemovedIfYes+'\',';
+				}	
+		          else { updateValueData += 'CI_CR_Complaintaboutcatridgeremoveifyes__c = \'\','; }
 			if (jsonData.CRProvideFrequencyDateOfLastOccuranc !== undefined && jsonData.CRProvideFrequencyDateOfLastOccuranc !== null && jsonData.CRProvideFrequencyDateOfLastOccuranc !== "null" && jsonData.CRProvideFrequencyDateOfLastOccuranc.length > 0)
 				{ insertQueryData += 'CI_CR_ProvideFrequencyDateOfLastOccuranc__c,'; valuesData += '\'' + jsonData.CRProvideFrequencyDateOfLastOccuranc + '\'' + ','; 
 				updateValueData += 'CI_CR_ProvideFrequencyDateOfLastOccuranc__c = \''+jsonData.CRProvideFrequencyDateOfLastOccuranc+'\',';
