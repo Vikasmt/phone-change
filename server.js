@@ -1284,8 +1284,8 @@ router.post('/insertDataandtransfer', function(req, res) {
 				}
 				
 			if (jsonData.UserAbleToPerformDataTransferIfNO !== undefined && jsonData.UserAbleToPerformDataTransferIfNO !== null && jsonData.UserAbleToPerformDataTransferIfNO !== "null" && jsonData.UserAbleToPerformDataTransferIfNO.length > 0)
-				{ insertQueryData += 'DT_userabletoperformdatatransferIfNO__c,'; valuesData += '\'' + jsonData.UserAbleToPerformDataTransferIfNO + '\'' + ','; 
-				  updateValueData += 'DT_userabletoperformdatatransferIfNO__c = \''+jsonData.UserAbleToPerformDataTransferIfNO+'\',';
+				{ insertQueryData += 'DT_userabletoperformdatatransferifno1__c,'; valuesData += '\'' + jsonData.UserAbleToPerformDataTransferIfNO + '\'' + ','; 
+				  updateValueData += 'DT_userabletoperformdatatransferifno1__c = \''+jsonData.UserAbleToPerformDataTransferIfNO+'\',';
 				}
 			else { updateValueData += 'DT_userabletoperformdatatransferIfNO__c = \'\','; } 		
 			if (jsonData.DateWhenTheIssueObservedIfNO !== undefined && jsonData.DateWhenTheIssueObservedIfNO !== null && jsonData.DateWhenTheIssueObservedIfNO !== "null" && jsonData.DateWhenTheIssueObservedIfNO.length > 0)
