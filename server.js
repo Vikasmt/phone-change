@@ -1239,8 +1239,8 @@ router.post('/insertDataandtransfer', function(req, res) {
 				}
 			else { updateValueData += 'DT_More__c = \'\','; } 	
 			if (jsonData.DidTheDataTransferPerformedByHCP !== undefined && jsonData.DidTheDataTransferPerformedByHCP !== null && jsonData.DidTheDataTransferPerformedByHCP !== "null" && jsonData.DidTheDataTransferPerformedByHCP.length > 0)
-				{ insertQueryData += 'DT_DidthedatatransferperformedbyHCP__c,'; valuesData += '\'' + jsonData.DidTheDataTransferPerformedByHCP + '\'' + ','; 
-				  updateValueData += 'DT_DidthedatatransferperformedbyHCP__c = \''+jsonData.DidTheDataTransferPerformedByHCP+'\',';
+				{ insertQueryData += 'DT_DidthedatatransferperformedbyHCP1__c,'; valuesData += '\'' + jsonData.DidTheDataTransferPerformedByHCP + '\'' + ','; 
+				  updateValueData += 'DT_DidthedatatransferperformedbyHCP1__c = \''+jsonData.DidTheDataTransferPerformedByHCP+'\',';
 				}
 			else { updateValueData += 'DT_DidthedatatransferperformedbyHCP__c = \'\','; } 
 			if (jsonData.InfoDisplayedByEdeviceIfYES !== undefined && jsonData.InfoDisplayedByEdeviceIfYES !== null && jsonData.InfoDisplayedByEdeviceIfYES !== "null" && jsonData.InfoDisplayedByEdeviceIfYES.length > 0)
