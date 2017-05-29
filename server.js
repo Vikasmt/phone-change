@@ -1516,8 +1516,8 @@ router.post('/insertPowerFailure', function(req, res) {
 				}   
 				
 			if (jsonData.NPOWarningMessage !== undefined && jsonData.NPOWarningMessage !== null && jsonData.NPOWarningMessage !== "null" && jsonData.NPOWarningMessage.length > 0)
-				{ insertQueryData += 'PF_NPO_WarningMessage__c,'; valuesData += '\'' + jsonData.NPOWarningMessage + '\'' + ','; 
-				  updateValueData += 'PF_NPO_WarningMessage__c = \''+jsonData.NPOWarningMessage+'\',';
+				{ insertQueryData += 'PF_NPO1_WarningMessage__c,'; valuesData += '\'' + jsonData.NPOWarningMessage + '\'' + ','; 
+				  updateValueData += 'PF_NPO1_WarningMessage__c = \''+jsonData.NPOWarningMessage+'\',';
 				}
 				
 			if (jsonData.NPONopoweroffIssueDisplydAtWhatStep !== undefined && jsonData.NPONopoweroffIssueDisplydAtWhatStep !== null && jsonData.NPONopoweroffIssueDisplydAtWhatStep !== "null" && jsonData.NPONopoweroffIssueDisplydAtWhatStep.length > 0)
