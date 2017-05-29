@@ -2022,8 +2022,8 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				}	
 		          else { updateValueData += 'CI_CR_Complaintaboutcatridgeremoveifyes__c = \'\','; }
 			if (jsonData.CRProvideFrequencyDateOfLastOccuranc !== undefined && jsonData.CRProvideFrequencyDateOfLastOccuranc !== null && jsonData.CRProvideFrequencyDateOfLastOccuranc !== "null" && jsonData.CRProvideFrequencyDateOfLastOccuranc.length > 0)
-				{ insertQueryData += 'CI_CR_ProvideFrequencyDateOfLastOccuranc__c,'; valuesData += '\'' + jsonData.CRProvideFrequencyDateOfLastOccuranc + '\'' + ','; 
-				updateValueData += 'CI_CR_ProvideFrequencyDateOfLastOccuranc__c = \''+jsonData.CRProvideFrequencyDateOfLastOccuranc+'\',';
+				{ insertQueryData += 'CI_CR_ProvideFreqDateOfLastOccuranc1__c,'; valuesData += '\'' + jsonData.CRProvideFrequencyDateOfLastOccuranc + '\'' + ','; 
+				updateValueData += 'CI_CR_ProvideFreqDateOfLastOccuranc1__c = \''+jsonData.CRProvideFrequencyDateOfLastOccuranc+'\',';
 				}
 				
 			if (jsonData.CRCartridgeRemovalIssueLinkedToPF !== undefined && jsonData.CRCartridgeRemovalIssueLinkedToPF !== null && jsonData.CRCartridgeRemovalIssueLinkedToPF !== "null" && jsonData.CRCartridgeRemovalIssueLinkedToPF.length > 0)
