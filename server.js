@@ -1759,7 +1759,14 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CD_IsTheCartridgeNew__c,'; valuesData += '\'' + jsonData.CDIsTheCartridgeNew + '\'' + ','; 
 				updateValueData += 'CI_CD_IsTheCartridgeNew__c = \''+jsonData.CDIsTheCartridgeNew+'\',';
 				}
-			
+			 else { updateValueData += 'CI_CD_IsTheCartridgeNew__c = \''+'False'+'\','; }
+		  
+		        if (jsonData.CDCartridgeLabelBeenRemovedReplaced !== undefined && jsonData.CDCartridgeLabelBeenRemovedReplaced !== null && jsonData.CDCartridgeLabelBeenRemovedReplaced !== "null" && jsonData.CDCartridgeLabelBeenRemovedReplaced.length > 0)
+				{ insertQueryData += 'CI_CD_CartridgeLabelBeenRemovedReplaced__c,'; valuesData += '\'' + jsonData.CDCartridgeLabelBeenRemovedReplaced + '\'' + ','; 
+				updateValueData += 'CI_CD_CartridgeLabelBeenRemovedReplaced__c = \''+jsonData.CDCartridgeLabelBeenRemovedReplaced+'\',';
+				}
+			 else { updateValueData += 'CI_CD_CartridgeLabelBeenRemovedReplaced__c = \''+'False'+'\','; }
+		  
 			if (jsonData.CDIsTheCartridgeNewIfNo !== undefined && jsonData.CDIsTheCartridgeNewIfNo !== null && jsonData.CDIsTheCartridgeNewIfNo !== "null" && jsonData.CDIsTheCartridgeNewIfNo.length > 0)
 				{ insertQueryData += 'CI_CD_IsTheCartridgeNewIfNo__c,'; valuesData += '\'' + jsonData.CDIsTheCartridgeNewIfNo + '\'' + ','; 
 				updateValueData += 'CI_CD_IsTheCartridgeNewIfNo__c = \''+jsonData.CDIsTheCartridgeNewIfNo+'\',';
