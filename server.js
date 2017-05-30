@@ -1247,7 +1247,7 @@ router.post('/insertDataandtransfer', function(req, res) {
 				{ insertQueryData += 'DT_InfodisplayedbyedeviceifYES__c,'; valuesData += '\'' + jsonData.InfoDisplayedByEdeviceIfYES + '\'' + ','; 
 				  updateValueData += 'DT_InfodisplayedbyedeviceifYES__c = \''+jsonData.InfoDisplayedByEdeviceIfYES+'\',';
 				}
-			else { updateValueData += 'DT_InfodisplayedbyedeviceifYES__c = \''+'False'+'\','; } 		
+			else {updateValueData += 'DT_InfodisplayedbyedeviceifYES__c = \'\',';  } 		
 			if (jsonData.DataTransferFromEdeviceToEasypod !== undefined && jsonData.DataTransferFromEdeviceToEasypod !== null && jsonData.DataTransferFromEdeviceToEasypod !== "null" && jsonData.DataTransferFromEdeviceToEasypod.length > 0)
 				{ insertQueryData += 'DT_DatatransferfromedevicetoEasypod__c,'; valuesData += '\'' + jsonData.DataTransferFromEdeviceToEasypod + '\'' + ',';
                   updateValueData += 'DT_DatatransferfromedevicetoEasypod__c = \''+jsonData.DataTransferFromEdeviceToEasypod+'\',';
