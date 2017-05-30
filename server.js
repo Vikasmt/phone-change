@@ -1277,7 +1277,7 @@ router.post('/insertDataandtransfer', function(req, res) {
 				{ insertQueryData += 'DT_Pleaseprovidediscrepancyanddate__c,'; valuesData += '\'' + jsonData.PleaseProvideDiscrepancyAndDate + '\'' + ','; 
 				  updateValueData += 'DT_Pleaseprovidediscrepancyanddate__c = \''+jsonData.PleaseProvideDiscrepancyAndDate+'\',';
 				}
-					
+			else { updateValueData += 'DT_Pleaseprovidediscrepancyanddate__c = \'\','; } 		
 			if (jsonData.DateWhenIssueOccurred !== undefined && jsonData.DateWhenIssueOccurred !== null && jsonData.DateWhenIssueOccurred !== "null" && jsonData.DateWhenIssueOccurred.length > 0)
 				{ insertQueryData += 'DT_Datewhenissueoccurred__c,'; valuesData += '\'' + jsonData.DateWhenIssueOccurred + '\'' + ','; 
 				  updateValueData += 'DT_Datewhenissueoccurred__c = \''+jsonData.DateWhenIssueOccurred+'\',';
