@@ -1241,7 +1241,7 @@ router.post('/insertDataandtransfer', function(req, res) {
 				{ insertQueryData += 'DT_DidthedatatransferperformedbyHCP1__c,'; valuesData += '\'' + jsonData.DidTheDataTransferPerformedByHCP + '\'' + ','; 
 				  updateValueData += 'DT_DidthedatatransferperformedbyHCP1__c = \''+jsonData.DidTheDataTransferPerformedByHCP+'\',';
 				}
-			else { updateValueData += 'DT_DidthedatatransferperformedbyHCP__c = \'\','; } 
+			else { updateValueData += 'DT_DidthedatatransferperformedbyHCP1__c = \'\','; } 
 			if (jsonData.InfoDisplayedByEdeviceIfYES !== undefined && jsonData.InfoDisplayedByEdeviceIfYES !== null && jsonData.InfoDisplayedByEdeviceIfYES !== "null" && jsonData.InfoDisplayedByEdeviceIfYES.length > 0)
 				{ insertQueryData += 'DT_InfodisplayedbyedeviceifYES__c,'; valuesData += '\'' + jsonData.InfoDisplayedByEdeviceIfYES + '\'' + ','; 
 				  updateValueData += 'DT_InfodisplayedbyedeviceifYES__c = \''+jsonData.InfoDisplayedByEdeviceIfYES+'\',';
