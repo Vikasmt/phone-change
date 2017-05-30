@@ -885,7 +885,7 @@ router.post('/updateCase', function(req, res) {
 				        else{valueData += 'FMA_Adverseeventassociatedtodefect__c = \''+'False'+'\',';}
 
 					if (jsonData.AdverseEventAssociatedWitchOne !== undefined && jsonData.AdverseEventAssociatedWitchOne !== null && jsonData.AdverseEventAssociatedWitchOne !== "null" && jsonData.AdverseEventAssociatedWitchOne.length > 0)
-					{ valueData += 'FMA_Adverseeventassociatedwhichone__c = \''+jsonData.DeviceName+'\','; }
+					{ valueData += 'FMA_Adverseeventassociatedwhichone__c = \''+jsonData.AdverseEventAssociatedWitchOne+'\','; }
 				        else{valueData += 'FMA_Adverseeventassociatedwhichone__c = \'\',';}				
 					
 					if (jsonData.Subject !== undefined && jsonData.Subject !== null && jsonData.Subject !== "null" && jsonData.Subject.length > 0)
