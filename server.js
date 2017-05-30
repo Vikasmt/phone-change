@@ -517,8 +517,8 @@ router.post('/insertNeedleIssue', function(req, res) {
     console.log('............insertDecisiontree...............');   
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);       
-       
         var jsonData = req.body;
+	JSON.parse(jsonData.replace(/&quot;/g,'''));
         console.log('.....req..body......'+req.body);
         conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.caseid+'',
         function(err,result){
