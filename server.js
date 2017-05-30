@@ -1180,8 +1180,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
     });
 });
 
-
-
+	
 router.post('/insertDataandtransfer', function(req, res) {
     console.log('............insertDecisiontree...............');   
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
@@ -1217,7 +1216,7 @@ router.post('/insertDataandtransfer', function(req, res) {
 				{ insertQueryData += 'DT_InfoDisplayedByDeviceNotAccurate__c,'; valuesData += '\'' + jsonData.InfoDisplayedByDeviceNotAccurate + '\'' + ','; 
 				  updateValueData += 'DT_InfoDisplayedByDeviceNotAccurate__c = \''+jsonData.InfoDisplayedByDeviceNotAccurate+'\',';
 				}
-				
+			else { updateValueData += 'DT_InfoDisplayedByDeviceNotAccurate__c = \''+'False'+'\','; }		
 			if (jsonData.DateandTime !== undefined && jsonData.DateandTime !== null && jsonData.DateandTime !== "null" && jsonData.DateandTime.length > 0)
 				{ insertQueryData += 'DT_Dateandtime__c,'; valuesData += '\'' + jsonData.DateandTime + '\'' + ','; 
 				  updateValueData += 'DT_Dateandtime__c = \''+jsonData.DateandTime+'\',';
@@ -1261,18 +1260,18 @@ router.post('/insertDataandtransfer', function(req, res) {
 			if (jsonData.WasUserAbleToPerformDataTransfer !== undefined && jsonData.WasUserAbleToPerformDataTransfer !== null && jsonData.WasUserAbleToPerformDataTransfer !== "null" && jsonData.WasUserAbleToPerformDataTransfer.length > 0)
 				{ insertQueryData += 'DT_Wasuserabletoperformdatatransfer__c,'; valuesData += '\'' + jsonData.WasUserAbleToPerformDataTransfer + '\'' + ','; 
 				  updateValueData += 'DT_Wasuserabletoperformdatatransfer__c = \''+jsonData.WasUserAbleToPerformDataTransfer+'\',';
-				}
-				
+				}	
+			else { updateValueData += 'DT_Wasuserabletoperformdatatransfer__c = \''+'False'+'\','; }	
 			if (jsonData.WasUserAbleToSeeUploadedData !== undefined && jsonData.WasUserAbleToSeeUploadedData !== null && jsonData.WasUserAbleToSeeUploadedData !== "null" && jsonData.WasUserAbleToSeeUploadedData.length > 0)
 				{ insertQueryData += 'DT_Wasuserabletoseeuploadeddata__c,'; valuesData += '\'' + jsonData.WasUserAbleToSeeUploadedData + '\'' + ','; 
 				  updateValueData += 'DT_Wasuserabletoseeuploadeddata__c = \''+jsonData.WasUserAbleToSeeUploadedData+'\',';
 				}
-				
+			else { updateValueData += 'DT_Wasuserabletoseeuploadeddata__c = \''+'False'+'\','; }	
 			if (jsonData.AreTheUploadedDataAccurate !== undefined && jsonData.AreTheUploadedDataAccurate !== null && jsonData.AreTheUploadedDataAccurate !== "null" && jsonData.AreTheUploadedDataAccurate.length > 0)
 				{ insertQueryData += 'DT_AreTheUploadedDataAccurate__c,'; valuesData += '\'' + jsonData.AreTheUploadedDataAccurate + '\'' + ','; 
 				  updateValueData += 'DT_AreTheUploadedDataAccurate__c = \''+jsonData.AreTheUploadedDataAccurate+'\',';
 				}
-				
+			else { updateValueData += 'DT_AreTheUploadedDataAccurate__c = \''+'False'+'\','; }	
 			if (jsonData.PleaseProvideDiscrepancyAndDate !== undefined && jsonData.PleaseProvideDiscrepancyAndDate !== null && jsonData.PleaseProvideDiscrepancyAndDate !== "null" && jsonData.PleaseProvideDiscrepancyAndDate.length > 0)
 				{ insertQueryData += 'DT_Pleaseprovidediscrepancyanddate__c,'; valuesData += '\'' + jsonData.PleaseProvideDiscrepancyAndDate + '\'' + ','; 
 				  updateValueData += 'DT_Pleaseprovidediscrepancyanddate__c = \''+jsonData.PleaseProvideDiscrepancyAndDate+'\',';
@@ -1297,7 +1296,7 @@ router.post('/insertDataandtransfer', function(req, res) {
 				{ insertQueryData += 'DT_Isitarecurrentfailure__c,'; valuesData += '\'' + jsonData.IsitaRecurrentFailure + '\'' + ','; 
 				  updateValueData += 'DT_Isitarecurrentfailure__c = \''+jsonData.IsitaRecurrentFailure+'\',';
 				}
-				
+				else { updateValueData += 'DT_Isitarecurrentfailure__c = \''+'False'+'\','; }	
 			if (jsonData.PleaseProvideFrequencyIfYES !== undefined && jsonData.PleaseProvideFrequencyIfYES !== null && jsonData.PleaseProvideFrequencyIfYES !== "null" && jsonData.PleaseProvideFrequencyIfYES.length > 0)
 				{ insertQueryData += 'DT_ifyesPleaseprovidefrequency__c,'; valuesData += '\'' + jsonData.PleaseProvideFrequencyIfYES + '\'' + ','; 
 				  updateValueData += 'DT_ifyesPleaseprovidefrequency__c = \''+jsonData.PleaseProvideFrequencyIfYES+'\',';
@@ -1307,16 +1306,17 @@ router.post('/insertDataandtransfer', function(req, res) {
 				{ insertQueryData += 'DT_IssueLinkedToTheTransmitter__c,'; valuesData += '\'' + jsonData.IssueLinkedToTheTransmitter + '\'' + ','; 
 				  updateValueData += 'DT_IssueLinkedToTheTransmitter__c = \''+jsonData.IssueLinkedToTheTransmitter+'\',';
 				}
-				
+			else { updateValueData += 'DT_IssueLinkedToTheTransmitter__c = \''+'False'+'\','; }		
 			if (jsonData.AbnormalBlinkingOfTheTransmitter !== undefined && jsonData.AbnormalBlinkingOfTheTransmitter !== null && jsonData.AbnormalBlinkingOfTheTransmitter !== "null" && jsonData.AbnormalBlinkingOfTheTransmitter.length > 0)
 				{ insertQueryData += 'DT_AbnormalBlinkingOfTheTransmitter__c,'; valuesData += '\'' + jsonData.AbnormalBlinkingOfTheTransmitter + '\'' + ','; 
 				  updateValueData += 'DT_AbnormalBlinkingOfTheTransmitter__c = \''+jsonData.AbnormalBlinkingOfTheTransmitter+'\',';
 				}
-	    
+	        else { updateValueData += 'DT_AbnormalBlinkingOfTheTransmitter__c = \''+'False'+'\','; }		
 	        if (jsonData.WarngMsgDisplaydUponDataTransfer !== undefined && jsonData.WarngMsgDisplaydUponDataTransfer !== null && jsonData.WarngMsgDisplaydUponDataTransfer !== "null" && jsonData.WarngMsgDisplaydUponDataTransfer.length > 0)
                 { insertQueryData += 'DT_WarngMsgDisplaydUponDataTransfer__c,'; valuesData += '\'' + jsonData.WarngMsgDisplaydUponDataTransfer + '\'' + ','; 
 				  updateValueData += 'DT_WarngMsgDisplaydUponDataTransfer__c = \''+jsonData.WarngMsgDisplaydUponDataTransfer+'\',';
 				}
+			else { updateValueData += 'DT_WarngMsgDisplaydUponDataTransfer__c = \''+'False'+'\','; }	
                 
             if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0){ 
 			     insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\'';
@@ -1359,6 +1359,7 @@ router.post('/insertDataandtransfer', function(req, res) {
         });
     });
 });
+
 
 
 router.post('/insertPowerFailure', function(req, res) {
