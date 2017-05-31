@@ -518,6 +518,7 @@ router.post('/insertNeedleIssue', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);       
         var jsonData = req.body;
+	//JSON.parse(jsonData.replace(/&quot;/g,'''));
         console.log('.....req..body......'+req.body);
         conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.caseid+'',
         function(err,result){
@@ -2271,4 +2272,573 @@ router.post('/uploadfile', function(req, res) {
                             }
                             else{
                                 var attachmentrowid = result.rows[0].id;
-                             
+                                var columname = 'fma_attachment' + loopid + '__c';
+			        var herokucaseid = 'fma_herokucaseid__c';
+                                console.log('columname:' + columname);
+                                var attachmentUrl = baseUrl + 'api/showImage?imageid=' +attachmentrowid;
+                                console.log('attachmentUrl:'+attachmentUrl);
+                                
+                                conn.query('UPDATE salesforce.Case SET '+columname+' = \''+attachmentUrl+'\', '+herokucaseid+' = \''+caseid+'\' WHERE id='+caseid+'',
+                                    function(err,result){
+                                        done();
+                                        if(err){
+                                            return res.json({
+                                                    attachementid: -1,
+                                                    msgid: 2,
+                                                    message: err.message});
+                                        }
+                                        else{
+                                           return res.json({
+                                                    attachementid: attachmentrowid,
+                                                    msgid: 1,
+                                                    message: 'Success.'});
+                                        }
+                                    });
+                                }
+                            });
+                     }
+             });
+     });
+});
+
+router.get('/getContact', function(req, res) {
+    var contact_id = req.param('id');
+     pg.connect(process.env.DATABASE_URL, function (err, conn, done){
+          if (err) console.log(err);
+         conn.query(
+             'SELECT id, email, phone, firstname, lastname, mobilephone from salesforce.Contact where id='+contact_id+'',
+             function(err,result){
+                done();
+                if(err){
+                    res.status(400).json({error: err.message});
+                }
+                else{
+                    res.json(result.rows);
+                }
+            });
+     });
+});
+
+// Insert Case Service Start
+
+router.post('/insertCase', function(req, res) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        console.log('............insertCase...............');
+        console.log(req.body);
+        var jsonData = req.body;
+        var timestamp = '';
+        var insertQueryData = 'INSERT INTO salesforce.Case (';
+        var valuesData=' VALUES (';
+        
+        //-------------------------------------------Framing Query-------------------------------------------
+        
+        if (jsonData.DeviceName !== undefined && jsonData.DeviceName !== null && jsonData.DeviceName !== "null" && jsonData.DeviceName.length > 0)
+        { insertQueryData += 'FMA_DeviceName__c,'; valuesData += '\'' + jsonData.DeviceName + '\'' + ','; }
+        else { return res.json({caseid: -1,msgid: 2,message: 'Please select device name.'});}
+		
+	if (jsonData.userid !== undefined && jsonData.userid !== null && jsonData.userid !== "null" && jsonData.userid.toString().length > 0)
+        { insertQueryData += 'ContactId,'; valuesData += '\'' + jsonData.userid + '\'' + ','; }
+        else { return res.json({caseid: -1,msgid: 2,message: 'Userid should not be empty.'});}
+        
+        if (jsonData.ProductId !== undefined && jsonData.ProductId !== null && jsonData.ProductId !== "null" && jsonData.ProductId.toString().length > 0)
+        { insertQueryData += 'FMA_Product__c,'; valuesData += '\'' + jsonData.ProductId + '\'' + ','; }
+        else { return res.json({caseid: -1,msgid: 2,message: 'ProductId should not be empty.'});}
+		
+	if (jsonData.Gender !== undefined && jsonData.Gender !== null && jsonData.Gender !== "null" && jsonData.Gender.length > 0)
+        { insertQueryData += 'FMA_Gender__c,'; valuesData += '\'' + jsonData.Gender + '\'' + ','; }
+        //else { return res.json({caseid: -1,msgid: 2,message: 'Please select gender.'});}
+	
+	if (jsonData.FormulationDosage !== undefined && jsonData.FormulationDosage !== null && jsonData.FormulationDosage !== "null" && jsonData.FormulationDosage.length > 1)
+        { insertQueryData += 'FMA_Dosage__c,'; valuesData += '\'' + jsonData.FormulationDosage + '\'' + ','; }
+	
+	if (jsonData.TrainingDate !== undefined && jsonData.TrainingDate !== null && jsonData.TrainingDate !== "null" && jsonData.TrainingDate.length > 1)
+        { insertQueryData += 'FMA_Whenthepatientgottrained__c,'; valuesData += '\'' + jsonData.TrainingDate + '\'' + ','; }
+	    
+        if (jsonData.ComplainantCategory !== undefined && jsonData.ComplainantCategory !== null && jsonData.ComplainantCategory !== "null" && jsonData.ComplainantCategory.length > 1)
+        { insertQueryData += 'FMA_ComplainantCategory__c,'; valuesData += '\'' + jsonData.ComplainantCategory + '\'' + ','; }
+	    
+	   if (jsonData.AffiliateIfStillNeeded !== undefined && jsonData.AffiliateIfStillNeeded !== null && jsonData.AffiliateIfStillNeeded !== "null" && jsonData.AffiliateIfStillNeeded.length > 1)
+        { insertQueryData += 'FMA_AffiliateIfStillNeeded__c,'; valuesData += '\'' + jsonData.AffiliateIfStillNeeded + '\'' + ','; }
+
+        if (jsonData.BatchSerialNbr !== undefined && jsonData.BatchSerialNbr !== null && jsonData.BatchSerialNbr !== "null" && jsonData.BatchSerialNbr.length > 1)
+        { insertQueryData += 'FMA_BatchSerialnumber__c,'; valuesData += '\'' + jsonData.BatchSerialNbr + '\'' + ','; }
+
+        if (jsonData.DateOfFirstUse !== undefined && jsonData.DateOfFirstUse !== null && jsonData.DateOfFirstUse !== "null" && jsonData.DateOfFirstUse.length > 7)
+        { insertQueryData += 'FMA_Dateoffirstuse__c,'; valuesData += '\'' + jsonData.DateOfFirstUse + '\'' + ','; }
+
+        if (jsonData.ExpiryDate !== undefined && jsonData.ExpiryDate !== null && jsonData.ExpiryDate !== "null" && jsonData.ExpiryDate.length > 7)
+        { insertQueryData += 'FMA_Expirydate__c,'; valuesData += '\'' + jsonData.ExpiryDate + '\'' + ','; }
+
+        if (jsonData.InitialPatientName !== undefined && jsonData.InitialPatientName !== null && jsonData.InitialPatientName !== "null" && jsonData.InitialPatientName.length > 1)
+        { insertQueryData += 'FMA_Initialpatientname__c,'; valuesData += '\'' + jsonData.InitialPatientName + '\'' + ','; }
+
+        if (jsonData.InitialPatientSurName !== undefined && jsonData.InitialPatientSurName !== null && jsonData.InitialPatientSurName !== "null" && jsonData.InitialPatientSurName.length > 0)
+        { insertQueryData += 'FMA_Initialpatientsurname__c,'; valuesData += '\'' + jsonData.InitialPatientSurName + '\'' + ','; }
+
+        if (jsonData.Age !== undefined && jsonData.Age !== null && jsonData.Age !== "null" && jsonData.Age.length > 0)
+        { insertQueryData += 'FMA_Age__c,'; valuesData += jsonData.Age + ','; }
+		
+      	if (jsonData.Phoneno !== undefined && jsonData.Phoneno !== null && jsonData.Phoneno !== "null" && jsonData.Phoneno.length > 0)
+        { insertQueryData += 'FMA_Phoneno__c,'; valuesData += '\'' + jsonData.Phoneno + '\'' + ','; }
+      		
+      	if (jsonData.Email !== undefined && jsonData.Email !== null && jsonData.Email !== "null" && jsonData.Email.length > 0)
+        { insertQueryData += 'FMA_Email__c,'; valuesData += '\'' + jsonData.Email + '\'' + ','; }
+      		
+      	if (jsonData.Hasthepatientbeentrained !== undefined && jsonData.Hasthepatientbeentrained !== null && jsonData.Hasthepatientbeentrained !== "null" && jsonData.Hasthepatientbeentrained.length > 0)
+        { insertQueryData += 'FMA_Hasthepatientbeentrained__c,'; valuesData += jsonData.Hasthepatientbeentrained + ','; }
+      		
+      	if (jsonData.Whomadethetraining !== undefined && jsonData.Whomadethetraining !== null && jsonData.Whomadethetraining !== "null" && jsonData.Whomadethetraining.length > 0)
+        { insertQueryData += 'FMA_Whomadethetraining__c,'; valuesData += '\'' + jsonData.Whomadethetraining + '\'' + ','; }
+	    
+	if (jsonData.WhomadetheTrainingOther !== undefined && jsonData.WhomadetheTrainingOther !== null && jsonData.WhomadetheTrainingOther !== "null" && jsonData.WhomadetheTrainingOther.length > 0)
+        { insertQueryData += 'Who_made_the_training_Other__c,'; valuesData += '\'' + jsonData.WhomadetheTrainingOther + '\'' + ','; }
+
+        if (jsonData.NameOfCompliant !== undefined && jsonData.NameOfCompliant !== null && jsonData.NameOfCompliant !== "null" && jsonData.NameOfCompliant.length > 1)
+        { insertQueryData += 'FMA_NameofComplainant__c,'; valuesData += '\'' + jsonData.NameOfCompliant + '\'' + ','; }
+
+        if (jsonData.DefectDescription !== undefined && jsonData.DefectDescription !== null && jsonData.DefectDescription !== "null" && jsonData.DefectDescription.length > 1)
+        { insertQueryData += 'FMA_Defectdescription__c,'; valuesData += '\'' + jsonData.DefectDescription + '\'' + ','; }
+
+        if (jsonData.IsComplaintSampleAvailable !== undefined && jsonData.IsComplaintSampleAvailable !== null && jsonData.IsComplaintSampleAvailable !== "null" && jsonData.IsComplaintSampleAvailable.length > 0)
+        { insertQueryData += 'FMA_Isthecomplaintsampleavailable__c,'; valuesData += jsonData.IsComplaintSampleAvailable + ','; }
+
+        if (jsonData.HasResponseBeenRequested !== undefined && jsonData.HasResponseBeenRequested !== null && jsonData.HasResponseBeenRequested !== "null" && jsonData.HasResponseBeenRequested.length > 0)
+        { insertQueryData += 'FMA_Hasresponsebeenrequested__c,'; valuesData += jsonData.HasResponseBeenRequested + ','; }
+
+        if (jsonData.IsPatientFamiliarWithDeviceUsage !== undefined && jsonData.IsPatientFamiliarWithDeviceUsage !== null && jsonData.IsPatientFamiliarWithDeviceUsage !== "null" && jsonData.IsPatientFamiliarWithDeviceUsage.length > 0)
+        { insertQueryData += 'FMA_Ispatientfamiliarwithdeviceusage__c,'; valuesData += jsonData.IsPatientFamiliarWithDeviceUsage + ','; }
+
+        if (jsonData.SinceWhenPatientUseThisDevice !== undefined && jsonData.SinceWhenPatientUseThisDevice !== null && jsonData.SinceWhenPatientUseThisDevice !== "null" && jsonData.SinceWhenPatientUseThisDevice.length > 1)
+        { insertQueryData += 'FMA_Sincewhendoespatientusethiskind__c,'; valuesData += '\'' + jsonData.SinceWhenPatientUseThisDevice + '\'' + ','; }
+
+        if (jsonData.IsDevicePhysicallyDamaged !== undefined && jsonData.IsDevicePhysicallyDamaged !== null && jsonData.IsDevicePhysicallyDamaged !== "null" && jsonData.IsDevicePhysicallyDamaged.length > 0)
+        { insertQueryData += 'FMA_Isthedevicephysicallydamaged__c,'; valuesData += jsonData.IsDevicePhysicallyDamaged + ','; }
+
+        if (jsonData.DamageDuetoAccidentalFall !== undefined && jsonData.DamageDuetoAccidentalFall !== null && jsonData.DamageDuetoAccidentalFall !== "null" && jsonData.DamageDuetoAccidentalFall.length > 0)
+        { insertQueryData += 'FMA_Thedamageisduetoanaccidentalfall__c,'; valuesData += jsonData.DamageDuetoAccidentalFall + ','; }
+
+        if (jsonData.IsDefectedDuetomisusebypatient !== undefined && jsonData.IsDefectedDuetomisusebypatient !== null && jsonData.IsDefectedDuetomisusebypatient !== "null" && jsonData.IsDefectedDuetomisusebypatient.length > 0)
+        { insertQueryData += 'FMA_Isthedefectduetoamisusebypatient__c,'; valuesData += jsonData.IsDefectedDuetomisusebypatient + ','; }
+
+        if (jsonData.WhatStuckinside !== undefined && jsonData.WhatStuckinside !== null && jsonData.WhatStuckinside !== "null" && jsonData.WhatStuckinside.length > 0)
+        { insertQueryData += 'FMA_whatstuckinside__c,'; valuesData += '\'' + jsonData.WhatStuckinside + '\'' + ','; }
+
+        if (jsonData.Adverseeventassociatedtodefect !== undefined && jsonData.Adverseeventassociatedtodefect !== null && jsonData.Adverseeventassociatedtodefect !== "null" && jsonData.Adverseeventassociatedtodefect.length > 0)
+        { insertQueryData += 'FMA_Adverseeventassociatedtodefect__c,'; valuesData += jsonData.Adverseeventassociatedtodefect + ','; }
+
+        if (jsonData.AdverseEventAssociatedWitchOne !== undefined && jsonData.AdverseEventAssociatedWitchOne !== null && jsonData.AdverseEventAssociatedWitchOne !== "null" && jsonData.AdverseEventAssociatedWitchOne.length > 0)
+        { insertQueryData += 'FMA_Adverseeventassociatedwhichone__c,'; valuesData += '\'' + jsonData.AdverseEventAssociatedWitchOne + '\'' + ','; }
+	    
+	if (jsonData.ProductName !== undefined && jsonData.ProductName !== null && jsonData.ProductName !== "null" && jsonData.ProductName.length > 0)
+        { insertQueryData += 'FMA_ProductName__c,'; valuesData += '\'' + jsonData.ProductName + '\'' + ','; }    
+		
+      	if (jsonData.Subject !== undefined && jsonData.Subject !== null && jsonData.Subject !== "null" && jsonData.Subject.length > 0)
+        { insertQueryData += 'Subject,'; valuesData += '\'' + jsonData.Subject + '\'' + ','; }
+      		
+      	if (jsonData.Description !== undefined && jsonData.Description !== null && jsonData.Description !== "null" && jsonData.Description.length > 1)
+        { insertQueryData += 'Description,'; valuesData += '\'' + jsonData.Description + '\'' + ','; }
+	
+	if (jsonData.recordStatus !== undefined && jsonData.recordStatus !== null && jsonData.recordStatus !== "null" && jsonData.recordStatus.length > 1)
+        { insertQueryData += 'FMA_Recordstatus__c,'; valuesData += '\'' + jsonData.recordStatus + '\'' + ','; }
+	    
+	if (jsonData.patientId !== undefined && jsonData.patientId !== null && jsonData.patientId !== "null" && jsonData.patientId.length > 0)
+	{ insertQueryData += 'FMA_PatientId__c,'; valuesData += '\'' + jsonData.patientId + '\'' + ',';}
+	    
+	        insertQueryData += 'Priority,'; valuesData += '\'' + 'Medium' + '\'' + ',';
+		
+	        insertQueryData += 'Status'; valuesData += '\'' + 'New' + '\'';	
+	 console.log('............insertCase...1............');		
+	        
+        //-------------------------------------------End Framing Query-------------------------------------------
+        
+        //timestamp
+        if (jsonData.timestamp !== undefined && jsonData.timestamp !== null && jsonData.timestamp !== "null" && jsonData.timestamp.length > 0)
+        { timestamp = jsonData.timestamp; }
+        
+        var combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
+        console.log('............insertCase...2......combinedQuery......'+combinedQuery);
+        conn.query(combinedQuery,
+                function(err, result) {
+                    done();
+                    if(err){
+                        console.log(err.message);
+                            return res.json({
+                                    caseid: -1,
+				    sfid: 1,
+                                    msgid: 2,
+                                    timestamp: timestamp,
+                                    message: err.message});
+                        }
+                        else{
+                            console.log('......Insert..Case..Result.'+result);						
+                            // Updating HrkCase id Start
+                               conn.query('UPDATE salesforce.Case SET fma_herokucaseid__c = \''+result.rows[0].id+'\' WHERE id='+result.rows[0].id+'',
+                                   function(err,UpdateResult){
+				       console.log('......Updated..Hrk CaseId...Result...'+UpdateResult);
+                                       done();
+                                       if(err){
+                                           return res.json({  
+                                                   msgid: 2,
+                                                   message: err.message});
+                                       }
+                                       else{
+                                          return res.json({
+						caseid:result.rows[0].id,
+						sfid: result.rows[0].sfid,
+						msgid: 1,
+						timestamp: timestamp,
+						message: 'Success.'});
+                                       }
+                                   });			
+			   // Updating HrkCase id End
+                        } 
+            });
+    });
+});
+
+router.get('/getProductsCount', function(req, res) {
+	var type;
+	if(req.param('producttype') === 'Medical') type = 'Medical Device';
+	if(req.param('producttype') === 'Combination') type = 'Combination Product';
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        if (err) console.log(err);
+        conn.query(
+            'SELECT count(sfid) AS productsCount FROM salesforce.FMA_Product__c WHERE Type__c=\''+type+'\'',
+            function(err,result){
+                done();
+                if(err){
+                   return res.status(400).json({error: err.message});
+                }
+                else{
+                    return res.json(result.rows);
+                }
+            });
+    });
+});
+
+router.get('/getMyFeedbacks', function(req, res) {
+    var contact_id = req.param('id');
+     pg.connect(process.env.DATABASE_URL, function (err, conn, done){
+          if (err) console.log(err);
+         conn.query(
+             'SELECT sfid, casenumber, fma_devicename__c, description, createddate, status from salesforce.case where contactid =\''+contact_id+'\' and FMA_Recordstatus__c =\'Submitted\' order by createddate desc Limit 10',
+             function(err,result){
+                done();
+                if(err){
+                    res.status(400).json({error: err.message});
+                }
+                else{
+                    res.json(result.rows);
+                }
+            });
+     });
+});
+
+router.post('/CreateUser', function(req, res) {
+    console.log(req.body);
+    var jsonData = req.body;
+    
+    var formattedData='INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, IVOPPassword__c, IVOPMobileappuser__c) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+'True'+'\')  RETURNING id';
+    console.log('formatted Salesforce.Contact Query:'+formattedData);
+    
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+         if (err) console.log(err);
+        
+        conn.query(
+             'SELECT count(*) from UserManagement where trim(email)=\''+jsonData.email+'\'',
+             function(err, result){
+                done();
+                if(result.rows[0].count > 0){
+                    res.status(400).json({error: 'Email already exist.'});
+                }
+                 else{
+                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, IVOPPassword__c, IVOPMobileappuser__c, MailingCountry) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+'True'+'\', \''+jsonData.country+'\')  RETURNING id',
+                         function(err, result) {
+                            if(err){
+                                    return res.json({
+                                            msgid: 2,
+                                            message: err.message});
+                                }
+                                else{
+                                    var contactid = result.rows[0].id;
+                                    console.log('contactid: '+contactid);
+
+                                    var formattedData='INSERT INTO UserManagement (firstname, lastname, email, phone, password, language, country, contactid) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+jsonData.language+'\', \''+jsonData.country+'\', \''+contactid+'\')';
+                                    console.log('formatted UserManagement Query:'+formattedData);
+
+                                    conn.query('INSERT INTO UserManagement (firstname, lastname, email, phone, password, language, country, contactid, active) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+jsonData.language+'\', \''+jsonData.country+'\', \''+contactid+'\',true)',
+                                     function(err, result) {
+                                        done();
+                                         if(err){
+                                                return res.json({
+                                                        msgid: 2,
+                                                        message: err.message});
+                                            }
+                                            else{
+                                                var subject = 'Welcome To Feedback Application';
+                                                var text = 'Greetings!!!\n\n Welcome '+jsonData.firstname+',\n\nPlease use below credentials to login portal.\n\E-Mail: '+jsonData.email+'\nPassword: '+jsonData.password+'\n\nThanks';
+                                                var resultStr = sendEmail(jsonData.email, subject, text);
+                                                return res.json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                            }
+                                    });
+                                }
+                    });
+                 }
+             });
+     });
+});
+
+router.get('/getUsers', function(req, res) {
+ pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+     if (err) console.log(err);
+        conn.query(
+            'SELECT um.id, um.firstname, um.lastname, um.email, um.phone, um.contactid, um.active, sc.sfid from UserManagement um, Salesforce.Contact sc where um.contactid=sc.id',
+            function(err,result){
+                done();
+                if(err){
+                    return res.status(400).json({error: err.message});
+                }
+                else{
+                    return res.json(result.rows);
+                }
+            });
+ });
+});
+
+router.put('/updateStatus', function(req, res){
+    var user_id = req.param('id');
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done){
+          if (err) console.log(err);
+         conn.query(
+             'SELECT *from UserManagement where id='+user_id+'',
+             function(err,result){
+                done();
+                if(err){
+                    res.status(400).json({error: err.message});
+                }
+                else{
+                    var activeStatus = true;
+                    if(result.rows[0].active == null || result.rows[0].active == false)
+                        activeStatus = true;
+                    else
+                        activeStatus = false;
+                    
+                    var queryStr = 'Update UserManagement set active='+activeStatus+' where id='+user_id+'';
+                    console.log(queryStr);
+                    
+                    conn.query(queryStr, 
+                        function(err,result){
+                        done();
+                        if(err){
+                            return res.status(400).json({error: err.message});
+                        }
+                        else{
+                            return res.json(true);
+                        }
+                    });
+                }
+            });
+     });
+});
+
+router.post('/updateUserInfo', function(req, res) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        console.log(req.body);
+        var jsonData = req.body;
+        var user_id = jsonData.id;
+	if(jsonData.src == 'mobile'){
+	   var userManagementQueryStr = 'Update UserManagement set language=\''+jsonData.language+'\', country=\''+jsonData.country+'\' where id='+user_id+'';
+           console.log('.........Undefined User Info.............'+userManagementQueryStr);
+	   conn.query(userManagementQueryStr, 
+                      function(err,result){
+                               done();
+                               if(err){
+                                  return res.status(400).json({error: err.message});
+                               } else{
+                                  return res.status(200).json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                               }
+                    });
+	}
+        else if(jsonData.src == 'ios'){
+	   var userManagementQueryStr = 'Update UserManagement set language=\''+jsonData.language+'\', country=\''+jsonData.country+'\' where id='+user_id+'';
+           console.log('.........Undefined User Info.............'+userManagementQueryStr);
+	   conn.query(userManagementQueryStr, 
+                      function(err,result){
+                               done();
+                               if(err){
+                                  return res.status(400).json({error: err.message});
+                               } else{
+                                  return res.status(200).json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                               }
+                    });           
+	}else{
+           var userManagementQueryStr = 'Update UserManagement set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email+'\', phone=\''+jsonData.phone+'\', language=\''+jsonData.language+'\', country=\''+jsonData.country+'\' where id='+user_id+'';
+           console.log('.........Non.Undefined User Info.............'+userManagementQueryStr);
+	
+        conn.query('SELECT *from UserManagement where id='+user_id+'',
+            function(err,result){
+                if(err){
+                    return res.status(400).json({error: err.message});
+                }
+                else{
+                    var contactId = result.rows[0].contactid;
+                    console.log('contactId:'+contactId);
+                    
+                    var contactQueryStr = 'Update Salesforce.Contact set firstname=\''+jsonData.firstname+'\', lastname=\''+jsonData.lastname+'\', email=\''+jsonData.email.toLowerCase().trim()+'\', phone=\''+jsonData.phone+'\' where id='+contactId+'';
+                    console.log(contactQueryStr);
+                    
+                    conn.query(userManagementQueryStr, 
+                        function(err,result){
+                            if(err){
+                                return res.status(400).json({error: err.message});
+                            }
+                            else{
+                                conn.query(contactQueryStr, 
+                                    function(err,result){
+                                        done();
+                                        if(err){
+                                            return res.status(400).json({error: err.message});
+                                        }
+                                        else{
+                                            return res.status(200).json({
+                                                        msgid: 1,
+                                                        message: 'Success.'});
+                                        }
+                                });
+                            }
+                    });
+                }
+            });
+        }
+    });
+});
+
+
+/*router.put('/changePassword', function(req, res) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        var user_id = req.param('id');
+        var oldPassword = req.param('oldPassword');
+        var newPassword = req.param('newPassword');
+        console.log(user_id);
+        console.log(oldPassword);
+        console.log(newPassword);
+        
+        var userManagementQueryStr = 'Update UserManagement set password=\''+newPassword+'\' where id='+user_id+' and password=\''+oldPassword+'\'';
+        console.log(userManagementQueryStr);
+        
+        conn.query('SELECT *from UserManagement where id='+user_id+'',
+            function(err,result){
+                if(err){
+                    return res.status(400).json({error: err.message});
+                }
+                else{
+                    var contactId = result.rows[0].contactid;
+                    console.log('contactId:'+contactId);
+                    
+                    conn.query(userManagementQueryStr, 
+                        function(err,result){
+                            if(err){
+                                return res.status(400).json({error: err.message});
+                            }
+                            else{
+                                return res.status(200).json({
+                                            msgid: 1,
+                                            message: 'Success.'});
+                            }
+                    });
+                }
+            });
+    });
+    
+});*/
+
+router.put('/changePassword', function(req, res) {
+    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+        var user_id = req.param('id');
+	var conId = req.param('userid');
+        var oldPassword = req.param('oldPassword');
+        var newPassword = req.param('newPassword');
+        console.log(user_id);
+        console.log(oldPassword);
+        console.log(newPassword);
+        
+        var userManagementQueryStr = 'Update UserManagement set password=\''+newPassword+'\' where id='+user_id+' and password=\''+oldPassword+'\'';
+        console.log(userManagementQueryStr);
+        
+        conn.query('SELECT *from UserManagement where id='+user_id+'',
+            function(err,result){
+                if(err){
+                    return res.status(400).json({error: err.message});
+                }
+                else{
+		     var contactId = result.rows[0].contactid;
+		     console.log('contactId:'+contactId);
+                    conn.query(userManagementQueryStr, 
+                        function(err,result){
+                            if(err){
+                                return res.status(400).json({error: err.message});
+                            }
+                            else{
+				var queryStr = 'Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where sfid='+conId+'';
+				conn.query(queryStr, 
+				     function(err,result){
+					if(err){
+					    return res.status(400).json({error: err.message});
+					}
+					else{
+					    return res.status(200).json({
+							msgid: 1,
+							message: 'Success.'});
+					}
+				});
+                            }
+                    });
+                }
+           });
+    });
+});
+
+function sendEmail(toemail, subject, text){
+    var smtpConfig = {
+        host: emailhost,
+        port: emailport,
+        secure: emailsecure, // use SSL, 
+                      // you can try with TLS, but port is then 587
+        auth: {
+          user: emailuser, // Your email id
+          pass: emailpassword // Your password
+        }
+  };
+    
+    var transporter = nodemailer.createTransport(smtpConfig);
+    
+    var mailOptions = {
+        to: toemail,
+        subject: subject,
+        text: text
+        
+    };
+    
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            console.log(error);
+            return error;
+        }else{
+            console.log('Message sent: ' + info.response);
+            return "true";
+        };
+    });
+};
+
+app.use('/api', router);
+
+app.listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
+});
