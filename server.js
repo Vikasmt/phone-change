@@ -17,6 +17,12 @@ var emailpassword = 'mttl@123';
 
 var app = express();
 
+// create application/json parser 
+var jsonParser = bodyParser.json()
+
+// create application/x-www-form-urlencoded parser 
+var urldecodedParser = bodyParser.urldecoded({ extended: false })
+
 app.use(express.static('public'));
 
 app.use(bodyParser.json({limit: "50mb"}));
@@ -513,12 +519,11 @@ router.use(function(req, res, next) {
 });
 
 
-router.post('/insertNeedleIssue', function(req, res) {
+router.post('/insertNeedleIssue', urldecodedParser, function(req, res) {
     console.log('............insertDecisiontree...............');   
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);       
         var jsonData = req.body;
-	//JSON.parse(jsonData.replace(/&quot;/g,'''));
         console.log('.....req..body......'+req.body);
         conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.caseid+'',
         function(err,result){
