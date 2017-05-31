@@ -18,10 +18,10 @@ var emailpassword = 'mttl@123';
 var app = express();
 
 // create application/json parser 
-var jsonParser = bodyParser.json()
+//var jsonParser = bodyParser.json()
 
 // create application/x-www-form-urlencoded parser 
-var urldecodedParser = bodyParser.urldecoded({ extended: false })
+//var urldecodedParser = bodyParser.urldecoded({ extended: false })
 
 app.use(express.static('public'));
 
