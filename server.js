@@ -519,7 +519,7 @@ router.use(function(req, res, next) {
 });
 
 
-router.post('/insertNeedleIssue', jsonParser, function(req, res) {
+router.post('/insertNeedleIssue', function(req, res) {
     console.log('............insertDecisiontree...............');   
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         if (err) console.log(err);       
