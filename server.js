@@ -530,7 +530,7 @@ router.post('/insertNeedleIssue', function(req, res) {
           }else{
             
             var updateValueData = '';
-            var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
+            var insertQueryData = encodeURIComponent('INSERT INTO salesforce.IVOP_DecisionTree__c (';
             var valuesData=' VALUES ('; 
                 
             if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0){
@@ -712,9 +712,9 @@ router.post('/insertNeedleIssue', function(req, res) {
             var combinedQuery;
             
             if(jsonData.DecisionTreeId !== undefined && jsonData.DecisionTreeId !== null && jsonData.DecisionTreeId !== "null" && jsonData.DecisionTreeId.length > 0)           
-               combinedQuery = 'UPDATE salesforce.IVOP_DecisionTree__c SET '+updateValueData+' WHERE id='+jsonData.DecisionTreeId+'';
+               combinedQuery = encodeURIComponent('UPDATE salesforce.IVOP_DecisionTree__c SET '+updateValueData+' WHERE id='+jsonData.DecisionTreeId+'');
             else
-               combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
+               combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id');
             
             console.log('............combinedQuery.............'+combinedQuery); 
             //var temp = combinedQuery;    
