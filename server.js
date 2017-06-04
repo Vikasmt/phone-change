@@ -2664,7 +2664,7 @@ router.post('/updateUserInfo', function(req, res) {
                                }
                     });
 	}
-        else if(jsonData.src == 'iOS'){
+        else if(jsonData.src == 'mobile' || jsonData.src == 'iOS'){
 	   var userManagementQueryStr = 'Update UserManagement set language=\''+jsonData.language+'\', country=\''+jsonData.country+'\' where id='+user_id+'';
            console.log('.........Undefined User Info.............'+userManagementQueryStr);
 	   conn.query(userManagementQueryStr, 
