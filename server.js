@@ -2649,7 +2649,7 @@ router.post('/updateUserInfo', function(req, res) {
         console.log(req.body);
         var jsonData = req.body;
         var user_id = jsonData.id;
-	if(jsonData.src == 'mobile'){
+	if(jsonData.src == 'Android'){
 	   var userManagementQueryStr = 'Update UserManagement set language=\''+jsonData.language+'\', country=\''+jsonData.country+'\' where id='+user_id+'';
            console.log('.........Undefined User Info.............'+userManagementQueryStr);
 	   conn.query(userManagementQueryStr, 
@@ -2664,7 +2664,7 @@ router.post('/updateUserInfo', function(req, res) {
                                }
                     });
 	}
-        else if(jsonData.src == 'ios'){
+        else if(jsonData.src == 'iOS'){
 	   var userManagementQueryStr = 'Update UserManagement set language=\''+jsonData.language+'\', country=\''+jsonData.country+'\' where id='+user_id+'';
            console.log('.........Undefined User Info.............'+userManagementQueryStr);
 	   conn.query(userManagementQueryStr, 
