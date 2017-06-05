@@ -1086,17 +1086,17 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
 			      insertQueryData += 'DF_CanTheDeviceBeTurnedOn__c,'; valuesData += '\'' + jsonData.CanTheDeviceBeTurnedOn + '\'' + ',';
                   updateValueData += 'DF_CanTheDeviceBeTurnedOn__c = \''+jsonData.CanTheDeviceBeTurnedOn+'\',';
 				}
-				
+			else { updateValueData += 'DF_CanTheDeviceBeTurnedOn__c = \''+'False'+'\','; }	
 			if (jsonData.SomeThingDisplayedPreventingAcess !== undefined && jsonData.SomeThingDisplayedPreventingAcess !== null && jsonData.SomeThingDisplayedPreventingAcess !== "null" && jsonData.SomeThingDisplayedPreventingAcess.length > 0){
 			      insertQueryData += 'DF_somethingdisplayedpreventingacess__c,'; valuesData += '\'' + jsonData.SomeThingDisplayedPreventingAcess + '\'' + ','; 
 				  updateValueData += 'DF_somethingdisplayedpreventingacess__c = \''+jsonData.SomeThingDisplayedPreventingAcess+'\',';
 				  }
-				
+			else { updateValueData += 'DF_somethingdisplayedpreventingacess__c = \''+'False'+'\','; }	
 			if (jsonData.LinkedToaDeviceOption !== undefined && jsonData.LinkedToaDeviceOption !== null && jsonData.LinkedToaDeviceOption !== "null" && jsonData.LinkedToaDeviceOption.length > 0)
 				{ insertQueryData += 'DF_Linkedtoadeviceoption__c,'; valuesData += '\'' + jsonData.LinkedToaDeviceOption + '\'' + ','; 
 				  updateValueData += 'DF_Linkedtoadeviceoption__c = \''+jsonData.LinkedToaDeviceOption+'\',';
 				}
-			
+			else { updateValueData += 'DF_Linkedtoadeviceoption__c = \''+'False'+'\','; }
 			if (jsonData.CommentIfNo !== undefined && jsonData.CommentIfNo !== null && jsonData.CommentIfNo !== "null" && jsonData.CommentIfNo.length > 0)
 				{ insertQueryData += 'DF_CommentDeviceFunction__c,'; valuesData += '\'' + jsonData.CommentIfNo + '\'' + ','; 
 				  updateValueData += 'DF_CommentDeviceFunction__c = \''+jsonData.CommentIfNo+'\',';
@@ -1111,12 +1111,12 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
 				{ insertQueryData += 'DF_Changeindevicesbehaviour__c,'; valuesData += '\'' + jsonData.ChangeIndevicesBehaviour + '\'' + ','; 
 				  updateValueData += 'DF_Changeindevicesbehaviour__c = \''+jsonData.ChangeIndevicesBehaviour+'\',';
 				}
-				
+			else { updateValueData += 'DF_Changeindevicesbehaviour__c = \''+'False'+'\','; }	
 			if (jsonData.IsDeviceFunctioningSlowerThanUsual !== undefined && jsonData.IsDeviceFunctioningSlowerThanUsual !== null && jsonData.IsDeviceFunctioningSlowerThanUsual !== "null" && jsonData.IsDeviceFunctioningSlowerThanUsual.length > 0)
 				{ insertQueryData += 'DF_Isdevicefunctioningslowerthanusual__c,'; valuesData += '\'' + jsonData.IsDeviceFunctioningSlowerThanUsual + '\'' + ','; 
 				  updateValueData += 'DF_Isdevicefunctioningslowerthanusual__c = \''+jsonData.IsDeviceFunctioningSlowerThanUsual+'\',';
 				}
-				
+			else { updateValueData += 'DF_Isdevicefunctioningslowerthanusual__c = \''+'False'+'\','; }	
 			if (jsonData.WhenItHasObservedForTheFirstTime !== undefined && jsonData.WhenItHasObservedForTheFirstTime !== null && jsonData.WhenItHasObservedForTheFirstTime !== "null" && jsonData.WhenItHasObservedForTheFirstTime.length > 0)
 				{ insertQueryData += 'DF_Whenithasobservedforthefirsttime__c,'; valuesData += '\'' + jsonData.WhenItHasObservedForTheFirstTime + '\'' + ','; 
 				  updateValueData += 'DF_Whenithasobservedforthefirsttime__c = \''+jsonData.WhenItHasObservedForTheFirstTime+'\',';
@@ -1126,7 +1126,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
 				{ insertQueryData += 'DF_Isthedevicelouderthanusually__c,'; valuesData += '\'' + jsonData.IsTheDeviceLouderThanUsually + '\'' + ','; 
 				  updateValueData += 'DF_Isthedevicelouderthanusually__c = \''+jsonData.IsTheDeviceLouderThanUsually+'\',';
 				}
-				
+			else { updateValueData += 'DF_Isthedevicelouderthanusually__c = \''+'False'+'\','; }	
 			if (jsonData.WhenItHasBeenObservedForTheFirstTime !== undefined && jsonData.WhenItHasBeenObservedForTheFirstTime !== null && jsonData.WhenItHasBeenObservedForTheFirstTime !== "null" && jsonData.WhenItHasBeenObservedForTheFirstTime.length > 0)
 				{ insertQueryData += 'DF_Whenithasbeenobservedforthefirsttime__c,'; valuesData += '\'' + jsonData.WhenItHasBeenObservedForTheFirstTime + '\'' + ','; 
 				  updateValueData += 'DF_Whenithasbeenobservedforthefirsttime__c = \''+jsonData.WhenItHasBeenObservedForTheFirstTime+'\',';
@@ -1402,7 +1402,7 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_NP_Issomethingdisplayedondevice__c,'; valuesData += '\'' + jsonData.NPIsSomethingDisplayedOnDevice + '\'' + ','; 
 				  updateValueData += 'PF_NP_Issomethingdisplayedondevice__c = \''+jsonData.NPIsSomethingDisplayedOnDevice+'\',';
 				}
-				
+			else { updateValueData += 'PF_NP_Issomethingdisplayedondevice__c = \''+'False'+'\','; }	
 			if (jsonData.NPIsSomethingDisplayedOnDeiviceIfyes !== undefined && jsonData.NPIsSomethingDisplayedOnDeiviceIfyes !== null && jsonData.NPIsSomethingDisplayedOnDeiviceIfyes !== "null" && jsonData.NPIsSomethingDisplayedOnDeiviceIfyes.length > 0)
 			   { insertQueryData += 'PF_NP_IssomethingdisplayedondeiviceIfyes__c,'; valuesData += '\'' + jsonData.NPIsSomethingDisplayedOnDeiviceIfyes + '\'' + ','; 
 			     updateValueData += 'PF_NP_IssomethingdisplayedondeiviceIfyes__c = \''+jsonData.NPIsSomethingDisplayedOnDeiviceIfyes+'\',';
@@ -1412,17 +1412,17 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_NP_Doestheinjectionbuttonshowredlight__c,'; valuesData += '\'' + jsonData.NPDoesTheInjectionButtonShowRedLight + '\'' + ','; 
 				  updateValueData += 'PF_NP_Doestheinjectionbuttonshowredlight__c = \''+jsonData.NPDoesTheInjectionButtonShowRedLight+'\',';
 				}
-				
+			else { updateValueData += 'PF_NP_Doestheinjectionbuttonshowredlight__c = \''+'False'+'\','; }	
 			if (jsonData.NPHasthedevicebeendropped !== undefined && jsonData.NPHasthedevicebeendropped !== null && jsonData.NPHasthedevicebeendropped !== "null" && jsonData.NPHasthedevicebeendropped.length > 0)
 				{ insertQueryData += 'PF_NP_Hasthedevicebeendropped__c,'; valuesData += '\'' + jsonData.NPHasthedevicebeendropped + '\'' + ','; 
 				  updateValueData += 'PF_NP_Hasthedevicebeendropped__c = \''+jsonData.NPHasthedevicebeendropped+'\',';
 				}
-				
+			else { updateValueData += 'PF_NP_Hasthedevicebeendropped__c = \''+'False'+'\','; }	
 			if (jsonData.NPHasTheDeviceImpactedByColdOrHumid !== undefined && jsonData.NPHasTheDeviceImpactedByColdOrHumid !== null && jsonData.NPHasTheDeviceImpactedByColdOrHumid !== "null" && jsonData.NPHasTheDeviceImpactedByColdOrHumid.length > 0)
 				{ insertQueryData += 'PF_NP_Hasthedeviceimpactedbycoldorhumid__c,'; valuesData += '\'' + jsonData.NPHasTheDeviceImpactedByColdOrHumid + '\'' + ','; 
 				  updateValueData += 'PF_NP_Hasthedeviceimpactedbycoldorhumid__c = \''+jsonData.NPHasTheDeviceImpactedByColdOrHumid+'\',';
 				}
-				
+			else { updateValueData += 'PF_NP_Hasthedeviceimpactedbycoldorhumid__c = \''+'False'+'\','; }	
 			if (jsonData.NPSpecify !== undefined && jsonData.NPSpecify !== null && jsonData.NPSpecify !== "null" && jsonData.NPSpecify.length > 0)
 				{ insertQueryData += 'PF_NP_Specify__c,'; valuesData += '\'' + jsonData.NPSpecify + '\'' + ','; 
 				  updateValueData += 'PF_NP_Specify__c = \''+jsonData.NPSpecify+'\',';
@@ -1432,12 +1432,12 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_NP_Isinsertedbatteryspecification__c,'; valuesData += '\'' + jsonData.NPIsInsertedBatterySpecification + '\'' + ','; 
 				  updateValueData += 'PF_NP_Isinsertedbatteryspecification__c = \''+jsonData.NPIsInsertedBatterySpecification+'\',';
 				}
-			
+			else { updateValueData += 'PF_NP_Isinsertedbatteryspecification__c = \''+'False'+'\','; }
 			if (jsonData.NPIsTheBatteryCoverDamaged !== undefined && jsonData.NPIsTheBatteryCoverDamaged !== null && jsonData.NPIsTheBatteryCoverDamaged !== "null" && jsonData.NPIsTheBatteryCoverDamaged.length > 0)
 				{ insertQueryData += 'PF_NP_Isthebatterycoverdamaged__c,'; valuesData += '\'' + jsonData.NPIsTheBatteryCoverDamaged + '\'' + ','; 
 				  updateValueData += 'PF_NP_Isthebatterycoverdamaged__c = \''+jsonData.NPIsTheBatteryCoverDamaged+'\',';
 				}
-				
+			else { updateValueData += 'PF_NP_Isthebatterycoverdamaged__c = \''+'False'+'\','; }	
 			if (jsonData.NPSometimes !== undefined && jsonData.NPSometimes !== null && jsonData.NPSometimes !== "null" && jsonData.NPSometimes.length > 0)
 			   { insertQueryData += 'PF_NP_Sometimes__c,'; valuesData += '\'' + jsonData.NPSometimes + '\'' + ','; 
 			     updateValueData += 'PF_NP_Sometimes__c = \''+jsonData.NPSometimes+'\',';
@@ -1458,7 +1458,7 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_PO_Doesthedeviceturnoffsuddenly__c,'; valuesData += '\'' + jsonData.PODoesthedeviceturnoffsuddenly + '\'' + ','; 
 				  updateValueData += 'PF_PO_Doesthedeviceturnoffsuddenly__c = \''+jsonData.PODoesthedeviceturnoffsuddenly+'\',';
 				}
-				
+			else { updateValueData += 'PF_PO_Doesthedeviceturnoffsuddenly__c = \''+'False'+'\','; }	
 			if (jsonData.POPleaseSpecifyInjectionProcess !== undefined && jsonData.POPleaseSpecifyInjectionProcess !== null && jsonData.POPleaseSpecifyInjectionProcess !== "null" && jsonData.POPleaseSpecifyInjectionProcess.length > 0)
 				{ insertQueryData += 'PF_PO_Pleasespecifyinjectionprocess__c,'; valuesData += '\'' + jsonData.POPleaseSpecifyInjectionProcess + '\'' + ','; 
 				  updateValueData += 'PF_PO_Pleasespecifyinjectionprocess__c = \''+jsonData.POPleaseSpecifyInjectionProcess+'\',';
@@ -1468,7 +1468,7 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_PO_Doesthedevicestillturnon__c,'; valuesData += '\'' + jsonData.PODoesTheDeviceStillTurnOn + '\'' + ','; 
 				  updateValueData += 'PF_PO_Doesthedevicestillturnon__c = \''+jsonData.PODoesTheDeviceStillTurnOn+'\',';
 				}
-			
+			else { updateValueData += 'PF_PO_Doesthedevicestillturnon__c = \''+'False'+'\','; }
 			if (jsonData.PODoesthedevicestillturnonIfYes !== undefined && jsonData.PODoesthedevicestillturnonIfYes !== null && jsonData.PODoesthedevicestillturnonIfYes !== "null" && jsonData.PODoesthedevicestillturnonIfYes.length > 0)
 				{ insertQueryData += 'PF_PO_DoesthedevicestillturnonIfYes__c,'; valuesData += '\'' + jsonData.PODoesthedevicestillturnonIfYes + '\'' + ','; 
 				  updateValueData += 'PF_PO_DoesthedevicestillturnonIfYes__c = \''+jsonData.PODoesthedevicestillturnonIfYes+'\',';
@@ -1478,7 +1478,7 @@ router.post('/insertPowerFailure', function(req, res) {
 			   { insertQueryData += 'PF_PO_Hasawarningmessagebeendisplayed__c,'; valuesData += '\'' + jsonData.POHasaWarningMessageBeenDisplayed + '\'' + ','; 
 			     updateValueData += 'PF_PO_Hasawarningmessagebeendisplayed__c = \''+jsonData.POHasaWarningMessageBeenDisplayed+'\',';
 			   }
-				
+			else { updateValueData += 'PF_PO_Hasawarningmessagebeendisplayed__c = \''+'False'+'\','; }	
 			if (jsonData.POPleaseSpecify !== undefined && jsonData.POPleaseSpecify !== null && jsonData.POPleaseSpecify !== "null" && jsonData.POPleaseSpecify.length > 0)
 				{ insertQueryData += 'PF_PO_Pleasespecify__c,'; valuesData += '\'' + jsonData.POPleaseSpecify + '\'' + ','; 
 				  updateValueData += 'PF_PO_Pleasespecify__c = \''+jsonData.POPleaseSpecify+'\',';
@@ -1488,7 +1488,7 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_PO_Poweroffisarecurrentfailureobserve__c,'; valuesData += '\'' + jsonData.POPowerOffisAreCurrentFailureObserved + '\'' + ','; 
 				  updateValueData += 'PF_PO_Poweroffisarecurrentfailureobserve__c = \''+jsonData.POPowerOffisAreCurrentFailureObserved+'\',';
 				}
-				
+			else { updateValueData += 'PF_PO_Poweroffisarecurrentfailureobserve__c = \''+'False'+'\','; }	
 			if (jsonData.POProvideFrequency !== undefined && jsonData.POProvideFrequency !== null && jsonData.POProvideFrequency !== "null" && jsonData.POProvideFrequency.length > 0)
 				{ insertQueryData += 'PF_PO_Providefrequency__c,'; valuesData += '\'' + jsonData.POProvideFrequency + '\'' + ','; 
 				  updateValueData += 'PF_PO_Providefrequency__c = \''+jsonData.POProvideFrequency+'\',';
@@ -1498,19 +1498,19 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_PO_Doesdevicepowersoffwithsmallshocks__c,'; valuesData += '\'' + jsonData.PODoesDevicePowersoffWithSmallShocks + '\'' + ','; 
 				  updateValueData += 'PF_PO_Doesdevicepowersoffwithsmallshocks__c = \''+jsonData.PODoesDevicePowersoffWithSmallShocks+'\',';
 				}
-			
+			else { updateValueData += 'PF_PO_Doesdevicepowersoffwithsmallshocks__c = \''+'False'+'\','; }
 			if (jsonData.POHasUserTrytoRemoveandReinsertBattery !== undefined && jsonData.POHasUserTrytoRemoveandReinsertBattery !== null && jsonData.POHasUserTrytoRemoveandReinsertBattery !== "null" && jsonData.POHasUserTrytoRemoveandReinsertBattery.length > 0)
 				{ insertQueryData += 'PF_PO_Hasusertrytoremoveandreinsertbatte__c,'; valuesData += '\'' + jsonData.POHasUserTrytoRemoveandReinsertBattery + '\'' + ','; 
 				  updateValueData += 'PF_PO_Hasusertrytoremoveandreinsertbatte__c = \''+jsonData.POHasUserTrytoRemoveandReinsertBattery+'\',';
 				}	    
-				
+			else { updateValueData += 'PF_PO_Hasusertrytoremoveandreinsertbatte__c = \''+'False'+'\','; }	
 			// power failure - No power off
 			
 			if (jsonData.NPODeviceBlckedPreventingToBeTurnoff !== undefined && jsonData.NPODeviceBlckedPreventingToBeTurnoff !== null && jsonData.NPODeviceBlckedPreventingToBeTurnoff !== "null" && jsonData.NPODeviceBlckedPreventingToBeTurnoff.length > 0)
 				{ insertQueryData += 'PF_NPO_DeviceBlckedPreventingToBeTurnoff__c,'; valuesData += '\'' + jsonData.NPODeviceBlckedPreventingToBeTurnoff + '\'' + ','; 
 				  updateValueData += 'PF_NPO_DeviceBlckedPreventingToBeTurnoff__c = \''+jsonData.NPODeviceBlckedPreventingToBeTurnoff+'\',';
 				}
-			
+			else { updateValueData += 'PF_NPO_DeviceBlckedPreventingToBeTurnoff__c = \''+'False'+'\','; }
 			if (jsonData.NPODeviceBlckedPreventingToBeTurnoffIfNo !== undefined && jsonData.NPODeviceBlckedPreventingToBeTurnoffIfNo !== null && jsonData.NPODeviceBlckedPreventingToBeTurnoffIfNo !== "null" && jsonData.NPODeviceBlckedPreventingToBeTurnoffIfNo.length > 0)
 				{ insertQueryData += 'PF_NPO_DeviceBlckdPreventingToTurnofIfNo__c,'; valuesData += '\'' + jsonData.NPODeviceBlckedPreventingToBeTurnoffIfNo + '\'' + ','; 
 				  updateValueData += 'PF_NPO_DeviceBlckdPreventingToTurnofIfNo__c = \''+jsonData.NPODeviceBlckedPreventingToBeTurnoffIfNo+'\',';
@@ -1525,7 +1525,7 @@ router.post('/insertPowerFailure', function(req, res) {
 			   { insertQueryData += 'PF_NPO_NopoweroffIssueDisplydAtWhatStep__c,'; valuesData += '\'' + jsonData.NPONopoweroffIssueDisplydAtWhatStep + '\'' + ','; 
 			     updateValueData += 'PF_NPO_NopoweroffIssueDisplydAtWhatStep__c = \''+jsonData.NPONopoweroffIssueDisplydAtWhatStep+'\',';
 			   }
-				
+			else { updateValueData += 'PF_NPO_NopoweroffIssueDisplydAtWhatStep__c = \''+'False'+'\','; }	
 			if (jsonData.NPOPleaseSpecifyInjectionStep !== undefined && jsonData.NPOPleaseSpecifyInjectionStep !== null && jsonData.NPOPleaseSpecifyInjectionStep !== "null" && jsonData.NPOPleaseSpecifyInjectionStep.length > 0)
 				{ insertQueryData += 'PF_NPO_PleaseSpecifyInjectionStep__c,'; valuesData += '\'' + jsonData.NPOPleaseSpecifyInjectionStep + '\'' + ','; 
 				  updateValueData += 'PF_NPO_PleaseSpecifyInjectionStep__c = \''+jsonData.NPOPleaseSpecifyInjectionStep+'\',';
@@ -1535,12 +1535,12 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_NPO_NeedToRemoveBateryToTurnoffDevice__c,'; valuesData += '\'' + jsonData.NPONeedToRemoveBateryToTurnoffDevice + '\'' + ','; 
 				  updateValueData += 'PF_NPO_NeedToRemoveBateryToTurnoffDevice__c = \''+jsonData.NPONeedToRemoveBateryToTurnoffDevice+'\',';
 				}
-				
+			else { updateValueData += 'PF_NPO_NeedToRemoveBateryToTurnoffDevice__c = \''+'False'+'\','; }	
 			 if (jsonData.NPOIsSomethingStuckInsideTheDevice !== undefined && jsonData.NPOIsSomethingStuckInsideTheDevice !== null && jsonData.NPOIsSomethingStuckInsideTheDevice !== "null" && jsonData.NPOIsSomethingStuckInsideTheDevice.length > 0)
 				{ insertQueryData += 'PF_NPO_IsSomethingStuckInsideTheDevice__c,'; valuesData += '\'' + jsonData.NPOIsSomethingStuckInsideTheDevice + '\'' + ','; 
 				  updateValueData += 'PF_NPO_IsSomethingStuckInsideTheDevice__c = \''+jsonData.NPOIsSomethingStuckInsideTheDevice+'\',';
 				}
-				
+			else { updateValueData += 'PF_NPO_IsSomethingStuckInsideTheDevice__c = \''+'False'+'\','; }	
 			if (jsonData.NPOSpecify !== undefined && jsonData.NPOSpecify !== null && jsonData.NPOSpecify !== "null" && jsonData.NPOSpecify.length > 0)
 				{ insertQueryData += 'PF_NPO_Specify__c,'; valuesData += '\'' + jsonData.NPOSpecify + '\'' + ','; 
 			      updateValueData += 'PF_NPO_Specify__c = \''+jsonData.NPOSpecify+'\',';	
@@ -1550,7 +1550,7 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_NPO_IsItARecurrentFailure__c,'; valuesData += '\'' + jsonData.NPOIsItARecurrentFailure + '\'' + ','; 
 				  updateValueData += 'PF_NPO_IsItARecurrentFailure__c = \''+jsonData.NPOIsItARecurrentFailure+'\',';
 				}
-				
+			else { updateValueData += 'PF_NPO_IsItARecurrentFailure__c = \''+'False'+'\','; }	
 			if (jsonData.NPOFrequency !== undefined && jsonData.NPOFrequency !== null && jsonData.NPOFrequency !== "null" && jsonData.NPOFrequency.length > 0)
 			   { insertQueryData += 'PF_NPO_Frequency__c,'; valuesData += '\'' + jsonData.NPOFrequency + '\'' + ','; 
 			     updateValueData += 'PF_NPO_Frequency__c = \''+jsonData.NPOFrequency+'\',';
@@ -1582,7 +1582,7 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_BC_IsAWarningMessageDisplayed__c,'; valuesData += '\'' + jsonData.BCIsAWarningMessageDisplayed + '\'' + ','; 
 				  updateValueData += 'PF_BC_IsAWarningMessageDisplayed__c = \''+jsonData.BCIsAWarningMessageDisplayed+'\',';
 				}
-				
+			else { updateValueData += 'PF_BC_IsAWarningMessageDisplayed__c = \''+'False'+'\','; }	
 			if (jsonData.BCWarningMessage !== undefined && jsonData.BCWarningMessage !== null && jsonData.BCWarningMessage !== "null" && jsonData.BCWarningMessage.length > 0)
 				{ insertQueryData += 'PF_BC_WarningMessage__c,'; valuesData += '\'' + jsonData.BCWarningMessage + '\'' + ','; 
 				  updateValueData += 'PF_BC_WarningMessage__c = \''+jsonData.BCWarningMessage+'\',';
@@ -1592,7 +1592,7 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_BC_HasTheFailureBeenFrequentlyObservd__c,'; valuesData += '\'' + jsonData.BCHasTheFailureBeenFrequentlyObservd + '\'' + ','; 
 				  updateValueData += 'PF_BC_HasTheFailureBeenFrequentlyObservd__c = \''+jsonData.BCHasTheFailureBeenFrequentlyObservd+'\',';
 				}
-				
+			else { updateValueData += 'PF_BC_HasTheFailureBeenFrequentlyObservd__c = \''+'False'+'\','; }	
 			if (jsonData.BCPleaseProvideFrequency !== undefined && jsonData.BCPleaseProvideFrequency !== null && jsonData.BCPleaseProvideFrequency !== "null" && jsonData.BCPleaseProvideFrequency.length > 0)
 				{ insertQueryData += 'PF_BC_PleaseProvideFrequency__c,'; valuesData += '\'' + jsonData.BCPleaseProvideFrequency + '\'' + ','; 
 				  updateValueData += 'PF_BC_PleaseProvideFrequency__c = \''+jsonData.BCPleaseProvideFrequency+'\',';
@@ -1602,23 +1602,23 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_BC_BatteryWithinSpecifications__c,'; valuesData += '\'' + jsonData.BCBatteryWithinSpecifications + '\'' + ','; 
 				  updateValueData += 'PF_BC_BatteryWithinSpecifications__c = \''+jsonData.BCBatteryWithinSpecifications+'\',';
 				}
-				
+			else { updateValueData += 'PF_BC_BatteryWithinSpecifications__c = \''+'False'+'\','; }	
 			if (jsonData.BCBatteryProperlyPlaced !== undefined && jsonData.BCBatteryProperlyPlaced !== null && jsonData.BCBatteryProperlyPlaced !== "null" && jsonData.BCBatteryProperlyPlaced.length > 0)
 				{ insertQueryData += 'PF_BC_BatteryProperlyPlaced__c,'; valuesData += '\'' + jsonData.BCBatteryProperlyPlaced + '\'' + ','; 
 				  updateValueData += 'PF_BC_BatteryProperlyPlaced__c = \''+jsonData.BCBatteryProperlyPlaced+'\',';
 				}
-				
+			else { updateValueData += 'PF_BC_BatteryProperlyPlaced__c = \''+'False'+'\','; }	
 			if (jsonData.BCBatteryCoverClosed !== undefined && jsonData.BCBatteryCoverClosed !== null && jsonData.BCBatteryCoverClosed !== "null" && jsonData.BCBatteryCoverClosed.length > 0)
 				{ insertQueryData += 'PF_BC_BatteryCoverClosed__c,'; valuesData += '\'' + jsonData.BCBatteryCoverClosed + '\'' + ','; 
 				  updateValueData += 'PF_BC_BatteryCoverClosed__c = \''+jsonData.BCBatteryCoverClosed+'\',';
 				}
-				
+			else { updateValueData += 'PF_BC_BatteryCoverClosed__c = \''+'False'+'\','; }	
 			if (jsonData.BCHasTheDeviceBeenImpactedByHumidity !== undefined && jsonData.BCHasTheDeviceBeenImpactedByHumidity !== null && jsonData.BCHasTheDeviceBeenImpactedByHumidity !== "null" && jsonData.BCHasTheDeviceBeenImpactedByHumidity.length > 0)
 				{ insertQueryData += 'PF_BC_HasTheDeviceBeenImpactedByHumidity__c,'; valuesData += '\'' + jsonData.BCHasTheDeviceBeenImpactedByHumidity + '\'' + ','; 
 				  updateValueData += 'PF_BC_HasTheDeviceBeenImpactedByHumidity__c = \''+jsonData.BCHasTheDeviceBeenImpactedByHumidity+'\',';
 				}
 	    
-                
+             else { updateValueData += 'PF_BC_HasTheDeviceBeenImpactedByHumidity__c = \''+'False'+'\','; }   
             if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0){ 
 			     insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\'';
 			     updateValueData += 'HerokuCaseId__c = \''+jsonData.caseid+ '\'';
@@ -1715,7 +1715,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
 			   { insertQueryData += 'CI_CD_IsAWarningMessageDisplayed__c,'; valuesData += '\'' + jsonData.CDIsAWarningMessageDisplayed + '\'' + ','; 
 			   updateValueData += 'CI_CD_IsAWarningMessageDisplayed__c = \''+jsonData.CDIsAWarningMessageDisplayed+'\',';
 			   }
-				
+			else { updateValueData += 'CI_CD_IsAWarningMessageDisplayed__c = \''+'False'+'\','; }	
 			if (jsonData.CDIsAWarningMessageDisplayedIfYes !== undefined && jsonData.CDIsAWarningMessageDisplayedIfYes !== null && jsonData.CDIsAWarningMessageDisplayedIfYes !== "null" && jsonData.CDIsAWarningMessageDisplayedIfYes.length > 0)
 				{ insertQueryData += 'CI_CD_IsAWarningMessageDisplayedIfYes__c,'; valuesData += '\'' + jsonData.CDIsAWarningMessageDisplayedIfYes + '\'' + ','; 
 				updateValueData += 'CI_CD_IsAWarningMessageDisplayedIfYes__c = \''+jsonData.CDIsAWarningMessageDisplayedIfYes+'\',';
@@ -1725,7 +1725,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CD_CartridgeStillContainingMedication__c,'; valuesData += '\'' + jsonData.CDCartridgeStillContainingMedication + '\'' + ','; 
 				updateValueData += 'CI_CD_CartridgeStillContainingMedication__c = \''+jsonData.CDCartridgeStillContainingMedication+'\',';
 				}
-			
+			else { updateValueData += 'CI_CD_CartridgeStillContainingMedication__c = \''+'False'+'\','; }
 			if (jsonData.CDCartridgeexpired !== undefined && jsonData.CDCartridgeexpired !== null && jsonData.CDCartridgeexpired !== "null" && jsonData.CDCartridgeexpired.length > 0)
 				{ insertQueryData += 'CI_CD_Cartridgeexpired__c,'; valuesData += '\'' + jsonData.CDCartridgeexpired + '\'' + ','; 
 				updateValueData += 'CI_CD_Cartridgeexpired__c = \''+jsonData.CDCartridgeexpired+'\',';
@@ -1740,7 +1740,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CD_DevicePromptToRemoveTheCartridge__c,'; valuesData += '\'' + jsonData.CDDevicePromptToRemoveTheCartridge + '\'' + ','; 
 				updateValueData += 'CI_CD_DevicePromptToRemoveTheCartridge__c = \''+jsonData.CDDevicePromptToRemoveTheCartridge+'\',';
 				}
-			
+			else { updateValueData += 'CI_CD_DevicePromptToRemoveTheCartridge__c = \''+'False'+'\','; }
 			if (jsonData.CDCatridgeDetectionIssueWithOneOrAll !== undefined && jsonData.CDCatridgeDetectionIssueWithOneOrAll !== null && jsonData.CDCatridgeDetectionIssueWithOneOrAll !== "null" && jsonData.CDCatridgeDetectionIssueWithOneOrAll.length > 0)
 				{ insertQueryData += 'CI_CD_CatridgeDetectionIssueWithOneOrAll__c,'; valuesData += '\'' + jsonData.CDCatridgeDetectionIssueWithOneOrAll + '\'' + ','; 
 				updateValueData += 'CI_CD_CatridgeDetectionIssueWithOneOrAll__c = \''+jsonData.CDCatridgeDetectionIssueWithOneOrAll+'\',';
@@ -1750,12 +1750,12 @@ router.post('/insertCatridgeIssue', function(req, res) {
 			   { insertQueryData += 'CI_CD_IsTheCartridgeDoorDamaged__c,'; valuesData += '\'' + jsonData.CDIsTheCartridgeDoorDamaged + '\'' + ','; 
 			   updateValueData += 'CI_CD_IsTheCartridgeDoorDamaged__c = \''+jsonData.CDIsTheCartridgeDoorDamaged+'\',';
 			   }
-				
+			else { updateValueData += 'CI_CD_IsTheCartridgeDoorDamaged__c = \''+'False'+'\','; }	
 			if (jsonData.CDPlungerRodMoveOnInsertingCartridge !== undefined && jsonData.CDPlungerRodMoveOnInsertingCartridge !== null && jsonData.CDPlungerRodMoveOnInsertingCartridge !== "null" && jsonData.CDPlungerRodMoveOnInsertingCartridge.length > 0)
 				{ insertQueryData += 'CI_CD_PlungerRodMoveOnInsertingCartridge__c,'; valuesData += '\'' + jsonData.CDPlungerRodMoveOnInsertingCartridge + '\'' + ','; 
 				updateValueData += 'CI_CD_PlungerRodMoveOnInsertingCartridge__c = \''+jsonData.CDPlungerRodMoveOnInsertingCartridge+'\',';
 				}
-				
+			else { updateValueData += 'CI_CD_PlungerRodMoveOnInsertingCartridge__c = \''+'False'+'\','; }	
 			if (jsonData.CDIsTheCartridgeNew !== undefined && jsonData.CDIsTheCartridgeNew !== null && jsonData.CDIsTheCartridgeNew !== "null" && jsonData.CDIsTheCartridgeNew.length > 0)
 				{ insertQueryData += 'CI_CD_IsTheCartridgeNew__c,'; valuesData += '\'' + jsonData.CDIsTheCartridgeNew + '\'' + ','; 
 				updateValueData += 'CI_CD_IsTheCartridgeNew__c = \''+jsonData.CDIsTheCartridgeNew+'\',';
@@ -1777,7 +1777,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CD_DidTheDevicPromptToRemoveCartridge__c,'; valuesData += '\'' + jsonData.CDDidTheDevicPromptToRemoveCartridge + '\'' + ','; 
 				updateValueData += 'CI_CD_DidTheDevicPromptToRemoveCartridge__c = \''+jsonData.CDDidTheDevicPromptToRemoveCartridge+'\',';
 				}
-				
+			else { updateValueData += 'CI_CD_DidTheDevicPromptToRemoveCartridge__c = \''+'False'+'\','; }	
 			if (jsonData.CDCartridgeDetectionIssueWitOneOrAll !== undefined && jsonData.CDCartridgeDetectionIssueWitOneOrAll !== null && jsonData.CDCartridgeDetectionIssueWitOneOrAll !== "null" && jsonData.CDCartridgeDetectionIssueWitOneOrAll.length > 0)
 				{ insertQueryData += 'CI_CD_CartridgeDetectionIssueWitOneOrAll__c,'; valuesData += '\'' + jsonData.CDCartridgeDetectionIssueWitOneOrAll + '\'' + ','; 
 				updateValueData += 'CI_CD_CartridgeDetectionIssueWitOneOrAll__c = \''+jsonData.CDCartridgeDetectionIssueWitOneOrAll+'\',';
@@ -1794,22 +1794,22 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_BC_IsBrokenCartridgeInsideTheDevice__c,'; valuesData += '\'' + jsonData.BCIsBrokenCartridgeInsideTheDevice + '\'' + ','; 
 				updateValueData += 'CI_BC_IsBrokenCartridgeInsideTheDevice__c = \''+jsonData.BCIsBrokenCartridgeInsideTheDevice+'\',';
 				}   
-				
+			else { updateValueData += 'CI_BC_IsBrokenCartridgeInsideTheDevice__c = \''+'False'+'\','; }	
 			if (jsonData.BCHasTheDeviceBeenDropped !== undefined && jsonData.BCHasTheDeviceBeenDropped !== null && jsonData.BCHasTheDeviceBeenDropped !== "null" && jsonData.BCHasTheDeviceBeenDropped.length > 0)
 				{ insertQueryData += 'CI_BC_HasTheDeviceBeenDropped__c,'; valuesData += '\'' + jsonData.BCHasTheDeviceBeenDropped + '\'' + ','; 
 				updateValueData += 'CI_BC_HasTheDeviceBeenDropped__c = \''+jsonData.BCHasTheDeviceBeenDropped+'\',';
 				}
-						
+			else { updateValueData += 'CI_BC_HasTheDeviceBeenDropped__c = \''+'False'+'\','; }			
 			if (jsonData.BCCatridgeBrokenDueImproperFunctning !== undefined && jsonData.BCCatridgeBrokenDueImproperFunctning !== null && jsonData.BCCatridgeBrokenDueImproperFunctning !== "null" && jsonData.BCCatridgeBrokenDueImproperFunctning.length > 0)
 				{ insertQueryData += 'CI_BC_CatridgeBrokenDueImproperFunctning__c,'; valuesData += '\'' + jsonData.BCCatridgeBrokenDueImproperFunctning + '\'' + ','; 
 				updateValueData += 'CI_BC_CatridgeBrokenDueImproperFunctning__c = \''+jsonData.BCCatridgeBrokenDueImproperFunctning+'\',';
 				}
-				
+			else { updateValueData += 'CI_BC_CatridgeBrokenDueImproperFunctning__c = \''+'False'+'\','; }	
 			if (jsonData.BCIsAWarningMessageDisplayed !== undefined && jsonData.BCIsAWarningMessageDisplayed !== null && jsonData.BCIsAWarningMessageDisplayed !== "null" && jsonData.BCIsAWarningMessageDisplayed.length > 0)
 				{ insertQueryData += 'CI_BC_IsAWarningMessageDisplayed__c,'; valuesData += '\'' + jsonData.BCIsAWarningMessageDisplayed + '\'' + ','; 
 				updateValueData += 'CI_BC_IsAWarningMessageDisplayed__c = \''+jsonData.BCIsAWarningMessageDisplayed+'\',';
 				}
-			
+			else { updateValueData += 'CI_BC_IsAWarningMessageDisplayed__c = \''+'False'+'\','; }
 			if (jsonData.BCWarningMessage !== undefined && jsonData.BCWarningMessage !== null && jsonData.BCWarningMessage !== "null" && jsonData.BCWarningMessage.length > 0)
 				{ insertQueryData += 'CI_BC_WarningMessage__c,'; valuesData += '\'' + jsonData.BCWarningMessage + '\'' + ','; 
 				updateValueData += 'CI_BC_WarningMessage__c = \''+jsonData.BCWarningMessage+'\',';
@@ -1836,7 +1836,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CC_IssueLinkedToTheDoseCountDisplay__c,'; valuesData += '\'' + jsonData.CCIssueLinkedToTheDoseCountDisplay + '\'' + ','; 
 				updateValueData += 'CI_CC_IssueLinkedToTheDoseCountDisplay__c = \''+jsonData.CCIssueLinkedToTheDoseCountDisplay+'\',';
 				}
-				
+			else { updateValueData += 'CI_CC_IssueLinkedToTheDoseCountDisplay__c = \''+'False'+'\','; }	
 			if (jsonData.CCFrequency !== undefined && jsonData.CCFrequency !== null && jsonData.CCFrequency !== "null" && jsonData.CCFrequency.length > 0)
 			   { insertQueryData += 'CI_CC_Frequency__c,'; valuesData += '\'' + jsonData.CCFrequency + '\'' + ','; 
 			   updateValueData += 'CI_CC_Frequency__c = \''+jsonData.CCFrequency+'\',';
@@ -1846,7 +1846,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CC_HasSettingOfDeviceChangedRecently__c,'; valuesData += '\'' + jsonData.CCHasSettingOfDeviceChangedRecently + '\'' + ','; 
 				updateValueData += 'CI_CC_HasSettingOfDeviceChangedRecently__c = \''+jsonData.CCHasSettingOfDeviceChangedRecently+'\',';
 				}
-				
+			else { updateValueData += 'CI_CC_HasSettingOfDeviceChangedRecently__c = \''+'False'+'\','; }	
 			if (jsonData.CCSpecify !== undefined && jsonData.CCSpecify !== null && jsonData.CCSpecify !== "null" && jsonData.CCSpecify.length > 0)
 				{ insertQueryData += 'CI_CC_Specify__c,'; valuesData += '\'' + jsonData.CCSpecify + '\'' + ','; 
 				updateValueData += 'CI_CC_Specify__c = \''+jsonData.CCSpecify+'\',';
@@ -1891,7 +1891,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CC_HasTheCartridgeBeenRejectedByDevic__c,'; valuesData += '\'' + jsonData.CCHasTheCartridgeBeenRejectedByDevic + '\'' + ','; 
 				updateValueData += 'CI_CC_HasTheCartridgeBeenRejectedByDevic__c = \''+jsonData.CCHasTheCartridgeBeenRejectedByDevic+'\',';
 				}
-			
+			else { updateValueData += 'CI_CC_HasTheCartridgeBeenRejectedByDevic__c = \''+'False'+'\','; }
 			if (jsonData.CCHasCartridgeRejectedByDeviceIfNO !== undefined && jsonData.CCHasCartridgeRejectedByDeviceIfNO !== null && jsonData.CCHasCartridgeRejectedByDeviceIfNO !== "null" && jsonData.CCHasCartridgeRejectedByDeviceIfNO.length > 0)
 				{ insertQueryData += 'CI_CC_HasCartridgeRejectedByDeviceIfNo__c,'; valuesData += '\'' + jsonData.CCHasCartridgeRejectedByDeviceIfNO + '\'' + ','; 
 				updateValueData += 'CI_CC_HasCartridgeRejectedByDeviceIfNo__c = \''+jsonData.CCHasCartridgeRejectedByDeviceIfNO+'\',';
@@ -1901,7 +1901,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CC_IsAWarningMessageBeenDisplayed__c,'; valuesData += '\'' + jsonData.CCIsAWarningMessageBeenDisplayed + '\'' + ','; 
 				updateValueData += 'CI_CC_IsAWarningMessageBeenDisplayed__c = \''+jsonData.CCIsAWarningMessageBeenDisplayed+'\',';
 				}
-				
+			else { updateValueData += 'CI_CC_IsAWarningMessageBeenDisplayed__c = \''+'False'+'\','; }	
 			if (jsonData.CCWarningMessage !== undefined && jsonData.CCWarningMessage !== null && jsonData.CCWarningMessage !== "null" && jsonData.CCWarningMessage.length > 0)
 				{ insertQueryData += 'CI_CC_WarningMessage__c,'; valuesData += '\'' + jsonData.CCWarningMessage + '\'' + ','; 
 				updateValueData += 'CI_CC_WarningMessage__c = \''+jsonData.CCWarningMessage+'\',';
@@ -1911,17 +1911,17 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CC_CartridgeBeenLetInPlaceInsideDevic__c,'; valuesData += '\'' + jsonData.CCCartridgeBeenLetInPlaceInsideDevic + '\'' + ','; 
 				updateValueData += 'CI_CC_CartridgeBeenLetInPlaceInsideDevic__c = \''+jsonData.CCCartridgeBeenLetInPlaceInsideDevic+'\',';
 				}
-				
+			else { updateValueData += 'CI_CC_CartridgeBeenLetInPlaceInsideDevic__c = \''+'False'+'\','; }	
 			if (jsonData.CCUserPerfrmMorNedleAttchmntDtachmnt !== undefined && jsonData.CCUserPerfrmMorNedleAttchmntDtachmnt !== null && jsonData.CCUserPerfrmMorNedleAttchmntDtachmnt !== "null" && jsonData.CCUserPerfrmMorNedleAttchmntDtachmnt.length > 0)
 			   { insertQueryData += 'CI_CC_UserPerfrmMorNedleAttchmntDtachmnt__c,'; valuesData += '\'' + jsonData.CCUserPerfrmMorNedleAttchmntDtachmnt + '\'' + ','; 
 			   updateValueData += 'CI_CC_UserPerfrmMorNedleAttchmntDtachmnt__c = \''+jsonData.CCUserPerfrmMorNedleAttchmntDtachmnt+'\',';
 			   }
-				
+			else { updateValueData += 'CI_CC_UserPerfrmMorNedleAttchmntDtachmnt__c = \''+'False'+'\','; }	
 			if (jsonData.CCDoesAnAmountOfMedicationRemain !== undefined && jsonData.CCDoesAnAmountOfMedicationRemain !== null && jsonData.CCDoesAnAmountOfMedicationRemain !== "null" && jsonData.CCDoesAnAmountOfMedicationRemain.length > 0)
 				{ insertQueryData += 'CI_CC_DoesAnAmountOfMedicationRemain__c,'; valuesData += '\'' + jsonData.CCDoesAnAmountOfMedicationRemain + '\'' + ','; 
 				updateValueData += 'CI_CC_DoesAnAmountOfMedicationRemain__c = \''+jsonData.CCDoesAnAmountOfMedicationRemain+'\',';
 				}
-				
+			else { updateValueData += 'CI_CC_DoesAnAmountOfMedicationRemain__c = \''+'False'+'\','; }	
 			if (jsonData.CCIssueBeenObservdOnceOrSeveralTimes !== undefined && jsonData.CCIssueBeenObservdOnceOrSeveralTimes !== null && jsonData.CCIssueBeenObservdOnceOrSeveralTimes !== "null" && jsonData.CCIssueBeenObservdOnceOrSeveralTimes.length > 0)
 				{ insertQueryData += 'CI_CC_IssueBeenObservdOnceOrSeveralTimes__c,'; valuesData += '\'' + jsonData.CCIssueBeenObservdOnceOrSeveralTimes + '\'' + ','; 
 				updateValueData += 'CI_CC_IssueBeenObservdOnceOrSeveralTimes__c = \''+jsonData.CCIssueBeenObservdOnceOrSeveralTimes+'\',';
@@ -1938,37 +1938,37 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CI_CanTheCartridgeDoorBeOpened__c,'; valuesData += '\'' + jsonData.CICanTheCartridgeDoorBeOpened + '\'' + ','; 
 				updateValueData += 'CI_CI_CanTheCartridgeDoorBeOpened__c = \''+jsonData.CICanTheCartridgeDoorBeOpened+'\',';
 				}
-				
+			else { updateValueData += 'CI_CI_CanTheCartridgeDoorBeOpened__c = \''+'False'+'\','; }	
 			if (jsonData.CICartridgeHoldrReleasedWhenSlidngUp !== undefined && jsonData.CICartridgeHoldrReleasedWhenSlidngUp !== null && jsonData.CICartridgeHoldrReleasedWhenSlidngUp !== "null" && jsonData.CICartridgeHoldrReleasedWhenSlidngUp.length > 0)
 				{ insertQueryData += 'CI_CI_CartridgeHoldrReleasedWhenSlidngUp__c,'; valuesData += '\'' + jsonData.CICartridgeHoldrReleasedWhenSlidngUp + '\'' + ','; 
 				updateValueData += 'CI_CI_CartridgeHoldrReleasedWhenSlidngUp__c = \''+jsonData.CICartridgeHoldrReleasedWhenSlidngUp+'\',';
 				}
-			
+			else { updateValueData += 'CI_CI_CartridgeHoldrReleasedWhenSlidngUp__c = \''+'False'+'\','; }	
 			if (jsonData.CIDoesDeviceStartCartridgeLoading !== undefined && jsonData.CIDoesDeviceStartCartridgeLoading !== null && jsonData.CIDoesDeviceStartCartridgeLoading !== "null" && jsonData.CIDoesDeviceStartCartridgeLoading.length > 0)
 				{ insertQueryData += 'CI_CI_DoesDeviceStartCartridgeLoading__c,'; valuesData += '\'' + jsonData.CIDoesDeviceStartCartridgeLoading + '\'' + ','; 
 				updateValueData += 'CI_CI_DoesDeviceStartCartridgeLoading__c = \''+jsonData.CIDoesDeviceStartCartridgeLoading+'\',';
 				}
-				
+			else { updateValueData += 'CI_CI_DoesDeviceStartCartridgeLoading__c = \''+'False'+'\','; }	
 			if (jsonData.CIIsAWarningMessageDisplayed !== undefined && jsonData.CIIsAWarningMessageDisplayed !== null && jsonData.CIIsAWarningMessageDisplayed !== "null" && jsonData.CIIsAWarningMessageDisplayed.length > 0)
 			   { insertQueryData += 'CI_CI_IsAWarningMessageDisplayed__c,'; valuesData += '\'' + jsonData.CIIsAWarningMessageDisplayed + '\'' + ','; 
 			   updateValueData += 'CI_CI_IsAWarningMessageDisplayed__c = \''+jsonData.CIIsAWarningMessageDisplayed+'\',';
 			   }
-				
+			else { updateValueData += 'CI_CI_IsAWarningMessageDisplayed__c = \''+'False'+'\','; }	
 			if (jsonData.CIIsTheCartridgeDoorDamaged !== undefined && jsonData.CIIsTheCartridgeDoorDamaged !== null && jsonData.CIIsTheCartridgeDoorDamaged !== "null" && jsonData.CIIsTheCartridgeDoorDamaged.length > 0)
 				{ insertQueryData += 'CI_CI_IsTheCartridgeDoorDamaged__c,'; valuesData += '\'' + jsonData.CIIsTheCartridgeDoorDamaged + '\'' + ','; 
 				updateValueData += 'CI_CI_IsTheCartridgeDoorDamaged__c = \''+jsonData.CIIsTheCartridgeDoorDamaged+'\',';
 				}
-				
+			else { updateValueData += 'CI_CI_IsTheCartridgeDoorDamaged__c = \''+'False'+'\','; }	
 			if (jsonData.CIHasTheDeviceBeenDropped !== undefined && jsonData.CIHasTheDeviceBeenDropped !== null && jsonData.CIHasTheDeviceBeenDropped !== "null" && jsonData.CIHasTheDeviceBeenDropped.length > 0)
 			   { insertQueryData += 'CI_CI_HasTheDeviceBeenDropped__c,'; valuesData += '\'' + jsonData.CIHasTheDeviceBeenDropped + '\'' + ','; 
 			   updateValueData += 'CI_CI_HasTheDeviceBeenDropped__c = \''+jsonData.CIHasTheDeviceBeenDropped+'\',';
 			   }
-				
+			else { updateValueData += 'CI_CI_HasTheDeviceBeenDropped__c = \''+'False'+'\','; }	
 			if (jsonData.CIIsSomthngPreventCartridgeDoorOpeng !== undefined && jsonData.CIIsSomthngPreventCartridgeDoorOpeng !== null && jsonData.CIIsSomthngPreventCartridgeDoorOpeng !== "null" && jsonData.CIIsSomthngPreventCartridgeDoorOpeng.length > 0)
 				{ insertQueryData += 'CI_CI_IsSomthngPreventCartridgeDoorOpeng__c,'; valuesData += '\'' + jsonData.CIIsSomthngPreventCartridgeDoorOpeng + '\'' + ','; 
 				updateValueData += 'CI_CI_IsSomthngPreventCartridgeDoorOpeng__c = \''+jsonData.CIIsSomthngPreventCartridgeDoorOpeng+'\',';
 				}
-				
+			else { updateValueData += 'CI_CI_IsSomthngPreventCartridgeDoorOpeng__c = \''+'False'+'\','; }	
 			if (jsonData.CIPleaseSpecify !== undefined && jsonData.CIPleaseSpecify !== null && jsonData.CIPleaseSpecify !== "null" && jsonData.CIPleaseSpecify.length > 0)
 				{ insertQueryData += 'CI_CC_PleaseSpecify__c,'; valuesData += '\'' + jsonData.CIPleaseSpecify + '\'' + ','; 
 				updateValueData += 'CI_CC_PleaseSpecify__c = \''+jsonData.CIPleaseSpecify+'\',';
@@ -1979,17 +1979,17 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CR_CartridgeCurrentlyStuckInsideDevic__c,'; valuesData += '\'' + jsonData.CRCartridgeCurrentlyStuckInsideDevic + '\'' + ','; 
 				updateValueData += 'CI_CR_CartridgeCurrentlyStuckInsideDevic__c = \''+jsonData.CRCartridgeCurrentlyStuckInsideDevic+'\',';
 				}
-			
+			else { updateValueData += 'CI_CR_CartridgeCurrentlyStuckInsideDevic__c = \''+'False'+'\','; }
 			if (jsonData.CRCartridgeStuckDeviceDoesNotTurnon !== undefined && jsonData.CRCartridgeStuckDeviceDoesNotTurnon !== null && jsonData.CRCartridgeStuckDeviceDoesNotTurnon !== "null" && jsonData.CRCartridgeStuckDeviceDoesNotTurnon.length > 0)
 				{ insertQueryData += 'CI_CR_CartridgeStuckDeviceDoesNotTurnon__c,'; valuesData += '\'' + jsonData.CRCartridgeStuckDeviceDoesNotTurnon + '\'' + ','; 
 				updateValueData += 'CI_CR_CartridgeStuckDeviceDoesNotTurnon__c = \''+jsonData.CRCartridgeStuckDeviceDoesNotTurnon+'\',';
 				}
-				
+			else { updateValueData += 'CI_CR_CartridgeStuckDeviceDoesNotTurnon__c = \''+'False'+'\','; }	
 			if (jsonData.CRCartridgeStuckAndDevicBlockedByMsg !== undefined && jsonData.CRCartridgeStuckAndDevicBlockedByMsg !== null && jsonData.CRCartridgeStuckAndDevicBlockedByMsg !== "null" && jsonData.CRCartridgeStuckAndDevicBlockedByMsg.length > 0)
 			   { insertQueryData += 'CI_CR_CartridgeStuckAndDevicBlockedByMsg__c,'; valuesData += '\'' + jsonData.CRCartridgeStuckAndDevicBlockedByMsg + '\'' + ','; 
 			   updateValueData += 'CI_CR_CartridgeStuckAndDevicBlockedByMsg__c = \''+jsonData.CRCartridgeStuckAndDevicBlockedByMsg+'\',';
 			   }
-				
+			else { updateValueData += 'CI_CR_CartridgeStuckAndDevicBlockedByMsg__c = \''+'False'+'\','; }		
 			if (jsonData.CRWarningMessage !== undefined && jsonData.CRWarningMessage !== null && jsonData.CRWarningMessage !== "null" && jsonData.CRWarningMessage.length > 0)
 				{ insertQueryData += 'CI_CR_WarningMessage__c,'; valuesData += '\'' + jsonData.CRWarningMessage + '\'' + ','; 
 				updateValueData += 'CI_CR_WarningMessage__c = \''+jsonData.CRWarningMessage+'\',';
@@ -1999,17 +1999,17 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CR_StartRemoveCartridgeMenuOption__c,'; valuesData += '\'' + jsonData.CRStartRemoveCartridgeMenuOption + '\'' + ','; 
 				updateValueData += 'CI_CR_StartRemoveCartridgeMenuOption__c = \''+jsonData.CRStartRemoveCartridgeMenuOption+'\',';
 				}
-				
+			else { updateValueData += 'CI_CR_StartRemoveCartridgeMenuOption__c = \''+'False'+'\','; }	
 			if (jsonData.CRDevicePromptToOpenTheCartridgeDoor !== undefined && jsonData.CRDevicePromptToOpenTheCartridgeDoor !== null && jsonData.CRDevicePromptToOpenTheCartridgeDoor !== "null" && jsonData.CRDevicePromptToOpenTheCartridgeDoor.length > 0)
 				{ insertQueryData += 'CI_CR_DevicePromptToOpenTheCartridgeDoor__c,'; valuesData += '\'' + jsonData.CRDevicePromptToOpenTheCartridgeDoor + '\'' + ','; 
 				updateValueData += 'CI_CR_DevicePromptToOpenTheCartridgeDoor__c = \''+jsonData.CRDevicePromptToOpenTheCartridgeDoor+'\',';
 				}
-				
+			else { updateValueData += 'CI_CR_DevicePromptToOpenTheCartridgeDoor__c = \''+'False'+'\','; }	
 			if (jsonData.CRCanCartridgeDoorOfDeviceBeOpened !== undefined && jsonData.CRCanCartridgeDoorOfDeviceBeOpened !== null && jsonData.CRCanCartridgeDoorOfDeviceBeOpened !== "null" && jsonData.CRCanCartridgeDoorOfDeviceBeOpened.length > 0)
 				{ insertQueryData += 'CI_CR_CanCartridgeDoorOfDeviceBeOpened__c,'; valuesData += '\'' + jsonData.CRCanCartridgeDoorOfDeviceBeOpened + '\'' + ','; 
 				updateValueData += 'CI_CR_CanCartridgeDoorOfDeviceBeOpened__c = \''+jsonData.CRCanCartridgeDoorOfDeviceBeOpened+'\',';
 				}  
-				
+			else { updateValueData += 'CI_CR_CanCartridgeDoorOfDeviceBeOpened__c = \''+'False'+'\','; }	
 			if (jsonData.CRCartridgeHolderReleasedOnSliding !== undefined && jsonData.CRCartridgeHolderReleasedOnSliding !== null && jsonData.CRCartridgeHolderReleasedOnSliding !== "null" && jsonData.CRCartridgeHolderReleasedOnSliding.length > 0)
 			   { insertQueryData += 'CI_CR_CartridgeHolderReleasedOnSliding__c,'; valuesData += '\'' + jsonData.CRCartridgeHolderReleasedOnSliding + '\'' + ','; 
 			   updateValueData += 'CI_CR_CartridgeHolderReleasedOnSliding__c = \''+jsonData.CRCartridgeHolderReleasedOnSliding+'\',';
@@ -2024,6 +2024,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CR_ComplaintAboutCatridgeCanotRemoved__c,'; valuesData += '\'' + jsonData.CRComplaintAboutCatridgeCanotRemoved + '\'' + ','; 
 				updateValueData += 'CI_CR_ComplaintAboutCatridgeCanotRemoved__c = \''+jsonData.CRComplaintAboutCatridgeCanotRemoved+'\',';
 				}
+			else { updateValueData += 'CI_CR_ComplaintAboutCatridgeCanotRemoved__c = \''+'False'+'\','; }
 			if (jsonData.DoesPatientComplainThatSometimeRemovedIfYes !== undefined && jsonData.DoesPatientComplainThatSometimeRemovedIfYes !== null && jsonData.DoesPatientComplainThatSometimeRemovedIfYes !== "null" && jsonData.DoesPatientComplainThatSometimeRemovedIfYes.length > 0)
 				{ insertQueryData += 'CI_CR_Complaintaboutcatridgeremoveifyes__c,'; valuesData += '\'' + jsonData.DoesPatientComplainThatSometimeRemovedIfYes + '\'' + ','; 
 				updateValueData += 'CI_CR_Complaintaboutcatridgeremoveifyes__c = \''+jsonData.DoesPatientComplainThatSometimeRemovedIfYes+'\',';
@@ -2038,12 +2039,12 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CR_CartridgeRemovalIssueLinkedToPF__c,'; valuesData += '\'' + jsonData.CRCartridgeRemovalIssueLinkedToPF + '\'' + ','; 
 				updateValueData += 'CI_CR_CartridgeRemovalIssueLinkedToPF__c = \''+jsonData.CRCartridgeRemovalIssueLinkedToPF+'\',';
 				}
-				
+			else { updateValueData += 'CI_CR_CartridgeRemovalIssueLinkedToPF__c = \''+'False'+'\','; }	
 			if (jsonData.CRIsThisLinkedToWarningMessage !== undefined && jsonData.CRIsThisLinkedToWarningMessage !== null && jsonData.CRIsThisLinkedToWarningMessage !== "null" && jsonData.CRIsThisLinkedToWarningMessage.length > 0)
 				{ insertQueryData += 'CI_CR_IsThisLinkedToWarningMessage__c,'; valuesData += '\'' + jsonData.CRIsThisLinkedToWarningMessage + '\'' + ','; 
 				updateValueData += 'CI_CR_IsThisLinkedToWarningMessage__c = \''+jsonData.CRIsThisLinkedToWarningMessage+'\',';
 				}
-						
+			else { updateValueData += 'CI_CR_IsThisLinkedToWarningMessage__c = \''+'False'+'\','; }			
             if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0){ 
 			     insertQueryData += 'HerokuCaseId__c'; valuesData += '\'' + jsonData.caseid + '\'';
 			     updateValueData += 'HerokuCaseId__c = \''+jsonData.caseid+ '\'';
