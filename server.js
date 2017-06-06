@@ -935,7 +935,7 @@ router.post('/updateCase', function(req, res) {
 
 router.post('/updateDefectDescription', function(req, res) {
 var caseid = req.param('caseid');
-var Description = req.param('DefectDescription'); 	
+var Descriptio = req.param('DefectDescription'); 	
          pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
              if (err) console.log(err);
 	     var jsonData = req.body;
@@ -947,7 +947,7 @@ var Description = req.param('DefectDescription');
                                 message: 'case id not found.'});
                          }else{
 			        var Des = 'Description';
-                                conn.query('UPDATE salesforce.Case SET '+Des+' = \''+jsonData.Description+'\' WHERE id='+jsonData.caseid+'',
+                                conn.query('UPDATE salesforce.Case SET '+Des+' = \''+jsonData.Descriptio+'\' WHERE id='+jsonData.caseid+'',
                                     function(err,result){
                                         done();
                                         if(err){
