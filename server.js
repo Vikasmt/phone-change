@@ -938,7 +938,8 @@ var caseid = req.param('caseid');
 var Description = req.param('DefectDescription'); 	
          pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
              if (err) console.log(err);
-             conn.query('SELECT *from salesforce.Case WHERE id='+caseid+'',
+	     var jsonData = req.body;
+             conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.caseid+'',
                 function(err,result){
                  if (err != null || result.rowCount == 0) {
                       return res.json({
@@ -946,7 +947,7 @@ var Description = req.param('DefectDescription');
                                 message: 'case id not found.'});
                          }else{
 			        var Des = 'Description';
-                                conn.query('UPDATE salesforce.Case SET '+Des+' = \''+Description+'\' WHERE id='+caseid+'',
+                                conn.query('UPDATE salesforce.Case SET '+Des+' = \''+jsonData.Description+'\' WHERE id='+jsonData.caseid+'',
                                     function(err,result){
                                         done();
                                         if(err){
