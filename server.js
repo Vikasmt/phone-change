@@ -680,7 +680,7 @@ router.post('/insertNeedleIssue', function(req, res) {
                    insertQueryData += 'NW_ApproximateDate__c,'; valuesData += '\'' + jsonData.ApproximateDate + '\'' + ',';
                    updateValueData += 'NW_ApproximateDate__c = \''+jsonData.ApproximateDate+'\',';
                 }
-            //else { updateValueData += 'NW_ApproximateDate__c = \'\','; }   // Date
+            else { updateValueData += 'NW_ApproximateDate__c = NULL'; }   // Date
 
             if (jsonData.WarngMsgDisplayedAtParticularStep !== undefined && jsonData.WarngMsgDisplayedAtParticularStep !== null && jsonData.WarngMsgDisplayedAtParticularStep !== "null" && jsonData.WarngMsgDisplayedAtParticularStep.length > 0){
                    insertQueryData += 'NW_WarngMsgDisplayedAtParticularStep__c,'; valuesData += '\'' + jsonData.WarngMsgDisplayedAtParticularStep + '\'' + ',';
