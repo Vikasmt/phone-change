@@ -759,7 +759,7 @@ router.post('/updateCase', function(req, res) {
          //var jsonData = req.body;
 	 var resString = JSON.stringify(req.body);
          console.log('.....resString...before...'+resString);
-	 var jsonData = JSON.parse(resString.replace('&quot','\''));
+	 var jsonData = JSON.parse(resString.replace('&quot',''));
 	 console.log('....updateCase...'+jsonData);
          conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.caseid+'',
                 function(err,result){
@@ -983,7 +983,7 @@ router.post('/insertAppFeedback', function(req, res) {
         //var jsonData = req.body;
 	var resString = JSON.stringify(req.body);
         console.log('.....resString...before...'+resString);
-	var jsonData = JSON.parse(resString.replace('&quot','\''));
+	var jsonData = JSON.parse(resString.replace('&quot',''));
         var insertQueryData = 'INSERT INTO salesforce.IVOP_Appfeedback__c (';
         var valuesData=' VALUES ('; 
 	    
@@ -1068,7 +1068,7 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
         //var jsonData = req.body;
 	var resString = JSON.stringify(req.body);
         console.log('.....resString...before...'+resString);
-	var jsonData = JSON.parse(resString.replace('&quot','\''));
+	var jsonData = JSON.parse(resString.replace('&quot',''));
         console.log('.....req..body......'+req.body);
         conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.caseid+'',
         function(err,result){
@@ -1201,7 +1201,7 @@ router.post('/insertDataandtransfer', function(req, res) {
         //var jsonData = req.body;
 	var resString = JSON.stringify(req.body);
         console.log('.....resString...before...'+resString);
-	var jsonData = JSON.parse(resString.replace('&quot','\''));
+	var jsonData = JSON.parse(resString.replace('&quot',''));
         console.log('.....req..body......'+req.body);
         conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.caseid+'',
         function(err,result){
@@ -1385,7 +1385,7 @@ router.post('/insertPowerFailure', function(req, res) {
        // var jsonData = req.body;
 	var resString = JSON.stringify(req.body);
         console.log('.....resString...before...'+resString);
-	var jsonData = JSON.parse(resString.replace('&quot','\''));
+	var jsonData = JSON.parse(resString.replace('&quot',''));
         console.log('.....req..body......'+req.body);
         conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.caseid+'',
         function(err,result){
@@ -1688,7 +1688,7 @@ router.post('/insertCatridgeIssue', function(req, res) {
         //var jsonData = req.body;
 	var resString = JSON.stringify(req.body);
         console.log('.....resString...before...'+resString);
-	var jsonData = JSON.parse(resString.replace('&quot','\''));
+	var jsonData = JSON.parse(resString.replace('&quot',''));
         console.log('.....req..body......'+req.body);
         conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.caseid+'',
         function(err,result){
@@ -2351,7 +2351,7 @@ router.post('/insertCase', function(req, res) {
         //var jsonData = req.body;
 	var resString = JSON.stringify(req.body);
         console.log('.....resString...before...'+resString);
-	var jsonData = JSON.parse(resString.replace('&quot','\''));
+	var jsonData = JSON.parse(resString.replace('&quot',''));
         var timestamp = '';
         var insertQueryData = 'INSERT INTO salesforce.Case (';
         var valuesData=' VALUES (';
