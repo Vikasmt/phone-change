@@ -1470,7 +1470,7 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_NP_ST_Whenwaslasttimeissueobserved__c,'; valuesData += '\'' + jsonData.NPSTWhenWasLasttimeIssueObserved + '\'' + ','; 
 				  updateValueData += 'PF_NP_ST_Whenwaslasttimeissueobserved__c = \''+jsonData.NPSTWhenWasLasttimeIssueObserved+'\',';
 				}
-			else { updateValueData += 'PF_NP_ST_Whenwaslasttimeissueobserved__c = \'\','; }	
+			//else { updateValueData += 'PF_NP_ST_Whenwaslasttimeissueobserved__c = \'\','; }	
 				//Power failure - power off
 			if (jsonData.PODoesthedeviceturnoffsuddenly !== undefined && jsonData.PODoesthedeviceturnoffsuddenly !== null && jsonData.PODoesthedeviceturnoffsuddenly !== "null" && jsonData.PODoesthedeviceturnoffsuddenly.length > 0)
 				{ insertQueryData += 'PF_PO_Doesthedeviceturnoffsuddenly__c,'; valuesData += '\'' + jsonData.PODoesthedeviceturnoffsuddenly + '\'' + ','; 
@@ -1578,7 +1578,7 @@ router.post('/insertPowerFailure', function(req, res) {
 			   { insertQueryData += 'PF_NPO_TheLastNoPowerOffIssueObserved__c,'; valuesData += '\'' + jsonData.NPOTheLastNoPowerOffIssueObserved + '\'' + ','; 
 			     updateValueData += 'PF_NPO_TheLastNoPowerOffIssueObserved__c = \''+jsonData.NPOTheLastNoPowerOffIssueObserved+'\',';
 			   }
-			 else { updateValueData += 'PF_NPO_TheLastNoPowerOffIssueObserved__c = \'\','; }  
+			//else { updateValueData += 'PF_NPO_TheLastNoPowerOffIssueObserved__c = \'\','; }  
 			 // power failure - Battery consumption   
 			
 			if (jsonData.BatteryConsumption !== undefined && jsonData.BatteryConsumption !== null && jsonData.BatteryConsumption !== "null" && jsonData.BatteryConsumption.length > 0)
@@ -1590,12 +1590,12 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_BC_WhenWasTheBatteryInserted__c,'; valuesData += '\'' + jsonData.BCWhenWasTheBatteryInserted + '\'' + ','; 
 				  updateValueData += 'PF_BC_WhenWasTheBatteryInserted__c = \''+jsonData.BCWhenWasTheBatteryInserted+'\',';
 				}
-			else { updateValueData += 'PF_BC_WhenWasTheBatteryInserted__c = \'\','; }	
+			//else { updateValueData += 'PF_BC_WhenWasTheBatteryInserted__c = \'\','; }	
 			if (jsonData.BCWhenWasTheBatteryDischarged !== undefined && jsonData.BCWhenWasTheBatteryDischarged !== null && jsonData.BCWhenWasTheBatteryDischarged !== "null" && jsonData.BCWhenWasTheBatteryDischarged.length > 0)
 			   { insertQueryData += 'PF_BC_WhenWasTheBatteryDischarged__c,'; valuesData += '\'' + jsonData.BCWhenWasTheBatteryDischarged + '\'' + ','; 
 			     updateValueData += 'PF_BC_WhenWasTheBatteryDischarged__c = \''+jsonData.BCWhenWasTheBatteryDischarged+'\',';
 			   }
-			else { updateValueData += 'PF_BC_WhenWasTheBatteryDischarged__c = \'\','; }	
+			//else { updateValueData += 'PF_BC_WhenWasTheBatteryDischarged__c = \'\','; }	
 			if (jsonData.BCIsAWarningMessageDisplayed !== undefined && jsonData.BCIsAWarningMessageDisplayed !== null && jsonData.BCIsAWarningMessageDisplayed !== "null" && jsonData.BCIsAWarningMessageDisplayed.length > 0)
 				{ insertQueryData += 'PF_BC_IsAWarningMessageDisplayed__c,'; valuesData += '\'' + jsonData.BCIsAWarningMessageDisplayed + '\'' + ','; 
 				  updateValueData += 'PF_BC_IsAWarningMessageDisplayed__c = \''+jsonData.BCIsAWarningMessageDisplayed+'\',';
