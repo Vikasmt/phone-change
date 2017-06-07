@@ -521,7 +521,7 @@ router.post('/insertNeedleIssue', function(req, res) {
 
 	var resString = JSON.stringify(req.body);
         console.log('.....resString...before...'+resString);
-	var jsonData = JSON.parse(resString.replace('&quot','\''));
+	var jsonData = JSON.parse(resString.replace('&quot',''));
         console.log('.....req..jsonData...after...'+jsonData);
         conn.query('SELECT *from salesforce.Case WHERE id='+jsonData.caseid+'',
         function(err,result){
