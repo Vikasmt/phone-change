@@ -1128,12 +1128,14 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
 				{ insertQueryData += 'DF_Isdevicefunctioningslowerthanusual__c,'; valuesData += '\'' + jsonData.IsDeviceFunctioningSlowerThanUsual + '\'' + ','; 
 				  updateValueData += 'DF_Isdevicefunctioningslowerthanusual__c = \''+jsonData.IsDeviceFunctioningSlowerThanUsual+'\',';
 				}
-			else { updateValueData += 'DF_Isdevicefunctioningslowerthanusual__c = \''+'False'+'\','; }	
+			else { updateValueData += 'DF_Isdevicefunctioningslowerthanusual__c = \''+'False'+'\','; }
+			
 			if (jsonData.WhenItHasObservedForTheFirstTime !== undefined && jsonData.WhenItHasObservedForTheFirstTime !== null && jsonData.WhenItHasObservedForTheFirstTime !== "null" && jsonData.WhenItHasObservedForTheFirstTime.length > 0)
 				{ insertQueryData += 'DF_Whenithasobservedforthefirsttime__c,'; valuesData += '\'' + jsonData.WhenItHasObservedForTheFirstTime + '\'' + ','; 
 				  updateValueData += 'DF_Whenithasobservedforthefirsttime__c = \''+jsonData.WhenItHasObservedForTheFirstTime+'\',';
 				}
-			//else { updateValueData += 'DF_Whenithasobservedforthefirsttime__c = \'\','; }	
+			else { updateValueData += 'DF_Whenithasobservedforthefirsttime__c = NULL,'; }
+			
 			if (jsonData.IsTheDeviceLouderThanUsually !== undefined && jsonData.IsTheDeviceLouderThanUsually !== null && jsonData.IsTheDeviceLouderThanUsually !== "null" && jsonData.IsTheDeviceLouderThanUsually.length > 0)
 				{ insertQueryData += 'DF_Isthedevicelouderthanusually__c,'; valuesData += '\'' + jsonData.IsTheDeviceLouderThanUsually + '\'' + ','; 
 				  updateValueData += 'DF_Isthedevicelouderthanusually__c = \''+jsonData.IsTheDeviceLouderThanUsually+'\',';
@@ -1143,7 +1145,8 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
 				{ insertQueryData += 'DF_Whenithasbeenobservedforthefirsttime__c,'; valuesData += '\'' + jsonData.WhenItHasBeenObservedForTheFirstTime + '\'' + ','; 
 				  updateValueData += 'DF_Whenithasbeenobservedforthefirsttime__c = \''+jsonData.WhenItHasBeenObservedForTheFirstTime+'\',';
 				}
-			//else { updateValueData += 'DF_Whenithasbeenobservedforthefirsttime__c = \'\','; }	
+			else { updateValueData += 'DF_Whenithasbeenobservedforthefirsttime__c = NULL,'; }
+			
 			if (jsonData.CommentDeviceFunctioning !== undefined && jsonData.CommentDeviceFunctioning !== null && jsonData.CommentDeviceFunctioning !== "null" && jsonData.CommentDeviceFunctioning.length > 0)
 				{ insertQueryData += 'DF_CommentDeviceFunctioning__c,'; valuesData += '\'' + jsonData.CommentDeviceFunctioning + '\'' + ','; 
 				  updateValueData += 'DF_CommentDeviceFunctioning__c = \''+jsonData.CommentDeviceFunctioning+'\',';
@@ -1296,7 +1299,8 @@ router.post('/insertDataandtransfer', function(req, res) {
 				{ insertQueryData += 'DT_Datewhenissueoccurred__c,'; valuesData += '\'' + jsonData.DateWhenIssueOccurred + '\'' + ','; 
 				  updateValueData += 'DT_Datewhenissueoccurred__c = \''+jsonData.DateWhenIssueOccurred+'\',';
 				}
-			//else { updateValueData += 'DT_Datewhenissueoccurred__c = \'\','; }	
+			else { updateValueData += 'DT_Datewhenissueoccurred__c = NULL,'; }
+			
 			if (jsonData.UserAbleToPerformDataTransferIfNO !== undefined && jsonData.UserAbleToPerformDataTransferIfNO !== null && jsonData.UserAbleToPerformDataTransferIfNO !== "null" && jsonData.UserAbleToPerformDataTransferIfNO.length > 0)
 				{ insertQueryData += 'DT_userabletoperformdatatransferifno1__c,'; valuesData += '\'' + jsonData.UserAbleToPerformDataTransferIfNO + '\'' + ','; 
 				  updateValueData += 'DT_userabletoperformdatatransferifno1__c = \''+jsonData.UserAbleToPerformDataTransferIfNO+'\',';
@@ -1306,7 +1310,8 @@ router.post('/insertDataandtransfer', function(req, res) {
 				{ insertQueryData += 'DT_DateWhenTheIssueObservedIfNO__c,'; valuesData += '\'' + jsonData.DateWhenTheIssueObservedIfNO + '\'' + ','; 
 				  updateValueData += 'DT_DateWhenTheIssueObservedIfNO__c = \''+jsonData.DateWhenTheIssueObservedIfNO+'\',';
 				}
-			//else { updateValueData += 'DT_DateWhenTheIssueObservedIfNO__c = \'\','; }		
+			else { updateValueData += 'DT_DateWhenTheIssueObservedIfNO__c = NULL ,'; }
+			
 			if (jsonData.IsitaRecurrentFailure !== undefined && jsonData.IsitaRecurrentFailure !== null && jsonData.IsitaRecurrentFailure !== "null" && jsonData.IsitaRecurrentFailure.length > 0)
 				{ insertQueryData += 'DT_Isitarecurrentfailure__c,'; valuesData += '\'' + jsonData.IsitaRecurrentFailure + '\'' + ','; 
 				  updateValueData += 'DT_Isitarecurrentfailure__c = \''+jsonData.IsitaRecurrentFailure+'\',';
@@ -1470,7 +1475,8 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_NP_ST_Whenwaslasttimeissueobserved__c,'; valuesData += '\'' + jsonData.NPSTWhenWasLasttimeIssueObserved + '\'' + ','; 
 				  updateValueData += 'PF_NP_ST_Whenwaslasttimeissueobserved__c = \''+jsonData.NPSTWhenWasLasttimeIssueObserved+'\',';
 				}
-			//else { updateValueData += 'PF_NP_ST_Whenwaslasttimeissueobserved__c = \'\','; }	
+			else { updateValueData += 'PF_NP_ST_Whenwaslasttimeissueobserved__c = NULL,'; }
+			
 				//Power failure - power off
 			if (jsonData.PODoesthedeviceturnoffsuddenly !== undefined && jsonData.PODoesthedeviceturnoffsuddenly !== null && jsonData.PODoesthedeviceturnoffsuddenly !== "null" && jsonData.PODoesthedeviceturnoffsuddenly.length > 0)
 				{ insertQueryData += 'PF_PO_Doesthedeviceturnoffsuddenly__c,'; valuesData += '\'' + jsonData.PODoesthedeviceturnoffsuddenly + '\'' + ','; 
@@ -1573,12 +1579,14 @@ router.post('/insertPowerFailure', function(req, res) {
 			   { insertQueryData += 'PF_NPO_Frequency__c,'; valuesData += '\'' + jsonData.NPOFrequency + '\'' + ','; 
 			     updateValueData += 'PF_NPO_Frequency__c = \''+jsonData.NPOFrequency+'\',';
 			   }
-			 else { updateValueData += 'PF_NPO_Frequency__c = \'\','; }  
+			 else { updateValueData += 'PF_NPO_Frequency__c = \'\','; }
+			 
 			if (jsonData.NPOTheLastNoPowerOffIssueObserved !== undefined && jsonData.NPOTheLastNoPowerOffIssueObserved !== null && jsonData.NPOTheLastNoPowerOffIssueObserved !== "null" && jsonData.NPOTheLastNoPowerOffIssueObserved.length > 0)
 			   { insertQueryData += 'PF_NPO_TheLastNoPowerOffIssueObserved__c,'; valuesData += '\'' + jsonData.NPOTheLastNoPowerOffIssueObserved + '\'' + ','; 
 			     updateValueData += 'PF_NPO_TheLastNoPowerOffIssueObserved__c = \''+jsonData.NPOTheLastNoPowerOffIssueObserved+'\',';
 			   }
-			//else { updateValueData += 'PF_NPO_TheLastNoPowerOffIssueObserved__c = \'\','; }  
+			else { updateValueData += 'PF_NPO_TheLastNoPowerOffIssueObserved__c = NULL,'; }  
+			 
 			 // power failure - Battery consumption   
 			
 			if (jsonData.BatteryConsumption !== undefined && jsonData.BatteryConsumption !== null && jsonData.BatteryConsumption !== "null" && jsonData.BatteryConsumption.length > 0)
@@ -1590,12 +1598,14 @@ router.post('/insertPowerFailure', function(req, res) {
 				{ insertQueryData += 'PF_BC_WhenWasTheBatteryInserted__c,'; valuesData += '\'' + jsonData.BCWhenWasTheBatteryInserted + '\'' + ','; 
 				  updateValueData += 'PF_BC_WhenWasTheBatteryInserted__c = \''+jsonData.BCWhenWasTheBatteryInserted+'\',';
 				}
-			//else { updateValueData += 'PF_BC_WhenWasTheBatteryInserted__c = \'\','; }	
+			else { updateValueData += 'PF_BC_WhenWasTheBatteryInserted__c = NULL,'; }
+			
 			if (jsonData.BCWhenWasTheBatteryDischarged !== undefined && jsonData.BCWhenWasTheBatteryDischarged !== null && jsonData.BCWhenWasTheBatteryDischarged !== "null" && jsonData.BCWhenWasTheBatteryDischarged.length > 0)
 			   { insertQueryData += 'PF_BC_WhenWasTheBatteryDischarged__c,'; valuesData += '\'' + jsonData.BCWhenWasTheBatteryDischarged + '\'' + ','; 
 			     updateValueData += 'PF_BC_WhenWasTheBatteryDischarged__c = \''+jsonData.BCWhenWasTheBatteryDischarged+'\',';
 			   }
-			//else { updateValueData += 'PF_BC_WhenWasTheBatteryDischarged__c = \'\','; }	
+			else { updateValueData += 'PF_BC_WhenWasTheBatteryDischarged__c = NULL,'; }
+			
 			if (jsonData.BCIsAWarningMessageDisplayed !== undefined && jsonData.BCIsAWarningMessageDisplayed !== null && jsonData.BCIsAWarningMessageDisplayed !== "null" && jsonData.BCIsAWarningMessageDisplayed.length > 0)
 				{ insertQueryData += 'PF_BC_IsAWarningMessageDisplayed__c,'; valuesData += '\'' + jsonData.BCIsAWarningMessageDisplayed + '\'' + ','; 
 				  updateValueData += 'PF_BC_IsAWarningMessageDisplayed__c = \''+jsonData.BCIsAWarningMessageDisplayed+'\',';
@@ -1756,12 +1766,14 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CD_WhenCartridgeWasInsertedInDevice__c,'; valuesData += '\'' + jsonData.CDWhenCartridgeWasInsertedInDevice + '\'' + ','; 
 				updateValueData += 'CI_CD_WhenCartridgeWasInsertedInDevice__c = \''+jsonData.CDWhenCartridgeWasInsertedInDevice+'\',';
 				}
-			//else { updateValueData += 'CI_CD_WhenCartridgeWasInsertedInDevice__c = \'\','; }	
+			else { updateValueData += 'CI_CD_WhenCartridgeWasInsertedInDevice__c = NULL,'; }
+			
 			if (jsonData.CDDevicePromptToRemoveTheCartridge !== undefined && jsonData.CDDevicePromptToRemoveTheCartridge !== null && jsonData.CDDevicePromptToRemoveTheCartridge !== "null" && jsonData.CDDevicePromptToRemoveTheCartridge.length > 0)
 				{ insertQueryData += 'CI_CD_DevicePromptToRemoveTheCartridge__c,'; valuesData += '\'' + jsonData.CDDevicePromptToRemoveTheCartridge + '\'' + ','; 
 				updateValueData += 'CI_CD_DevicePromptToRemoveTheCartridge__c = \''+jsonData.CDDevicePromptToRemoveTheCartridge+'\',';
 				}
 			else { updateValueData += 'CI_CD_DevicePromptToRemoveTheCartridge__c = \''+'False'+'\','; }
+			
 			if (jsonData.CDCatridgeDetectionIssueWithOneOrAll !== undefined && jsonData.CDCatridgeDetectionIssueWithOneOrAll !== null && jsonData.CDCatridgeDetectionIssueWithOneOrAll !== "null" && jsonData.CDCatridgeDetectionIssueWithOneOrAll.length > 0)
 				{ insertQueryData += 'CI_CD_CatridgeDetectionIssueWithOneOrAll__c,'; valuesData += '\'' + jsonData.CDCatridgeDetectionIssueWithOneOrAll + '\'' + ','; 
 				updateValueData += 'CI_CD_CatridgeDetectionIssueWithOneOrAll__c = \''+jsonData.CDCatridgeDetectionIssueWithOneOrAll+'\',';
@@ -1872,22 +1884,26 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CC_Specify__c,'; valuesData += '\'' + jsonData.CCSpecify + '\'' + ','; 
 				updateValueData += 'CI_CC_Specify__c = \''+jsonData.CCSpecify+'\',';
 				}
-			else { updateValueData += 'CI_CC_Specify__c = \'\','; } 
+			else { updateValueData += 'CI_CC_Specify__c = \'\','; }
+			
 			if (jsonData.CCWhenTheIssueHasBeenObserved !== undefined && jsonData.CCWhenTheIssueHasBeenObserved !== null && jsonData.CCWhenTheIssueHasBeenObserved !== "null" && jsonData.CCWhenTheIssueHasBeenObserved.length > 0)
 				{ insertQueryData += 'CI_CC_WhenTheIssueHasBeenObserved__c,'; valuesData += '\'' + jsonData.CCWhenTheIssueHasBeenObserved + '\'' + ','; 
 				updateValueData += 'CI_CC_WhenTheIssueHasBeenObserved__c = \''+jsonData.CCWhenTheIssueHasBeenObserved+'\',';
 				}
-			//else { updateValueData += 'CI_CC_WhenTheIssueHasBeenObserved__c = \'\','; }
+			else { updateValueData += 'CI_CC_WhenTheIssueHasBeenObserved__c = NULL,'; }
+			
 			if (jsonData.CCWhenCartridgeWithMoreInjectinPerfm !== undefined && jsonData.CCWhenCartridgeWithMoreInjectinPerfm !== null && jsonData.CCWhenCartridgeWithMoreInjectinPerfm !== "null" && jsonData.CCWhenCartridgeWithMoreInjectinPerfm.length > 0)
 				{ insertQueryData += 'CI_CC_WhenCartridgeWithMoreInjectinPerfm__c,'; valuesData += '\'' + jsonData.CCWhenCartridgeWithMoreInjectinPerfm + '\'' + ','; 
 				updateValueData += 'CI_CC_WhenCartridgeWithMoreInjectinPerfm__c = \''+jsonData.CCWhenCartridgeWithMoreInjectinPerfm+'\',';
 				}
-			//else { updateValueData += 'CI_CC_WhenCartridgeWithMoreInjectinPerfm__c = \'\','; }
+			else { updateValueData += 'CI_CC_WhenCartridgeWithMoreInjectinPerfm__c = NULL,'; }
+			
 			if (jsonData.CCLesInjectnsThanExpectedHavPerformd !== undefined && jsonData.CCLesInjectnsThanExpectedHavPerformd !== null && jsonData.CCLesInjectnsThanExpectedHavPerformd !== "null" && jsonData.CCLesInjectnsThanExpectedHavPerformd.length > 0)
 				{ insertQueryData += 'CI_CC_LesInjectnsThanExpectedHavPerformd__c,'; valuesData += '\'' + jsonData.CCLesInjectnsThanExpectedHavPerformd + '\'' + ','; 
 				updateValueData += 'CI_CC_LesInjectnsThanExpectedHavPerformd__c = \''+jsonData.CCLesInjectnsThanExpectedHavPerformd+'\',';
 				}
-			else { updateValueData += 'CI_CC_LesInjectnsThanExpectedHavPerformd__c = \'\','; } 	
+			else { updateValueData += 'CI_CC_LesInjectnsThanExpectedHavPerformd__c = \'\','; }
+			
 			if (jsonData.CCHowManyInjectionShouldHavePerformd !== undefined && jsonData.CCHowManyInjectionShouldHavePerformd !== null && jsonData.CCHowManyInjectionShouldHavePerformd !== "null" && jsonData.CCHowManyInjectionShouldHavePerformd.length > 0)
 				{ insertQueryData += 'CI_CC_HowManyInjectionShouldHavePerformd__c,'; valuesData += '\'' + jsonData.CCHowManyInjectionShouldHavePerformd + '\'' + ','; 
 				updateValueData += 'CI_CC_HowManyInjectionShouldHavePerformd__c = \''+jsonData.CCHowManyInjectionShouldHavePerformd+'\',';
@@ -1907,7 +1923,8 @@ router.post('/insertCatridgeIssue', function(req, res) {
 				{ insertQueryData += 'CI_CC_WhenTheCartridgeBeenInserted__c,'; valuesData += '\'' + jsonData.CCWhenTheCartridgeBeenInserted + '\'' + ','; 
 				updateValueData += 'CI_CC_WhenTheCartridgeBeenInserted__c = \''+jsonData.CCWhenTheCartridgeBeenInserted+'\',';
 				}
-			//else { updateValueData += 'CI_CC_WhenTheCartridgeBeenInserted__c = \'\','; }	
+			else { updateValueData += 'CI_CC_WhenTheCartridgeBeenInserted__c = NULL,'; }
+			
 			if (jsonData.CCHasTheCartridgeBeenRejectedByDevic !== undefined && jsonData.CCHasTheCartridgeBeenRejectedByDevic !== null && jsonData.CCHasTheCartridgeBeenRejectedByDevic !== "null" && jsonData.CCHasTheCartridgeBeenRejectedByDevic.length > 0)
 				{ insertQueryData += 'CI_CC_HasTheCartridgeBeenRejectedByDevic__c,'; valuesData += '\'' + jsonData.CCHasTheCartridgeBeenRejectedByDevic + '\'' + ','; 
 				updateValueData += 'CI_CC_HasTheCartridgeBeenRejectedByDevic__c = \''+jsonData.CCHasTheCartridgeBeenRejectedByDevic+'\',';
