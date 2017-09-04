@@ -315,7 +315,7 @@ router.put('/forgotPassword', function(req,res){
                             return res.status(400).json({error: err.message});
                         }
                         else{
-							var queryStrCon = 'Update salesforce.contact set IVOPPassword__c=\''+resetPassword+'\' , IVOPPasswordStatus__c=\''+'Reset'+'\' where trim(email)=\''+emailAddress+'\'';
+							var queryStrCon = 'Update salesforce.contact set Password__c=\''+resetPassword+'\' , IVOPPasswordStatus__c=\''+'Reset'+'\' where trim(email)=\''+emailAddress+'\'';
 							console.log(queryStrCon);
 							
 							conn.query(queryStrCon, 
@@ -2590,7 +2590,7 @@ router.post('/CreateUser', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
     
-    var formattedData='INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, IVOPPassword__c, IVOPMobileappuser__c, IVOP_AppUserCountry__c) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+'True'+'\', \''+jsonData.country+'\')  RETURNING id';
+    var formattedData='INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, Password__c, IVOPMobileappuser__c, IVOP_AppUserCountry__c) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+'True'+'\', \''+jsonData.country+'\')  RETURNING id';
     console.log('formatted Salesforce.Contact Query:'+formattedData);
     
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
@@ -2604,7 +2604,7 @@ router.post('/CreateUser', function(req, res) {
                     res.status(400).json({error: 'Email already exist.'});
                 }
                  else{
-                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, IVOPPassword__c, IVOPMobileappuser__c, IVOP_AppUserCountry__c) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+'True'+'\', \''+jsonData.country+'\')  RETURNING id',
+                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, Password__c, IVOPMobileappuser__c, IVOP_AppUserCountry__c) VALUES (\''+jsonData.firstname+'\', \''+jsonData.lastname+'\', \''+jsonData.email.toLowerCase().trim()+'\', \''+jsonData.phone+'\', \''+jsonData.password+'\', \''+'True'+'\', \''+jsonData.country+'\')  RETURNING id',
                          function(err, result) {
                             if(err){
                                     return res.json({
@@ -2837,7 +2837,7 @@ router.put('/changePassword', function(req, res) {
                                 return res.status(400).json({error: err.message});
                             }
                             else{
-				var queryStr = 'Update salesforce.contact set IVOPPassword__c=\''+newPassword+'\' where sfid='+conId+'';
+				var queryStr = 'Update salesforce.contact set Password__c=\''+newPassword+'\' where sfid='+conId+'';
 				conn.query(queryStr, 
 				     function(err,result){
 					if(err){
