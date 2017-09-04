@@ -12,7 +12,7 @@
   <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css" />
     
-<style>
+    <style>
         
         .form-control:invalid, .custom-file-control:invalid {
     background-image: -webkit-linear-gradient(bottom, #9E7CC1 2px, rgba(213, 0, 0, 0) 2px), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.26) 1px, transparent 1px);
@@ -39,7 +39,6 @@
     .btn.btn-raised.btn-success,.btn.btn-raised.btn-success:hover,.btn.btn-raised.btn-success.active{
          background-color: #79589F;
          border-color: #79589F; 
-	 
     }
     .table thead th{
     font-weight: 400;
@@ -93,61 +92,58 @@
 
     
 </head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-resource.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    <script src="scripts/constants/myapp.constant.js"></script>
-    <script src="scripts/ngLoader.js"></script>
-    <script src="scripts/mainapp.js"></script>
-    <script src="scripts/appHttpInterceptor.js"></script>
-    <script src="scripts/controllers/createuser.js"></script>
-    <script src="scripts/controllers/userlist.js"></script>
-    <script src="scripts/controllers/HelpList.js"></script>
-    <script src="scripts/controllers/createHelp.js"></script>
-    <script src="scripts/controllers/disclaimerlist.js"></script>
-    <script src="scripts/controllers/createDisclaimer.js"></script>
-	
+<script src="scripts/controllers/createDisclaimer.js"></script>
+
+    
 <body>
- 
-<div ng-app="mainApp" class="box">
-	<div style="width: 100%;    background: #8460aa;">
-		<img src="https://www.merck-cap.com/resource/1478119071000/Images/images/layer_15.png" style="width: 77px;height: 42px;margin: 10px 14px;" />
-		<a href="https://phone-change-con.herokuapp.com/#!/list" ng-show="link" class="material-icons" style="color: #fafafa;font-size: 1.9em;padding: 0.1em 0em 0 0.5em;line-height: 1em;vertical-align: middle;">home</a>
-	</div>
-	<div ng-controller="loginCtrl" ng-show="isVisible" class="container">
-		<div class="panel-heading">
-			<h3 class="panel-title">
-				<i class="material-icons">&#xE853</i>
-				<span>Login</span>
-			</h3>
-		</div>
-		<form novalidate>
-			<div class="panel-body">
-				<div class="form-group">
-				<label for="Username" style="margin-left:415px;">Username</label>
-				<input  type="text" class="form-control" style="margin-left:415px; width:25%;" ng-model="username" placeholder="Enter Username" required>
-					<span class="highlight"></span>
-					<span class="bar"></span>
-				</div>	
-				<div class="form-group">
-				
-					<label for="Password" style="margin-left:415px;">Password</label>
-					<input type="password" class="form-control" style="margin-left:415px; width:25%;" ng-model="password" placeholder="Enter Password" required>
-						<span class="highlight"></span>
-						<span class="bar"></span>
-					</div>
-					<button class="btn btn-raised btn-success btn-primary ctuser" style="margin-left:518px;" id="buttonlogintoregister" ng-click="validateLogin()">Login</button>
-				</div>
-			   </form>
-			</div>
-			<div ui-view></div>
-		</div>
 
-	
-	
+
+<!--index page-->
+  <ng-form name="myForm" ng-controller="createDisclaimerCtrl"  ng-init="bindParameters()">
+    <div id="createuserForm" class="container" style="width: 450px">
+       <div class="form-horizontal">
+        <div class="panel panel-default">
+                <div class="panel-heading">
+                
+                    <h3 class="panel-title"><i class="material-icons">&#xE853</i><span>{{mode==='E' ? 'Update Disclaimer' : 'Create Disclaimer'}}</span></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="title">Country</label>
+                        <input type="text" class="form-control" ng-model="disclaimer.country" id="country" name="country" placeholder="Enter country">
+     
+                    </div>
+                    <div class="form-group">
+                        <label for="discription">Language</label>
+                        <input type="text" class="form-control" name="language" id="language" ng-model="disclaimer.language" placeholder="Enter Language">
+                       
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Content</label>
+                        <input type="text" class="form-control" ng-model="disclaimer.content" id="content" name="content" placeholder="Enter Content">
+                        
+                    </div>
+                    
+                </div>
+                <div class="panel-footer">
+                    <div id="message" class="alert alert-info" role="alert" style="display: none;">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        <span id="messageMessage"></span>
+                    </div>
+                    <div id="error" class="alert alert-danger" role="alert" style="display: none;">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        <span id="errorMessage"></span>
+                    </div>
+                    <div class="btn-div">
+                    <button class="btn btn-raised btn-success btn-primary ctuser" ng-click="CreateDisclaimer(disclaimer)">{{mode==='E' ? 'Update Disclaimer' : 'Create Disclaimer'}}</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </div>
+      </ng-form>
 
 </body>
 </html>
