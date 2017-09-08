@@ -129,9 +129,8 @@ router.get('/ValidateAdminPortal', function(req, res) {
 
 router.get('/ValidateAdmin', function(req, res) {
     var emailaddress = req.headers.email.toLowerCase().trim();
-    if(req.headers.password !=null || req.headers.password != 'undefined'){
-       var password = req.headers.password;
-    }
+    var password = req.headers.password;
+    
     console.log(emailaddress);
     console.log(password);
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
@@ -152,6 +151,7 @@ router.get('/ValidateAdmin', function(req, res) {
                             message: 'Invalid email.'});
                 }
                  else{
+		       if(password !=null || password != 'undefined'){
                        conn.query(
                             'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.active, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\' and um.password=\''+password+'\' and um.contactid=sc.id',
                            function(err,result){
@@ -214,6 +214,7 @@ router.get('/ValidateAdmin', function(req, res) {
                                             message: 'Success.'});
                                }
                             });
+		       }       
                  }
              });
      });
