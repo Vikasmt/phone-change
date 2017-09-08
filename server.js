@@ -129,7 +129,7 @@ router.get('/ValidateAdminPortal', function(req, res) {
 
 router.get('/ValidateAdmin', function(req, res) {
     var emailaddress = req.headers.email.toLowerCase().trim();
-    if(req.headers.password !=null && req.headers.password != 'undefined'){
+    if(req.headers.password !=null || req.headers.password != 'undefined'){
        var password = req.headers.password;
     }
     console.log(emailaddress);
