@@ -151,7 +151,7 @@ router.get('/ValidateAdmin', function(req, res) {
                             message: 'Invalid email.'});
                 }
                  else{
-		       if(password !=null || password != 'undefined'){
+		       if(password !=null || password != undefined){
                        conn.query(
                             'SELECT um.id, um.firstname, um.lastname, um.username, um.email, um.phone, um.active, um.language, um.country, sc.sfid from UserManagement um, Salesforce.Contact sc where um.email=\''+emailaddress+'\' and um.password=\''+password+'\' and um.contactid=sc.id',
                            function(err,result){
