@@ -129,7 +129,9 @@ router.get('/ValidateAdminPortal', function(req, res) {
 
 router.get('/ValidateAdmin', function(req, res) {
     var emailaddress = req.headers.email.toLowerCase().trim();
-    var password = req.headers.password;
+    if(req.headers.password !=null && req.headers.password != 'undefined'){
+       var password = req.headers.password;
+    }
     console.log(emailaddress);
     console.log(password);
      pg.connect(process.env.DATABASE_URL, function (err, conn, done){
