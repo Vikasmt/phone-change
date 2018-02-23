@@ -1294,7 +1294,10 @@ router.post('/insertWarningMessage', function (req, res) {
 
                     var combinedQuery;
 
-                    combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
+                     if (jsonData.DecisionTreeId !== undefined && jsonData.DecisionTreeId !== null && jsonData.DecisionTreeId !== "null" && jsonData.DecisionTreeId.length > 0)
+                        combinedQuery = 'UPDATE salesforce.IVOP_DecisionTree__c SET ' + updateValueData + ' WHERE id=' + jsonData.DecisionTreeId + '';
+                    else
+                        combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
 
                     console.log('............combinedQuery.............' + combinedQuery);
                     conn.query(combinedQuery,
