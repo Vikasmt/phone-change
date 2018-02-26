@@ -1316,7 +1316,6 @@ router.post('/insertInjectionDose', function(req, res) {
                     console.log('............combinedQuery.............' + combinedQuery);
                     conn.query(combinedQuery,
                         function(err, result) {
-                            console.log('Result: ' + result.rows[0].id);
                             done();
                             if (err) {
                                 return res.json({
@@ -1325,14 +1324,12 @@ router.post('/insertInjectionDose', function(req, res) {
                                 });
                             } else {
                                 if (jsonData.DecisionTreeId !== undefined && jsonData.DecisionTreeId !== null && jsonData.DecisionTreeId !== "null" && jsonData.DecisionTreeId.length > 0) {
-                                    console.log('decision tree inserted');
                                     return res.json({
                                         msgid: 1,
                                         DecisionTreeId: jsonData.DecisionTreeId,
                                         message: 'Success.'
                                     });
                                 } else {
-                                    console.log('decision tree new insertion');
                                     return res.json({
                                         msgid: 1,
                                         DecisionTreeId: result.rows[0].id,
