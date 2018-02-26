@@ -1316,6 +1316,7 @@ router.post('/insertInjectionDose', function(req, res) {
                     console.log('............combinedQuery.............' + combinedQuery);
                     conn.query(combinedQuery,
                         function(err, result) {
+                            console.log('Result: ' + result.rows[0]);
                             done();
                             if (err) {
                                 return res.json({
