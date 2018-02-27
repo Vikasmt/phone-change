@@ -2817,7 +2817,7 @@ router.post('/CreateUser', function(req, res) {
                 if (result.rows[0].count > 0) {
                     res.status(400).json({ error: 'Email already exist.' });
                 } else {
-                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, Password__c, IVOPMobileappuser__c, IVOP_AppUserCountry__c) VALUES (\'' + jsonData.firstname + '\', \'' + jsonData.lastname + '\', \'' + jsonData.email.toLowerCase().trim() + '\', \'' + jsonData.phone + '\', \'' + jsonData.password + '\', \'' + 'True' + '\', \'' + jsonData.country + '\')  RETURNING id',
+                    conn.query('INSERT INTO Salesforce.Contact (firstname, lastname, email, phone, Password__c, IVOPMobileappuser__c, IVOP_AppUserCountry__c,ivop_language__c) VALUES (\'' + jsonData.firstname + '\', \'' + jsonData.lastname + '\', \'' + jsonData.email.toLowerCase().trim() + '\', \'' + jsonData.phone + '\', \'' + jsonData.password + '\', \'' + 'True' + '\', \'' + jsonData.country + '\', \'' + jsonData.language + '\')  RETURNING id',
                         function(err, result) {
                             if (err) {
                                 return res.json({
@@ -2860,7 +2860,7 @@ router.get('/getUsers', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function(err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT um.id, um.firstname, um.lastname, um.email, um.phone, um.contactid, um.active, sc.sfid from UserManagement um, Salesforce.Contact sc where um.contactid=sc.id',
+            'SELECT um.id, um.firstname, um.lastname, um.email, um.phone, um.country, um.language, um.contactid, um.active, sc.sfid from UserManagement um, Salesforce.Contact sc where um.contactid=sc.id',
             function(err, result) {
                 done();
                 if (err) {
@@ -2911,36 +2911,8 @@ router.post('/updateUserInfo', function(req, res) {
         console.log(req.body);
         var jsonData = req.body;
         var user_id = jsonData.id;
-        if (jsonData.src == 'Android') {
-            var userManagementQueryStr = 'Update UserManagement set language=\'' + jsonData.language + '\', country=\'' + jsonData.country + '\' where id=' + user_id + '';
-            console.log('.........Undefined User Info.............' + userManagementQueryStr);
-            conn.query(userManagementQueryStr,
-                function(err, result) {
-                    done();
-                    if (err) {
-                        return res.status(400).json({ error: err.message });
-                    } else {
-                        return res.status(200).json({
-                            msgid: 1,
-                            message: 'Success.'
-                        });
-                    }
-                });
-        } else if (jsonData.src == 'mobile' || jsonData.src == 'iOS') {
-            var userManagementQueryStr = 'Update UserManagement set language=\'' + jsonData.language + '\', country=\'' + jsonData.country + '\' where id=' + user_id + '';
-            console.log('.........Undefined User Info.............' + userManagementQueryStr);
-            conn.query(userManagementQueryStr,
-                function(err, result) {
-                    done();
-                    if (err) {
-                        return res.status(400).json({ error: err.message });
-                    } else {
-                        return res.status(200).json({
-                            msgid: 1,
-                            message: 'Success.'
-                        });
-                    }
-                });
+        if (jsonData.src == 'Android' || jsonData.src == 'mobile' || jsonData.src == 'iOS') {
+            UpdateUserInfo(jsonData);
         } else {
             var userManagementQueryStr = 'Update UserManagement set firstname=\'' + jsonData.firstname + '\', lastname=\'' + jsonData.lastname + '\', email=\'' + jsonData.email + '\', phone=\'' + jsonData.phone + '\', language=\'' + jsonData.language + '\', country=\'' + jsonData.country + '\' where id=' + user_id + '';
             console.log('.........Non.Undefined User Info.............' + userManagementQueryStr);
@@ -2953,7 +2925,7 @@ router.post('/updateUserInfo', function(req, res) {
                         var contactId = result.rows[0].contactid;
                         console.log('contactId:' + contactId);
 
-                        var contactQueryStr = 'Update Salesforce.Contact set firstname=\'' + jsonData.firstname + '\', lastname=\'' + jsonData.lastname + '\', email=\'' + jsonData.email.toLowerCase().trim() + '\', phone=\'' + jsonData.phone + '\' where id=' + contactId + '';
+                        var contactQueryStr = 'Update Salesforce.Contact set firstname=\'' + jsonData.firstname + '\', lastname=\'' + jsonData.lastname + '\', email=\'' + jsonData.email.toLowerCase().trim() + '\', phone=\'' + jsonData.phone + '\', ivop_language__c=\'' + jsonData.language + '\', ivop_appusercountry__c=\'' + jsonData.country + '\' where id=' + contactId + '';
                         console.log(contactQueryStr);
 
                         conn.query(userManagementQueryStr,
@@ -2980,6 +2952,45 @@ router.post('/updateUserInfo', function(req, res) {
         }
     });
 });
+
+function UpdateUserInfo(jsonData) {
+    var user_id = jsonData.id;
+    var userManagementQueryStr = 'Update UserManagement set language=\'' + jsonData.language + '\', country=\'' + jsonData.country + '\' where id=' + user_id + '';
+    console.log('.........Non.Undefined User Info.............' + userManagementQueryStr);
+
+    conn.query('SELECT *from UserManagement where id=' + user_id + '',
+        function(err, result) {
+            if (err) {
+                return res.status(400).json({ error: err.message });
+            } else {
+                var contactId = result.rows[0].contactid;
+                console.log('contactId:' + contactId);
+
+                var contactQueryStr = 'Update Salesforce.Contact set ivop_language__c=\'' + jsonData.language + '\', ivop_appusercountry__c=\'' + jsonData.country + '\' where id=' + contactId + '';
+                console.log(contactQueryStr);
+
+                conn.query(userManagementQueryStr,
+                    function(err, result) {
+                        if (err) {
+                            return res.status(400).json({ error: err.message });
+                        } else {
+                            conn.query(contactQueryStr,
+                                function(err, result) {
+                                    done();
+                                    if (err) {
+                                        return res.status(400).json({ error: err.message });
+                                    } else {
+                                        return res.status(200).json({
+                                            msgid: 1,
+                                            message: 'Success.'
+                                        });
+                                    }
+                                });
+                        }
+                    });
+            }
+        });
+}
 
 
 /*router.put('/changePassword', function(req, res) {
