@@ -126,8 +126,6 @@
                     .then(function(data, status, config) {
                         var userinfo = angular.fromJson(angular.toJson(data));
                         alert(userinfo.data.alertmessage);
-                        userinfo.data.token = "asdf";
-                        userinfo.data.msgid = 1;
                         $cookieStore.put('AccessToken', userinfo.data.token);
                         if (userinfo.data.msgid === 1) {
                             $scope.isVisible = false;

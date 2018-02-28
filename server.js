@@ -82,6 +82,7 @@ router.get('/ValidateAdminPortal', function(req, res) {
                                     uhrkid: '',
                                     language: '',
                                     country: '',
+                                    alertmessage: 'Invalid password',
                                     msgid: 3,
                                     message: 'Invalid password.'
                                 });
@@ -94,6 +95,7 @@ router.get('/ValidateAdminPortal', function(req, res) {
                                     uhrkid: '',
                                     language: '',
                                     country: '',
+                                    alertmessage: 'User is inactive.',
                                     msgid: 4,
                                     message: 'User is inactive.'
                                 });
@@ -106,6 +108,7 @@ router.get('/ValidateAdminPortal', function(req, res) {
                                     uhrkid: '',
                                     language: '',
                                     country: '',
+                                    alertmessage: 'User is not synced. Please wait...',
                                     msgid: 4,
                                     message: 'User is not synced. Please wait...'
                                 });
