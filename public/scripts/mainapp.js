@@ -1,9 +1,9 @@
-(function(){
+(function() {
     "use strict";
     var myapp = angular.module("mainApp", ['ui.router', 'ngLoader', 'ngResource', 'ngCookies', 'mainApp.constant']);
-    
-    myapp.run(function ($rootScope, $cookieStore, $state) {
-        $rootScope.$on('$stateChangeStart', function (e, to) {
+
+    myapp.run(function($rootScope, $cookieStore, $state) {
+        $rootScope.$on('$stateChangeStart', function(e, to) {
             if (to.Authentication == true) {
                 if (angular.isUndefined($cookieStore.get('AccessToken')) || $cookieStore.get('AccessToken').length == 0) {
                     e.preventDefault();
@@ -14,17 +14,18 @@
         });
     });
 
-    myapp.config(['$resourceProvider', function ($resourceProvider) {
+    myapp.config(['$resourceProvider', function($resourceProvider) {
         // Don't strip trailing slashes from calculated URLs
         $resourceProvider.defaults.stripTrailingSlashes = false;
     }]);
 
     myapp.config(myAppConfiguration);
-    
+
     myAppConfiguration.$inject = ["$httpProvider", "$provide"];
+
     function myAppConfiguration($httpProvider, $provide) {
-        $provide.decorator('$templateRequest', ['$delegate', function ($delegate) {
-            var templateProvider = function (tpl, ignoreRequestError) {
+        $provide.decorator('$templateRequest', ['$delegate', function($delegate) {
+            var templateProvider = function(tpl, ignoreRequestError) {
                 return $delegate(tpl, true);
             }
             return templateProvider;
@@ -33,8 +34,8 @@
         $httpProvider.useApplyAsync(true);
         $httpProvider.interceptors.push('appHttpInterceptor');
     }
-    
-    myapp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+
+    myapp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("/");
         $stateProvider
             .state('home', {
@@ -67,13 +68,13 @@
                 controller: 'userCtrl',
                 controllerAs: 'vm'
             })
-           .state('helplist', {
+            .state('helplist', {
                 url: '/Helplist',
                 templateUrl: 'HelpList.html',
                 controller: 'HelpCtrl',
                 controllerAs: 'vm'
             })
-             .state('createHelp', {
+            .state('createHelp', {
                 url: '/helpAction',
                 templateUrl: 'createHelp.html',
                 controller: 'createHelpCtrl',
@@ -84,7 +85,7 @@
                 },
                 Authentication: true
             })
-           .state('disclaimerlist', {
+            .state('disclaimerlist', {
                 url: '/Disclaimerlist',
                 templateUrl: 'disclaimerlist.html',
                 controller: 'DisclaimerCtrl',
@@ -102,85 +103,87 @@
                 Authentication: true
             });
     }]);
-    
-    myapp.controller("loginCtrl", function($scope,$rootScope, $http, $state, $cookieStore, apiUrl) {
+
+    myapp.controller("loginCtrl", function($scope, $rootScope, $http, $state, $cookieStore, apiUrl) {
         $scope.isVisible = true;
         $rootScope.link = false;
-        $scope.validateLogin = function(){
-            //alert($scope.username);
+        $scope.validateLogin = function() {
+            //alert($scope.emailaddress);
             //alert($scope.password);
-            if($scope.username!=undefined && $scope.username.length>0
-              && $scope.password!=undefined && $scope.password.length>0){
+            if ($scope.emailaddress != undefined && $scope.emailaddress.length > 0 &&
+                $scope.password != undefined && $scope.password.length > 0) {
                 var validateuserurl = apiUrl + 'ValidateAdminPortal';
                 console.log(validateuserurl);
                 var config = {
-                        headers : {
-                            'Content-Type': 'application/json',
-                            'email': $scope.username,
-                            'password': $scope.password
-                        }
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'email': $scope.emailaddress,
+                        'password': $scope.password
                     }
-        
+                }
+
                 $http.get(validateuserurl, config)
-                        .then(function (data, status, config) {
-                            var userinfo = angular.fromJson(angular.toJson(data));
-                            alert(userinfo.data.alertmessage);
-                            $cookieStore.put('AccessToken', userinfo.data.token);
+                    .then(function(data, status, config) {
+                        var userinfo = angular.fromJson(angular.toJson(data));
+                        alert(userinfo.data.alertmessage);
+                        $cookieStore.put('AccessToken', userinfo.data.token);
+                        if (userinfo.data.msgid === 1) {
                             $scope.isVisible = false;
-                            $rootScope.link =  true;
+                            $rootScope.link = true;
                             $state.go('listscreen');
-                        })
-                        .catch(function (data, status, config) {
-                            alert('failed to authenticate');
-                        });
+                        }
+                    })
+                    .catch(function(data, status, config) {
+                        alert('failed to authenticate');
+                    });
             }
         }
     });
-    
+
     myapp.controller("mainCtrl", function($scope, $http, $state, apiUrl) {
-        $scope.load = function(){
+        $scope.load = function() {
             $scope.isclicked = false;
             $scope.isclickedhelp = false;
             $scope.isclickeddisclaimer = false;
         }
-        
-        $scope.navigatecreateuser = function(){
+
+        $scope.navigatecreateuser = function() {
             $scope.isclicked = true;
             $scope.isclickedhelp = true;
             $scope.isclickeddisclaimer = true;
             $state.go('createuser');
         }
-        
-        $scope.navigateuserslist = function(){
+
+        $scope.navigateuserslist = function() {
             $scope.isclicked = true;
             $scope.isclickedhelp = true;
             $scope.isclickeddisclaimer = true;
             $state.go('userlist');
         }
-        $scope.navigatehelplist = function(){
+        $scope.navigatehelplist = function() {
             $scope.isclicked = true;
             $scope.isclickedhelp = true;
             $scope.isclickeddisclaimer = true;
             $state.go('helplist');
         }
-         $scope.navigatecreatehelp = function(){
+        $scope.navigatecreatehelp = function() {
             $scope.isclicked = true;
             $scope.isclickedhelp = true;
-             $scope.isclickeddisclaimer = true;
+            $scope.isclickeddisclaimer = true;
             $state.go('createHelp');
         }
-         $scope.navigatedisclaimerlist = function(){
+        $scope.navigatedisclaimerlist = function() {
             $scope.isclicked = true;
             $scope.isclickedhelp = true;
-             $scope.isclickeddisclaimer = true;
+            $scope.isclickeddisclaimer = true;
             $state.go('disclaimerlist');
         }
-         $scope.navigatecreatedisclaimer = function(){
+        $scope.navigatecreatedisclaimer = function() {
             $scope.isclicked = true;
             $scope.isclickedhelp = true;
             $scope.isclickeddisclaimer = true;
             $state.go('createDisclaimer');
         }
-        
+
     });
 })();

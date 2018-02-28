@@ -64,7 +64,7 @@ router.get('/ValidateAdminPortal', function(req, res) {
                         uhrkid: '',
                         language: '',
                         country: '',
-                        alertmessage: 'Please enter the admin credentials',
+                        alertmessage: 'Invalid email',
                         msgid: 2,
                         message: 'Invalid email.'
                     });
