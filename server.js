@@ -3493,7 +3493,7 @@ router.post('/updateUserInfo', function(req, res) {
         var jsonData = req.body;
         var user_id = jsonData.id;
         if (jsonData.src == 'Android' || jsonData.src == 'mobile' || jsonData.src == 'iOS') {
-            UpdateUserInfo(jsonData);
+            UpdateUserInfo(conn, jsonData);
         } else {
             var userManagementQueryStr = 'Update UserManagement set firstname=\'' + jsonData.firstname + '\', lastname=\'' + jsonData.lastname + '\', email=\'' + jsonData.email + '\', phone=\'' + jsonData.phone + '\', language=\'' + jsonData.language + '\', country=\'' + jsonData.country + '\' where id=' + user_id + '';
             console.log('.........Non.Undefined User Info.............' + userManagementQueryStr);
@@ -3540,7 +3540,7 @@ router.post('/updateUserInfo', function(req, res) {
     });
 });
 
-function UpdateUserInfo(jsonData) {
+function UpdateUserInfo(conn, jsonData) {
     var user_id = jsonData.id;
     var userManagementQueryStr = 'Update UserManagement set language=\'' + jsonData.language + '\', country=\'' + jsonData.country + '\' where id=' + user_id + '';
     console.log('.........Non.Undefined User Info.............' + userManagementQueryStr);
