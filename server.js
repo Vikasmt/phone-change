@@ -425,7 +425,7 @@ router.get('/getHelpcontent', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function(err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT id, eng_question, eng_answer, ita_question, ita_answer, email, helpcontactnum from Helpcontent',
+            'SELECT id, eng_question, eng_answer, ita_question, ita_answer, spa_question, spa_answer, kor_question, kor_answer, email, helpcontactnum from Helpcontent',
             function(err, result) {
                 done();
                 if (err) {
@@ -2868,12 +2868,12 @@ router.post('/CreateHelp', function(req, res) {
     console.log(req.body);
     var jsonData = req.body;
 
-    var formattedData = 'INSERT INTO Helpcontent (eng_question, eng_answer, ita_question, ita_answer) VALUES (\'' + jsonData.eng_question + '\', \'' + jsonData.eng_answer + '\', \'' + jsonData.ita_question + '\', \'' + jsonData.ita_answer + '\')  RETURNING id';
+    var formattedData = 'INSERT INTO Helpcontent (eng_question, eng_answer, ita_question, ita_answer, spa_question, spa_answer,kor_question, kor_answer) VALUES (\'' + jsonData.eng_question + '\', \'' + jsonData.eng_answer + '\', \'' + jsonData.ita_question + '\', \'' + jsonData.ita_answer + '\', \'' + jsonData.spa_question + '\', \'' + jsonData.spa_answer + '\', \'' + jsonData.kor_question + '\', \'' + jsonData.kor_answer + '\')  RETURNING id';
     console.log('formatted Helptable Query:' + formattedData);
 
     pg.connect(process.env.DATABASE_URL, function(err, conn, done) {
         if (err) console.log(err);
-        conn.query('INSERT INTO Helpcontent (eng_question, eng_answer, ita_question, ita_answer) VALUES (\'' + jsonData.eng_question + '\', \'' + jsonData.eng_answer + '\', \'' + jsonData.ita_question + '\', \'' + jsonData.ita_answer + '\')  RETURNING id',
+        conn.query(formattedData,
             function(err, result) {
                 done();
                 if (err) {
@@ -2896,12 +2896,12 @@ router.post('/updateHelpInfo', function(req, res) {
     var jsonData = req.body;
     var help_id = jsonData.id;
 
-    var formattedData = 'UPDATE Helpcontent SET eng_question = \'' + jsonData.eng_question + '\', eng_answer = \'' + jsonData.eng_answer + '\', ita_question = \'' + jsonData.ita_question + '\', ita_answer = \'' + jsonData.ita_answer + '\' where id=' + help_id + '';
+    var formattedData = 'UPDATE Helpcontent SET eng_question = \'' + jsonData.eng_question + '\', eng_answer = \'' + jsonData.eng_answer + '\', ita_question = \'' + jsonData.ita_question + '\', ita_answer = \'' + jsonData.ita_answer + '\', spa_question = \'' + jsonData.spa_question + '\', spa_answer = \'' + jsonData.spa_answer + '\', kor_question = \'' + jsonData.kor_question + '\', kor_answer = \'' + jsonData.kor_answer + '\' where id=' + help_id + '';
     console.log('formatted Helptable Query:' + formattedData);
 
     pg.connect(process.env.DATABASE_URL, function(err, conn, done) {
         if (err) console.log(err);
-        conn.query('UPDATE Helpcontent SET eng_question = \'' + jsonData.eng_question + '\', eng_answer = \'' + jsonData.eng_answer + '\', ita_question = \'' + jsonData.ita_question + '\', ita_answer = \'' + jsonData.ita_answer + '\'  where id=' + help_id + '',
+        conn.query(formattedData,
             function(err, result) {
                 done();
                 if (err) {
