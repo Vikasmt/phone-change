@@ -107,6 +107,11 @@
     myapp.controller("loginCtrl", function($scope, $rootScope, $http, $state, $cookieStore, apiUrl) {
         $scope.isVisible = true;
         $rootScope.link = false;
+
+        $scope.visibleLogin = function() {
+            return !(angular.isUndefined($cookieStore.get('AccessToken')) || $cookieStore.get('AccessToken').length == 0);
+        }
+
         $scope.validateLogin = function() {
             //alert($scope.emailaddress);
             //alert($scope.password);
