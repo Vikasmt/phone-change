@@ -139,7 +139,7 @@
             <a href="https://ivop-feedback-app.herokuapp.com/#!/list" ng-show="link" class="material-icons" style="color: #fafafa;font-size: 1.9em;padding: 0.1em 0em 0 0.5em;line-height: 1em;vertical-align: middle;">home</a>
         </div>
         <div ng-controller="loginCtrl" ng-show="isVisible" class="container">
-            <div class="panel-heading">
+            <div class="panel-heading" ng-hide="visibleLogin()">
                 <h3 class="panel-title">
                     <i class="material-icons">&#xE853</i>
                     <span>Login</span>
