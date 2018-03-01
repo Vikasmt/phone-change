@@ -18,11 +18,11 @@
                     angular.forEach(Help.data, function(Help) {
                         Help.eng_question = Help.eng_question;
                         Help.eng_answer = Help.eng_answer;
-                        Help.ita_question = Help.ita_question.trim();
+                        Help.ita_question = Help.ita_question;
                         Help.ita_answer = Help.ita_answer;
-                        Help.spa_question = Help.spa_question.trim();
+                        Help.spa_question = Help.spa_question;
                         Help.spa_answer = Help.spa_answer;
-                        Help.kor_question = Help.kor_question.trim();
+                        Help.kor_question = Help.kor_question;
                         Help.kor_answer = Help.kor_answer;
                         Help.email = Help.email;
                         Help.helpcontactnum = Help.helpcontactnum;
