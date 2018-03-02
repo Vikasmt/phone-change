@@ -425,7 +425,7 @@ router.get('/getHelpcontent', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function(err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT id, eng_question, eng_answer, ita_question, ita_answer, spa_question, spa_answer, kor_question, kor_answer, email, helpcontactnum from Helpcontent',
+            'SELECT id, eng_question, eng_answer, ita_question, ita_answer, spa_question, spa_answer, kor_question, kor_answer, eng_emailtext, ita_emailtext, spa_emailtext, kor_emailtext, email, helpcontactnum from Helpcontent',
             function(err, result) {
                 done();
                 if (err) {
