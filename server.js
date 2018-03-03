@@ -1616,6 +1616,89 @@ router.post('/insertInjectionDose', function(req, res) {
     });
 });
 
+router.post('/insertOther', function(req, res) {
+    console.log('............insertOthertree...............');
+    pg.connect(process.env.DATABASE_URL, function(err, conn, done) {
+        if (err) console.log(err);
+
+        //var jsonData = req.body;
+        var resString = JSON.stringify(req.body);
+        console.log('.....resString...before...' + resString);
+        var jsonData = JSON.parse(resString.replace('&quot', ' '));
+        console.log('.....req..body......' + req.body);
+        conn.query('SELECT *from salesforce.Case WHERE id=' + jsonData.caseid + '',
+            function(err, result) {
+                if (err != null || result.rowCount == 0) {
+                    return res.json({
+                        caseid: -1,
+                        msgid: 3,
+                        message: 'case id not found.'
+                    });
+                } else {
+
+                    var updateValueData = '';
+                    var insertQueryData = 'INSERT INTO salesforce.IVOP_DecisionTree__c (';
+                    var valuesData = ' VALUES (';
+
+                    if (jsonData.DecisionTreeIssueType !== undefined && jsonData.DecisionTreeIssueType !== null && jsonData.DecisionTreeIssueType !== "null" && jsonData.DecisionTreeIssueType.length > 0) {
+                        insertQueryData += 'DT_DecisionTreeIssueType__c,';
+                        valuesData += '\'' + jsonData.DecisionTreeIssueType + '\'' + ',';
+                        updateValueData += 'DT_DecisionTreeIssueType__c = \'' + jsonData.DecisionTreeIssueType + '\',';
+                    } else {
+                        updateValueData += 'DT_DecisionTreeIssueType__c = \'\',';
+                    }
+
+                    if (jsonData.OtherDescription !== undefined && jsonData.OtherDescription !== null && jsonData.OtherDescription !== "null" && jsonData.OtherDescription.length > 0) {
+                        insertQueryData += 'OI_Description__c ,';
+                        valuesData += '\'' + jsonData.OtherDescription + '\'' + ',';
+                        updateValueData += 'OI_Description__c = \'' + jsonData.OtherDescription + '\',';
+                    } else {
+                        updateValueData += 'OI_Description__c = \'\',';
+                    }
+
+                    if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0) {
+                        insertQueryData += 'HerokuCaseId__c';
+                        valuesData += '\'' + jsonData.caseid + '\'';
+                        updateValueData += 'HerokuCaseId__c = \'' + jsonData.caseid + '\'';
+                    }
+
+                    var combinedQuery;
+
+                    if (jsonData.DecisionTreeId !== undefined && jsonData.DecisionTreeId !== null && jsonData.DecisionTreeId !== "null" && jsonData.DecisionTreeId.length > 0)
+                        combinedQuery = 'UPDATE salesforce.IVOP_DecisionTree__c SET ' + updateValueData + ' WHERE id=' + jsonData.DecisionTreeId + '';
+                    else
+                        combinedQuery = insertQueryData + ')' + valuesData + ') RETURNING id';
+
+                    console.log('............combinedQuery.............' + combinedQuery);
+                    conn.query(combinedQuery,
+                        function(err, result) {
+                            done();
+                            if (err) {
+                                return res.json({
+                                    msgid: 2,
+                                    message: err.message
+                                });
+                            } else {
+                                if (jsonData.DecisionTreeId !== undefined && jsonData.DecisionTreeId !== null && jsonData.DecisionTreeId !== "null" && jsonData.DecisionTreeId.length > 0) {
+                                    return res.json({
+                                        msgid: 1,
+                                        DecisionTreeId: jsonData.DecisionTreeId,
+                                        message: 'Success.'
+                                    });
+                                } else {
+                                    return res.json({
+                                        msgid: 1,
+                                        DecisionTreeId: result.rows[0].id,
+                                        message: 'Success.'
+                                    });
+                                }
+                            }
+                        });
+                }
+            });
+    });
+});
+
 router.post('/insertDataandtransfer', function(req, res) {
     console.log('............insertDecisiontree...............');
     pg.connect(process.env.DATABASE_URL, function(err, conn, done) {
