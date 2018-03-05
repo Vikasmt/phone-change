@@ -3761,6 +3761,7 @@ router.put('/changePassword', function(req, res) {
 });
 
 function sendEmail(toemail, subject, text) {
+    console.log('Sending Email Initiated.');
     var smtpConfig = {
         host: emailhost,
         port: emailport,
