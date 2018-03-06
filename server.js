@@ -3581,7 +3581,7 @@ router.post('/updateUserInfo', function(req, res) {
         if (jsonData.src == 'Android' || jsonData.src == 'mobile' || jsonData.src == 'iOS') {
             UpdateUserInfo(conn, done, err, res, jsonData);
         } else {
-            var userManagementQueryStr = 'Update UserManagement set firstname=\'' + jsonData.firstname + '\', lastname=\'' + jsonData.lastname + '\', email=\'' + jsonData.email + '\', phone=\'' + jsonData.phone + '\', language=\'' + jsonData.language + '\', country=\'' + jsonData.country + '\' where id=' + user_id + '';
+            var userManagementQueryStr = 'Update UserManagement set firstname=\'' + jsonData.firstname + '\', lastname=\'' + jsonData.lastname + '\', phone=\'' + jsonData.phone + '\', language=\'' + jsonData.language + '\', country=\'' + jsonData.country + '\' where id=' + user_id + '';
             console.log('.........Non.Undefined User Info.............' + userManagementQueryStr);
 
             conn.query('SELECT *from UserManagement where id=' + user_id + '',
@@ -3594,7 +3594,7 @@ router.post('/updateUserInfo', function(req, res) {
                         var contactId = result.rows[0].contactid;
                         console.log('contactId:' + contactId);
 
-                        var contactQueryStr = 'Update Salesforce.Contact set firstname=\'' + jsonData.firstname + '\', lastname=\'' + jsonData.lastname + '\', email=\'' + jsonData.email.toLowerCase().trim() + '\', phone=\'' + jsonData.phone + '\', ivop_language__c=\'' + jsonData.language + '\', ivop_appusercountry__c=\'' + jsonData.country + '\' where id=' + contactId + '';
+                        var contactQueryStr = 'Update Salesforce.Contact set firstname=\'' + jsonData.firstname + '\', lastname=\'' + jsonData.lastname + '\', phone=\'' + jsonData.phone + '\', ivop_language__c=\'' + jsonData.language + '\', ivop_appusercountry__c=\'' + jsonData.country + '\' where id=' + contactId + '';
                         console.log(contactQueryStr);
 
                         conn.query(userManagementQueryStr,
