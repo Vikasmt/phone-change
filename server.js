@@ -1358,6 +1358,22 @@ router.post('/insertDiviceGeneralFunctioning', function(req, res) {
                         updateValueData += 'DF_CommentDeviceFunctioning__c = \'\',';
                     }
 
+                    if (jsonData.NoSpecifyComment !== undefined && jsonData.NoSpecifyComment !== null && jsonData.NoSpecifyComment !== "null" && jsonData.NoSpecifyComment.length > 0) {
+                        insertQueryData += ' DF_ifNoPleaseSpecifyYourComment__c,';
+                        valuesData += '\'' + jsonData.NoSpecifyComment + '\'' + ',';
+                        updateValueData += ' DF_ifNoPleaseSpecifyYourComment__c = \'' + jsonData.NoSpecifyComment + '\',';
+                    } else {
+                        updateValueData += ' DF_ifNoPleaseSpecifyYourComment__c = \'\',';
+                    }
+
+                    if (jsonData.YesSpecifyComment !== undefined && jsonData.YesSpecifyComment !== null && jsonData.YesSpecifyComment !== "null" && jsonData.YesSpecifyComment.length > 0) {
+                        insertQueryData += ' DF_PleaseSpecifyOtherInformation__c,';
+                        valuesData += '\'' + jsonData.YesSpecifyComment + '\'' + ',';
+                        updateValueData += ' DF_PleaseSpecifyOtherInformation__c = \'' + jsonData.YesSpecifyComment + '\',';
+                    } else {
+                        updateValueData += ' DF_PleaseSpecifyOtherInformation__c = \'\',';
+                    }
+
                     if (jsonData.caseid !== undefined && jsonData.caseid !== null && jsonData.caseid !== "null" && jsonData.caseid.length > 0) {
                         insertQueryData += 'HerokuCaseId__c';
                         valuesData += '\'' + jsonData.caseid + '\'';
