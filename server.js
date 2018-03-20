@@ -2463,6 +2463,13 @@ router.post('/insertCatridgeIssue', function(req, res) {
                     } else {
                         updateValueData += 'CI_CD_CatridgeDetectionIssueWithOneOrAll__c = \'\',';
                     }
+                    if (jsonData.CDOtherWarningMessage !== undefined && jsonData.CDOtherWarningMessage !== null && jsonData.CDOtherWarningMessage !== "null" && jsonData.CDOtherWarningMessage.length > 0) {
+                        insertQueryData += 'CI_CD_OtherWarningMessage__c,';
+                        valuesData += '\'' + jsonData.CDOtherWarningMessage + '\'' + ',';
+                        updateValueData += 'CI_CD_OtherWarningMessage__c = \'' + jsonData.CDOtherWarningMessage + '\',';
+                    } else {
+                        updateValueData += 'CI_CD_OtherWarningMessage__c = \'\',';
+                    }
                     if (jsonData.CDIsTheCartridgeDoorDamaged !== undefined && jsonData.CDIsTheCartridgeDoorDamaged !== null && jsonData.CDIsTheCartridgeDoorDamaged !== "null" && jsonData.CDIsTheCartridgeDoorDamaged.length > 0) {
                         insertQueryData += 'CI_CD_IsTheCartridgeDoorDamaged__c,';
                         valuesData += '\'' + jsonData.CDIsTheCartridgeDoorDamaged + '\'' + ',';
