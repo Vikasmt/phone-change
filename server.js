@@ -1071,7 +1071,7 @@ router.post('/updateCase', function(req, res) {
                     }
 
                     if (jsonData.recordStatus !== undefined && jsonData.recordStatus !== null && jsonData.recordStatus !== "null" && jsonData.recordStatus.length > 1) {
-                        valueData += 'FMA_Recordstatus__c = \'' + jsonData.recordStatus + '\',';
+                        valueData += 'Status = \'' + jsonData.recordStatus + '\',';
                     }
 
                     if (jsonData.patientId !== undefined && jsonData.patientId !== null && jsonData.patientId !== "null" && jsonData.patientId.length > 0) {
@@ -3377,7 +3377,7 @@ router.post('/insertCase', function(req, res) {
         }
 
         if (jsonData.recordStatus !== undefined && jsonData.recordStatus !== null && jsonData.recordStatus !== "null" && jsonData.recordStatus.length > 1) {
-            insertQueryData += 'FMA_Recordstatus__c,';
+            insertQueryData += 'Status,';
             valuesData += '\'' + jsonData.recordStatus + '\'' + ',';
         }
 
@@ -3468,7 +3468,7 @@ router.get('/getMyFeedbacks', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function(err, conn, done) {
         if (err) console.log(err);
         conn.query(
-            'SELECT sfid, casenumber, fma_devicename__c, description, createddate, status from salesforce.case where contactid =\'' + contact_id + '\' and FMA_Recordstatus__c =\'Submitted\' order by createddate desc Limit 10',
+            'SELECT sfid, casenumber, fma_devicename__c, description, createddate, status from salesforce.case where contactid =\'' + contact_id + '\' and Status =\'Submitted\' order by createddate desc Limit 10',
             function(err, result) {
                 done();
                 if (err) {
