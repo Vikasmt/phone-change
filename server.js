@@ -3389,8 +3389,8 @@ router.post('/insertCase', function(req, res) {
         insertQueryData += 'Priority,';
         valuesData += '\'' + 'Medium' + '\'' + ',';
 
-        insertQueryData += 'Status';
-        valuesData += '\'' + 'New' + '\'';
+        //insertQueryData += 'Status';
+        //valuesData += '\'' + 'New' + '\'';
         console.log('............insertCase...1............');
 
         //-------------------------------------------End Framing Query-------------------------------------------
