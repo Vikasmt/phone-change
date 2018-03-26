@@ -3386,7 +3386,7 @@ router.post('/insertCase', function(req, res) {
             valuesData += '\'' + jsonData.patientId + '\'' + ',';
         }
 
-        insertQueryData += 'Priority,';
+        insertQueryData += 'Priority';
         valuesData += '\'' + 'Medium' + '\'';
 
         //insertQueryData += 'Status';
