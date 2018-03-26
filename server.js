@@ -3387,7 +3387,7 @@ router.post('/insertCase', function(req, res) {
         }
 
         insertQueryData += 'Priority,';
-        valuesData += '\'' + 'Medium' + '\'' + ',';
+        valuesData += '\'' + 'Medium' + '\'';
 
         //insertQueryData += 'Status';
         //valuesData += '\'' + 'New' + '\'';
